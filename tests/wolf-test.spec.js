@@ -355,15 +355,6 @@ test('Appointment location error', async({ browser }) => {
   await page.locator('[data-dp-element="action-next"]').click()
   await page.locator('.dp--future').filter({hasText: '12'}).first().click()
 
-  await page.waitForTimeout(2000)
-  const departure_date_visible = page.locator('[name="general.departure_date"]')
-  await expect(departure_date_visible).toBeVisible()
-  await departure_date_visible.click()
-  await page.waitForTimeout(1000)
-  await page.locator('[data-dp-element="action-next"]').click()
-  await page.locator('[data-dp-element="action-next"]').click()
-  await page.locator('.dp--future').filter({hasText: '16'}).first().click()
-
   const continue_sidebar = page.locator('id=btnContinueSidebar')
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()

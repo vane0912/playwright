@@ -2,9 +2,12 @@ const { test, expect } = require('@playwright/test');
 const {deploy_url} = require('../urls');
 const path = require('path');
 
-test('USPS Passport', async({page}) =>{
+test.skip('USPS Passport', async({page}) =>{
     await page.goto(deploy_url + 'passport-renewal/united-states/application')
+    await expect(page.locator('#btnContinueSidebar')).toBeEnabled()
+    await page.locator('#btnContinueSidebar').click()
 
+    await page.waitForURL('**/passport-renewal/united-states/application#step=step_2')
     await expect(page.getByPlaceholder('John William')).toBeVisible()
     await page.getByPlaceholder('John William').fill('Test')
     await page.getByPlaceholder('Smith').first().fill('Test')

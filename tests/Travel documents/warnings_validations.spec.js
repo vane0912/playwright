@@ -29,15 +29,6 @@ test('Appointment location error', async({page}) => {
     await page.locator('.dp--future').filter({hasText: '12'}).first().click()
     await expect(page.locator('[name="general.email"]')).toBeVisible()
   
-    await page.waitForTimeout(3000)
-    const departure_date_visible = page.locator('[name="general.departure_date"]')
-    await expect(departure_date_visible).toBeVisible()
-    await departure_date_visible.click()
-    await page.waitForTimeout(1000)
-    await page.locator('[data-dp-element="action-next"]').click()
-    await page.locator('[data-dp-element="action-next"]').click()
-    await page.locator('.dp--future').filter({hasText: '16'}).first().click()
-  
     const continue_sidebar = page.locator('id=btnContinueSidebar')
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
@@ -170,11 +161,6 @@ test('Trip disclaimer appearing for arrival date warnings', async({page}) => {
   const today = new Date()
   await page.goto(deploy_url + 'india/apply-now')
 
-  const continue_step1 = page.locator('id=btnContinueSidebar')
-  await expect(continue_step1).toBeEnabled()
-  await continue_step1.click()
-  await page.waitForURL('**/india/apply-now#step=step_2')
-
   const arrival_date_visible = page.locator('[name="general.arrival_date"]')
   await expect(arrival_date_visible).toBeVisible()
   await arrival_date_visible.click()
@@ -184,5 +170,6 @@ test('Trip disclaimer appearing for arrival date warnings', async({page}) => {
 
   await expect(page.getByTestId('arrivalDateWarningBody')).toBeVisible()
   await expect(page.getByTestId('arrivalDateWarningBody')).toContainText('Apply now to receive your document(s) on time.')
+
 })
   

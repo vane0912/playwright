@@ -7,6 +7,9 @@ failed:
 all: 
 	npx playwright test 
 status: 
-	npx playwright test USPS.spec.js --headed
+	npx playwright test wolf.status.spec.js 
 passport: 
 	npx playwright test passport.spec.js 
+
+mobile: 
+	npx playwright test currency_mobile.spec.js --headed

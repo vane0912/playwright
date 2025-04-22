@@ -5,17 +5,12 @@ test('Processing speeds appear and work', async({page}) => {
     const today = new Date()
     await page.goto(deploy_url + 'india/apply-now')
   
-    const continue_step1 = page.locator('id=btnContinueSidebar')
-    await expect(continue_step1).toBeEnabled()
-    await continue_step1.click()
-    await page.waitForURL('**/india/apply-now#step=step_2')
-  
     const arrival_date_visible = page.locator('[name="general.arrival_date"]')
     await expect(arrival_date_visible).toBeVisible()
     await arrival_date_visible.click()
     await expect(page.locator('.dp__outer_menu_wrap')).toBeVisible()
   
-    await page.locator('.dp--future').filter({hasText: `20`}).first().click()
+    await page.locator('.dp--future').filter({hasText: `28`}).first().click()
 
     const continue_sidebar = page.locator('id=btnContinueSidebar')
     await expect(continue_sidebar).toBeEnabled()
@@ -26,7 +21,7 @@ test('Processing speeds appear and work', async({page}) => {
     await expect(name_applicant).toBeVisible()
     await name_applicant.fill('Test')
   
-    const last_name = page.getByPlaceholder("Smith")
+    const last_name = page.getByRole('textbox', { name: 'Smith', exact: true })
     await last_name.fill('Test')
   
     const dob_day = page.locator('[name="applicant.0.dob.day"]')
