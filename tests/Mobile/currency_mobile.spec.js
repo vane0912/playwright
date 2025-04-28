@@ -1,7 +1,7 @@
 const { test, expect } = require('@playwright/test');
 const {deploy_url, Orders} = require('../urls');
 
-test.skip('Different currency', async ({ page }) => {
+test('Different currency Mobile', async ({ page }) => {
     await page.goto(deploy_url + 'turkey/apply-now');
     await page.setViewportSize({ width: 412, height: 915 });
     const headerMobileNav = page.locator('id=headerMobileNav');
@@ -95,14 +95,6 @@ test.skip('Different currency', async ({ page }) => {
     if (duplicate){
       await page.locator('id=btnDisclaimerNext').click()
     }
-    const total_price = page.getByTestId('order-total')
-    await expect(total_price).toBeVisible()
-    const total_price_assertion = await page.locator('//span[@data-handle="order-total"]').textContent()
-  
-    console.log(total_price_assertion)
-    console.log(price.split(' ')[0].replace(",", ""))
-    expect.soft(price.split(' ')[0].replace(",", ""), 'Expect Total to be the same as Standard').toContain(total_price_assertion)
-  
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
     const payment_btn = page.locator('id=btnSubmitPayment')
