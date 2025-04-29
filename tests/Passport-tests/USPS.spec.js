@@ -105,7 +105,11 @@ test.skip('USPS Passport', async({page}) =>{
 
     await expect(input_eye_color).toBeVisible();
     await input_eye_color.fill('amber');
-    await page.getByRole("option", {name: ' Amber'}).click()
+    await page.waitForTimeout(1000)
+    await page.keyboard.press("ArrowDown")
+    await page.waitForTimeout(1000)
+    await page.keyboard.press("Enter")
+    await page.waitForTimeout(1000)
 
     const hair_color = page.getByTestId('dropdown-applicant.0.appearence_2');
     await hair_color.selectOption('Brown')
@@ -121,8 +125,12 @@ test.skip('USPS Passport', async({page}) =>{
 
     await page.waitForNavigation({waitUntil: 'load'})
 
-
-    await page.locator('[name="applicant.0.shipping_address"]').fill('aaaaaa')
+    await page.locator('[name="applicant.0.shipping_address"]').fill('123')
+    await page.waitForTimeout(2000)
+    await page.keyboard.press("Space")
+    await page.waitForTimeout(1000)
+    await page.keyboard.press("Enter")
+    await page.waitForTimeout(1000)
     await page.locator('[name="applicant.0.shipping_city"]').fill('aaaaaa')
     await page.locator('[name="applicant.0.shipping_city"]').fill('aaaaaa')
 
@@ -142,7 +150,7 @@ test.skip('USPS Passport', async({page}) =>{
     await next_btn.click()
 
     await page.waitForNavigation({waitUntil: 'load'})
-
+    await page.waitForTimeout(2000)
 
     await page.getByPlaceholder('Elizabeth').fill('Test')
     await page.getByPlaceholder('Decker').fill('Test')
@@ -157,6 +165,11 @@ test.skip('USPS Passport', async({page}) =>{
     await page.getByRole("option", {name: ' Child'}).click()
 
     await page.getByPlaceholder('123 Main Street, Springfield, USA').fill('123')
+    await page.waitForTimeout(2000)
+    await page.keyboard.press("Space")
+    await page.waitForTimeout(1000)
+    await page.keyboard.press("Enter")
+    await page.waitForTimeout(1000)
     await page.locator('//li[@data-place-id="ChIJIaGbBBhawokRUmbgNsUmr-s"]').click()
 
     await page.locator('[name="applicant.0.emergency_contact_city"]').fill('aaaaaa')
@@ -172,12 +185,15 @@ test.skip('USPS Passport', async({page}) =>{
     await input_emergency_contact_country.fill('Mexico');
     await page.getByRole("option", {name: 'Mexico flag Mexico'}).click()
 
-    await page.getByPlaceholder('111-222-3333').fill('1111111111111')
     await page.locator('xpath=//div[@name="applicant.0.emergency_contact_phone"]//div[@data-handle="filter-value"]').click()
+    await page.waitForTimeout(2000)
     await page.getByTestId('dial-codes').fill('52')
-
+    await page.waitForTimeout(2000)
+    await page.keyboard.press('ArrowDown')
     await page.keyboard.press('Enter')
 
+    await page.getByPlaceholder('111-222-3333').fill('1111111111111')
+    
     await page.waitForTimeout(1000)
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
@@ -185,16 +201,18 @@ test.skip('USPS Passport', async({page}) =>{
     await page.waitForNavigation({waitUntil: 'load'})
 
 
-    await page.getByPlaceholder('XXX-XX-XXXX').fill('123456789')
+    await page.getByPlaceholder('XXX-XX-XXXX').type('1234567')
     await page.waitForTimeout(1000)
+    await page.keyboard.press('Enter')
     await expect(next_btn).toBeEnabled()
+    await page.waitForTimeout(1000)
     await next_btn.click()
 
     await page.waitForNavigation({waitUntil: 'load'})
 
 
     await page.locator('id=instructions-continue').click()
-    await page.locator('.input-file').setInputFiles(path.join(__dirname, 'uploads_passport/Applicant-Photo.jpg'))
+    await page.locator('input[type="file"]').nth(2).setInputFiles(path.join(__dirname, 'uploads_passport/Applicant-Photo.jpg'))
     await page.locator('id=review-continue').click()
 
     await page.locator('id=instructions-continue').click()
