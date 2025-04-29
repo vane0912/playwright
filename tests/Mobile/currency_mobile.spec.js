@@ -136,5 +136,4 @@ test('Different currency Mobile', async ({ page }) => {
     await expect(submit_post_payment).toBeEnabled()
     await submit_post_payment.click()
     await page.waitForNavigation({waitUntil: 'load'})
-  
   })

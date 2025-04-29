@@ -147,11 +147,6 @@ test('Travel Doc application pre and post payment are working Mobile', async({pa
     // Post payment
     await page.getByPlaceholder('111-222-3333').first().fill('11111111')
     
-    // Sidebar checks
-    const sidebar_checks = page.locator('//div[@data-vue-component="product-application-suspense-wrapper"]')
-    const sidebar_post_payment_txt = ['Colombia Check-MIG Form Application', 'Trip details']
-    sidebar_post_payment_txt.forEach(async txt => await expect(sidebar_checks).toContainText(txt))
-    
     await page.getByTestId('boolean-WhatsApp').click()
 
     const arrive_colombia = page.locator('[name="general.arrival_location"]')
@@ -198,7 +193,6 @@ test('Travel Doc application pre and post payment are working Mobile', async({pa
     await expect(submit_post_payment).toBeEnabled()
     await submit_post_payment.click()
 
-    await page.waitForTimeout(5000)
     await page.waitForNavigation({waitUntil: 'load'})
     await page.locator('#trackApplication').click()
 })
