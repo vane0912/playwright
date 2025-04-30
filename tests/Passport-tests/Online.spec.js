@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 const {deploy_url} = require('../urls');
 const path = require('path');
 
-test('USPS Passport', async({page}) =>{
+test('Online Passport', async({page}) =>{
     test.slow()
     await page.goto(deploy_url + 'passport-renewal/united-states/application')
     await expect(page.getByPlaceholder('John William')).toBeVisible()
@@ -16,7 +16,7 @@ test('USPS Passport', async({page}) =>{
     await dob_month.selectOption('7')
 
     const dob_year = page.locator('[name="general.dob.year"]')
-    await dob_year.selectOption('2000')
+    await dob_year.selectOption('1986')
 
     await expect(page.locator('#btnContinueSidebar')).toBeEnabled()
     await page.locator('#btnContinueSidebar').click()
@@ -31,7 +31,7 @@ test('USPS Passport', async({page}) =>{
     await passport_issue_month.selectOption('7')
     await page.waitForTimeout(1000)
     const passport_issue_year = page.locator('[name="general.passport_issued_date.year"]')
-    await passport_issue_year.selectOption('2022')
+    await passport_issue_year.selectOption('2012')
 
     await page.waitForTimeout(1000)
     const passport_expiration_day = page.locator('[name="general.passport_expiration_date.day"]')
@@ -42,7 +42,7 @@ test('USPS Passport', async({page}) =>{
     await passport_expiration_month.selectOption('7')
     
     const passport_expiration_year = page.locator('[name="general.passport_expiration_date.year"]')
-    await passport_expiration_year.selectOption('2034')
+    await passport_expiration_year.selectOption('2023')
     await page.waitForTimeout(1000)
 
     await expect(page.locator('#btnContinueSidebar')).toBeEnabled()
@@ -214,11 +214,11 @@ test('USPS Passport', async({page}) =>{
     await page.locator('input[type="file"]').nth(2).setInputFiles(path.join(__dirname, 'uploads_passport/Applicant-Photo.jpg'))
     await page.waitForTimeout(8000)
     await page.locator('id=review-continue').click()
-    
+
     await page.locator('id=instructions-continue').click()
     await page.locator('input[type="file"]').nth(2).setInputFiles(path.join(__dirname, 'uploads_passport/passport.jpg'))
     await page.waitForTimeout(8000)
-    
+
     const submit_post_payment = page.getByTestId("acceptFileUploadBtn")
     await submit_post_payment.click()
     await page.waitForNavigation({waitUntil: 'load'})
