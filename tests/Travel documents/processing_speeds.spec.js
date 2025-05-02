@@ -10,7 +10,7 @@ test('Processing speeds appear and work', async({page}) => {
     await arrival_date_visible.click()
     await expect(page.locator('.dp__outer_menu_wrap')).toBeVisible()
   
-    await page.locator('.dp--future').filter({hasText: `5`}).first().click()
+    await page.locator('.dp--future').filter({hasText: `8`}).first().click()
 
     const continue_sidebar = page.locator('id=btnContinueSidebar')
     await expect(continue_sidebar).toBeEnabled()
