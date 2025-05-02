@@ -11,4 +11,4 @@ status:
 passport: 
 	npx playwright test USPS.spec.js 
 mobile: 
-	npx playwright test warnings_validations_mobile.spec.js --headed
+	npx playwright test hamburguer_menu_validations.spec.js

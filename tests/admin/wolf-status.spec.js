@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 const {deploy_url, Orders} = require('../urls');
 const path = require('path');
 
-test.skip('MIN', async({browser}) => {
+test('MIN', async({browser}) => {
     const context = await browser.newContext();
     await context.clearCookies();
 
@@ -40,7 +40,7 @@ test.skip('MIN', async({browser}) => {
 
     await page.waitForURL('**/admin/orders/my_orders?redirect_to_first_order=1')
 })
-test.skip('Complete', async({browser}) => {
+test('Complete', async({browser}) => {
     const context = await browser.newContext();
     await context.clearCookies();
 
@@ -71,7 +71,7 @@ test.skip('Complete', async({browser}) => {
     await expect(page.locator('.upload-input-wrap')).toBeVisible()
     await expect(page.getByTestId('order-status')).toHaveText('Complete')
 })
-test.skip('Rejected', async({browser}) => {
+test('Rejected', async({browser}) => {
     const context = await browser.newContext();
     await context.clearCookies();
 
