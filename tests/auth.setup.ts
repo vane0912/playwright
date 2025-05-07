@@ -24,30 +24,26 @@ setup('authenticate', async ({ page }) => {
     const selector_products = page.getByTestId('dropdown-general.visa_type_id');
     await selector_products.selectOption('38')
 
-    const continue_step1 = page.locator('id=btnContinueSidebar')
-    await expect(continue_step1).toBeEnabled()
-    await continue_step1.click()
-    await page.waitForURL('**/turkey/apply-now#step=step_2')
-    
     const arrival_date_visible = page.locator('[name="general.arrival_date"]')
     await expect(arrival_date_visible).toBeVisible()
     await arrival_date_visible.click()
     await expect(page.locator('.dp__outer_menu_wrap')).toBeVisible()
-    await page.locator('[data-dp-element="action-next"]').click()
     await page.locator('.dp--future').filter({hasText: '12'}).first().click()
-    await expect(page.locator('[name="general.email"]')).toBeVisible()
-    await page.locator('[name="general.email"]').fill(email_test)
 
     const continue_sidebar = page.locator('id=btnContinueSidebar')
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
     await page.waitForURL('**/turkey/apply-now#step=step_3a')
+
+    await expect(page.locator('[name="general.email"]')).toBeVisible()
+    await page.locator('[name="general.email"]').fill(email_test)
+
     
     const name_applicant = page.getByPlaceholder("John William")
     await expect(name_applicant).toBeVisible()
     await name_applicant.fill('Test')
 
-    const last_name = page.getByPlaceholder("Smith")
+    const last_name = page.getByPlaceholder("Smith").first()
     await last_name.fill('Test')
 
     const dob_day = page.locator('[name="applicant.0.dob.day"]')
