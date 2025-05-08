@@ -16,32 +16,20 @@ test('Travel Doc application pre and post payment are working Mobile', async({pa
     const sidebar_txt = [' Most popular', 'Valid for', '90 days after arrival', 'Number of entries','Single entry', 'Max stay', '90 days per entry']
     sidebar_txt.forEach(async txt => await expect(sidebar).toContainText(txt))
 
-    const continue_step1 = page.locator('id=btnContinueUnderSectionMobile')
-    await expect(continue_step1).toBeEnabled()
-    await continue_step1.click()
-    await page.waitForURL('**/colombia/apply-now#step=step_2')
-    
-    // Validations Step_2
     const arrival_date_visible = page.locator('[name="general.arrival_date"]')
     await expect(arrival_date_visible).toBeVisible()
     await arrival_date_visible.click()
     await expect(page.locator('.dp__outer_menu_wrap')).toBeVisible()
     await page.locator('[data-dp-element="action-next"]').click()
     await page.locator('.dp--future').filter({hasText: '12'}).first().click()
-    await expect(page.locator('[name="general.email"]')).toBeVisible()
-
-    // General checks    
-    await expect(page.getByRole('heading', { name: 'Colombia Check-MIG Form' })).toContainText('Colombia Check-MIG Form')
-    await expect(page.locator("id=question-container")).toContainText('Your Trip Details')
-
-    //
 
     const continue_sidebar = page.locator('id=btnContinueUnderSectionMobile')
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
     await page.waitForURL('**/colombia/apply-now#step=step_3a')
-
+      
     // Validations Step_3a
+    await expect(page.locator('[name="general.email"]')).toBeVisible()
     await expect(page.getByTestId("add-traveler")).toBeVisible()
 
     // General checks    
@@ -54,7 +42,7 @@ test('Travel Doc application pre and post payment are working Mobile', async({pa
     await expect(name_applicant).toBeVisible()
     await name_applicant.fill('Test')
 
-    const last_name = page.getByPlaceholder("Smith")
+    const last_name = page.getByPlaceholder("Smith").first()
     await last_name.fill('Test')
 
     const dob_day = page.locator('[name="applicant.0.dob.day"]')

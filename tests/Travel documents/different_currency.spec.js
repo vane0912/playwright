@@ -27,11 +27,7 @@ test('Different currency', async ({ page }) => {
   
   const selector_products = page.getByTestId('dropdown-general.visa_type_id');
   await selector_products.selectOption('38')
-  const continue_step1 = page.locator('id=btnContinueSidebar')
-  await expect(continue_step1).toBeEnabled()
-  await continue_step1.click()
   
-  await page.waitForURL('**/turkey/apply-now#step=step_2')
   const arrival_date_visible = page.locator('[name="general.arrival_date"]')
   await expect(arrival_date_visible).toBeVisible()
   await arrival_date_visible.click()
@@ -48,7 +44,7 @@ test('Different currency', async ({ page }) => {
   await expect(name_applicant).toBeVisible()
   await name_applicant.fill('Test')
 
-  const last_name = page.getByPlaceholder("Smith")
+  const last_name = page.getByPlaceholder("Smith").first()
   await last_name.fill('Test')
 
   const dob_day = page.locator('[name="applicant.0.dob.day"]')
