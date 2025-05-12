@@ -21,7 +21,27 @@ test('Online Passport', async({page}) =>{
     await expect(page.locator('#btnContinueSidebar')).toBeEnabled()
     await page.locator('#btnContinueSidebar').click()
 
-    await page.waitForURL('**/passport-renewal/united-states/application#step=step_3')
+    await page.waitForURL('**/passport-renewal/united-states/application#step=step_4')
+    await page.waitForTimeout(2000)
+    await page.locator('#btnContinueSidebar').waitFor()
+    await page.locator('#btnContinueSidebar').click()
+
+    await page.waitForURL('**/passport-renewal/united-states/application#step=review')
+    await page.waitForTimeout(1000)
+    const duplicate = await page.isVisible('id=btnDisclaimerNext')
+    if (duplicate){
+      await page.locator('id=btnDisclaimerNext').click()
+    }
+    await page.getByRole('button', { name: 'Continue to payment' }).click()
+
+    const payment_btn = page.locator('id=btnSubmitPayment')
+    await expect(payment_btn).toBeVisible()
+    await expect(payment_btn).toBeEnabled()
+    await payment_btn.click()
+    
+    // Post Payment
+    await page.waitForNavigation({waitUntil: 'load'})
+
     const passport_issue_day = page.locator('[name="general.passport_issued_date.day"]')
     await expect(passport_issue_day).toBeVisible()
     await passport_issue_day.selectOption('13')
@@ -44,30 +64,6 @@ test('Online Passport', async({page}) =>{
     const passport_expiration_year = page.locator('[name="general.passport_expiration_date.year"]')
     await passport_expiration_year.selectOption('2023')
     await page.waitForTimeout(1000)
-
-    await expect(page.locator('#btnContinueSidebar')).toBeEnabled()
-    await page.locator('#btnContinueSidebar').click()
-
-    await page.waitForURL('**/passport-renewal/united-states/application#step=step_4')
-    await page.waitForTimeout(2000)
-    await page.locator('#btnContinueSidebar').waitFor()
-    await page.locator('#btnContinueSidebar').click()
-
-    await page.waitForURL('**/passport-renewal/united-states/application#step=review')
-    await page.waitForTimeout(1000)
-    const duplicate = await page.isVisible('id=btnDisclaimerNext')
-    if (duplicate){
-      await page.locator('id=btnDisclaimerNext').click()
-    }
-    await page.getByRole('button', { name: 'Continue to payment' }).click()
-
-    const payment_btn = page.locator('id=btnSubmitPayment')
-    await expect(payment_btn).toBeVisible()
-    await expect(payment_btn).toBeEnabled()
-    await payment_btn.click()
-    
-    // Post Payment
-    await page.waitForNavigation({waitUntil: 'load'})
 
     await page.getByPlaceholder('111-222-3333').fill('11111111')
     await page.getByTestId('boolean-WhatsApp').click()
