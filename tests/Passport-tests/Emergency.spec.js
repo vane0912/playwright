@@ -24,7 +24,7 @@ test('USPS Passport', async({page}) =>{
     await page.waitForURL('**/passport-renewal/united-states/application#step=step_4')
     await page.waitForTimeout(2000)
 
-    await page.getByText("Expedited Service", {exact: true}).click()
+    await page.getByText("Emergency Service", {exact: true}).click()
 
     await page.locator('#btnContinueSidebar').waitFor()
     await page.locator('#btnContinueSidebar').click()

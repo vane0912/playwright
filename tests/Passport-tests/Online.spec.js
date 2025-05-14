@@ -23,6 +23,9 @@ test('Online Passport', async({page}) =>{
 
     await page.waitForURL('**/passport-renewal/united-states/application#step=step_4')
     await page.waitForTimeout(2000)
+
+    await page.getByText("Standard Service", {exact: true}).click()
+
     await page.locator('#btnContinueSidebar').waitFor()
     await page.locator('#btnContinueSidebar').click()
 
