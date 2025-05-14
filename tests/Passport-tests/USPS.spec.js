@@ -27,7 +27,8 @@ test('USPS Passport', async({page}) =>{
     await page.locator('#btnContinueSidebar').click()
 
     await page.waitForURL('**/passport-renewal/united-states/application#step=review')
-    await page.waitForTimeout(1000)
+    await page.waitForTimeout(2000)
+
     const duplicate = await page.isVisible('id=btnDisclaimerNext')
     if (duplicate){
       await page.locator('id=btnDisclaimerNext').click()
@@ -107,8 +108,8 @@ test('USPS Passport', async({page}) =>{
     const hair_color = page.getByTestId('dropdown-applicant.0.appearence_2');
     await hair_color.selectOption('Brown')
 
-    await page.locator("id=feet").fill('5')
-    await page.locator("id=inches").fill('5')
+    await page.locator("id=feet-applicant.0.height_fsr").fill('5')
+    await page.locator("id=inches-applicant.0.height_fsr").fill('5')
 
     await page.getByTestId('dropdown-applicant.0.occupation').selectOption('self-employed')
 
@@ -163,7 +164,7 @@ test('USPS Passport', async({page}) =>{
     await page.waitForTimeout(1000)
     await page.keyboard.press("Enter")
     await page.waitForTimeout(1000)
-    await page.locator('//li[@data-place-id="ChIJIaGbBBhawokRUmbgNsUmr-s"]').click()
+    await page.locator('//li[@data-place-id="ChIJoZ8Hus00K4gRfgPGjqVFR5w"]').click()
 
     await page.locator('[name="applicant.0.emergency_contact_city"]').fill('aaaaaa')
     await page.locator('[name="applicant.0.emergency_contact_state"]').fill('aaaaaa')
