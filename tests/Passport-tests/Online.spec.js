@@ -107,9 +107,9 @@ test('Online Passport', async({page}) =>{
     const hair_color = page.getByTestId('dropdown-applicant.0.appearence_2');
     await hair_color.selectOption('Brown')
 
-    await page.getByPlaceholder('5 feet').fill('5')
-    await page.getByPlaceholder('2.9 inches').fill('5')
-
+    await page.locator("id=feet").fill('5')
+    await page.locator("id=inches").fill('5')
+    
     await page.getByTestId('dropdown-applicant.0.occupation').selectOption('self-employed')
 
     await page.waitForTimeout(1000)
