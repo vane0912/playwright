@@ -99,9 +99,19 @@ test('Different currency Mobile', async ({ page }) => {
     await payment_btn.click()
     
     await page.waitForNavigation({waitUntil: 'load'})
-  
-    Orders.push(page.url().split("/")[4]) 
     
+    const request = await fetch("http://localhost:3000/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ 
+          MIN: page.url().split("/")[4] 
+        }),
+    });
+    const response = await request.json()
+    console.log(response)
+  
     await page.getByPlaceholder('111-222-3333').fill('11111111')
     await page.getByTestId('boolean-WhatsApp').click()
   

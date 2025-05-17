@@ -2,7 +2,12 @@ const { test, expect } = require('@playwright/test');
 const {deploy_url, Orders} = require('../urls');
 const path = require('path');
 
-test.skip('MIN', async({browser}) => {
+
+test('MIN', async({browser}) => {
+    const request = await fetch("http://localhost:3000/");
+    const Order = await request.json()
+    console.log(Order.MIN)
+
     const context = await browser.newContext();
     await context.clearCookies();
 
@@ -10,7 +15,7 @@ test.skip('MIN', async({browser}) => {
     await page.goto(deploy_url + 'login')
 
     page.on('dialog', async (dialog) => {
-        await dialog.accept(Orders[0]);
+        await dialog.accept(Order.MIN);
     });
     await page.getByPlaceholder('1234567 or you@email.com').fill('sergio@admin.com')
     await page.getByRole("button", {name: 'Continue'}).click()

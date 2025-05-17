@@ -1,14 +1,16 @@
 report:
 	npx playwright show-report
-wolf: 
-	npx playwright test wolf-test.spec.js 
+
 failed:
 	npx playwright test --last-failed
 all: 
-	npx playwright test 
-status: 
-	npx playwright test login_order_id.spec.js --headed
+	npx playwright test /tests/Travel documents/ /tests/Passport-tests/ /tests/Mobile/
+	npx playwright test /tests/Admin/
+	
+test: 
+	npx playwright test /tests/admin/
+
+docs: 
+	npx playwright test /tests/Travel documents/
 passport: 
-	npx playwright test USPS.spec.js 
-mobile: 
-	npx playwright test hamburguer_menu_validations.spec.js
+	npx playwright test /tests/Passport-tests/
