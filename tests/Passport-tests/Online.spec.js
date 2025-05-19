@@ -112,6 +112,9 @@ test('Online Passport', async({page}) =>{
 
     await page.locator("id=feet-applicant.0.height_fsr").fill('5')
     await page.locator("id=inches-applicant.0.height_fsr").fill('5')
+
+    const marital_status = page.getByTestId('dropdown-applicant.0.marital_status');
+    await marital_status.selectOption('Single')
     
     await page.getByTestId('dropdown-applicant.0.occupation').selectOption('self-employed')
 
