@@ -5,6 +5,10 @@ const path = require('path');
 test('USPS Passport', async({page}) =>{
     test.slow()
     await page.goto(deploy_url + 'passport-renewal/united-states/application')
+    await page.waitForTimeout(2000)
+    await page.locator("id=btnContinueSidebar").click()
+    await page.waitForURL('**/passport-renewal/united-states/application#step=step_2')
+
     await expect(page.getByPlaceholder('John William')).toBeVisible()
     await page.getByPlaceholder('John William').fill('Test')
     await page.getByPlaceholder('Smith').first().fill('Test')

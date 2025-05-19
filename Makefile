@@ -1,12 +1,14 @@
 report:
-	npx playwright show-report
+	npx playwright show-report --report-dir=/test-results-2
 
 failed:
-	npx playwright test --last-failed
+	npx playwright test --last-failed --headed
 all: 
-	npx playwright test "/tests/Travel documents/" "/tests/Passport-tests/" "/tests/Mobile/" --workers 2 --reporter=line
-	npx playwright test /tests/admin/
+	npx playwright test /tests/Travel documents/ /tests/Passport-tests/ /tests/Mobile/ --workers 2 
 admin: 
 	npx playwright test /tests/admin/
-passport: 
+test: 
+	npx playwright test embassy_visa.spec.js
+
+passport:
 	npx playwright test /tests/Passport-tests/
