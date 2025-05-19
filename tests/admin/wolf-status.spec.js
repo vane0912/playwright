@@ -4,9 +4,9 @@ const path = require('path');
 
 
 test('MIN', async({browser}) => {
-    const request = await fetch("http://localhost:3000/");
+    const request = await fetch("https://littleserver-production.up.railway.app/");
     const Order = await request.json()
-    console.log(Order.MIN)
+    console.log(Order.Min)
 
     const context = await browser.newContext();
     await context.clearCookies();
@@ -15,9 +15,9 @@ test('MIN', async({browser}) => {
     await page.goto(deploy_url + 'login')
 
     page.on('dialog', async (dialog) => {
-        await dialog.accept(Order.MIN);
+        await dialog.accept(Order.Min);
     });
-    await page.getByPlaceholder('1234567 or you@email.com').fill('sergio@admin.com')
+    await page.getByPlaceholder('1234567 or you@email.com').fill('david@admin.com')
     await page.getByRole("button", {name: 'Continue'}).click()
     
     await page.locator('#password_login_input').fill('testivisa5!')
@@ -45,13 +45,17 @@ test('MIN', async({browser}) => {
 
     await page.waitForURL('**/admin/orders/my_orders?redirect_to_first_order=1')
 })
-test.skip('Complete', async({browser}) => {
+test('Complete', async({browser}) => {
+    const request = await fetch("https://littleserver-production.up.railway.app/");
+    const Order = await request.json()
+    console.log(Order.Completed)
+
     const context = await browser.newContext();
     await context.clearCookies();
 
     const page = await context.newPage();
     page.on('dialog', async (dialog) => {
-        await dialog.accept(Orders[1]);
+        await dialog.accept(Order.Completed);
     });
     await page.goto(deploy_url + 'login')
     await page.getByPlaceholder('1234567 or you@email.com').fill('david@admin.com')
@@ -76,17 +80,21 @@ test.skip('Complete', async({browser}) => {
     await expect(page.locator('.upload-input-wrap')).toBeVisible()
     await expect(page.getByTestId('order-status')).toHaveText('Complete')
 })
-test.skip('Rejected', async({browser}) => {
+test('Rejected', async({browser}) => {
+    const request = await fetch("https://littleserver-production.up.railway.app/");
+    const Order = await request.json()
+    console.log(Order.Rejected)
+
     const context = await browser.newContext();
     await context.clearCookies();
 
     const page = await context.newPage();
     page.on('dialog', async (dialog) => {
-        await dialog.accept(Orders[2]);
+        await dialog.accept(Order.Rejected);
     });
 
     await page.goto(deploy_url + 'login')
-    await page.getByPlaceholder('1234567 or you@email.com').fill('sergio@admin.com')
+    await page.getByPlaceholder('1234567 or you@email.com').fill('david@admin.com')
     await page.getByRole("button", {name: 'Continue'}).click()
 
     await page.locator('#password_login_input').fill('testivisa5!')

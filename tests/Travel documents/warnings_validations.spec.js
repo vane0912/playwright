@@ -148,8 +148,6 @@ test('Appointment location error', async({page}) => {
   
     const error_text = page.getByText('Your order cannot include different appointment locations. Please make separate orders for each location.')
     await expect(error_text).toBeVisible()
-  
-    await page.waitForTimeout(9000)
   })
   
 test('Trip disclaimer appearing for arrival date warnings', async({page}) => {
@@ -165,6 +163,5 @@ test('Trip disclaimer appearing for arrival date warnings', async({page}) => {
 
   await expect(page.getByTestId('arrivalDateWarningBody')).toBeVisible()
   await expect(page.getByTestId('arrivalDateWarningBody')).toContainText('Apply now to receive your document(s) on time.')
-
 })
   

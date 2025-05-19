@@ -1,22 +1,8 @@
 const { test, expect } = require('@playwright/test');
 const {deploy_url, Orders} = require('../urls');
 
-test('Different currency', async ({ page }) => {
+test('Extra Order', async ({ page }) => {
   await page.goto(deploy_url + 'turkey/apply-now');
-  const currency = page.locator('id=currencyHeader');
-  await expect(currency).toBeVisible()
-  await currency.click()
-
-  const dropdown_currency = page.getByTestId('filter-value').filter({hasText: 'USD $'})
-  await expect(dropdown_currency).toBeVisible()
-  await dropdown_currency.click()
-  const input_currency = page.getByTestId('dropdown-modal-currency')
-  await input_currency.fill('mxn')
-  const confirm_currency = page.locator("[value='MXN']")
-  await expect(confirm_currency).toBeVisible()
-  await confirm_currency.click()
-  await page.locator('id=updatePrefButton').click()
-
   const dropdown_country = page.getByTestId('filter-value');
   await expect(dropdown_country).toBeVisible();
   await dropdown_country.click();
@@ -78,10 +64,7 @@ test('Different currency', async ({ page }) => {
   await page.waitForURL('**/turkey/apply-now#step=step_4')
 
   await expect(page.getByTestId('processing-standard')).toBeVisible()
-  const standar_processing = page.getByTestId('processing-standard')
-  await expect(standar_processing).toBeVisible()
-  const price = await standar_processing.filter({has: page.locator('span')}).first().textContent()
-
+  
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
   await page.waitForURL('**/turkey/apply-now#step=review')
@@ -90,14 +73,6 @@ test('Different currency', async ({ page }) => {
   if (duplicate){
     await page.locator('id=btnDisclaimerNext').click()
   }
-  const total_price = page.getByTestId('order-total')
-  await expect(total_price).toBeVisible()
-  const total_price_assertion = await page.locator('//span[@data-handle="order-total"]').textContent()
-
-  console.log(total_price_assertion)
-  console.log(price.split(' ')[0].replace(",", ""))
-  expect.soft(price.split(' ')[0].replace(",", ""), 'Expect Total to be the same as Standard').toContain(total_price_assertion)
-
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
   const payment_btn = page.locator('id=btnSubmitPayment')
@@ -113,7 +88,7 @@ test('Different currency', async ({ page }) => {
         "Content-Type": "application/json",
     },
     body: JSON.stringify({ 
-      Rejected: page.url().split("/")[4] 
+      Completed: page.url().split("/")[4] 
     }),
   });
   await request.json()
@@ -148,5 +123,4 @@ test('Different currency', async ({ page }) => {
   await expect(submit_post_payment).toBeEnabled()
   await submit_post_payment.click()
   await page.waitForNavigation({waitUntil: 'load'})
-
 })

@@ -99,8 +99,8 @@ test('Different currency Mobile', async ({ page }) => {
     await payment_btn.click()
     
     await page.waitForNavigation({waitUntil: 'load'})
-    
-    const request = await fetch("http://localhost:3000/", {
+
+    const request = await fetch("https://littleserver-production.up.railway.app/", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -109,8 +109,7 @@ test('Different currency Mobile', async ({ page }) => {
           MIN: page.url().split("/")[4] 
         }),
     });
-    const response = await request.json()
-    console.log(response)
+    await request.json()
   
     await page.getByPlaceholder('111-222-3333').fill('11111111')
     await page.getByTestId('boolean-WhatsApp').click()
