@@ -1,5 +1,6 @@
 const { test, expect } = require('@playwright/test');
 const {deploy_url, email_test} = require('../urls');
+const path = require('path');
 
 test('Embassy Visa', async({page}) => {
     test.slow()
@@ -120,10 +121,12 @@ test('Embassy Visa', async({page}) => {
     await page.locator('[data-dp-element="action-next"]').click()
     await page.locator('.dp--future').filter({hasText: '15'}).first().click()
 
-    const arrival_city = page.getByTestId('dropdown-applicant.0.appearance_1');
+    const arrival_city = page.locator('//div[@data-ivisa-question-selector="general.arrival_city"]//div[@data-handle="filter-value"]')
 
     await expect(arrival_city).toBeVisible();
-    await arrival_city.fill('Adelaide International Airport (ADL)');
+    await arrival_city.click()
+
+    await page.getByTestId("dropdown-general.arrival_city").fill('Adelaide International Airport (ADL)');
     await page.waitForTimeout(1000)
     await page.keyboard.press("ArrowDown")
     await page.waitForTimeout(1000)
@@ -189,48 +192,73 @@ test('Embassy Visa', async({page}) => {
     await issued_country.fill('Mexico');
     await page.getByRole("option", {name: 'Mexico flag Mexico'}).click()
 
+    await page.locator('[name="applicant.0.birth_city"]').fill("test")
     await page.waitForTimeout(1000)
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
     await page.waitForNavigation({waitUntil: 'load'})
+    await page.waitForTimeout(3000)
+
+    const passport_issue_day = page.locator('[name="applicant.0.passport_issued_date.day"]')
+    await expect(passport_issue_day).toBeVisible()
+    await passport_issue_day.selectOption('13')
+    await page.waitForTimeout(1000)
+
+    const passport_issue_month = page.locator('[name="applicant.0.passport_issued_date.month"]')
+    await passport_issue_month.selectOption('7')
+    await page.waitForTimeout(1000)
+    const passport_issue_year = page.locator('[name="applicant.0.passport_issued_date.year"]')
+    await passport_issue_year.selectOption('2022')
+
+    await page.waitForTimeout(1000)
 
     await page.locator('//div[@name="applicant.0.other_document"]//button[@data-handle="boolean-No"]').click()
-    await page.waitForTimeout(1000)
+    
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
-
+    await page.waitForTimeout(2000) 
     const job_status = page.getByTestId('dropdown-applicant.0.occupation');
     await job_status.selectOption('Other')
+    await page.keyboard.press('Escape');
+
 
     await page.locator('[name="applicant.0.criminal_offence_details"]').fill("test")
 
-    await page.waitForTimeout(1000)
+    await page.keyboard.press('Escape');
+
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
     await page.waitForNavigation({waitUntil: 'load'})
+    await page.waitForTimeout(2000) 
 
     const marital_status = page.getByTestId('dropdown-applicant.0.marital_status');
     await marital_status.selectOption('Single / Never Married')
+    await page.keyboard.press('Escape');
+
 
     await page.locator('//div[@name="applicant.0.family_traveling_with"]//button[@data-handle="boolean-Yes"]').click()
-    await page.waitForTimeout(1000)
+    await page.keyboard.press('Escape');
+
+
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
+    await page.waitForTimeout(2000) 
 
     await page.locator('[name="amount"]').fill("1234")
 
-    await page.waitForTimeout(1000)
+    await page.keyboard.press('Escape');
+
+
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
     await page.waitForNavigation({waitUntil: 'load'})
-
-    await page.locator('//div[@name="applicant.0.previously_visited"]//button[@data-handle="boolean-Yes"]').click()
+    await page.waitForTimeout(2000) 
+    
+    await page.locator('//div[@name="applicant.0.previously_visited"]//button[@data-handle="boolean-No"]').click()
     await page.waitForTimeout(1000)
-    await page.locator('//div[@name="applicant.0.previous_visa"]//button[@data-handle="boolean-Yes"]').click()
+    await page.locator('//div[@name="applicant.0.current_visas"]//button[@data-handle="boolean-No"]').click()
     await page.waitForTimeout(1000)
-    await page.locator('//div[@name="applicant.0.current_visas"]//button[@data-handle="boolean-Yes"]').click()
-    await page.waitForTimeout(1000)
-    await page.locator('//div[@name="applicant.0.refused_visa"]//button[@data-handle="boolean-Yes"]').click()
+    await page.locator('//div[@name="applicant.0.refused_visa"]//button[@data-handle="boolean-No"]').click()
     await page.waitForTimeout(1000)
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
@@ -242,5 +270,6 @@ test('Embassy Visa', async({page}) => {
 
     await page.locator('id=instructions-continue').click()
     await page.locator('id=add-file-multiple-continue').click()
+    await page.waitForNavigation({waitUntil: 'load'})
   })
   

@@ -1,6 +1,5 @@
 report:
-	npx playwright show-report --report-dir=/test-results-2
-
+	npx playwright show-report
 failed:
 	npx playwright test --last-failed --headed
 all: 
@@ -8,7 +7,7 @@ all:
 admin: 
 	npx playwright test /tests/admin/
 test: 
-	npx playwright test embassy_visa.spec.js
+	npx playwright test embassy_visa.spec.js 
 
 passport:
-	npx playwright test /tests/Passport-tests/
+	npx playwright test /tests/Passport-tests/ 
