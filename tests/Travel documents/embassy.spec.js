@@ -45,12 +45,6 @@ test('Embassy reg', async({page}) => {
   await continue_step1.click()
 
   await page.waitForURL('**/embassy-registration#step=step_2')
-  const name_applicant = page.getByPlaceholder("John William")
-  await expect(name_applicant).toBeVisible()
-  await name_applicant.fill('Test')
-
-  const last_name = page.getByPlaceholder("Smith").first()
-  await last_name.fill('Test')
 
   const dob_day = page.locator('[name="applicant.0.dob.day"]')
   await dob_day.selectOption('11')
@@ -99,6 +93,13 @@ test('Embassy reg', async({page}) => {
   await passport_issue_year.selectOption('2020')
   await page.waitForTimeout(1000)
 
+  const name_applicant = page.getByPlaceholder("John William")
+  await expect(name_applicant).toBeVisible()
+  await name_applicant.fill('Test')
+  await page.waitForTimeout(1000)
+  const last_name = page.getByPlaceholder("Smith").first()
+  await last_name.fill('Test')
+  await page.waitForTimeout(1000)
   await expect(continue_step1).toBeEnabled()
   await continue_step1.click()
 

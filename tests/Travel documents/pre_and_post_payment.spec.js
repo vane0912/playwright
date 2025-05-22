@@ -51,21 +51,21 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
     sidebar_3a.forEach(async txt => await expect(sidebar_step_2).toContainText(txt))
 
     //
-    const name_applicant = page.getByPlaceholder("John William")
+    await page.waitForTimeout(1000)
+    const dob_day = page.locator('[name="applicant.0.dob.day"]')
+    await dob_day.selectOption('13')
+    const dob_month = page.locator('[name="applicant.0.dob.month"]')
+    await dob_month.selectOption('7')
+    const dob_year = page.locator('[name="applicant.0.dob.year"]')
+    await dob_year.selectOption('2000')
+    const name_applicant = page.locator('[name="applicant.0.first_name"]')
     await expect(name_applicant).toBeVisible()
     await name_applicant.fill('Test')
 
-    const last_name = page.getByPlaceholder("Smith").first()
+    await page.waitForTimeout(1000)
+    const last_name = page.locator('[name="applicant.0.last_name"]')
     await last_name.fill('Test')
-
-    const dob_day = page.locator('[name="applicant.0.dob.day"]')
-    await dob_day.selectOption('11')
-
-    const dob_month = page.locator('[name="applicant.0.dob.month"]')
-    await dob_month.selectOption('7')
-
-    const dob_year = page.locator('[name="applicant.0.dob.year"]')
-    await dob_year.selectOption('2000')
+    await page.waitForTimeout(1000)
 
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
@@ -83,15 +83,13 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
     const passport_num = page.locator('[name="applicant.0.passport_num"]')
     await expect(passport_num).toBeVisible()
     await passport_num.fill('123456789')
-
     const passport_day = page.locator('[name="applicant.0.passport_expiration_date.day"]')
     await passport_day.selectOption('13')
-
     const passport_month = page.locator('[name="applicant.0.passport_expiration_date.month"]')
     await passport_month.selectOption('7')
-
     const passport_year = page.locator('[name="applicant.0.passport_expiration_date.year"]')
     await passport_year.selectOption('2030')
+    await page.waitForTimeout(4000)
 
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
@@ -159,8 +157,7 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
     await page.waitForNavigation({waitUntil: 'load'})
 
     // Post payment
-    await page.getByPlaceholder('111-222-3333').first().fill('11111111')
-    
+
     // Sidebar checks
     const sidebar_checks = page.locator('//div[@data-vue-component="product-application-suspense-wrapper"]')
     const sidebar_post_payment_txt = ['Colombia Check-MIG Form Application', 'Trip details', 'Test Test', 'Personal Information']
@@ -195,8 +192,15 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
     await page.locator('[name="general.destination_state"]').fill('aaaaaa')
     await page.locator('[name="general.destination_zip"]').fill('aaaaaa')
     await page.locator('[name="general.destination_country"]').fill('aaaaaa')
-    await page.locator('xpath=//div[@name="general.destination_phone"]//input[@name="telephone"]').fill('11111111111111')
-
+    await page.locator('xpath=//div[@name="general.destination_phone"]//input[@name="telephone"]').click()
+    await page.waitForTimeout(1000)
+    await page.keyboard.type("11111111", {delay: 100})
+    
+    await page.waitForTimeout(1000)
+    await page.getByPlaceholder('111-222-3333').first().click()
+    await page.waitForTimeout(1000)
+    await page.keyboard.type("11111111", {delay: 100})
+    
     await page.waitForTimeout(1000)
     const next_btn = page.locator('id=btnContinueUnderSection')
     await expect(next_btn).toBeEnabled()

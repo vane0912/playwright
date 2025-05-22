@@ -7,7 +7,7 @@ all:
 admin: 
 	npx playwright test /tests/admin/
 test: 
-	npx playwright test embassy_visa.spec.js 
+	npx playwright test /tests/Travel documents/
 
 passport:
 	npx playwright test /tests/Passport-tests/ 
