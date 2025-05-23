@@ -32,31 +32,25 @@ test('Appointment location error mobile', async({page}) => {
 
     await expect(page.locator('[name="general.email"]')).toBeVisible()
   
-    const name_applicant = page.getByPlaceholder("John William")
-    await expect(name_applicant).toBeVisible()
-    await name_applicant.fill('Test')
-  
-    const last_name = page.getByPlaceholder("Smith").first()
-    await last_name.fill('Test')
-  
+    await page.waitForTimeout(1000)
     const dob_day = page.locator('[name="applicant.0.dob.day"]')
     await dob_day.selectOption('13')
-  
     const dob_month = page.locator('[name="applicant.0.dob.month"]')
     await dob_month.selectOption('7')
-  
     const dob_year = page.locator('[name="applicant.0.dob.year"]')
     await dob_year.selectOption('2000')
+    const name_applicant = page.locator('[name="applicant.0.first_name"]')
+    await expect(name_applicant).toBeVisible()
+    await name_applicant.fill('Test')
+
+    await page.waitForTimeout(1000)
+    const last_name = page.locator('[name="applicant.0.last_name"]')
+    await last_name.fill('Test')
+    await page.waitForTimeout(1000)
+
   
     const add_traveler = page.getByTestId('add-traveler')
     await add_traveler.click()
-  
-    const name_applicant_2 = page.locator('[name="applicant.1.first_name"]')
-    await expect(name_applicant_2).toBeVisible()
-    await name_applicant_2.fill('Test')
-  
-    const last_name_2 = page.locator('[name="applicant.1.last_name"]')
-    await last_name_2.fill('Test')
   
     const dob_day_2 = page.locator('[name="applicant.1.dob.day"]')
     await dob_day_2.selectOption('13')
@@ -66,6 +60,15 @@ test('Appointment location error mobile', async({page}) => {
   
     const dob_year_2 = page.locator('[name="applicant.1.dob.year"]')
     await dob_year_2.selectOption('2000')
+
+    await page.waitForTimeout(1000)
+    const name_applicant_2 = page.locator('[name="applicant.1.first_name"]')
+    await expect(name_applicant_2).toBeVisible()
+    await name_applicant_2.fill('Test')
+    await page.waitForTimeout(1000)
+    const last_name_2 = page.locator('[name="applicant.1.last_name"]')
+    await last_name_2.fill('Test')
+    await page.waitForTimeout(1000)
   
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()

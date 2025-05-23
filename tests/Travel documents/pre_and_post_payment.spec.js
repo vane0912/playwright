@@ -164,6 +164,10 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
     sidebar_post_payment_txt.forEach(async txt => await expect(sidebar_checks).toContainText(txt))
     await expect(page.getByTestId('General information')).toBeVisible()
     await expect(page.getByTestId('Personal Information')).toBeVisible()
+    await page.waitForTimeout(1000)
+    await page.locator('xpath=//div[@name="general.destination_phone"]//input[@name="telephone"]').click()
+    await page.waitForTimeout(1000)
+    await page.keyboard.type("11111111", {delay: 100})
     
     await page.getByTestId('boolean-WhatsApp').click()
 
@@ -192,9 +196,6 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
     await page.locator('[name="general.destination_state"]').fill('aaaaaa')
     await page.locator('[name="general.destination_zip"]').fill('aaaaaa')
     await page.locator('[name="general.destination_country"]').fill('aaaaaa')
-    await page.locator('xpath=//div[@name="general.destination_phone"]//input[@name="telephone"]').click()
-    await page.waitForTimeout(1000)
-    await page.keyboard.type("11111111", {delay: 100})
     
     await page.waitForTimeout(1000)
     await page.getByPlaceholder('111-222-3333').first().click()

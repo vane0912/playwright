@@ -20,21 +20,22 @@ test('Processing speeds appear and work for mobile', async({page}) => {
     await continue_sidebar.click()
     await page.waitForURL('**/india/apply-now#step=step_3a')
   
-    const name_applicant = page.getByPlaceholder("John William")
-    await expect(name_applicant).toBeVisible()
-    await name_applicant.fill('Test')
-  
-    const last_name = page.getByRole('textbox', { name: 'Smith', exact: true })
-    await last_name.fill('Test')
-  
+    await page.waitForTimeout(1000)
     const dob_day = page.locator('[name="applicant.0.dob.day"]')
     await dob_day.selectOption('13')
-  
     const dob_month = page.locator('[name="applicant.0.dob.month"]')
     await dob_month.selectOption('7')
-  
     const dob_year = page.locator('[name="applicant.0.dob.year"]')
     await dob_year.selectOption('2000')
+    const name_applicant = page.locator('[name="applicant.0.first_name"]')
+    await expect(name_applicant).toBeVisible()
+    await name_applicant.fill('Test')
+
+    await page.waitForTimeout(1000)
+    const last_name = page.locator('[name="applicant.0.last_name"]')
+    await last_name.fill('Test')
+    await page.waitForTimeout(1000)
+
   
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
@@ -43,15 +44,13 @@ test('Processing speeds appear and work for mobile', async({page}) => {
     const passport_num = page.locator('[name="applicant.0.passport_num"]')
     await expect(passport_num).toBeVisible()
     await passport_num.fill('123456789')
-  
     const passport_day = page.locator('[name="applicant.0.passport_expiration_date.day"]')
     await passport_day.selectOption('13')
-  
     const passport_month = page.locator('[name="applicant.0.passport_expiration_date.month"]')
     await passport_month.selectOption('7')
-  
     const passport_year = page.locator('[name="applicant.0.passport_expiration_date.year"]')
     await passport_year.selectOption('2030')
+    await page.waitForTimeout(4000)
     
     const dropdown_country = page.locator('[name="applicant.0.port_of_arrival"]');
     await expect(dropdown_country).toBeVisible();
