@@ -95,6 +95,17 @@ test('Payment with VISA', async({page}) => {
   await expect(payment_btn).toBeEnabled()
   await payment_btn.click()
   await page.waitForNavigation({waitUntil: 'load'})
+  await page.waitForTimeout(1000)
+  const request = await fetch("https://littleserver-production.up.railway.app/", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ 
+      Cancelled: page.url().split("/")[4] 
+    }),
+  });
+  await request.json()
 })
   
 test('Payment with Master Card', async({page}) => {

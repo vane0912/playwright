@@ -180,8 +180,6 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
 
     await page.getByRole("option", {value: 'Armenia (AXM), El Eden Airport'}).click()
 
-    await page.getByPlaceholder('E.g. AV47').fill('A1234')
-
     const host_city = page.locator('[name="general.destination_city"]')
     await host_city.click()
     const host_city_input = page.getByTestId('dropdown-general.destination_city');
@@ -201,8 +199,14 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
     await page.getByPlaceholder('111-222-3333').first().click()
     await page.waitForTimeout(1000)
     await page.keyboard.type("11111111", {delay: 100})
-    
     await page.waitForTimeout(1000)
+
+    await page.waitForTimeout(1000)
+    await page.locator('[name="general.arrival_flight_number"]').click()
+    await page.waitForTimeout(1000)
+    await page.keyboard.type("aaaaaaaa", {delay: 100})
+    await page.waitForTimeout(1000)
+
     const next_btn = page.locator('id=btnContinueUnderSection')
     await expect(next_btn).toBeEnabled()
     await next_btn.click()

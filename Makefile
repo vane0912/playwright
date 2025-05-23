@@ -7,7 +7,7 @@ all:
 admin: 
 	npx playwright test /tests/admin/
 test: 
-	npx playwright test /tests/Travel documents/
+	npx playwright test pre_and_post_payment.spec
 
 passport:
 	npx playwright test /tests/Passport-tests/ 

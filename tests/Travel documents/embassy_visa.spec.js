@@ -216,15 +216,13 @@ test('Embassy Visa', async({page}) => {
     
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
+    await page.waitForNavigation({waitUntil: 'load'})
     await page.waitForTimeout(2000) 
     const job_status = page.getByTestId('dropdown-applicant.0.occupation');
     await job_status.selectOption('Other')
-    await page.keyboard.press('Escape');
-
-
+    await page.waitForTimeout(2000) 
     await page.locator('[name="applicant.0.criminal_offence_details"]').fill("test")
-
-    await page.keyboard.press('Escape');
+    await page.waitForTimeout(2000) 
 
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
@@ -233,20 +231,21 @@ test('Embassy Visa', async({page}) => {
 
     const marital_status = page.getByTestId('dropdown-applicant.0.marital_status');
     await marital_status.selectOption('Single / Never Married')
-    await page.keyboard.press('Escape');
+    await page.waitForTimeout(2000) 
 
 
     await page.locator('//div[@name="applicant.0.family_traveling_with"]//button[@data-handle="boolean-Yes"]').click()
-    await page.keyboard.press('Escape');
+    await page.waitForTimeout(2000) 
 
 
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
     await page.waitForTimeout(2000) 
 
-    await page.locator('[name="amount"]').fill("1234")
-
-    await page.keyboard.press('Escape');
+    await page.locator('[name="amount"]').click()
+    await page.waitForTimeout(1000)
+    await page.keyboard.type("1234565", {delay: 100})
+    await page.waitForTimeout(1000)
 
 
     await expect(next_btn).toBeEnabled()
