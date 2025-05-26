@@ -2,7 +2,10 @@ const { test, expect } = require('@playwright/test');
 const {deploy_url} = require('../urls');
 
 test('Processing speeds appear and work for mobile', async({page}) => {
-    const today = new Date()
+    var myDate = new Date(new Date(). getTime()+(5*24*60*60*1000));
+    const datepicker_date = new Date(myDate);
+    const date1 = datepicker_date.getDate();
+
     await page.goto(deploy_url + 'india/apply-now')
     await page.setViewportSize({ width: 412, height: 915 });
 
@@ -12,7 +15,7 @@ test('Processing speeds appear and work for mobile', async({page}) => {
     await expect(page.locator('.dp__outer_menu_wrap')).toBeVisible()
     
     await page.locator('[data-dp-element="action-next"]').click()
-    await page.locator('.dp--future').filter({hasText: `8`}).first().click()
+    await page.locator('.dp--future').filter({hasText: date1}).first().click()
 
     const continue_sidebar = page.locator('id=btnContinueUnderSectionMobile')
     

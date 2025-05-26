@@ -138,8 +138,8 @@ test('Cancelled', async({browser}) => {
 
     await page.waitForURL('**/admin/users/27656/edit')
     await page.locator('[name="employee_role"]').selectOption("admin")
-
-    await page.getByRole("button").filter({hasText: "Update user"}).click()
+    await page.getByText("Update user").click()
+    await page.waitForTimeout(5000)
     await page.waitForURL('**/admin/users')
 
     await page.goto(deploy_url + 'admin')

@@ -1,7 +1,7 @@
 report:
 	npx playwright show-report
 failed:
-	npx playwright test --last-failed 
+	npx playwright test --last-failed --headed
 all: 
 	npx playwright test /tests/Travel documents/ /tests/Passport-tests/ /tests/Mobile/ --workers 2 
 admin: 
