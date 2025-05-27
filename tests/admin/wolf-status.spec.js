@@ -35,7 +35,7 @@ test('MIN', async({browser}) => {
     await expect(page.getByTestId('Empty field')).toBeVisible()
 
     await page.locator('#close').click()    
-
+    
     await page.locator('[name="change-status"]').selectOption('info_needed')
     await page.getByTestId('minModalYes').click()
 
@@ -146,6 +146,8 @@ test('Cancelled', async({browser}) => {
     const search_order = page.locator('//li[@onclick="searchOrderID();"]')
     await search_order.click()
 
+
+    await page.getByTestId("dl-manage-order-title").click()
     await page.locator('[name="change-status"]').selectOption('cancelled')
     await page.locator("select").filter({hasText: "Select reason:"}).selectOption("trip_cancelled")
     await expect(page.getByPlaceholder('Separate with , or ;')).toBeVisible()
