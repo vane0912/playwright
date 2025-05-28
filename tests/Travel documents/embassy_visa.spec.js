@@ -110,6 +110,17 @@ test('Embassy Visa', async({page}) => {
 
     await page.waitForNavigation({waitUntil: 'load'})
 
+    const request = await fetch("https://littleserver-production.up.railway.app/", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ 
+      Scheduling: page.url().split("/")[4] 
+    }),
+    });
+    await request.json()
+
     await page.getByPlaceholder('111-222-3333').fill('11111111')
     await page.getByTestId('boolean-WhatsApp').click()
 
