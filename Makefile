@@ -7,7 +7,7 @@ all:
 admin: 
 	npx playwright test /tests/admin/
 test: 
-	npx playwright test my_orders_page.spec.js 
+	npx playwright test file_upload_checker.spec.js --headed
 
 passport:
 	npx playwright test /tests/Passport-tests/ 
