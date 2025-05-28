@@ -74,8 +74,8 @@ test('Card update', async ({ page }) => {
     await expect(page.getByTestId("updatePaymentMethodBtn")).toBeEnabled()
   
     await page.goto(deploy_url + 'account/payment-method/edit')
-    await page.getByPlaceholder("Card number").fill("4111 1111 1111 1111")
-    await page.getByPlaceholder("MM/YY").fill("10/26")
+    await page.getByPlaceholder("Card number").fill("4556 7610 2998 3886")
+    await page.getByPlaceholder("MM/YY").fill("10/29")
     await page.getByPlaceholder("CVV").fill("123")
     await page.getByPlaceholder("Cardholder name").fill("John Smith")
     await page.locator("id=btnSubmitPayment").click()

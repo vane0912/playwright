@@ -1,21 +1,10 @@
 const { test, expect } = require('@playwright/test');
 const {deploy_url, Orders} = require('../urls');
 
-test('Different currency', async ({ page }) => {
+let order_num 
+test('Individual subscription purchase', async ({ page }) => {
+  test.slow()
   await page.goto(deploy_url + 'turkey/apply-now');
-  const currency = page.locator('id=currencyHeader');
-  await expect(currency).toBeVisible()
-  await currency.click()
-
-  const dropdown_currency = page.getByTestId('filter-value').filter({hasText: 'USD $'})
-  await expect(dropdown_currency).toBeVisible()
-  await dropdown_currency.click()
-  const input_currency = page.getByTestId('dropdown-modal-currency')
-  await input_currency.fill('mxn')
-  const confirm_currency = page.locator("[value='MXN']")
-  await expect(confirm_currency).toBeVisible()
-  await confirm_currency.click()
-  await page.locator('id=updatePrefButton').click()
 
   const dropdown_country = page.getByTestId('filter-value');
   await expect(dropdown_country).toBeVisible();
@@ -46,7 +35,7 @@ test('Different currency', async ({ page }) => {
   const dob_month = page.locator('[name="applicant.0.dob.month"]')
   await dob_month.selectOption('7')
   const dob_year = page.locator('[name="applicant.0.dob.year"]')
-  await dob_year.selectOption('2000')
+  await dob_year.selectOption('2002')
   const name_applicant = page.locator('[name="applicant.0.first_name"]')
   await expect(name_applicant).toBeVisible()
   await name_applicant.fill('Test')
@@ -88,13 +77,6 @@ test('Different currency', async ({ page }) => {
   if (duplicate){
     await page.locator('id=btnDisclaimerNext').click()
   }
-  const total_price = page.getByTestId('order-total')
-  await expect(total_price).toBeVisible()
-  const total_price_assertion = await page.locator('//span[@data-handle="order-total"]').textContent()
-
-  console.log(total_price_assertion)
-  console.log(price.split(' ')[0].replace(",", ""))
-  expect.soft(price.split(' ')[0].replace(",", ""), 'Expect Total to be the same as Standard').toContain(total_price_assertion)
 
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
@@ -104,17 +86,7 @@ test('Different currency', async ({ page }) => {
   await payment_btn.click()
   
   await page.waitForNavigation({waitUntil: 'load'})
-
-  const request = await fetch("https://littleserver-production.up.railway.app/", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ 
-      Rejected: page.url().split("/")[4] 
-    }),
-  });
-  await request.json()
+  order_num = page.url().split("/")[4] 
 
   await page.getByPlaceholder('111-222-3333').fill('11111111')
   await page.getByTestId('boolean-WhatsApp').click()
@@ -146,4 +118,113 @@ test('Different currency', async ({ page }) => {
   await expect(submit_post_payment).toBeEnabled()
   await submit_post_payment.click()
   await page.waitForNavigation({waitUntil: 'load'})
+
+  await page.locator('id=trackApplication').click()
+  await page.waitForURL(deploy_url + "order/" + order_num)
+
+  // Purchase subscription
+
+  await page.getByText("View plans").click()
+  await expect(page.locator("id=iVisaPlusContent")).toBeVisible()
+
+  await expect(page.getByTestId("purchase-subscription-button")).toContainText(" Subscribe for $79.99 $29.99")
+  await page.getByTestId("purchase-subscription-button").click()
+
+  await page.waitForURL(deploy_url + "order/" + order_num + "?subscription=true")
+
+  // Place free order 
+  await page.goto(deploy_url + 'turkey/apply-now');
+
+  await expect(dropdown_country).toBeVisible();
+  await dropdown_country.click();
+  await expect(input_country).toBeVisible();
+  await input_country.fill('Mexico');
+  await page.getByRole("option", {name: 'Mexico flag Mexico'}).click()
+  
+  await selector_products.selectOption('38')
+  await expect(arrival_date_visible).toBeVisible()
+  await arrival_date_visible.click()
+  await expect(page.locator('.dp__outer_menu_wrap')).toBeVisible()
+  await page.locator('[data-dp-element="action-next"]').click()
+  await page.locator('.dp--future').filter({hasText: '12'}).first().click()
+
+  await expect(continue_sidebar).toBeEnabled()
+  await continue_sidebar.click()
+  await page.waitForURL('**/turkey/apply-now#step=step_3a')
+  
+  await page.waitForTimeout(1000)
+  await dob_day.selectOption('13')
+  await dob_month.selectOption('7')
+  await dob_year.selectOption('2002')
+  await expect(name_applicant).toBeVisible()
+  await name_applicant.fill('Test')
+  
+  await page.waitForTimeout(1000)
+  await last_name.fill('Test')
+  await page.waitForTimeout(1000)
+
+  await expect(continue_sidebar).toBeEnabled()
+  await continue_sidebar.click()
+  await page.waitForURL('**/turkey/apply-now#step=step_3c')
+  
+  await expect(passport_num).toBeVisible()
+  await passport_num.fill('123456789')
+  await passport_day.selectOption('13')
+  await passport_month.selectOption('7')
+  await passport_year.selectOption('2030')
+  await page.waitForTimeout(4000)
+
+  await expect(continue_sidebar).toBeEnabled()
+  await continue_sidebar.click()
+  await page.waitForURL('**/turkey/apply-now#step=step_4')
+
+  await expect(page.getByTestId('processing-standard')).toBeVisible()
+  await expect(standar_processing).toBeVisible()
+
+  await expect(continue_sidebar).toBeEnabled()
+  await continue_sidebar.click()
+  await page.waitForURL('**/turkey/apply-now#step=review')
+  await page.waitForTimeout(2000)
+  if (duplicate){
+    await page.locator('id=btnDisclaimerNext').click()
+  }
+
+  await expect(continue_sidebar).toBeEnabled()
+  await continue_sidebar.click()
+
+  await expect(page.locator('.card-body')).toContainText("Your iVisa+ Subscription covers the total cost of your application")
+  await expect(payment_btn).toBeVisible()
+  await expect(payment_btn).toBeEnabled()
+  await payment_btn.click()
+  
+  await page.waitForNavigation({waitUntil: 'load'})
+  order_num = page.url().split("/")[4] 
+
+  await page.getByPlaceholder('111-222-3333').fill('11111111')
+  await page.getByTestId('boolean-WhatsApp').click()
+
+  await page.waitForTimeout(1000)
+  await expect(next_btn).toBeEnabled()
+  await next_btn.click()
+  await expect(page.getByTestId('boolean-Male')).toBeEnabled()
+  await page.waitForTimeout(1000)
+  await page.getByTestId('boolean-Male').click()
+  await page.waitForTimeout(1000)
+  await expect(next_btn).toBeEnabled()
+  await next_btn.click()
+
+  await page.waitForNavigation({waitUntil: 'load'})
+  await passport_issue_day.selectOption('13')
+  await page.waitForTimeout(1000)
+
+  await passport_issue_month.selectOption('7')
+  await page.waitForTimeout(1000)
+  await passport_issue_year.selectOption('2020')
+  await page.waitForTimeout(1000)
+  await expect(submit_post_payment).toBeEnabled()
+  await submit_post_payment.click()
+  await page.waitForNavigation({waitUntil: 'load'})
+
+  await page.locator('id=trackApplication').click()
+  await page.waitForURL(deploy_url + "order/" + order_num)
 })
