@@ -7,7 +7,7 @@ all:
 admin: 
 	npx playwright test /tests/admin/
 test: 
-	npx playwright test /tests/Mobile/
+	npx playwright test banner_mobile_app.spec.js --headed
 
 passport:
 	npx playwright test /tests/Passport-tests/ 
