@@ -1,9 +1,13 @@
-const { test, expect } = require('@playwright/test');
-const {deploy_url, email_test} = require('../urls');
+const { test, expect, devices } = require('@playwright/test');
+const { deploy_url } = require('../urls');
 
+const iPhone13 = devices['iPhone 13'];
+
+test.use({
+  ...iPhone13,
+});
 test('Appointment location error mobile', async({page}) => {
     await page.goto(deploy_url + 'australia/apply-now')
-    await page.setViewportSize({ width: 412, height: 915 });
   
     const dropdown_country =  page.getByTestId('filter-value');
     await expect(dropdown_country).toBeVisible();

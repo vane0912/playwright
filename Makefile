@@ -7,7 +7,7 @@ all:
 admin: 
 	npx playwright test /tests/admin/
 test: 
-	npx playwright test subscription_individual.spec.js 
+	npx playwright test /tests/Mobile/
 
 passport:
 	npx playwright test /tests/Passport-tests/ 

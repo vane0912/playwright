@@ -1,9 +1,14 @@
-const { test, expect } = require('@playwright/test');
-const {deploy_url, Orders} = require('../urls');
+const { test, expect, devices } = require('@playwright/test');
+const { deploy_url } = require('../urls');
+
+const iPhone13 = devices['iPhone 13'];
+
+test.use({
+  ...iPhone13,
+});
 
 test('Different currency Mobile', async ({ page }) => {
     await page.goto(deploy_url + 'turkey/apply-now');
-    await page.setViewportSize({ width: 412, height: 915 });
     const headerMobileNav = page.locator('id=headerMobileNav');
     await expect(headerMobileNav).toBeVisible()
     await headerMobileNav.click()

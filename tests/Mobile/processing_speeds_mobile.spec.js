@@ -1,13 +1,17 @@
-const { test, expect } = require('@playwright/test');
-const {deploy_url} = require('../urls');
+const { test, expect, devices } = require('@playwright/test');
+const { deploy_url } = require('../urls');
 
+const iPhone13 = devices['iPhone 13'];
+
+test.use({
+  ...iPhone13,
+});
 test('Processing speeds appear and work for mobile', async({page}) => {
     var myDate = new Date(new Date(). getTime()+(10*24*60*60*1000));
     const datepicker_date = new Date(myDate);
     const date1 = datepicker_date.getDate();
 
     await page.goto(deploy_url + 'india/apply-now')
-    await page.setViewportSize({ width: 412, height: 915 });
 
     const arrival_date_visible = page.locator('[name="general.arrival_date"]')
     await expect(arrival_date_visible).toBeVisible()

@@ -1,9 +1,13 @@
-const { test, expect } = require('@playwright/test');
-const {deploy_url, email_test} = require('../urls');
+const { test, expect, devices } = require('@playwright/test');
+const { deploy_url, email_test } = require('../urls');
+
+const iPhone13 = devices['iPhone 13'];
+
+test.use({
+  ...iPhone13,
+});
 
 test('Travel Doc application pre and post payment are working Mobile', async({page}) => {
-
-    await page.setViewportSize({ width: 412, height: 915 });
     await page.goto(deploy_url + 'colombia/apply-now')
     const headerMobileNav = page.locator('id=headerMobileNav');
     await expect(headerMobileNav).toBeVisible()
