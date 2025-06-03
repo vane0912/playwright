@@ -144,8 +144,8 @@ test('Online Passport', async({page}) =>{
     
     await page.locator('[name="applicant.0.mothers_first_name"]').fill('test')
     await page.waitForTimeout(1000)
-    */
-   await page.waitForTimeout(2000)
+
+    await page.waitForTimeout(2000)
     await page.locator('//div[@name="applicant.0.mother_us_citizen"]//button[@data-handle="boolean-Yes"]').click()
     await page.waitForTimeout(2000)
     await page.locator('[name="applicant.0.mothers_last_name"]').pressSequentially('test', { delay: 100 })
@@ -155,7 +155,7 @@ test('Online Passport', async({page}) =>{
     await next_btn.click()
 
     await page.waitForNavigation({waitUntil: 'load'})
-
+    */
     await page.locator('[name="applicant.0.shipping_address"]').fill('123')
     await page.waitForTimeout(2000)
     await page.keyboard.press("Space")
@@ -180,6 +180,7 @@ test('Online Passport', async({page}) =>{
     await next_btn.click()
 
     await page.waitForNavigation({waitUntil: 'load'})
+
 
     await page.getByPlaceholder('123 Main Street, Springfield, USA').fill('123')
     await page.waitForTimeout(2000)

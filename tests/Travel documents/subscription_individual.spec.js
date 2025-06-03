@@ -128,6 +128,7 @@ test('Individual subscription purchase', async ({ page }) => {
   await expect(page.locator("id=iVisaPlusContent")).toBeVisible()
 
   await expect(page.getByTestId("purchase-subscription-button")).toContainText(" Subscribe for $79.99 $29.99")
+  await percySnapshot(page, 'Purchase Subscription modal');
   await page.getByTestId("purchase-subscription-button").click()
 
   await page.waitForURL(deploy_url + "order/" + order_num + "?subscription=true")
@@ -180,6 +181,7 @@ test('Individual subscription purchase', async ({ page }) => {
 
   await expect(page.getByTestId('processing-standard')).toBeVisible()
   await expect(standar_processing).toBeVisible()
+  await percySnapshot(page, 'Processing speeds discount');
 
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
@@ -190,10 +192,11 @@ test('Individual subscription purchase', async ({ page }) => {
   }
 
   await expect(continue_sidebar).toBeEnabled()
+  
   await continue_sidebar.click()
 
   await expect(page.locator('.card-body')).toContainText("Your iVisa+ Subscription covers the total cost of your application")
-  await percySnapshot(page, 'Subscription buy modal');
+  await percySnapshot(page, 'Subscription is free modal');
 
   await expect(payment_btn).toBeVisible()
   await expect(payment_btn).toBeEnabled()

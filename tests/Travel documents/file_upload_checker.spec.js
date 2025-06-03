@@ -4,7 +4,7 @@ const percySnapshot = require('@percy/playwright');
 const path = require('path');
 
 let Order_num
-test('Processing speeds appear and work', async({page}) => {
+test('File upload checker', async({page}) => {
     test.slow()
     var myDate = new Date(new Date(). getTime()+(10*24*60*60*1000));
     const datepicker_date = new Date(myDate);

@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 const {deploy_url} = require('../urls');
 
 test('Buy super rush', async({page}) => {
-  var myDate = new Date(new Date(). getTime()+(3*24*60*60*1000));
+  var myDate = new Date(new Date(). getTime()+(2*24*60*60*1000));
   const datepicker_date = new Date(myDate);
   const date1 = datepicker_date.getDate();
   await page.goto(deploy_url + 'malaysia/apply-now')

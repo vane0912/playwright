@@ -18,7 +18,6 @@ test('Processing speeds appear and work for mobile', async({page}) => {
     await arrival_date_visible.click()
     await expect(page.locator('.dp__outer_menu_wrap')).toBeVisible()
     
-    await page.locator('[data-dp-element="action-next"]').click()
     await page.locator('.dp--future').filter({hasText: date1}).first().click()
 
     const continue_sidebar = page.locator('id=btnContinueUnderSectionMobile')
