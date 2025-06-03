@@ -1,6 +1,6 @@
 const { test, expect } = require('@playwright/test');
 const {deploy_url, Orders} = require('../urls');
-
+const percySnapshot = require('@percy/playwright');
 let order_num 
 test('Individual subscription purchase', async ({ page }) => {
   test.slow()
@@ -193,6 +193,8 @@ test('Individual subscription purchase', async ({ page }) => {
   await continue_sidebar.click()
 
   await expect(page.locator('.card-body')).toContainText("Your iVisa+ Subscription covers the total cost of your application")
+  await percySnapshot(page, 'Subscription buy modal');
+
   await expect(payment_btn).toBeVisible()
   await expect(payment_btn).toBeEnabled()
   await payment_btn.click()

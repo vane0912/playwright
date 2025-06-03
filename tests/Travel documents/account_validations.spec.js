@@ -1,5 +1,6 @@
 const { test, expect } = require('@playwright/test');
 const {deploy_url, email_test, Orders} = require('../urls');
+const percySnapshot = require('@percy/playwright');
 
 test('Magic login link', async ({ page,browser }) => {
     await page.goto(deploy_url + 'account/settings')
@@ -11,6 +12,7 @@ test('Magic login link', async ({ page,browser }) => {
     await btn_logout.click()
     await page.goto(deploy_url + 'login')
     await page.waitForURL('**/login')
+    await percySnapshot(page, 'Login page');
     const email_input = page.locator('id=email_login_input')
     await expect(email_input).toBeVisible()
     await email_input.fill(email_test)
@@ -21,6 +23,7 @@ test('Magic login link', async ({ page,browser }) => {
     await page.locator("id=magic_login_link").click()
     await page.waitForTimeout(2000)
     await expect(page.getByText("Check your email, we sent a password free login link")).toBeVisible()
+    await percySnapshot(page, 'Login link sent');
 
     const context = await browser.newContext({
         httpCredentials: {
@@ -62,6 +65,7 @@ test('Password set and test', async ({ page }) => {
     const password = page.locator('id=password_login_input')
     await expect(password).toBeVisible()
     await password.fill('testivisa5!')
+    await percySnapshot(page, 'Edit account information');
   
     const login_cta = page.locator('id=log_in_button')
     await expect(login_cta).toBeEnabled()
@@ -74,6 +78,7 @@ test('Card update', async ({ page }) => {
     await expect(page.getByTestId("updatePaymentMethodBtn")).toBeEnabled()
   
     await page.goto(deploy_url + 'account/payment-method/edit')
+    await percySnapshot(page, 'Payment update page');
     await page.getByPlaceholder("Card number").fill("4556 7610 2998 3886")
     await page.getByPlaceholder("MM/YY").fill("10/29")
     await page.getByPlaceholder("CVV").fill("123")

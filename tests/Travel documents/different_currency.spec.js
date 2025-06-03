@@ -1,5 +1,6 @@
 const { test, expect } = require('@playwright/test');
 const {deploy_url, Orders} = require('../urls');
+const percySnapshot = require('@percy/playwright');
 
 test('Different currency', async ({ page }) => {
   await page.goto(deploy_url + 'turkey/apply-now');
@@ -15,6 +16,7 @@ test('Different currency', async ({ page }) => {
   const confirm_currency = page.locator("[value='MXN']")
   await expect(confirm_currency).toBeVisible()
   await confirm_currency.click()
+  await percySnapshot(page, 'Update currency modal');
   await page.locator('id=updatePrefButton').click()
 
   const dropdown_country = page.getByTestId('filter-value');

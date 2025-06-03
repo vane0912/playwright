@@ -1,5 +1,6 @@
 const { test, expect } = require('@playwright/test');
 const {deploy_url} = require('../urls');
+const percySnapshot = require('@percy/playwright');
 
 test('Processing speeds appear and work', async({page}) => {
     var myDate = new Date(new Date(). getTime()+(10*24*60*60*1000));
@@ -91,4 +92,5 @@ test('Processing speeds appear and work', async({page}) => {
     sidebar_validations = ['India Tourist eVisa', '1 Traveler', '+ Government fees', '$ 10.25', '+ Super Rush, 30 hours', '$ 159.99']
     sidebar_validations.forEach(async txt => await expect(sidebar_step_2).toContainText(txt))
     await expect(correct_total).toHaveText('170.24')
+    await percySnapshot(page, 'Processing speeds design');
 })

@@ -1,5 +1,6 @@
 const { test, expect } = require('@playwright/test');
 const {deploy_url, email_test} = require('../urls');
+const percySnapshot = require('@percy/playwright');
 
 test('Travel Doc application pre and post payment are working', async({page}) => {
     await page.goto(deploy_url + 'colombia/apply-now')
@@ -23,6 +24,7 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
     await page.locator('[data-dp-element="action-next"]').click()
     await page.locator('.dp--future').filter({hasText: '12'}).first().click()
 
+    await percySnapshot(page, 'Step 1 application');
     const continue_sidebar = page.locator('id=btnContinueSidebar')
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
@@ -67,6 +69,7 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
     await last_name.fill('Test')
     await page.waitForTimeout(1000)
 
+    await percySnapshot(page, 'Step 2 application');
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
     await page.waitForURL('**/colombia/apply-now#step=step_3c')
@@ -91,6 +94,8 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
     await passport_year.selectOption('2030')
     await page.waitForTimeout(4000)
 
+    await percySnapshot(page, 'Step 3c application');
+
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
     await page.waitForURL('**/colombia/apply-now#step=step_4')
@@ -107,6 +112,7 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
     await expect(sidebar_step_2).toContainText('$ 49.99')
     await expect(sidebar_step_2).toContainText('+ Standard, 24 hours')
 
+    await percySnapshot(page, 'Step 4 application');
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
     await page.waitForURL('**/colombia/apply-now#step=review')
@@ -133,6 +139,7 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
 
     await expect(review_step_sidebar[1]).toContainText('$ 49.99')
     await expect(review_step_sidebar[1]).toContainText('+ Standard, 24 hours')
+    await percySnapshot(page, 'Review step application')
 
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
@@ -162,6 +169,7 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
     const sidebar_checks = page.locator('//div[@data-vue-component="product-application-suspense-wrapper"]')
     const sidebar_post_payment_txt = ['Colombia Check-MIG Form Application', 'Trip details', 'Test Test', 'Personal Information']
     sidebar_post_payment_txt.forEach(async txt => await expect(sidebar_checks).toContainText(txt))
+    await percySnapshot(page, 'Post payment application')
     await expect(page.getByTestId('General information')).toBeVisible()
     await expect(page.getByTestId('Personal Information')).toBeVisible()
     await page.waitForTimeout(1000)

@@ -1,5 +1,6 @@
 const { test, expect } = require('@playwright/test');
 const {deploy_url} = require('../urls');
+const percySnapshot = require('@percy/playwright');
 const path = require('path');
 
 let Order_num
@@ -105,7 +106,7 @@ test('Processing speeds appear and work', async({page}) => {
     await page.waitForTimeout(8000)
     await expect(page.locator("id=document-loading")).toBeHidden()
     await expect(page.locator("id=document-step")).toContainText("Let's try that again", " The photo must be clear and in focus", " Don't wear a hat", " Don't wear glasses", "Watch tutorial")
-
+    await percySnapshot(page, 'Error file Applicant photo');
     await page.getByTestId("acceptFileUploadBtn").click()
 
     // Upload Correct Photo
@@ -114,6 +115,7 @@ test('Processing speeds appear and work', async({page}) => {
     await page.waitForTimeout(8000)
     await expect(page.locator("id=document-loading")).toBeHidden()
     await expect(page.locator("id=document-step")).toContainText("Your upload passed our initial review!", "One of our experts will do a final review to ensure it meets all requirements. If it doesn't, we’ll contact you. ", "Don't like it? ", "You can take a new one")
+    await percySnapshot(page, 'Correct Applicant photo');
     await page.locator('id=review-continue').click()
 
     // Confirm instructions appear Passport photo
@@ -126,7 +128,7 @@ test('Processing speeds appear and work', async({page}) => {
     await page.waitForTimeout(10000)
     await expect(page.locator("id=document-loading")).toBeHidden()
     await expect(page.locator("id=document-step")).toContainText("Let's try that again", "Upload the full page with your name and photo. It must be clear and easy to read")
-
+    await percySnapshot(page, 'Error file passport photo');
     await page.getByTestId("acceptFileUploadBtn").click()
     
     // Upload Correct Photo
@@ -135,5 +137,6 @@ test('Processing speeds appear and work', async({page}) => {
     await page.waitForTimeout(10000)
     await expect(page.locator("id=document-loading")).toBeHidden()
     await expect(page.locator("id=document-step")).toContainText("Your upload passed our initial review!", "One of our experts will do a final review to ensure it meets all requirements. If it doesn't, we’ll contact you. ", "Don't like it? ", "You can take a new one")
+    await percySnapshot(page, 'Correct Passport photo');
     await page.locator('id=review-continue').click()
 })

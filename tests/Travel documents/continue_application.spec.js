@@ -1,5 +1,6 @@
 const { test, expect } = require('@playwright/test');
 const {deploy_url} = require('../urls');
+const percySnapshot = require('@percy/playwright');
 
 test('Continue with your application banner', async({page}) => {
   await page.goto(deploy_url + 'colombia/apply-now')
@@ -31,4 +32,5 @@ test('Continue with your application banner', async({page}) => {
   await expect(page.locator(".banner_container")).toBeVisible()
   await expect(page.locator(".banner_container")).toContainText("You’ve already started an order.")
   await expect(page.getByText("Go to application")).toBeVisible() 
+  await percySnapshot(page, 'Continue with application banner');
 })

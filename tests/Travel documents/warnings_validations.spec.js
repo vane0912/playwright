@@ -1,5 +1,6 @@
 const { test, expect } = require('@playwright/test');
 const {deploy_url, email_test} = require('../urls');
+const percySnapshot = require('@percy/playwright');
 
 test('Appointment location error', async({page}) => {
     await page.goto(deploy_url + 'australia/apply-now')
@@ -154,6 +155,8 @@ test('Appointment location error', async({page}) => {
   
     const error_text = page.getByText('Your order cannot include different appointment locations. Please make separate orders for each location.')
     await expect(error_text).toBeVisible()
+
+    await percySnapshot(page, 'Appointment location error');
   })
   
 test('Trip disclaimer appearing for arrival date warnings', async({page}) => {
@@ -169,5 +172,6 @@ test('Trip disclaimer appearing for arrival date warnings', async({page}) => {
 
   await expect(page.getByTestId('arrivalDateWarningBody')).toBeVisible()
   await expect(page.getByTestId('arrivalDateWarningBody')).toContainText('Apply now to receive your document(s) on time.')
+  await percySnapshot(page, 'Trip disclaimer');
 })
   
