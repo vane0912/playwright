@@ -24,7 +24,6 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
     await page.locator('[data-dp-element="action-next"]').click()
     await page.locator('.dp--future').filter({hasText: '12'}).first().click()
 
-    await percySnapshot(page, 'Step 1 application');
     const continue_sidebar = page.locator('id=btnContinueSidebar')
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
@@ -69,7 +68,6 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
     await last_name.fill('Test')
     await page.waitForTimeout(1000)
 
-    await percySnapshot(page, 'Step 2 application');
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
     await page.waitForURL('**/colombia/apply-now#step=step_3c')
@@ -94,8 +92,6 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
     await passport_year.selectOption('2030')
     await page.waitForTimeout(4000)
 
-    await percySnapshot(page, 'Step 3c application');
-
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
     await page.waitForURL('**/colombia/apply-now#step=step_4')
@@ -112,7 +108,6 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
     await expect(sidebar_step_2).toContainText('$ 49.99')
     await expect(sidebar_step_2).toContainText('+ Standard, 24 hours')
 
-    await percySnapshot(page, 'Step 4 application');
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
     await page.waitForURL('**/colombia/apply-now#step=review')

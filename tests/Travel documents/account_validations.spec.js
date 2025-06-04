@@ -12,9 +12,9 @@ test('Magic login link', async ({ page,browser }) => {
     await btn_logout.click()
     await page.goto(deploy_url + 'login')
     await page.waitForURL('**/login')
-    await percySnapshot(page, 'Login page');
     const email_input = page.locator('id=email_login_input')
     await expect(email_input).toBeVisible()
+    await percySnapshot(page, 'Login page');
     await email_input.fill(email_test)
     const continue_login = page.locator('id=continue_button')
     await expect(continue_login).toBeEnabled()
@@ -23,7 +23,7 @@ test('Magic login link', async ({ page,browser }) => {
     await page.locator("id=magic_login_link").click()
     await page.waitForTimeout(2000)
     await expect(page.getByText("Check your email, we sent a password free login link")).toBeVisible()
-    await percySnapshot(page, 'Login link sent');
+    await percySnapshot(page, 'Magic link');
 
     const context = await browser.newContext({
         httpCredentials: {
@@ -78,11 +78,11 @@ test('Card update', async ({ page }) => {
     await expect(page.getByTestId("updatePaymentMethodBtn")).toBeEnabled()
   
     await page.goto(deploy_url + 'account/payment-method/edit')
-    await percySnapshot(page, 'Payment update page');
     await page.getByPlaceholder("Card number").fill("4556 7610 2998 3886")
     await page.getByPlaceholder("MM/YY").fill("10/29")
     await page.getByPlaceholder("CVV").fill("123")
     await page.getByPlaceholder("Cardholder name").fill("John Smith")
+    await percySnapshot(page, 'Payment update page');
     await page.locator("id=btnSubmitPayment").click()
     await page.waitForURL('**/account/payment-method')
 })
