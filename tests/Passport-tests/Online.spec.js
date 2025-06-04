@@ -85,19 +85,6 @@ test('Online Passport', async({page}) =>{
     await page.getByTestId('boolean-Standard (28 pages)').dispatchEvent('click')
     await page.locator('[name="general.passport_num"]').fill('111111111')
 
-    const birth_country = page.locator('[name="general.state_of_birth"]');
-    await expect(birth_country).toBeVisible();
-    await birth_country.click()
-    const input_birth_country = page.getByTestId('dropdown-general.state_of_birth');
-    await expect(input_birth_country).toBeVisible();
-    await input_birth_country.fill('alaska');
-    await page.getByRole("option", {name: 'AK - ALASKA'}).click()
-    await page.waitForTimeout(1000)
-
-    await page.locator('[name="general.birth_city"]').fill('aaaaaaaaa')
-    await page.getByTestId('boolean-Female').dispatchEvent('click')
-    await page.waitForTimeout(1000)
-
     await page.getByPlaceholder('111-222-3333').click()
     await page.waitForTimeout(1000)
     await page.keyboard.type("11111111", {delay: 100})
@@ -108,7 +95,20 @@ test('Online Passport', async({page}) =>{
     await next_btn.click()
     
     await page.waitForNavigation({waitUntil: 'load'})
+    
+    await page.waitForTimeout(2000)
+    const birth_country = page.locator('[name="applicant.0.state_of_birth"]');
+    await expect(birth_country).toBeVisible();
+    await birth_country.click()
+    const input_birth_country = page.getByTestId('dropdown-applicant.0.state_of_birth');
+    await expect(input_birth_country).toBeVisible();
+    await input_birth_country.fill('alaska');
+    await page.getByRole("option", {name: 'AK - ALASKA'}).click()
+    await page.waitForTimeout(1000)
 
+    await page.locator('[name="applicant.0.birth_city"]').fill('aaaaaaaaa')
+    await page.getByTestId('boolean-Female').dispatchEvent('click')
+    await page.waitForTimeout(1000)
 
     const eye_color = page.locator('[name="applicant.0.appearance_1"]');
     await expect(eye_color).toBeVisible();

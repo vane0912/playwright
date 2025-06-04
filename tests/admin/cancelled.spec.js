@@ -14,8 +14,7 @@ test('Cancelled', async({browser}) => {
     page.on('dialog', async (dialog) => {
         await dialog.accept(Order.Cancelled);
     });
-
-    await page.goto(deploy_url + 'admin/users/27656/edit')
+    await page.goto(deploy_url + 'admin/users/27659/edit')
     await page.getByPlaceholder('1234567 or you@email.com').fill('sergio@admin.com')
     await page.getByRole("button", {name: 'Continue'}).click()
 
@@ -24,6 +23,7 @@ test('Cancelled', async({browser}) => {
 
     await page.waitForURL('**/admin/users/27656/edit')
     await page.locator('[name="employee_role"]').selectOption("admin")
+    await page.waitForTimeout(5000)
     await page.getByText("Update user").click()
     await page.waitForTimeout(5000)
     await page.waitForURL('**/admin/users')
