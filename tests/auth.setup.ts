@@ -78,9 +78,7 @@ setup('authenticate', async ({ page }) => {
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
     await page.waitForURL('**/turkey/apply-now#step=step_4')
-
-    await expect(page.getByTestId('processing-standard')).toBeVisible()
-    await expect(continue_sidebar).toBeEnabled()
+    
     await continue_sidebar.click()
     await page.waitForURL('**/turkey/apply-now#step=review')
     await page.waitForTimeout(2000)

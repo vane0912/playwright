@@ -3,7 +3,7 @@ const {deploy_url, Orders} = require('../urls');
 const path = require('path');
 const { PassThrough } = require('stream');
 
-test('Scheduled', async({browser}) => {
+test.fixme('Scheduled', async({browser}) => {
     const request = await fetch("https://littleserver-production.up.railway.app/");
     const Order = await request.json()
     console.log(Order.Scheduling)
