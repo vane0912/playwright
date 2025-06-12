@@ -83,7 +83,7 @@ test('USPS Passport', async({page}) =>{
 
     await page.getByTestId('boolean-WhatsApp').dispatchEvent('click')
     
-    await page.getByTestId('boolean-Standard (28 pages)').dispatchEvent('click')
+    await page.getByTestId('boolean-Standard — 28 pages').dispatchEvent('click')
     await page.locator('[name="general.passport_num"]').fill('111111111')
 
     await page.getByPlaceholder('111-222-3333').click()
