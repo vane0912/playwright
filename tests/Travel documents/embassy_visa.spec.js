@@ -152,7 +152,7 @@ test('Embassy Visa', async({page}) => {
     await page.waitForTimeout(1000)
     await page.keyboard.press("Enter")
     await page.waitForTimeout(1000)
-    await page.locator('//li[@data-place-id="ChIJGXp3nGBbwokR0k8exweu1Js"]').click()
+    await page.locator('//li[@data-place-id="ChIJoZ8Hus00K4gRfgPGjqVFR5w"]').click()
 
     await page.locator('//div[@name="general.traveling_with_others"]//button[@data-handle="boolean-No"]').click()
     await page.waitForTimeout(1000)
@@ -192,7 +192,7 @@ test('Embassy Visa', async({page}) => {
     await page.waitForTimeout(1000)
     await page.keyboard.press("Enter")
     await page.waitForTimeout(1000)
-    await page.locator('//li[@data-place-id="ChIJGXp3nGBbwokR0k8exweu1Js"]').click()
+    await page.locator('//li[@data-place-id="ChIJoZ8Hus00K4gRfgPGjqVFR5w"]').click()
 
     const birth_country = page.locator('[name="applicant.0.secondary_document_issued_country"]');
     await expect(birth_country).toBeVisible();

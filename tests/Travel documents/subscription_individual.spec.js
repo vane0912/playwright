@@ -186,7 +186,8 @@ test('Individual subscription purchase', async ({ page }) => {
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
   await page.waitForURL('**/turkey/apply-now#step=review')
-  await page.waitForTimeout(2000)
+  
+  await page.waitForTimeout(3000)
   if (duplicate){
     await page.locator('id=btnDisclaimerNext').click()
   }

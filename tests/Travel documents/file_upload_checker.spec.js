@@ -103,7 +103,7 @@ test('File upload checker', async({page}) => {
     await page.locator('id=instructions-continue').click()
     await page.locator('input[type="file"]').nth(2).setInputFiles(path.join(__dirname, 'uploads_passport/Error_1.png'))
     await expect(page.locator("id=document-loading")).toBeVisible()
-    await page.waitForTimeout(8000)
+    await page.waitForTimeout(14000)
     await expect(page.locator("id=document-loading")).toBeHidden()
     await expect(page.locator("id=document-step")).toContainText("Let's try that again", " The photo must be clear and in focus", " Don't wear a hat", " Don't wear glasses", "Watch tutorial")
     await percySnapshot(page, 'Error Applicant');
@@ -112,7 +112,7 @@ test('File upload checker', async({page}) => {
     // Upload Correct Photo
     await page.locator('input[type="file"]').nth(2).setInputFiles(path.join(__dirname, 'uploads_passport/Applicant-Photo.jpg'))
     await expect(page.locator("id=document-loading")).toBeVisible()
-    await page.waitForTimeout(8000)
+    await page.waitForTimeout(14000)
     await expect(page.locator("id=document-loading")).toBeHidden()
     await expect(page.locator("id=document-step")).toContainText("Your upload passed our initial review!", "One of our experts will do a final review to ensure it meets all requirements. If it doesn't, we’ll contact you. ", "Don't like it? ", "You can take a new one")
     await percySnapshot(page, 'Ap Correct');

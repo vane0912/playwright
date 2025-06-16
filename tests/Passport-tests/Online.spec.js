@@ -39,6 +39,29 @@ test('Online Passport', async({page}) =>{
 
     await page.locator('#btnContinueSidebar').waitFor()
     await page.locator('#btnContinueSidebar').click()
+    //
+    await page.locator('[name="applicant.0.shipping_address"]').fill('123')
+    await page.waitForTimeout(2000)
+    await page.keyboard.press("Space")
+    await page.waitForTimeout(1000)
+    await page.keyboard.press("Enter")
+    await page.waitForTimeout(1000)
+
+    const state = page.locator('[name="applicant.0.shipping_state"]');
+    await expect(state).toBeVisible();
+    await state.click();
+    const input_state = page.getByTestId('dropdown-applicant.0.shipping_state');
+
+    await expect(input_state).toBeVisible();
+    await input_state.fill('Alabama');
+    await page.getByRole("option", {name: ' Alabama'}).click()
+    await page.waitForTimeout(1000)
+    await page.locator('[name="applicant.0.shipping_zip"]').pressSequentially('test', { delay: 100 })
+    await page.waitForTimeout(1000)
+    await page.locator('[name="applicant.0.shipping_city"]').pressSequentially('test', { delay: 100 })
+    await page.waitForTimeout(1000)
+
+    await page.locator('#btnContinueSidebar').click()
 
     await page.waitForURL('**/passport-renewal/united-states/application#step=review')
     await page.waitForTimeout(1000)
@@ -56,34 +79,9 @@ test('Online Passport', async({page}) =>{
     // Post Payment
     await page.waitForNavigation({waitUntil: 'load'})
 
-    const passport_issue_day = page.locator('[name="general.passport_issued_date.day"]')
-    await expect(passport_issue_day).toBeVisible()
-    await passport_issue_day.selectOption('13')
-    await page.waitForTimeout(1000)
-    
-
-    const passport_issue_month = page.locator('[name="general.passport_issued_date.month"]')
-    await passport_issue_month.selectOption('7')
-    await page.waitForTimeout(1000)
-
-    const passport_issue_year = page.locator('[name="general.passport_issued_date.year"]')
-    await passport_issue_year.selectOption('2012')
-    await page.waitForTimeout(1000)
-    
-    const passport_expiration_day = page.locator('[name="general.passport_expiration_date.day"]')
-    await passport_expiration_day.selectOption('13')
-    await page.waitForTimeout(1000)
-    
-    const passport_expiration_month = page.locator('[name="general.passport_expiration_date.month"]')
-    await passport_expiration_month.selectOption('7')
-
-    const passport_expiration_year = page.locator('[name="general.passport_expiration_date.year"]')
-    await passport_expiration_year.selectOption('2023')  
-
     await page.getByTestId('boolean-WhatsApp').dispatchEvent('click')
     
     await page.getByTestId('boolean-Standard — 28 pages').dispatchEvent('click')
-    await page.locator('[name="general.passport_num"]').fill('111111111')
 
     await page.getByPlaceholder('111-222-3333').click()
     await page.waitForTimeout(1000)
@@ -107,8 +105,6 @@ test('Online Passport', async({page}) =>{
     await page.waitForTimeout(1000)
 
     await page.locator('[name="applicant.0.birth_city"]').fill('aaaaaaaaa')
-    await page.getByTestId('boolean-Female').dispatchEvent('click')
-    await page.waitForTimeout(1000)
 
     const eye_color = page.locator('[name="applicant.0.appearance_1"]');
     await expect(eye_color).toBeVisible();
@@ -136,6 +132,38 @@ test('Online Passport', async({page}) =>{
     await next_btn.click()
 
     await page.waitForNavigation({waitUntil: 'load'})
+
+    const passport_issue_day = page.locator('[name="applicant.0.passport_issued_date.day"]')
+    await expect(passport_issue_day).toBeVisible()
+    await passport_issue_day.selectOption('13')
+    await page.waitForTimeout(1000)
+    
+
+    const passport_issue_month = page.locator('[name="applicant.0.passport_issued_date.month"]')
+    await passport_issue_month.selectOption('7')
+    await page.waitForTimeout(1000)
+
+    const passport_issue_year = page.locator('[name="applicant.0.passport_issued_date.year"]')
+    await passport_issue_year.selectOption('2012')
+    await page.waitForTimeout(1000)
+    
+    const passport_expiration_day = page.locator('[name="applicant.0.passport_expiration_date.day"]')
+    await passport_expiration_day.selectOption('13')
+    await page.waitForTimeout(1000)
+    
+    const passport_expiration_month = page.locator('[name="applicant.0.passport_expiration_date.month"]')
+    await passport_expiration_month.selectOption('7')
+
+    const passport_expiration_year = page.locator('[name="applicant.0.passport_expiration_date.year"]')
+    await passport_expiration_year.selectOption('2023')  
+
+    await page.locator('[name="applicant.0.passport_num"]').fill('111111111')
+
+    await page.waitForTimeout(1000)
+    await expect(next_btn).toBeEnabled()
+    await next_btn.click()
+
+    await page.waitForNavigation({waitUntil: 'load'})
     /*
     await page.locator('[name="applicant.0.fathers_first_name"]').fill('test')
     await page.waitForTimeout(1000)
@@ -156,31 +184,6 @@ test('Online Passport', async({page}) =>{
 
     await page.waitForNavigation({waitUntil: 'load'})
     */
-    await page.locator('[name="applicant.0.shipping_address"]').fill('123')
-    await page.waitForTimeout(2000)
-    await page.keyboard.press("Space")
-    await page.waitForTimeout(1000)
-    await page.keyboard.press("Enter")
-    await page.waitForTimeout(1000)
-
-    const state = page.locator('[name="applicant.0.shipping_state"]');
-    await expect(state).toBeVisible();
-    await state.click();
-    const input_state = page.getByTestId('dropdown-applicant.0.shipping_state');
-
-    await expect(input_state).toBeVisible();
-    await input_state.fill('Alabama');
-    await page.getByRole("option", {name: ' Alabama'}).click()
-    await page.waitForTimeout(1000)
-    await page.locator('[name="applicant.0.shipping_zip"]').pressSequentially('test', { delay: 100 })
-    await page.waitForTimeout(1000)
-    await page.locator('[name="applicant.0.shipping_city"]').pressSequentially('test', { delay: 100 })
-    await page.waitForTimeout(1000)
-    await expect(next_btn).toBeEnabled()
-    await next_btn.click()
-
-    await page.waitForNavigation({waitUntil: 'load'})
-
 
     await page.getByPlaceholder('123 Main Street, Springfield, USA').fill('123')
     await page.waitForTimeout(2000)
