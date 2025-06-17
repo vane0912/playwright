@@ -104,6 +104,8 @@ test('Emergency Passport', async({page}) =>{
     await page.waitForTimeout(1000)
     
     await page.locator('[name="applicant.0.birth_city"]').fill('aaaaaaaaa')
+    //await page.getByTestId('boolean-Female').dispatchEvent('click')
+    //await page.waitForTimeout(1000)
     
     const eye_color = page.locator('[name="applicant.0.appearance_1"]');
     await expect(eye_color).toBeVisible();
@@ -124,14 +126,10 @@ test('Emergency Passport', async({page}) =>{
     await page.locator("id=feet-applicant.0.height_fsr").fill('5')
     await page.locator("id=inches-applicant.0.height_fsr").fill('5')
     
-    await page.getByTestId('dropdown-applicant.0.occupation').selectOption('self-employed')
-    const marital_status = page.getByTestId('dropdown-applicant.0.marital_status');
-    await marital_status.selectOption('Single')
-
     await page.waitForTimeout(1000)
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
-    
+    /*
     await page.waitForNavigation({waitUntil: 'load'})
     await page.waitForTimeout(2000)
     await page.locator('[name="applicant.0.fathers_first_name"]').pressSequentially('test', { delay: 100 })
@@ -149,7 +147,7 @@ test('Emergency Passport', async({page}) =>{
 
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
-
+    */
     await page.waitForNavigation({waitUntil: 'load'})
 
     const passport_issue_day = page.locator('[name="applicant.0.passport_issued_date.day"]')
@@ -179,6 +177,45 @@ test('Emergency Passport', async({page}) =>{
     await page.locator('[name="applicant.0.passport_num"]').fill('111111111')
 
     await page.waitForTimeout(1000)
+    await expect(next_btn).toBeEnabled()
+    await next_btn.click()
+    await page.waitForNavigation({waitUntil: 'load'})
+
+    //await page.getByTestId('dropdown-applicant.0.occupation').selectOption('self-employed')
+
+    const waitTimeout = async (seconds) => page.waitForTimeout(seconds);
+    const locator = async (selector) => page.locator(selector).pressSequentially('test', { delay: 100 });
+
+    async function pressAndWait(selector, timeout){
+      await locator(selector);
+      await waitTimeout(timeout);
+    } 
+
+    /* Esto... */
+    await pressAndWait('[name="applicant.0.fathers_first_name"]', 1000);
+    await pressAndWait('[name="applicant.0.fathers_last_name"]', 1000);
+    /* */
+
+    await page.waitForTimeout(2000)
+
+    /* Es lo mismo que estas lineas */
+    await page.locator('[name="applicant.0.fathers_first_name"]').pressSequentially('test', { delay: 100 })
+    await page.waitForTimeout(1000)
+    await page.locator('[name="applicant.0.fathers_last_name"]').pressSequentially('test', { delay: 100 })
+    await page.waitForTimeout(1000)
+    /* */
+    await page.locator('//div[@name="applicant.0.father_us_citizen"]//button[@data-handle="boolean-Yes"]').click()
+        
+    await page.locator('[name="applicant.0.mothers_first_name"]').pressSequentially('test', { delay: 100 })
+    await page.waitForTimeout(2000)
+    await page.locator('//div[@name="applicant.0.mother_us_citizen"]//button[@data-handle="boolean-Yes"]').click()
+    await page.waitForTimeout(2000)
+    await page.locator('[name="applicant.0.mothers_last_name"]').pressSequentially('test', { delay: 100 })
+    await page.waitForTimeout(1000)
+    const marital_status = page.getByTestId('dropdown-applicant.0.marital_status');
+    await marital_status.selectOption('Single')
+    await page.waitForTimeout(1000)
+    
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
     await page.waitForNavigation({waitUntil: 'load'})
