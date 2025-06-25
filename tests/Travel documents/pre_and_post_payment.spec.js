@@ -192,7 +192,7 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
 
     await page.getByRole("option", {value: 'ABREGO , NORTE DE SANTANDER'}).click()
 
-    await page.getByPlaceholder('3456 Maraschino Dr., Apt. B Austin, TX 78910').fill('123 William Street')
+    await page.locator('[name="general.destination_address"]').fill('123 William Street')
 
     await page.locator('[name="general.destination_state"]').fill('aaaaaa')
     await page.locator('[name="general.destination_zip"]').fill('aaaaaa')

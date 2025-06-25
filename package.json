@@ -9,13 +9,14 @@
   "description": "",
   "devDependencies": {
     "@azure/microsoft-playwright-testing": "^1.0.0-beta.7",
-    "@percy/cli": "^1.30.11",
+    "@percy/cli": "^1.31.0",
     "@percy/playwright": "^1.0.8",
     "@playwright/test": "^1.49.1",
     "@types/node": "^22.10.7",
     "dotenv": "^16.5.0"
   },
   "dependencies": {
+    "percy": "^5.0.0",
     "playwright": "^1.50.1"
   }
 }

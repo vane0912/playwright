@@ -146,7 +146,7 @@ test('Embassy Visa', async({page}) => {
 
     await page.getByPlaceholder("JW Marriott Hotel Madrid or Mario Rodriguez").fill("Test name")
 
-    await page.getByPlaceholder('3456 Maraschino Dr., Apt. B Austin, TX 78910').fill('123')
+    await page.locator('[name="general.destination_address"]').fill('123')
     await page.waitForTimeout(2000)
     await page.keyboard.press("Space")
     await page.waitForTimeout(1000)

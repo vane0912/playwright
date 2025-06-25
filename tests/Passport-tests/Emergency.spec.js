@@ -199,10 +199,12 @@ test('Emergency Passport', async({page}) =>{
     await page.waitForTimeout(2000)
 
     /* Es lo mismo que estas lineas */
+    /*
     await page.locator('[name="applicant.0.fathers_first_name"]').pressSequentially('test', { delay: 100 })
     await page.waitForTimeout(1000)
     await page.locator('[name="applicant.0.fathers_last_name"]').pressSequentially('test', { delay: 100 })
     await page.waitForTimeout(1000)
+    */
     /* */
     await page.locator('//div[@name="applicant.0.father_us_citizen"]//button[@data-handle="boolean-Yes"]').click()
         
