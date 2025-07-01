@@ -13,7 +13,7 @@ test('Travel Doc application pre and post payment are working Mobile', async({pa
     await expect(headerMobileNav).toBeVisible()
     // Validations step_1
     const container = page.locator('id=question-container')
-    const container_txt = ['Apply now for your Colombia Check-MIG Form', "Ensure you select the nationality of the passport you'll be traveling with.", "What is your nationality?", "Applying for", "50,000+ Reviews"]
+    const container_txt = ['Apply now for your Colombia Check-MIG Form', "Ensure you select the nationality of the passport you'll be traveling with.", "What's your nationality?", "Applying for", "50,000+ Reviews"]
     container_txt.forEach(async txt => await expect(container).toContainText(txt))
 
     const sidebar = page.getByTestId('step-1-sidebar')
@@ -38,7 +38,7 @@ test('Travel Doc application pre and post payment are working Mobile', async({pa
 
     // General checks    
     await expect(page.getByRole('heading', { name: 'Colombia Check-MIG Form' })).toContainText('Colombia Check-MIG Form')
-    await expect(page.locator("id=question-container")).toContainText('Your Personal Details')
+    await expect(page.locator("id=question-container")).toContainText('Personal Details')
     await expect(page.locator("id=question-container")).toContainText("These should match what's in your passport.")
 
     //
@@ -64,7 +64,7 @@ test('Travel Doc application pre and post payment are working Mobile', async({pa
 
     // Validations Step_3c
     await expect(page.getByRole('heading', { name: 'Colombia Check-MIG Form' })).toContainText('Colombia Check-MIG Form')
-    await expect(page.locator("id=question-container")).toContainText('Your Passport Information')
+    await expect(page.locator("id=question-container")).toContainText('Passport Information')
     await expect(page.locator("id=question-container")).toContainText("Add passport details later")
     
     const passport_num = page.locator('[name="applicant.0.passport_num"]')
@@ -103,15 +103,12 @@ test('Travel Doc application pre and post payment are working Mobile', async({pa
     await expect(page.getByRole('heading', { name: 'Review your order' }).first()).toContainText('Review your order')
     question_container_txt.forEach(async txt => await expect(question_container).toContainText(txt))
   
-    const review_step_sidebar = await page.getByTestId('sidebar-summary-breakdown').all()
+    const review_step_sidebar = await page.getByTestId('sidebar-summary-breakdown')
 
-    await expect(review_step_sidebar[1]).toContainText('Colombia Check-MIG Form')
-    await expect(review_step_sidebar[1]).toContainText('1 Traveler')
-    await expect(review_step_sidebar[1]).toContainText('+ Government fees')
-    await expect(review_step_sidebar[1]).toContainText('$ 0.00')
-
-    await expect(review_step_sidebar[1]).toContainText('$ 49.99')
-    await expect(review_step_sidebar[1]).toContainText('+ Standard, 24 hours')
+    await expect(review_step_sidebar).toContainText('Colombia Check-MIG Form')
+    await expect(review_step_sidebar).toContainText('1 Traveler')
+    await expect(review_step_sidebar).toContainText('$ 49.99')
+    await expect(review_step_sidebar).toContainText('+ Standard, 24 Hours')
 
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()

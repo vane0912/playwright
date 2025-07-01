@@ -117,14 +117,14 @@ test('Embassy reg', async({page}) => {
   await expect(page.locator('footer')).toBeVisible()
   review_container_txt.forEach(async txt => await expect(review_container).toContainText(txt))
 
-  const review_step_sidebar = await page.getByTestId('sidebar-summary-breakdown').all()
+  const review_step_sidebar = await page.getByTestId('sidebar-summary-breakdown')
 
-  await expect(review_step_sidebar[1]).toContainText('MX Embassy Registration')
-  await expect(review_step_sidebar[1]).toContainText('1 Traveler')
-  await expect(review_step_sidebar[1]).toContainText('Embassy Registration')
-  await expect(review_step_sidebar[1]).toContainText('+ Embassy Registration Fee (MX)')
+  await expect(review_step_sidebar).toContainText('MX Embassy Registration')
+  await expect(review_step_sidebar).toContainText('1 Traveler')
+  await expect(review_step_sidebar).toContainText('Embassy Registration')
+  await expect(review_step_sidebar).toContainText('+ Embassy Registration Fee (MX)')
 
-  await expect(review_step_sidebar[1]).toContainText('$ 12.95')
+  await expect(review_step_sidebar).toContainText('$ 12.95')
 
   await expect(continue_step1).toBeEnabled()
   await continue_step1.click()

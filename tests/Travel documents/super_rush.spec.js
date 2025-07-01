@@ -40,7 +40,7 @@ test('Buy super rush', async({page}) => {
 
   const super_rush = page.getByTestId('processing-super_rush')
   await expect(super_rush).toBeVisible()
-  await expect(super_rush).toContainText("Super Rush - 30 minutes processing", "$69.99")
+  await expect(super_rush).toContainText("Super Rush30 minutes processing", "$69.99")
   await super_rush.click()
 
   await expect(continue_sidebar).toBeEnabled()
