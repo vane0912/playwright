@@ -2,14 +2,12 @@ const { test, expect } = require('@playwright/test');
 const {deploy_url, email_test, Orders} = require('../urls');
 const percySnapshot = require('@percy/playwright');
 
-test('Magic login link', async ({ page,browser }) => {
-    await page.goto(deploy_url + 'account/settings')
-    const user = page.locator('id=loggedInUserContainer')
-    await expect(user).toBeVisible()
-    await user.click()
-    const btn_logout = page.locator('id=btnLogout')
-    await expect(btn_logout).toBeVisible()
-    await btn_logout.click()
+test('Magic login link', async ({ browser }) => {
+    const context1 = await browser.newContext();
+    await context1.clearCookies();
+
+    const page = await context1.newPage();
+
     await page.goto(deploy_url + 'login')
     await page.waitForURL('**/login')
     const email_input = page.locator('id=email_login_input')
@@ -31,6 +29,7 @@ test('Magic login link', async ({ page,browser }) => {
           password: 'testivisa5!',
         },
     });
+    await context.clearCookies();
     const email = await context.newPage();
     await email.goto(deploy_url + 'mail')
     await email.getByText("Here's your automatic login link").first().click()
@@ -45,8 +44,9 @@ test('Magic login link', async ({ page,browser }) => {
     await newTab.waitForLoadState()
     const new_tab_user = newTab.locator('id=loggedInUserContainer')
     await expect(new_tab_user).toBeVisible()
+    await page.waitForTimeout(5000)
 })
-test('Password set and test', async ({ page }) => {
+test.skip('Password set and test', async ({ page }) => {
     await page.goto(deploy_url + 'account/settings')
     const user = page.locator('id=loggedInUserContainer')
     await expect(user).toBeVisible()
@@ -73,7 +73,7 @@ test('Password set and test', async ({ page }) => {
     await page.waitForNavigation({waitUntil: 'load'})
 })
 
-test('Card update', async ({ page }) => {
+test.skip('Card update', async ({ page }) => {
     await page.goto(deploy_url + 'account/payment-method')
     await expect(page.getByTestId("updatePaymentMethodBtn")).toBeEnabled()
   

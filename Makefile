@@ -9,3 +9,5 @@ admin:
 test: 
 	npx playwright test /tests/Travel documents/ /tests/Passport-tests/ /tests/Mobile/ --workers 2 
 	
+test2: 
+	npx playwright test account_validations.spec.js --headed
