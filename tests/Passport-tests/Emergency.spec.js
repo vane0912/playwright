@@ -1,12 +1,15 @@
 const { test, expect } = require('@playwright/test');
 const {deploy_url} = require('../urls');
 const path = require('path');
+const percySnapshot = require('@percy/playwright');
 
 test('Emergency Passport', async({page}) =>{
     test.slow()
     await page.goto(deploy_url + 'passport-renewal/united-states/application')
     await page.waitForTimeout(2000)
+    await percySnapshot(page, 'PassportStep1')
     await page.locator("id=btnContinueSidebar").click()
+    
     await page.waitForURL('**/passport-renewal/united-states/application#step=step_2')
 
     await expect(page.getByPlaceholder('John William')).toBeVisible()
@@ -30,13 +33,14 @@ test('Emergency Passport', async({page}) =>{
     await page.waitForTimeout(1000)
 
     await expect(page.locator('#btnContinueSidebar')).toBeEnabled()
+    await percySnapshot(page, 'PassportStep2')
     await page.locator('#btnContinueSidebar').click()
 
     await page.waitForURL('**/passport-renewal/united-states/application#step=step_4')
     await page.waitForTimeout(2000)
 
     await page.getByText("Emergency Service", {exact: true}).click()
-
+    await percySnapshot(page, 'PassportSpeedStep')
     await page.locator('#btnContinueSidebar').waitFor()
     await page.locator('#btnContinueSidebar').click()
     await page.locator('[name="applicant.0.shipping_address"]').fill('123')
@@ -45,7 +49,7 @@ test('Emergency Passport', async({page}) =>{
     await page.waitForTimeout(1000)
     await page.keyboard.press("Enter")
     await page.waitForTimeout(1000)
-
+    await percySnapshot(page, 'PassportShippingStep')
     const state = page.locator('[name="applicant.0.shipping_state"]');
     await expect(state).toBeVisible();
     await state.click();
@@ -69,6 +73,7 @@ test('Emergency Passport', async({page}) =>{
     if (duplicate){
       await page.locator('id=btnDisclaimerNext').click()
     }
+    await percySnapshot(page, 'PassportReviewStep')
     await page.getByRole('button', { name: 'Continue to payment' }).click()
 
     const payment_btn = page.locator('id=btnSubmitPayment')

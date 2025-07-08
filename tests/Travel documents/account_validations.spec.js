@@ -5,7 +5,6 @@ const percySnapshot = require('@percy/playwright');
 test('Magic login link', async ({ browser }) => {
     const context1 = await browser.newContext();
     await context1.clearCookies();
-
     const page = await context1.newPage();
 
     await page.goto(deploy_url + 'login')
@@ -65,6 +64,7 @@ test.skip('Password set and test', async ({ page }) => {
     const password = page.locator('id=password_login_input')
     await expect(password).toBeVisible()
     await password.fill('testivisa5!')
+    await page.waitForTimeout(3000)
     await percySnapshot(page, 'Edit account information');
   
     const login_cta = page.locator('id=log_in_button')
@@ -82,6 +82,7 @@ test.skip('Card update', async ({ page }) => {
     await page.getByPlaceholder("MM/YY").fill("10/29")
     await page.getByPlaceholder("CVV").fill("123")
     await page.getByPlaceholder("Cardholder name").fill("John Smith")
+    await page.waitForTimeout(3000)
     await percySnapshot(page, 'Payment update page');
     await page.locator("id=btnSubmitPayment").click()
     await page.waitForURL('**/account/payment-method')

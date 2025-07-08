@@ -16,6 +16,7 @@ test('Different currency', async ({ page }) => {
   const confirm_currency = page.locator("[value='MXN']")
   await expect(confirm_currency).toBeVisible()
   await confirm_currency.click()
+  await page.waitForTimeout(3000)
   await percySnapshot(page, 'Update currency modal');
   await page.locator('id=updatePrefButton').click()
 

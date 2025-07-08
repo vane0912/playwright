@@ -127,6 +127,7 @@ test('Individual subscription purchase', async ({ page }) => {
   await expect(page.locator("id=iVisaPlusContent")).toBeVisible()
 
   await expect(page.getByTestId("purchase-subscription-button")).toContainText(" Subscribe for $79.99 $29.99")
+  await page.waitForTimeout(3000)
   await percySnapshot(page, 'Purchase Subscription modal');
   await page.getByTestId("purchase-subscription-button").click()
 

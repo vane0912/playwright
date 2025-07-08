@@ -1,5 +1,6 @@
 const { test, expect } = require('@playwright/test');
 const {deploy_url} = require('../urls');
+const percySnapshot = require('@percy/playwright');
 
 test('Embassy reg', async({page}) => {
   await page.goto(deploy_url + 'embassy-registration')
@@ -12,6 +13,7 @@ test('Embassy reg', async({page}) => {
   await page.locator('[data-dp-element="action-next"]').click()
   await page.locator('.dp--future').filter({hasText: '12'}).first().click()
   await expect(page.locator('[name="general.email"]')).toBeVisible()
+  await percySnapshot(page, 'EmbassyRegStep1')
 
   await page.waitForTimeout(3000)
   const departure_date_visible = page.locator('[name="general.departure_date"]')
@@ -54,6 +56,9 @@ test('Embassy reg', async({page}) => {
 
   const dob_year = page.locator('[name="applicant.0.dob.year"]')
   await dob_year.selectOption('2000')
+
+  await percySnapshot(page, 'EmbassyRegStep2')
+
 
   await expect(page.getByTestId('boolean-Male')).toBeEnabled()
   await page.waitForTimeout(1000)
@@ -125,8 +130,9 @@ test('Embassy reg', async({page}) => {
   await expect(review_step_sidebar).toContainText('+ Embassy Registration Fee (MX)')
 
   await expect(review_step_sidebar).toContainText('$ 12.95')
-
+  
   await expect(continue_step1).toBeEnabled()
+  await percySnapshot(page, 'EmbassyRegReview')
   await continue_step1.click()
 
   const payment_btn = page.locator('id=btnSubmitPayment')

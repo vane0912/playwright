@@ -26,6 +26,7 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
 
     const continue_sidebar = page.locator('id=btnContinueSidebar')
     await expect(continue_sidebar).toBeEnabled()
+    await percySnapshot(page, 'Step1Application')
     await continue_sidebar.click()
     await page.waitForURL('**/colombia/apply-now#step=step_3a')
     
@@ -44,7 +45,7 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
     // General checks    
     await expect(page.getByRole('heading')).toContainText('Colombia Check-MIG Form')
     await expect(page.locator('footer')).toBeVisible()
-    await expect(page.locator("id=question-container")).toContainText('Personal Details')
+    await expect(page.locator("id=question-container")).toContainText('Your personal details')
     await expect(page.locator("id=question-container")).toContainText("These should match what's in your passport.")
     await expect(page.locator("id=btnPreviousSidebar")).toBeVisible()    
 
@@ -69,13 +70,14 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
     await page.waitForTimeout(1000)
 
     await expect(continue_sidebar).toBeEnabled()
+    await percySnapshot(page, 'Step2Application')
     await continue_sidebar.click()
     await page.waitForURL('**/colombia/apply-now#step=step_3c')
 
     // Validations Step_3c
     await expect(page.getByRole('heading')).toContainText('Colombia Check-MIG Form')
     await expect(page.locator('footer')).toBeVisible()
-    await expect(page.locator("id=question-container")).toContainText('Passport Information')
+    await expect(page.locator("id=question-container")).toContainText('Passport details')
     await expect(page.locator("id=question-container")).toContainText("Add passport details later")
     await expect(page.locator("id=btnPreviousSidebar")).toBeVisible()    
 
@@ -93,6 +95,7 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
     await page.waitForTimeout(4000)
 
     await expect(continue_sidebar).toBeEnabled()
+    await percySnapshot(page, 'Step3Application')
     await continue_sidebar.click()
     await page.waitForURL('**/colombia/apply-now#step=step_4')
 
@@ -109,6 +112,7 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
     await expect(sidebar_step_2).toContainText('+ Standard, 24 Hours')
 
     await expect(continue_sidebar).toBeEnabled()
+    await percySnapshot(page, 'PricesFreeGovFee')
     await continue_sidebar.click()
     await page.waitForURL('**/colombia/apply-now#step=review')
 
@@ -159,11 +163,10 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
 
     // Sidebar checks
     const sidebar_checks = page.locator('//div[@data-vue-component="product-application-suspense-wrapper"]')
-    const sidebar_post_payment_txt = ['Colombia Check-MIG Form Application', 'Trip details', 'Test Test', 'Personal Information']
+    const sidebar_post_payment_txt = ['Colombia Check-MIG Form Application', 'Trip details', 'Test Test', 'Personal details']
     sidebar_post_payment_txt.forEach(async txt => await expect(sidebar_checks).toContainText(txt))
     await percySnapshot(page, 'Post payment application')
     await expect(page.getByTestId('General information')).toBeVisible()
-    await expect(page.getByTestId('Personal Information')).toBeVisible()
     await page.waitForTimeout(1000)
     await page.locator('xpath=//div[@name="general.destination_phone"]//input[@name="telephone"]').click()
     await page.waitForTimeout(1000)
@@ -217,7 +220,7 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
     // Sidebar checks
     sidebar_post_payment_txt.forEach(async txt => await expect(sidebar_checks).toContainText(txt))
     await expect(page.getByTestId('General information')).toBeVisible()
-    await expect(page.getByTestId('Personal Information')).toBeVisible()
+    await expect(page.getByTestId('Personal details')).toBeVisible()
 
     await page.waitForTimeout(1000)
     await page.getByTestId('boolean-Male').click()

@@ -38,7 +38,7 @@ test('Travel Doc application pre and post payment are working Mobile', async({pa
 
     // General checks    
     await expect(page.getByRole('heading', { name: 'Colombia Check-MIG Form' })).toContainText('Colombia Check-MIG Form')
-    await expect(page.locator("id=question-container")).toContainText('Personal Details')
+    await expect(page.locator("id=question-container")).toContainText('Your personal details')
     await expect(page.locator("id=question-container")).toContainText("These should match what's in your passport.")
 
     //
@@ -64,7 +64,7 @@ test('Travel Doc application pre and post payment are working Mobile', async({pa
 
     // Validations Step_3c
     await expect(page.getByRole('heading', { name: 'Colombia Check-MIG Form' })).toContainText('Colombia Check-MIG Form')
-    await expect(page.locator("id=question-container")).toContainText('Passport Information')
+    await expect(page.locator("id=question-container")).toContainText('Passport details')
     await expect(page.locator("id=question-container")).toContainText("Add passport details later")
     
     const passport_num = page.locator('[name="applicant.0.passport_num"]')
