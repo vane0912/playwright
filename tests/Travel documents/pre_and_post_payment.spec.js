@@ -135,7 +135,7 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
     await expect(review_step_sidebar).toContainText('1 Traveler')
     await expect(review_step_sidebar).toContainText('$ 49.99')
     await expect(review_step_sidebar).toContainText('+ Standard, 24 Hours')
-    await percySnapshot(page, 'Review step application')
+    await percySnapshot(page, 'ReviewStepapplication')
 
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()

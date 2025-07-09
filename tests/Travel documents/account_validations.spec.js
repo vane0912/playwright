@@ -45,7 +45,7 @@ test('Magic login link', async ({ browser }) => {
     await expect(new_tab_user).toBeVisible()
     await page.waitForTimeout(5000)
 })
-test.skip('Password set and test', async ({ page }) => {
+test('Password set and test', async ({ page }) => {
     await page.goto(deploy_url + 'account/settings')
     const user = page.locator('id=loggedInUserContainer')
     await expect(user).toBeVisible()
@@ -73,7 +73,7 @@ test.skip('Password set and test', async ({ page }) => {
     await page.waitForNavigation({waitUntil: 'load'})
 })
 
-test.skip('Card update', async ({ page }) => {
+test('Card update', async ({ page }) => {
     await page.goto(deploy_url + 'account/payment-method')
     await expect(page.getByTestId("updatePaymentMethodBtn")).toBeEnabled()
   
