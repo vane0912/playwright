@@ -253,13 +253,16 @@ test('USPS Passport', async({page}) =>{
 
 
     await page.locator('id=instructions-continue').click()
-    await page.locator('input[type="file"]').nth(2).setInputFiles(path.join(__dirname, 'uploads_passport/Applicant-Photo.jpg'))
+    await page.getByTestId("try-another-way-button").click()
+    await page.setInputFiles('input[type="file"]', path.join(__dirname, 'uploads_passport/Applicant-Photo.jpg'));
     await page.waitForTimeout(8000)
     await page.locator('id=review-continue').click()
 
     await page.locator('id=instructions-continue').click()
-    await page.locator('input[type="file"]').nth(2).setInputFiles(path.join(__dirname, 'uploads_passport/passport.jpg'))
+    await page.getByTestId("try-another-way-button").click()
+    await page.setInputFiles('input[type="file"]', path.join(__dirname, 'uploads_passport/passport.jpg'));
     await page.waitForTimeout(8000)
+
 
     const submit_post_payment = page.getByTestId("acceptFileUploadBtn")
     await submit_post_payment.click()

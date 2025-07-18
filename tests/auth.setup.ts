@@ -62,6 +62,15 @@ setup('authenticate', async ({ page }) => {
     await continue_sidebar.click()
     await page.waitForURL('**/turkey/apply-now#step=step_3c')
     
+    const dropdown_country_step3c = page.locator('[name="applicant.0.nationality_country"]');
+    await expect(dropdown_country_step3c).toBeVisible();
+    await dropdown_country_step3c.click();
+    const input_country_3c = page.getByTestId('dropdown-applicant.0.nationality_country');
+    await expect(input_country_3c).toBeVisible();
+    await input_country_3c.fill('Mexico');
+    await page.getByRole("option", {name: 'Mexico flag Mexico'}).click()
+
+    
     const passport_num = page.locator('[name="applicant.0.passport_num"]')
     await expect(passport_num).toBeVisible()
     await passport_num.fill('123456789')

@@ -158,11 +158,14 @@ test('Travel Doc application pre and post payment are working Mobile', async({pa
 
     await page.getByRole("option", {value: 'ABREGO , NORTE DE SANTANDER'}).click()
 
-    await page.locator('[name="general.destination_address"]').fill('123 William Street')
+    await page.locator('[name="general.destination_address"]').fill('123')
 
-    await page.locator('[name="general.destination_state"]').fill('aaaaaa')
-    await page.locator('[name="general.destination_zip"]').fill('aaaaaa')
-    await page.locator('[name="general.destination_country"]').fill('aaaaaa')
+    await page.waitForTimeout(2000)
+    await page.keyboard.press("Space")
+    await page.waitForTimeout(1000)
+    await page.keyboard.press("Enter")
+    await page.waitForTimeout(1000)
+    await page.locator('//li[@data-place-id="ChIJA2QAZweQP44Rfrm0B_KpKnM"]').click()
     
     await page.waitForTimeout(1000)
     await page.getByPlaceholder('111-222-3333').first().click()

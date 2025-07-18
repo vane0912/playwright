@@ -111,6 +111,7 @@ test('Appointment location error mobile', async({page}) => {
     await visa_denied.click()
   
     // Second applicant
+    await page.getByText("Traveler #2 - Test").click()
     const skip_passport_1 = page.locator('[name="applicant.1.is_passport_on_hand"]')
     await expect(skip_passport_1).toBeVisible()
     await skip_passport_1.check()

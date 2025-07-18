@@ -152,7 +152,7 @@ test('Embassy Visa', async({page}) => {
     await page.waitForTimeout(1000)
     await page.keyboard.press("Enter")
     await page.waitForTimeout(1000)
-    await page.locator('//li[@data-place-id="ChIJoZ8Hus00K4gRfgPGjqVFR5w"]').click()
+    await page.locator('//li[@data-place-id="ChIJy03Qsx1akWsRcbqOMJc_Hm8"]').click()
 
     await page.locator('//div[@name="general.traveling_with_others"]//button[@data-handle="boolean-No"]').click()
     await page.waitForTimeout(1000)
@@ -172,7 +172,8 @@ test('Embassy Visa', async({page}) => {
     await page.locator('id=add-file-multiple-continue').click()
 
     await page.locator('id=instructions-continue').click()
-    await page.locator('input[type="file"]').nth(2).setInputFiles(path.join(__dirname, 'uploads_passport/passport.jpg'))
+    await page.getByTestId("try-another-way-button").click()
+    await page.setInputFiles('input[type="file"]', path.join(__dirname, 'uploads_passport/passport.jpg'));
     await page.waitForTimeout(8000)
     await page.locator('id=review-continue').click()
 

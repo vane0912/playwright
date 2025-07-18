@@ -101,7 +101,9 @@ test('File upload checker', async({page}) => {
     
     // Upload wrong file Applicant photo
     await page.locator('id=instructions-continue').click()
-    await page.locator('input[type="file"]').nth(2).setInputFiles(path.join(__dirname, 'uploads_passport/Error_1.png'))
+
+    await page.getByTestId("try-another-way-button").click()
+    await page.setInputFiles('input[type="file"]', path.join(__dirname, 'uploads_passport/Error_1.png'));
     await expect(page.locator("id=document-loading")).toBeVisible()
     await page.waitForTimeout(14000)
     await expect(page.locator("id=document-loading")).toBeHidden()
@@ -110,7 +112,8 @@ test('File upload checker', async({page}) => {
     await page.getByTestId("acceptFileUploadBtn").click()
 
     // Upload Correct Photo
-    await page.locator('input[type="file"]').nth(2).setInputFiles(path.join(__dirname, 'uploads_passport/Applicant-Photo.jpg'))
+    await page.getByTestId("try-another-way-button").click()
+    await page.setInputFiles('input[type="file"]', path.join(__dirname, 'uploads_passport/Applicant-Photo.jpg'));
     await expect(page.locator("id=document-loading")).toBeVisible()
     await page.waitForTimeout(14000)
     await expect(page.locator("id=document-loading")).toBeHidden()
@@ -123,7 +126,8 @@ test('File upload checker', async({page}) => {
     
     // Upload wrong file Passport photo
     await page.locator('id=instructions-continue').click()
-    await page.locator('input[type="file"]').nth(2).setInputFiles(path.join(__dirname, 'uploads_passport/Error_2.png'))
+    await page.getByTestId("try-another-way-button").click()
+    await page.setInputFiles('input[type="file"]', path.join(__dirname, 'uploads_passport/Error_2.png'));
     await expect(page.locator("id=document-loading")).toBeVisible()
     await page.waitForTimeout(10000)
     await expect(page.locator("id=document-loading")).toBeHidden()
@@ -132,7 +136,8 @@ test('File upload checker', async({page}) => {
     await page.getByTestId("acceptFileUploadBtn").click()
     
     // Upload Correct Photo
-    await page.locator('input[type="file"]').nth(2).setInputFiles(path.join(__dirname, 'uploads_passport/passport.jpg'))
+    await page.getByTestId("try-another-way-button").click()
+    await page.setInputFiles('input[type="file"]', path.join(__dirname, 'uploads_passport/passport.jpg'));
     await expect(page.locator("id=document-loading")).toBeVisible()
     await page.waitForTimeout(10000)
     await expect(page.locator("id=document-loading")).toBeHidden()

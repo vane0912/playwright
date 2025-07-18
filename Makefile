@@ -8,5 +8,5 @@ admin:
 	npx playwright test /tests/admin/
 test: 
 	npx playwright test /tests/Travel documents/ /tests/Passport-tests/ /tests/Mobile/ --workers 2 
-cmm:
-	npx playwright test complete.spec.js --headed
+test2:
+	npx playwright test file_upload_checker.spec.js --headed

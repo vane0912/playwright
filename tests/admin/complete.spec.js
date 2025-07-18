@@ -32,8 +32,7 @@ test('Complete and CMM', async ({ browser }) => {
     await page.getByTestId("dropdown-charge-reason").selectOption("visa_type_change")
     await page.waitForTimeout(3000)
     await page.locator("id=submitChargeButton").click()
-    await page.waitForURL('**/admin/order_items/' + Order.Completed + '/edit')
-
+    await page.waitForNavigation()
     const context = await browser.newContext({
         httpCredentials: {
           username: 'admin',
