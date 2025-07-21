@@ -102,7 +102,7 @@ test('Different currency Mobile', async ({ page }) => {
     await payment_btn.click()
     
     await page.waitForNavigation({waitUntil: 'load'})
-
+    await page.getByTestId("transition-page-button").click()
     const request = await fetch("https://littleserver-production.up.railway.app/", {
         method: "POST",
         headers: {

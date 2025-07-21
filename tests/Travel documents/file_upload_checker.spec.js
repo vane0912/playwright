@@ -85,6 +85,7 @@ test('File upload checker', async({page}) => {
     await payment_btn.click()
     
     await page.waitForNavigation({waitUntil: 'load'})
+    await page.getByTestId("transition-page-button").click()
     Order_num = page.url().split("/")[4] 
 
     await page.getByPlaceholder('111-222-3333').fill('11111111')

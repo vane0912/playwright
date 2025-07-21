@@ -131,7 +131,7 @@ test('Travel Doc application pre and post payment are working Mobile', async({pa
     await expect(payment_btn).toBeEnabled()
     await payment_btn.click()
     await page.waitForNavigation({waitUntil: 'load'})
-
+    await page.getByTestId("transition-page-button").click()
     // Post payment
     await page.waitForTimeout(1000)
     await page.locator('xpath=//div[@name="general.destination_phone"]//input[@name="telephone"]').click()

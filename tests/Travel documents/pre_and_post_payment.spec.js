@@ -158,7 +158,7 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
     await expect(payment_btn).toBeEnabled()
     await payment_btn.click()
     await page.waitForNavigation({waitUntil: 'load'})
-
+    await page.getByTestId("transition-page-button").click()
     // Post payment
 
     // Sidebar checks

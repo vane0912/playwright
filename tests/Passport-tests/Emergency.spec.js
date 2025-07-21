@@ -83,6 +83,7 @@ test('Emergency Passport', async({page}) =>{
     
     // Post Payment
     await page.waitForNavigation({waitUntil: 'load'})
+    await page.getByTestId("transition-page-button").click()
     await page.getByTestId('boolean-WhatsApp').dispatchEvent('click')
     
     await page.getByTestId('boolean-Standard — 28 pages').dispatchEvent('click')

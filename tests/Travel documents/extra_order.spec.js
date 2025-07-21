@@ -81,7 +81,7 @@ test('Extra Order', async ({ page }) => {
   await payment_btn.click()
   
   await page.waitForNavigation({waitUntil: 'load'})
-
+  await page.getByTestId("transition-page-button").click()
   const request = await fetch("https://littleserver-production.up.railway.app/", {
     method: "POST",
     headers: {
@@ -92,7 +92,7 @@ test('Extra Order', async ({ page }) => {
     }),
   });
   await request.json()
-
+  
   await page.getByPlaceholder('111-222-3333').fill('11111111')
   await page.getByTestId('boolean-WhatsApp').click()
 

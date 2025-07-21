@@ -78,6 +78,7 @@ test('Online Passport', async({page}) =>{
     
     // Post Payment
     await page.waitForNavigation({waitUntil: 'load'})
+    await page.getByTestId("transition-page-button").click()
 
     await page.getByTestId('boolean-WhatsApp').dispatchEvent('click')
     

@@ -78,7 +78,7 @@ test('USPS Passport', async({page}) =>{
     
     // Post Payment
     await page.waitForNavigation({waitUntil: 'load'})
-
+    await page.getByTestId("transition-page-button").click()
 
     await page.getByTestId('boolean-WhatsApp').dispatchEvent('click')
     
@@ -250,7 +250,7 @@ test('USPS Passport', async({page}) =>{
     await next_btn.click()
 
     await page.waitForNavigation({waitUntil: 'load'})
-
+    
 
     await page.locator('id=instructions-continue').click()
     await page.getByTestId("try-another-way-button").click()
