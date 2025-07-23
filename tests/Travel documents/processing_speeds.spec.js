@@ -3,7 +3,7 @@ const {deploy_url} = require('../urls');
 const percySnapshot = require('@percy/playwright');
 
 test('Processing speeds appear and work', async({page}) => {
-    var myDate = new Date(new Date(). getTime()+(10*24*60*60*1000));
+    var myDate = new Date(new Date().getTime() + (6 * 24 * 60 * 60 * 1000));
     const datepicker_date = new Date(myDate);
     const date1 = datepicker_date.getDate();
 
