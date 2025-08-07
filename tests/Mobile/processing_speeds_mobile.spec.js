@@ -7,7 +7,7 @@ test.use({
   ...iPhone13,
 });
 test('Processing speeds appear and work for mobile', async({page}) => {
-    var myDate = new Date(new Date(). getTime() + (6 * 24 * 60 * 60 * 1000));
+    var myDate = new Date(new Date(). getTime() + (11 * 24 * 60 * 60 * 1000));
     const datepicker_date = new Date(myDate);
     const date1 = datepicker_date.getDate();
 
@@ -17,7 +17,7 @@ test('Processing speeds appear and work for mobile', async({page}) => {
     await expect(arrival_date_visible).toBeVisible()
     await arrival_date_visible.click()
     await expect(page.locator('.dp__outer_menu_wrap')).toBeVisible()
-    
+    //await page.locator('[data-dp-element="action-next"]').click()
     await page.locator('.dp--future').filter({hasText: date1}).first().click()
 
     const continue_sidebar = page.locator('id=btnContinueUnderSectionMobile')

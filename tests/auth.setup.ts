@@ -11,6 +11,7 @@ setup('authenticate', async ({ page }) => {
     const dropdown_country =  page.getByTestId('filter-value');
 
     await expect(dropdown_country).toBeVisible();
+    await page.locator("id=customCookieBotAcceptAll").click()
     await dropdown_country.click();
     const input_country = page.getByTestId('dropdown-general.common_nationality_country');
 

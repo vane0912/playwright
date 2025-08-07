@@ -98,7 +98,7 @@ test('File upload checker', async({page}) => {
     await next_btn.click()
     await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_documents")
     // Confirm instructions appear Applicant photo
-    await expect(page.locator("id=document-step")).toContainText("Applicant's photo", "Let's upload your photo", "Face the camera straight on with a plain background.", "No glasses, hats, or scarves", "No smiling.", "It must be different")
+    await expect(page.locator("id=document-step")).toContainText("Applicant's Photo", "Upload your photo", "Face the camera straight on with a plain background.", "No angles or head tilts ", "No glasses, hats, or scarves", "No glasses, hats, or scarves")
     
     // Upload wrong file Applicant photo
     await page.locator('id=instructions-continue').click()

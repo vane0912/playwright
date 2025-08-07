@@ -240,7 +240,7 @@ test('USPS Passport', async({page}) =>{
     await page.waitForNavigation({waitUntil: 'load'})
     */
 
-    await page.getByPlaceholder('XXX-XX-XXXX').click()
+    await page.locator('[name="applicant.0.ssn"]').click()
     await page.waitForTimeout(1000)
     await page.keyboard.type("123456")
     await page.waitForTimeout(1000)

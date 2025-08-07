@@ -186,7 +186,7 @@ test('Emergency Passport', async({page}) =>{
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
     await page.waitForNavigation({waitUntil: 'load'})
-
+    await page.waitForTimeout(5000)
     //await page.getByTestId('dropdown-applicant.0.occupation').selectOption('self-employed')
 
     const waitTimeout = async (seconds) => page.waitForTimeout(seconds);
@@ -203,15 +203,6 @@ test('Emergency Passport', async({page}) =>{
     /* */
 
     await page.waitForTimeout(2000)
-
-    /* Es lo mismo que estas lineas */
-    /*
-    await page.locator('[name="applicant.0.fathers_first_name"]').pressSequentially('test', { delay: 100 })
-    await page.waitForTimeout(1000)
-    await page.locator('[name="applicant.0.fathers_last_name"]').pressSequentially('test', { delay: 100 })
-    await page.waitForTimeout(1000)
-    */
-    /* */
     await page.locator('//div[@name="applicant.0.father_us_citizen"]//button[@data-handle="boolean-Yes"]').click()
         
     await page.locator('[name="applicant.0.mothers_first_name"]').pressSequentially('test', { delay: 100 })
@@ -283,7 +274,7 @@ test('Emergency Passport', async({page}) =>{
     await page.waitForNavigation({waitUntil: 'load'})
     */
 
-    await page.getByPlaceholder('XXX-XX-XXXX').click()
+    await page.locator('[name="applicant.0.ssn"]').click()
     await page.waitForTimeout(1000)
     await page.keyboard.type("123456")
     await page.waitForTimeout(1000)
