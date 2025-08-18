@@ -166,25 +166,6 @@ test('Embassy Visa', async({page}) => {
     await next_btn.click()
     await page.waitForNavigation({waitUntil: 'load'})
 
-    await page.locator('id=instructions-continue').click()
-    await page.locator('input[type="file"]').nth(1).setInputFiles(path.join(__dirname, 'uploads_passport/Applicant-Photo.jpg'))
-    await page.waitForTimeout(8000)
-    await page.locator('id=add-file-multiple-continue').click()
-
-    await page.locator('id=instructions-continue').click()
-    await page.getByTestId("try-another-way-button").click()
-    await page.setInputFiles('input[type="file"]', path.join(__dirname, 'uploads_passport/passport.jpg'));
-    await page.waitForTimeout(8000)
-    await page.locator('id=review-continue').click()
-
-    await page.locator('id=instructions-continue').click()
-    await page.locator('input[type="file"]').nth(1).setInputFiles(path.join(__dirname, 'uploads_passport/Applicant-Photo.jpg'))
-    await page.waitForTimeout(8000)
-    await page.locator('id=add-file-multiple-continue').click()
-
-    await page.locator('id=instructions-continue').click()
-    await page.locator('id=add-file-multiple-continue').click()
-
     await page.locator('[name="applicant.0.birth_city"]').fill("test")
 
     await page.getByPlaceholder('1234 Sesame St. Apt. 3, Springtown, IL 55555').fill('123')
@@ -199,33 +180,14 @@ test('Embassy Visa', async({page}) => {
     await expect(birth_country).toBeVisible();
     await birth_country.click();
     const issued_country = page.getByTestId('dropdown-applicant.0.secondary_document_issued_country');
-
     await expect(issued_country).toBeVisible();
     await issued_country.fill('Mexico');
     await page.getByRole("option", {name: 'Mexico flag Mexico'}).click()
 
+    await page.getByTestId('boolean-Male').click()
+    
     await page.locator('[name="applicant.0.birth_city"]').fill("test")
     await page.waitForTimeout(1000)
-    await expect(next_btn).toBeEnabled()
-    await next_btn.click()
-    await page.waitForNavigation({waitUntil: 'load'})
-    await page.waitForTimeout(3000)
-
-    const passport_issue_day = page.locator('[name="applicant.0.passport_issued_date.day"]')
-    await expect(passport_issue_day).toBeVisible()
-    await passport_issue_day.selectOption('13')
-    await page.waitForTimeout(1000)
-
-    const passport_issue_month = page.locator('[name="applicant.0.passport_issued_date.month"]')
-    await passport_issue_month.selectOption('7')
-    await page.waitForTimeout(1000)
-    const passport_issue_year = page.locator('[name="applicant.0.passport_issued_date.year"]')
-    await passport_issue_year.selectOption('2022')
-
-    await page.waitForTimeout(1000)
-
-    await page.locator('//div[@name="applicant.0.other_document"]//button[@data-handle="boolean-No"]').click()
-    
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
     await page.waitForNavigation({waitUntil: 'load'})
@@ -280,7 +242,49 @@ test('Embassy Visa', async({page}) => {
     await page.waitForNavigation({waitUntil: 'load'})
 
     await page.locator('id=instructions-continue').click()
+    await page.locator('input[type="file"]').nth(1).setInputFiles(path.join(__dirname, 'uploads_passport/Applicant-Photo.jpg'))
+    await page.waitForTimeout(8000)
     await page.locator('id=add-file-multiple-continue').click()
+
+    await page.locator('id=instructions-continue').click()
+    await page.locator('input[type="file"]').nth(1).setInputFiles(path.join(__dirname, 'uploads_passport/Applicant-Photo.jpg'))
+    await page.waitForTimeout(8000)
+    await page.locator('id=add-file-multiple-continue').click()
+
+    await page.locator('id=instructions-continue').click()
+    await page.locator('id=add-file-multiple-continue').click()
+    
+    await page.locator('id=instructions-continue').click()
+    await page.locator('id=add-file-multiple-continue').click()
+
+    await page.locator('id=instructions-continue').click()
+    await page.getByTestId("try-another-way-button").click()
+    await page.setInputFiles('input[type="file"]', path.join(__dirname, 'uploads_passport/passport.jpg'));
+    await page.waitForTimeout(8000)
+    await page.locator('id=review-continue').click()
+
+    await page.waitForNavigation({waitUntil: 'load'})
+
+    await page.waitForTimeout(3000)
+
+    const passport_issue_day = page.locator('[name="applicant.0.passport_issued_date.day"]')
+    await expect(passport_issue_day).toBeVisible()
+    await passport_issue_day.selectOption('13')
+    await page.waitForTimeout(1000)
+
+    const passport_issue_month = page.locator('[name="applicant.0.passport_issued_date.month"]')
+    await passport_issue_month.selectOption('7')
+    await page.waitForTimeout(1000)
+    const passport_issue_year = page.locator('[name="applicant.0.passport_issued_date.year"]')
+    await passport_issue_year.selectOption('2022')
+
+    await page.waitForTimeout(1000)
+
+    await page.locator('//div[@name="applicant.0.other_document"]//button[@data-handle="boolean-No"]').click()
+    
+    const submit_post_payment = page.locator('id=btnSubmitApplication')
+    await expect(submit_post_payment).toBeEnabled()
+    await submit_post_payment.click()
     await page.waitForNavigation({waitUntil: 'load'})
   })
   

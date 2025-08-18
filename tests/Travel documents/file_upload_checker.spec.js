@@ -96,7 +96,62 @@ test('File upload checker', async({page}) => {
     await page.waitForTimeout(1000)
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
+    await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_personal")    
+    await page.waitForTimeout(2000)
+    await page.getByTestId('boolean-Male').click()
+    await page.locator('[name="applicant.0.birth_city"]').fill('aaaaaaaaa')
+
+    const religion = page.locator('[name="applicant.0.religion"]');
+    
+    await expect(religion).toBeVisible();
+    await religion.click()
+    const input_religion = page.getByTestId('dropdown-applicant.0.religion');
+    await expect(input_religion).toBeVisible();
+    await input_religion.fill('bahai');
+    await page.getByRole("option", {name: 'Bahai'}).click()
+    await page.waitForTimeout(1000)
+
+    await page.getByTestId('boolean-Married').click()
+    
+    await expect(next_btn).toBeEnabled()
+    await next_btn.click()
+    await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_residency_information_after_payment")
+    
+    await page.getByPlaceholder('1234 Sesame St. Apt. 3, Springtown, IL 55555').fill('123')
+    await page.waitForTimeout(2000)
+    await page.keyboard.press("Space")
+    await page.waitForTimeout(1000)
+    await page.keyboard.press("Enter")
+    await page.waitForTimeout(1000)
+    await page.locator('//li[@data-place-id="ChIJ49W-BhhawokR4KLCF2oTVVo"]').click()
+
+    await page.waitForTimeout(1000)
+    await expect(next_btn).toBeEnabled()
+    await next_btn.click()
+    await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_work")
+
+    await page.waitForTimeout(2000)
+    const employment = page.locator('[name="applicant.0.occupation"]');
+    await expect(employment).toBeVisible();
+    await employment.click()
+    const input_employment = page.getByTestId('dropdown-applicant.0.occupation');
+    await expect(input_employment).toBeVisible();
+    await input_employment.fill('retired');
+    await page.getByRole("option", {name: 'Retired'}).click()
+    await page.waitForTimeout(1000)
+
+    await expect(next_btn).toBeEnabled()
+    await next_btn.click()
+    await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_family")
+
+    await page.locator('[name="applicant.0.fathers_name"]').fill("test")
+    await page.locator('[name="applicant.0.mothers_name"]').fill("test")
+    await page.locator('[name="applicant.0.spouse_first_last_name"]').fill("test")
+
+    await expect(next_btn).toBeEnabled()
+    await next_btn.click()
     await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_documents")
+
     // Confirm instructions appear Applicant photo
     await expect(page.locator("id=document-step")).toContainText("Applicant's Photo", "Upload your photo", "Face the camera straight on with a plain background.", "No angles or head tilts ", "No glasses, hats, or scarves", "No glasses, hats, or scarves")
     
