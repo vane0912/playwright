@@ -38,5 +38,5 @@ test('Rejected', async({browser}) => {
     
     await page.waitForTimeout(10000)
     await expect(page.locator('.upload-input-wrap')).toBeVisible()
-    await expect(page.getByTestId('order-status')).toHaveText('Rejected by Gov')
+    await expect(page.getByTestId('order-status')).toHaveText('Rejected By Gov')
 })

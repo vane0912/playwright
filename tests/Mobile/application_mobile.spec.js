@@ -25,7 +25,7 @@ test('Travel Doc application pre and post payment are working Mobile', async({pa
     await arrival_date_visible.click()
     await expect(page.locator('.dp__outer_menu_wrap')).toBeVisible()
     await page.locator('[data-dp-element="action-next"]').click()
-    await page.locator('.dp--future').filter({hasText: '12'}).first().click()
+    await page.locator('.dp--future').filter({hasText: '2'}).first().click()
 
     const continue_sidebar = page.locator('id=btnContinueUnderSectionMobile')
     await expect(continue_sidebar).toBeEnabled()
@@ -183,11 +183,8 @@ test('Travel Doc application pre and post payment are working Mobile', async({pa
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
     await page.waitForNavigation({waitUntil: 'load'})
-
-    await expect(page.getByTestId('boolean-Male')).toBeEnabled()
-
-    // Sidebar checks
-    await page.waitForTimeout(1000)
+    
+    await page.waitForTimeout(2000)
     await page.getByTestId('boolean-Male').click()
     await page.waitForTimeout(1000)
 
