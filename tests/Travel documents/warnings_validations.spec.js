@@ -71,6 +71,11 @@ test('Appointment location error', async({page}) => {
     await last_name_2.fill('Test')
     await page.waitForTimeout(1000)
     
+    
+    await expect(continue_sidebar).toBeEnabled()
+    await continue_sidebar.click()
+    await page.waitForURL('**/australia/apply-now#step=step_3b')
+    
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
     await page.waitForURL('**/australia/apply-now#step=step_3c')

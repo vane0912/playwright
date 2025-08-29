@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 const {deploy_url} = require('../urls');
 
 test('Autofill appears and works', async({page}) => {
-  await page.goto(deploy_url + 'colombia/apply-now')
+  await page.goto(deploy_url + 'thailand/apply-now')
     
   const dropdown_country =  page.getByTestId('filter-value');
 
@@ -24,21 +24,21 @@ test('Autofill appears and works', async({page}) => {
   const continue_sidebar = page.locator('id=btnContinueSidebar')
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
-  await page.waitForURL('**/colombia/apply-now#step=step_3a')
+  await page.waitForURL('**/thailand/apply-now#step=step_3a')
   await expect(page.getByTestId("dropdown-prefill-selector")).toBeVisible()
   await page.getByTestId("dropdown-prefill-selector").selectOption("0")
   
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
-  await page.waitForURL('**/colombia/apply-now#step=step_3c')
+  await page.waitForURL('**/thailand/apply-now#step=step_3c')
 
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
-  await page.waitForURL('**/colombia/apply-now#step=step_4')
-
+  await page.waitForURL('**/thailand/apply-now#step=step_4')
+  await page.waitForTimeout(3000)
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
-  await page.waitForURL('**/colombia/apply-now#step=review')
+  await page.waitForURL('**/thailand/apply-now#step=review')
   await page.waitForTimeout(2000)
   const duplicate = await page.isVisible('id=btnDisclaimerNext')
   if (duplicate){

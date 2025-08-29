@@ -76,6 +76,10 @@ test('Appointment location error mobile', async({page}) => {
   
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
+    
+    await page.waitForURL('**/australia/apply-now#step=step_3b')
+    await expect(continue_sidebar).toBeEnabled()
+    await continue_sidebar.click()
     await page.waitForURL('**/australia/apply-now#step=step_3c')
   
     const skip_passport = page.locator('[name="applicant.0.is_passport_on_hand"]')

@@ -8,16 +8,16 @@ test.use({
 });
 
 test('Travel Doc application pre and post payment are working Mobile', async({page}) => {
-    await page.goto(deploy_url + 'colombia/apply-now')
+    await page.goto(deploy_url + 'thailand/apply-now')
     const headerMobileNav = page.locator('id=headerMobileNav');
     await expect(headerMobileNav).toBeVisible()
     // Validations step_1
     const container = page.locator('id=question-container')
-    const container_txt = ['Apply now for your Colombia Check-MIG Form', "Ensure you select the nationality of the passport you'll be traveling with.", "What's your nationality?", "Applying for", "50,000+ Reviews"]
+    const container_txt = ['Apply now for your Thailand Digital Arrival Card', "Ensure you select the nationality of the passport you'll be traveling with.", "What's your nationality?", "Applying for", "50,000+ Reviews"]
     container_txt.forEach(async txt => await expect(container).toContainText(txt))
 
     const sidebar = page.getByTestId('step-1-sidebar')
-    const sidebar_txt = [' Most popular', 'Valid for', '90 days after arrival', 'Number of entries','Single entry', 'Max stay', '90 days per entry']
+    const sidebar_txt = ['Valid for', '30 days after arrival', 'Number of entries','Single entry', 'Max stay', '30 days per entry']
     sidebar_txt.forEach(async txt => await expect(sidebar).toContainText(txt))
 
     const arrival_date_visible = page.locator('[name="general.arrival_date"]')
@@ -30,14 +30,14 @@ test('Travel Doc application pre and post payment are working Mobile', async({pa
     const continue_sidebar = page.locator('id=btnContinueUnderSectionMobile')
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    await page.waitForURL('**/colombia/apply-now#step=step_3a')
+    await page.waitForURL('**/thailand/apply-now#step=step_3a')
       
     // Validations Step_3a
     await expect(page.locator('[name="general.email"]')).toBeVisible()
     await expect(page.getByTestId("add-traveler")).toBeVisible()
 
     // General checks    
-    await expect(page.getByRole('heading', { name: 'Colombia Check-MIG Form' })).toContainText('Colombia Check-MIG Form')
+    await expect(page.getByRole('heading', { name: 'Thailand Digital Arrival Card' })).toContainText('Thailand Digital Arrival Card')
     await expect(page.locator("id=question-container")).toContainText('Your personal details')
     await expect(page.locator("id=question-container")).toContainText("These should match what's in your passport.")
 
@@ -60,10 +60,10 @@ test('Travel Doc application pre and post payment are working Mobile', async({pa
 
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    await page.waitForURL('**/colombia/apply-now#step=step_3c')
+    await page.waitForURL('**/thailand/apply-now#step=step_3c')
 
     // Validations Step_3c
-    await expect(page.getByRole('heading', { name: 'Colombia Check-MIG Form' })).toContainText('Colombia Check-MIG Form')
+    await expect(page.getByRole('heading', { name: 'Thailand Digital Arrival Card' })).toContainText('Thailand Digital Arrival Card')
     await expect(page.locator("id=question-container")).toContainText('Passport details')
     await expect(page.locator("id=question-container")).toContainText("Add passport details later")
     
@@ -80,16 +80,16 @@ test('Travel Doc application pre and post payment are working Mobile', async({pa
 
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    await page.waitForURL('**/colombia/apply-now#step=step_4')
+    await page.waitForURL('**/thailand/apply-now#step=step_4')
 
     // Validations Step_4
-    await expect(page.getByRole('heading', { name: 'Colombia Check-MIG Form' })).toContainText('Colombia Check-MIG Form')
+    await expect(page.getByRole('heading', { name: 'Thailand Digital Arrival Card' })).toContainText('Thailand Digital Arrival Card')
     await expect(page.locator("id=question-container")).toContainText('Choose your processing time')
     await expect(page.getByTestId('processing-standard')).toBeVisible()    
 
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    await page.waitForURL('**/colombia/apply-now#step=review')
+    await page.waitForURL('**/thailand/apply-now#step=review')
 
     await page.waitForTimeout(2000)
     const duplicate = await page.isVisible('id=btnDisclaimerNext')
@@ -99,16 +99,16 @@ test('Travel Doc application pre and post payment are working Mobile', async({pa
 
     // Validations Review_step
     const question_container = page.locator("id=question-container")
-    const question_container_txt = ['Arriving as soon as', 'Standard Processing', 'Colombia Check-MIG Form', 'Valid for: ', '90 days after arrival', 'Max stay: ', '90 days per entry', 'Number of entries: ', 'Single entry', 'travelers', 'Test Test']
+    const question_container_txt = ['Arriving as soon as', 'Standard Processing', 'Thailand Digital Arrival Card', 'Valid for: ', '30 days after arrival', 'Max stay: ', '30 days per entry', 'Number of entries: ', 'Single entry', 'travelers', 'Test Test']
     await expect(page.getByRole('heading', { name: 'Review your order' }).first()).toContainText('Review your order')
     question_container_txt.forEach(async txt => await expect(question_container).toContainText(txt))
   
     const review_step_sidebar = await page.getByTestId('sidebar-summary-breakdown')
 
-    await expect(review_step_sidebar).toContainText('Colombia Check-MIG Form')
+    await expect(review_step_sidebar).toContainText('Thailand Digital Arrival Card')
     await expect(review_step_sidebar).toContainText('1 Traveler')
-    await expect(review_step_sidebar).toContainText('$ 49.99')
-    await expect(review_step_sidebar).toContainText('+ Standard, 24 Hours')
+    await expect(review_step_sidebar).toContainText('$ 59.99')
+    await expect(review_step_sidebar).toContainText('+ Standard, 24 hours')
 
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
@@ -133,67 +133,53 @@ test('Travel Doc application pre and post payment are working Mobile', async({pa
     await page.waitForNavigation({waitUntil: 'load'})
     await page.getByTestId("transition-page-button").click()
     // Post payment
-    await page.waitForTimeout(1000)
-    await page.locator('xpath=//div[@name="general.destination_phone"]//input[@name="telephone"]').click()
-    await page.waitForTimeout(1000)
-    await page.keyboard.type("11111111", {delay: 100})
+    await page.getByPlaceholder('111-222-3333').fill('11111111')
     
     await page.getByTestId('boolean-WhatsApp').click()
 
-    const arrive_colombia = page.locator('[name="general.arrival_location"]')
-    await arrive_colombia.click()
-    const arrive_colombia_input = page.getByTestId('dropdown-general.arrival_location');
-
-    await expect(arrive_colombia_input).toBeVisible();
-    await arrive_colombia_input.fill('Armenia (AXM), El Eden Airport');
-
-    await page.getByRole("option", {value: 'Armenia (AXM), El Eden Airport'}).click()
-
-    const host_city = page.locator('[name="general.destination_city"]')
-    await host_city.click()
-    const host_city_input = page.getByTestId('dropdown-general.destination_city');
-
-    await expect(host_city_input).toBeVisible();
-    await host_city_input.fill('ABREGO , NORTE DE SANTANDER');
-
-    await page.getByRole("option", {value: 'ABREGO , NORTE DE SANTANDER'}).click()
-
-    await page.locator('[name="general.destination_address"]').fill('123')
-
-    await page.waitForTimeout(2000)
-    await page.keyboard.press("Space")
-    await page.waitForTimeout(1000)
-    await page.keyboard.press("Enter")
-    await page.waitForTimeout(1000)
-    await page.locator('//li[@data-place-id="ChIJA2QAZweQP44Rfrm0B_KpKnM"]').click()
-    
-    await page.waitForTimeout(1000)
-    await page.getByPlaceholder('111-222-3333').first().click()
-    await page.waitForTimeout(1000)
-    await page.keyboard.type("11111111", {delay: 100})
-    
-    await page.waitForTimeout(1000)
-    await page.locator('[name="general.arrival_flight_number"]').click()
-    await page.waitForTimeout(1000)
-    await page.keyboard.type("aaaaaaaa", {delay: 100})
-    await page.waitForTimeout(1000)
-
-    await page.waitForTimeout(1000)
+    await page.getByTestId("boolean-Tourism").click()
+    await page.locator('[name="general.city_current_residence"]').fill("Test")
     const next_btn = page.locator('id=btnContinueUnderSection')
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
     await page.waitForNavigation({waitUntil: 'load'})
-    
-    await page.waitForTimeout(2000)
+    await page.waitForTimeout(3000)
+    const before_thailand = page.locator('[name="general.country_where_boarded"]')
+    await before_thailand.click()
+    const before_thailand_input = page.getByTestId('dropdown-general.country_where_boarded');
+    await expect(before_thailand_input).toBeVisible();
+    await before_thailand_input.fill('Mexico');
+    await page.getByRole("option", {name: 'Mexico flag Mexico'}).click()
+
+    await page.locator('[name="general.arrival_flight_number"]').fill("1234")
+    await expect(next_btn).toBeEnabled()
+    await next_btn.click()
+    await page.waitForNavigation({waitUntil: 'load'})
+
+    // Sidebar checks
+    await page.waitForTimeout(1000)
     await page.getByTestId('boolean-Male').click()
     await page.waitForTimeout(1000)
+    await expect(next_btn).toBeEnabled()
+    await next_btn.click()
+    await page.waitForNavigation({waitUntil: 'load'})
 
+    const host_city = page.locator('[name="applicant.0.profession_occupation"]')
+    await host_city.click()
+    const host_city_input = page.getByTestId('dropdown-applicant.0.profession_occupation');
+
+    await expect(host_city_input).toBeVisible();
+    await host_city_input.fill('Accountant');
+    await page.waitForTimeout(2000)
+    await page.getByRole('option', { name: 'Accountant' }).click()
+    await page.waitForTimeout(2000)
     const submit_post_payment = page.locator('id=btnSubmitApplication')
     await expect(submit_post_payment).toBeEnabled()
     await submit_post_payment.click()
-
     await page.waitForNavigation({waitUntil: 'load'})
-    await page.locator('#trackApplication').click()
+
+    const track_application = page.locator('#trackApplication')
+    await expect(track_application).toBeVisible()
 })
 
 

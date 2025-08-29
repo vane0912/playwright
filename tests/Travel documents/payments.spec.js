@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 const {deploy_url} = require('../urls');
 
 test('Payment with VISA', async({page}) => {
-  await page.goto(deploy_url + 'colombia/apply-now')
+  await page.goto(deploy_url + 'thailand/apply-now')
     
   const dropdown_country =  page.getByTestId('filter-value');
 
@@ -24,7 +24,7 @@ test('Payment with VISA', async({page}) => {
   const continue_sidebar = page.locator('id=btnContinueSidebar')
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
-  await page.waitForURL('**/colombia/apply-now#step=step_3a')
+  await page.waitForURL('**/thailand/apply-now#step=step_3a')
 
   const dob_day = page.locator('[name="applicant.0.dob.day"]')
   await dob_day.selectOption('13')
@@ -46,7 +46,7 @@ test('Payment with VISA', async({page}) => {
 
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
-  await page.waitForURL('**/colombia/apply-now#step=step_3c')
+  await page.waitForURL('**/thailand/apply-now#step=step_3c')
 
   const passport_num = page.locator('[name="applicant.0.passport_num"]')
   await expect(passport_num).toBeVisible()
@@ -61,11 +61,11 @@ test('Payment with VISA', async({page}) => {
 
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
-  await page.waitForURL('**/colombia/apply-now#step=step_4')
+  await page.waitForURL('**/thailand/apply-now#step=step_4')
 
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
-  await page.waitForURL('**/colombia/apply-now#step=review')
+  await page.waitForURL('**/thailand/apply-now#step=review')
   await page.waitForTimeout(2000)
   const duplicate = await page.isVisible('id=btnDisclaimerNext')
   if (duplicate){
@@ -109,7 +109,7 @@ test('Payment with VISA', async({page}) => {
 })
   
 test('Payment with Master Card', async({page}) => {
-    await page.goto(deploy_url + 'colombia/apply-now')
+    await page.goto(deploy_url + 'thailand/apply-now')
     
     const dropdown_country =  page.getByTestId('filter-value');
   
@@ -130,7 +130,7 @@ test('Payment with Master Card', async({page}) => {
     const continue_sidebar = page.locator('id=btnContinueSidebar')
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    await page.waitForURL('**/colombia/apply-now#step=step_3a')
+    await page.waitForURL('**/thailand/apply-now#step=step_3a')
   
     const dob_day = page.locator('[name="applicant.0.dob.day"]')
     await dob_day.selectOption('13')
@@ -152,7 +152,7 @@ test('Payment with Master Card', async({page}) => {
   
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    await page.waitForURL('**/colombia/apply-now#step=step_3c')
+    await page.waitForURL('**/thailand/apply-now#step=step_3c')
   
     const passport_num = page.locator('[name="applicant.0.passport_num"]')
     await expect(passport_num).toBeVisible()
@@ -167,11 +167,11 @@ test('Payment with Master Card', async({page}) => {
     
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    await page.waitForURL('**/colombia/apply-now#step=step_4')
+    await page.waitForURL('**/thailand/apply-now#step=step_4')
   
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    await page.waitForURL('**/colombia/apply-now#step=review')
+    await page.waitForURL('**/thailand/apply-now#step=review')
     await page.waitForTimeout(2000)
     const duplicate = await page.isVisible('id=btnDisclaimerNext')
     if (duplicate){
@@ -204,7 +204,7 @@ test('Payment with Master Card', async({page}) => {
 })
   
 test('Payment with Amex', async({page}) => {
-    await page.goto(deploy_url + 'colombia/apply-now')
+    await page.goto(deploy_url + 'thailand/apply-now')
     
     const dropdown_country =  page.getByTestId('filter-value');
   
@@ -227,7 +227,7 @@ test('Payment with Amex', async({page}) => {
     const continue_sidebar = page.locator('id=btnContinueSidebar')
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    await page.waitForURL('**/colombia/apply-now#step=step_3a')
+    await page.waitForURL('**/thailand/apply-now#step=step_3a')
   
     await page.waitForTimeout(1000)
     const dob_day = page.locator('[name="applicant.0.dob.day"]')
@@ -247,7 +247,7 @@ test('Payment with Amex', async({page}) => {
   
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    await page.waitForURL('**/colombia/apply-now#step=step_3c')
+    await page.waitForURL('**/thailand/apply-now#step=step_3c')
   
     const passport_num = page.locator('[name="applicant.0.passport_num"]')
     await expect(passport_num).toBeVisible()
@@ -262,11 +262,11 @@ test('Payment with Amex', async({page}) => {
   
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    await page.waitForURL('**/colombia/apply-now#step=step_4')
+    await page.waitForURL('**/thailand/apply-now#step=step_4')
   
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    await page.waitForURL('**/colombia/apply-now#step=review')
+    await page.waitForURL('**/thailand/apply-now#step=review')
     await page.waitForTimeout(2000)
     const duplicate = await page.isVisible('id=btnDisclaimerNext')
     if (duplicate){
@@ -299,7 +299,7 @@ test('Payment with Amex', async({page}) => {
 })
   
 test('Payment with Discover', async({page}) => {
-    await page.goto(deploy_url + 'colombia/apply-now')
+    await page.goto(deploy_url + 'thailand/apply-now')
     
     const dropdown_country =  page.getByTestId('filter-value');
   
@@ -321,7 +321,7 @@ test('Payment with Discover', async({page}) => {
     const continue_sidebar = page.locator('id=btnContinueSidebar')
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    await page.waitForURL('**/colombia/apply-now#step=step_3a')
+    await page.waitForURL('**/thailand/apply-now#step=step_3a')
   
     await page.waitForTimeout(1000)
     const dob_day = page.locator('[name="applicant.0.dob.day"]')
@@ -341,7 +341,7 @@ test('Payment with Discover', async({page}) => {
     
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    await page.waitForURL('**/colombia/apply-now#step=step_3c')
+    await page.waitForURL('**/thailand/apply-now#step=step_3c')
   
     const passport_num = page.locator('[name="applicant.0.passport_num"]')
     await expect(passport_num).toBeVisible()
@@ -356,11 +356,11 @@ test('Payment with Discover', async({page}) => {
   
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    await page.waitForURL('**/colombia/apply-now#step=step_4')
+    await page.waitForURL('**/thailand/apply-now#step=step_4')
   
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    await page.waitForURL('**/colombia/apply-now#step=review')
+    await page.waitForURL('**/thailand/apply-now#step=review')
     await page.waitForTimeout(2000)
     const duplicate = await page.isVisible('id=btnDisclaimerNext')
     if (duplicate){

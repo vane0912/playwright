@@ -3,7 +3,7 @@ const {deploy_url} = require('../urls');
 const percySnapshot = require('@percy/playwright');
 
 test('Continue with your application banner', async({page}) => {
-  await page.goto(deploy_url + 'colombia/apply-now')
+  await page.goto(deploy_url + 'thailand/apply-now')
     
   const dropdown_country =  page.getByTestId('filter-value');
 
@@ -25,10 +25,10 @@ test('Continue with your application banner', async({page}) => {
   const continue_sidebar = page.locator('id=btnContinueSidebar')
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
-  await page.waitForURL('**/colombia/apply-now#step=step_3a')
+  await page.waitForURL('**/thailand/apply-now#step=step_3a')
 
   await page.goto(deploy_url)
-  await page.goto(deploy_url + 'colombia/apply-now')
+  await page.goto(deploy_url + 'thailand/apply-now')
   await expect(page.locator(".banner_container")).toBeVisible()
   await expect(page.locator(".banner_container")).toContainText("You’ve already started an order.")
   await expect(page.getByText("Go to application")).toBeVisible() 

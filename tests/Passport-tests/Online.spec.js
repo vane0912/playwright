@@ -230,6 +230,7 @@ test('Online Passport', async({page}) =>{
 
     await page.locator('id=review-continue').click()
 
+    await page.getByText("Use selected details").click()
     const passport_issue_day = page.locator('[name="applicant.0.passport_issued_date.day"]')
     await expect(passport_issue_day).toBeVisible()
     await passport_issue_day.selectOption('13')

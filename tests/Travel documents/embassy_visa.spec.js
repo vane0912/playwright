@@ -49,8 +49,13 @@ test('Embassy Visa', async({page}) => {
   
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
+
+    await page.waitForURL('**/australia/apply-now#step=step_3b')
+    await expect(continue_sidebar).toBeEnabled()
+    await continue_sidebar.click()
+
     await page.waitForURL('**/australia/apply-now#step=step_3c')
-  
+
     const skip_passport = page.locator('[name="applicant.0.is_passport_on_hand"]')
     await expect(skip_passport).toBeVisible()
     await skip_passport.check()
@@ -266,7 +271,7 @@ test('Embassy Visa', async({page}) => {
     await page.waitForNavigation({waitUntil: 'load'})
 
     await page.waitForTimeout(3000)
-
+    await page.getByText("Use selected details").click()
     const passport_issue_day = page.locator('[name="applicant.0.passport_issued_date.day"]')
     await expect(passport_issue_day).toBeVisible()
     await passport_issue_day.selectOption('13')

@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 const {deploy_url} = require('../urls');
 
 test.skip('Payment with VISA', async({page}) => {
-  await page.goto(deploy_url + 'colombia/apply-now?splitversion=202508-86b638rf9')
+  await page.goto(deploy_url + 'thailand/apply-now?splitversion=202508-86b638rf9')
     
   const dropdown_country =  page.getByTestId('filter-value');
 
@@ -24,7 +24,7 @@ test.skip('Payment with VISA', async({page}) => {
   const continue_sidebar = page.locator('id=btnContinueSidebar')
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
-  await page.waitForURL('**/colombia/apply-now?splitversion=202508-86b638rf9#step=step_3a')
+  await page.waitForURL('**/thailand/apply-now?splitversion=202508-86b638rf9#step=step_3a')
 
   const dob_day = page.locator('[name="applicant.0.dob.day"]')
   await dob_day.selectOption('13')
@@ -46,7 +46,7 @@ test.skip('Payment with VISA', async({page}) => {
 
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
-  await page.waitForURL('**/colombia/apply-now?splitversion=202508-86b638rf9#step=step_3c')
+  await page.waitForURL('**/thailand/apply-now?splitversion=202508-86b638rf9#step=step_3c')
 
   const passport_num = page.locator('[name="applicant.0.passport_num"]')
   await expect(passport_num).toBeVisible()
@@ -61,11 +61,11 @@ test.skip('Payment with VISA', async({page}) => {
 
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
-  await page.waitForURL('**/colombia/apply-now?splitversion=202508-86b638rf9#step=step_4')
+  await page.waitForURL('**/thailand/apply-now?splitversion=202508-86b638rf9#step=step_4')
 
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
-  await page.waitForURL('**/colombia/apply-now?splitversion=202508-86b638rf9#step=review')
+  await page.waitForURL('**/thailand/apply-now?splitversion=202508-86b638rf9#step=review')
   await page.waitForTimeout(2000)
   const duplicate = await page.isVisible('id=btnDisclaimerNext')
   if (duplicate){
@@ -112,7 +112,7 @@ test.skip('Payment with VISA', async({page}) => {
 })
   
 test.skip('Payment with Master Card', async({page}) => {
-    await page.goto(deploy_url + 'colombia/apply-now?splitversion=202508-86b638rf9')
+    await page.goto(deploy_url + 'thailand/apply-now?splitversion=202508-86b638rf9')
     
     const dropdown_country =  page.getByTestId('filter-value');
   
@@ -133,7 +133,7 @@ test.skip('Payment with Master Card', async({page}) => {
     const continue_sidebar = page.locator('id=btnContinueSidebar')
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    await page.waitForURL('**/colombia/apply-now?splitversion=202508-86b638rf9#step=step_3a')
+    await page.waitForURL('**/thailand/apply-now?splitversion=202508-86b638rf9#step=step_3a')
   
     const dob_day = page.locator('[name="applicant.0.dob.day"]')
     await dob_day.selectOption('13')
@@ -155,7 +155,7 @@ test.skip('Payment with Master Card', async({page}) => {
   
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    await page.waitForURL('**/colombia/apply-now?splitversion=202508-86b638rf9#step=step_3c')
+    await page.waitForURL('**/thailand/apply-now?splitversion=202508-86b638rf9#step=step_3c')
   
     const passport_num = page.locator('[name="applicant.0.passport_num"]')
     await expect(passport_num).toBeVisible()
@@ -170,11 +170,11 @@ test.skip('Payment with Master Card', async({page}) => {
     
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    await page.waitForURL('**/colombia/apply-now?splitversion=202508-86b638rf9#step=step_4')
+    await page.waitForURL('**/thailand/apply-now?splitversion=202508-86b638rf9#step=step_4')
   
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    await page.waitForURL('**/colombia/apply-now?splitversion=202508-86b638rf9#step=review')
+    await page.waitForURL('**/thailand/apply-now?splitversion=202508-86b638rf9#step=review')
     await page.waitForTimeout(2000)
     const duplicate = await page.isVisible('id=btnDisclaimerNext')
     if (duplicate){
@@ -211,7 +211,7 @@ test.skip('Payment with Master Card', async({page}) => {
 })
   
 test.skip('Payment with Amex', async({page}) => {
-    await page.goto(deploy_url + 'colombia/apply-now?splitversion=202508-86b638rf9')
+    await page.goto(deploy_url + 'thailand/apply-now?splitversion=202508-86b638rf9')
     
     const dropdown_country =  page.getByTestId('filter-value');
   
@@ -234,7 +234,7 @@ test.skip('Payment with Amex', async({page}) => {
     const continue_sidebar = page.locator('id=btnContinueSidebar')
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    await page.waitForURL('**/colombia/apply-now?splitversion=202508-86b638rf9#step=step_3a')
+    await page.waitForURL('**/thailand/apply-now?splitversion=202508-86b638rf9#step=step_3a')
   
     await page.waitForTimeout(1000)
     const dob_day = page.locator('[name="applicant.0.dob.day"]')
@@ -254,7 +254,7 @@ test.skip('Payment with Amex', async({page}) => {
   
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    await page.waitForURL('**/colombia/apply-now?splitversion=202508-86b638rf9#step=step_3c')
+    await page.waitForURL('**/thailand/apply-now?splitversion=202508-86b638rf9#step=step_3c')
   
     const passport_num = page.locator('[name="applicant.0.passport_num"]')
     await expect(passport_num).toBeVisible()
@@ -269,11 +269,11 @@ test.skip('Payment with Amex', async({page}) => {
   
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    await page.waitForURL('**/colombia/apply-now?splitversion=202508-86b638rf9#step=step_4')
+    await page.waitForURL('**/thailand/apply-now?splitversion=202508-86b638rf9#step=step_4')
   
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    await page.waitForURL('**/colombia/apply-now?splitversion=202508-86b638rf9#step=review')
+    await page.waitForURL('**/thailand/apply-now?splitversion=202508-86b638rf9#step=review')
     await page.waitForTimeout(2000)
     const duplicate = await page.isVisible('id=btnDisclaimerNext')
     if (duplicate){
@@ -309,7 +309,7 @@ test.skip('Payment with Amex', async({page}) => {
 })
   
 test.skip('Payment with Discover', async({page}) => {
-    await page.goto(deploy_url + 'colombia/apply-now?splitversion=202508-86b638rf9')
+    await page.goto(deploy_url + 'thailand/apply-now?splitversion=202508-86b638rf9')
     
     const dropdown_country =  page.getByTestId('filter-value');
   
@@ -331,7 +331,7 @@ test.skip('Payment with Discover', async({page}) => {
     const continue_sidebar = page.locator('id=btnContinueSidebar')
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    await page.waitForURL('**/colombia/apply-now?splitversion=202508-86b638rf9#step=step_3a')
+    await page.waitForURL('**/thailand/apply-now?splitversion=202508-86b638rf9#step=step_3a')
   
     await page.waitForTimeout(1000)
     const dob_day = page.locator('[name="applicant.0.dob.day"]')
@@ -351,7 +351,7 @@ test.skip('Payment with Discover', async({page}) => {
     
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    await page.waitForURL('**/colombia/apply-now?splitversion=202508-86b638rf9#step=step_3c')
+    await page.waitForURL('**/thailand/apply-now?splitversion=202508-86b638rf9#step=step_3c')
   
     const passport_num = page.locator('[name="applicant.0.passport_num"]')
     await expect(passport_num).toBeVisible()
@@ -366,11 +366,11 @@ test.skip('Payment with Discover', async({page}) => {
   
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    await page.waitForURL('**/colombia/apply-now?splitversion=202508-86b638rf9#step=step_4')
+    await page.waitForURL('**/thailand/apply-now?splitversion=202508-86b638rf9#step=step_4')
   
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    await page.waitForURL('**/colombia/apply-now?splitversion=202508-86b638rf9#step=review')
+    await page.waitForURL('**/thailand/apply-now?splitversion=202508-86b638rf9#step=review')
     await page.waitForTimeout(2000)
     const duplicate = await page.isVisible('id=btnDisclaimerNext')
     if (duplicate){
@@ -407,7 +407,7 @@ test.skip('Payment with Discover', async({page}) => {
     await page.waitForNavigation({waitUntil: 'load'})
 })
 test.skip('Payment Invalid', async({page}) => {
-    await page.goto(deploy_url + 'colombia/apply-now?splitversion=202508-86b638rf9')
+    await page.goto(deploy_url + 'thailand/apply-now?splitversion=202508-86b638rf9')
     
     const dropdown_country =  page.getByTestId('filter-value');
   
@@ -429,7 +429,7 @@ test.skip('Payment Invalid', async({page}) => {
     const continue_sidebar = page.locator('id=btnContinueSidebar')
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    await page.waitForURL('**/colombia/apply-now?splitversion=202508-86b638rf9#step=step_3a')
+    await page.waitForURL('**/thailand/apply-now?splitversion=202508-86b638rf9#step=step_3a')
   
     await page.waitForTimeout(1000)
     const dob_day = page.locator('[name="applicant.0.dob.day"]')
@@ -449,7 +449,7 @@ test.skip('Payment Invalid', async({page}) => {
     
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    await page.waitForURL('**/colombia/apply-now?splitversion=202508-86b638rf9#step=step_3c')
+    await page.waitForURL('**/thailand/apply-now?splitversion=202508-86b638rf9#step=step_3c')
   
     const passport_num = page.locator('[name="applicant.0.passport_num"]')
     await expect(passport_num).toBeVisible()
@@ -464,11 +464,11 @@ test.skip('Payment Invalid', async({page}) => {
   
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    await page.waitForURL('**/colombia/apply-now?splitversion=202508-86b638rf9#step=step_4')
+    await page.waitForURL('**/thailand/apply-now?splitversion=202508-86b638rf9#step=step_4')
   
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    await page.waitForURL('colombia/apply-now?splitversion=202508-86b638rf9#step=review')
+    await page.waitForURL('thailand/apply-now?splitversion=202508-86b638rf9#step=review')
     await page.waitForTimeout(2000)
     const duplicate = await page.isVisible('id=btnDisclaimerNext')
     if (duplicate){
