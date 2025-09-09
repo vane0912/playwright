@@ -17,7 +17,7 @@ test('Cancelled', async({browser}) => {
     await page.goto(deploy_url + 'admin/users/27659/edit')
     await page.getByPlaceholder('1234567 or you@email.com').fill('sergio@admin.com')
     await page.getByRole("button", {name: 'Continue'}).click()
-    await page.locator("id=customCookieBotAcceptAll").click()
+    //await page.locator("id=customCookieBotAcceptAll").click()
 
     await page.locator('#password_login_input').fill('testivisa5!')
     await page.locator('#log_in_button').click()

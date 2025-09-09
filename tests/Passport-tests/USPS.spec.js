@@ -132,6 +132,27 @@ test('USPS Passport', async({page}) =>{
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
     await page.waitForNavigation({waitUntil: 'load'})
+    await page.waitForTimeout(2000)
+    await page.getByTestId("dropdown-applicant.0.marital_status").selectOption("Single")
+    await page.waitForTimeout(2000)
+    await page.locator('[name="applicant.0.fathers_first_name"]').fill('test')
+    await page.waitForTimeout(1000)
+    await page.locator('[name="applicant.0.fathers_last_name"]').fill('test')
+    await page.locator('//div[@name="applicant.0.father_us_citizen"]//button[@data-handle="boolean-Yes"]').click()
+    
+    await page.locator('[name="applicant.0.mothers_first_name"]').fill('test')
+    await page.waitForTimeout(1000)
+
+    await page.waitForTimeout(2000)
+    await page.locator('//div[@name="applicant.0.mother_us_citizen"]//button[@data-handle="boolean-Yes"]').click()
+    await page.waitForTimeout(2000)
+    await page.locator('[name="applicant.0.mothers_last_name"]').pressSequentially('test', { delay: 100 })
+    await page.waitForTimeout(1000)
+
+    await expect(next_btn).toBeEnabled()
+    await next_btn.click()
+
+    await page.waitForNavigation({waitUntil: 'load'})
 
     await page.locator('[name="applicant.0.ssn"]').click()
     await page.waitForTimeout(1000)
@@ -177,7 +198,7 @@ test('USPS Passport', async({page}) =>{
 
     await page.locator('id=review-continue').click()
 
-    await page.getByText("Use selected details").click()
+    //await page.getByText("Use selected details").click()
     const passport_issue_day = page.locator('[name="applicant.0.passport_issued_date.day"]')
     await expect(passport_issue_day).toBeVisible()
     await passport_issue_day.selectOption('13')

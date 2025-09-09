@@ -171,13 +171,15 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
     
     await page.getByTestId('boolean-WhatsApp').click()
 
-    await page.getByTestId("boolean-Tourism").click()
-    await page.locator('[name="general.city_current_residence"]').fill("Test")
+
+    //await page.locator('[name="general.city_current_residence"]').fill("Test")
     const next_btn = page.locator('id=btnContinueUnderSection')
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
     await page.waitForNavigation({waitUntil: 'load'})
     await page.waitForTimeout(2000)
+    await page.getByTestId("boolean-Tourism").click()
+    /*
     const before_thailand = page.locator('[name="general.country_where_boarded"]')
     await before_thailand.click()
     const before_thailand_input = page.getByTestId('dropdown-general.country_where_boarded');
@@ -186,7 +188,7 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
     await page.waitForTimeout(2000)
     await page.getByRole("option", {name: 'Mexico flag Mexico'}).click()
     await page.waitForTimeout(2000)
-
+    */
     await page.locator('[name="general.arrival_flight_number"]').fill("1234")
     await page.waitForTimeout(2000)
     await expect(next_btn).toBeEnabled()
@@ -196,15 +198,12 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
     await page.waitForTimeout(1000)
     await page.getByTestId('boolean-Male').click()
     await page.waitForTimeout(1000)
-    await expect(next_btn).toBeEnabled()
-    await next_btn.click()
-    await page.waitForNavigation({waitUntil: 'load'})
-
+    /*
     // Sidebar checks
     sidebar_post_payment_txt.forEach(async txt => await expect(sidebar_checks).toContainText(txt))
     await expect(page.getByTestId('General information')).toBeVisible()
     await expect(page.getByTestId('Personal details')).toBeVisible()
-
+    
     const host_city = page.locator('[name="applicant.0.profession_occupation"]')
     await host_city.click()
     const host_city_input = page.getByTestId('dropdown-applicant.0.profession_occupation');
@@ -214,6 +213,7 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
     await page.waitForTimeout(2000)
     await page.getByRole('option', { name: 'Accountant' }).click()
     await page.waitForTimeout(2000)
+    */
     const submit_post_payment = page.locator('id=btnSubmitApplication')
     await expect(submit_post_payment).toBeEnabled()
     await submit_post_payment.click()

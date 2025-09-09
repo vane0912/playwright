@@ -76,7 +76,7 @@ test('Payment with VISA', async({page}) => {
 
   const card_number = page.getByPlaceholder("Card number")
   await expect(card_number).toBeVisible()
-  await card_number.fill('4556 7610 2998 3886')
+  await card_number.fill('4111 1111 1111 1111')
 
   const expiration_month = page.getByPlaceholder("MM/YY")
   await expiration_month.fill('10/26')
