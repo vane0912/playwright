@@ -1,6 +1,5 @@
 const { test, expect } = require('@playwright/test');
 const {deploy_url} = require('../urls');
-const percySnapshot = require('@percy/playwright');
 const path = require('path');
 
 let Order_num
@@ -12,12 +11,12 @@ test('UK ETA ORDER 1', async({page}) => {
 
     await page.goto(deploy_url + 'united-kingdom/apply-now')
   
-    const arrival_date_visible = page.locator('[name="general.arrival_date"]')
-    await expect(arrival_date_visible).toBeVisible()
-    await arrival_date_visible.click()
-    await expect(page.locator('.dp__outer_menu_wrap')).toBeVisible()
-  
-    await page.locator('.dp--future').filter({hasText: date1}).first().click()
+    //const arrival_date_visible = page.locator('[name="general.arrival_date"]')
+    //await expect(arrival_date_visible).toBeVisible()
+    //await arrival_date_visible.click()
+    //await expect(page.locator('.dp__outer_menu_wrap')).toBeVisible()
+  //
+    //await page.locator('.dp--future').filter({hasText: date1}).first().click()
 
     const continue_sidebar = page.locator('id=btnContinueSidebar')
     await expect(continue_sidebar).toBeEnabled()
@@ -91,10 +90,12 @@ test('UK ETA ORDER 1', async({page}) => {
     await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_personal")    
     await page.waitForTimeout(2000)
     await page.getByTestId('boolean-Male').click()
+    await page.getByTestId("boolean-Unemployed").click()
+    await page.waitForTimeout(2000)
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
     // Residency Details
-
+    
     await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_residency_information_after_payment")
     await page.getByPlaceholder('1234 Sesame St. Apt. 3, Springtown, IL 55555').fill('123')
     await page.waitForTimeout(2000)
@@ -105,10 +106,12 @@ test('UK ETA ORDER 1', async({page}) => {
     await page.locator('//li[@data-place-id="ChIJ49W-BhhawokR4KLCF2oTVVo"]').click()
     await page.waitForTimeout(1000)
     // Work
+    
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
+    /*
     await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_work")
-
+    
     await page.waitForTimeout(2000)
     const employment = page.getByTestId("boolean-No")
     await expect(employment).toBeVisible();
@@ -122,6 +125,7 @@ test('UK ETA ORDER 1', async({page}) => {
    
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
+    */
     await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_documents")
 
     //File upload
@@ -154,6 +158,7 @@ test('UK ETA ORDER 1', async({page}) => {
 
     await page.locator('id=review-continue').click()
     await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_ocr_review")
+    await page.getByText("Use selected details").click()
 
     const submit_post_payment = page.locator('id=btnSubmitApplication')
     await expect(submit_post_payment).toBeEnabled()

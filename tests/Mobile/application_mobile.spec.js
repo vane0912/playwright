@@ -138,7 +138,7 @@ test('Travel Doc application pre and post payment are working Mobile', async({pa
     await next_btn.click()
     await page.waitForNavigation({waitUntil: 'load'})
     await page.waitForTimeout(3000)
-    await page.getByTestId("boolean-Tourism").click()
+    //await page.getByTestId("boolean-Tourism").click()
     /*
     const before_thailand = page.locator('[name="general.country_where_boarded"]')
     await before_thailand.click()

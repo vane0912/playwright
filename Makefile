@@ -9,4 +9,4 @@ admin:
 test: 
 	npx playwright test /tests/Travel documents/ /tests/Passport-tests/ /tests/Mobile/ --workers 2 
 test2:
-	npx playwright test payments.spec.js
+	npx playwright test /tests/UK/
