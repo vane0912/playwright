@@ -16,14 +16,14 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
 
     const ids = ['id=help-button', 'id=currencyHeader', 'id=langHeader', 'id=logo-ivisa-link']
     ids.forEach(async id => await expect(page.locator(id)).toBeVisible())
-    
+    /*
     const arrival_date_visible = page.locator('[name="general.arrival_date"]')
     await expect(arrival_date_visible).toBeVisible()
     await arrival_date_visible.click()
     await expect(page.locator('.dp__outer_menu_wrap')).toBeVisible()
     await page.locator('[data-dp-element="action-next"]').click()
     await page.locator('.dp--future').filter({hasText: '12'}).first().click()
-
+    */
     const continue_sidebar = page.locator('id=btnContinueSidebar')
     await expect(continue_sidebar).toBeEnabled()
     await percySnapshot(page, 'Step1Application')
@@ -124,7 +124,7 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
 
     // Validations Review_step
     const question_container = page.locator("id=question-container")
-    const question_container_txt = ['Arriving as soon as', 'Standard Processing', 'Thailand Digital Arrival Card', 'Valid for: ', '30 days after arrival', 'Max stay: ', '30 days per entry', 'Number of entries: ', 'Single entry', 'travelers', 'Test Test']
+    const question_container_txt = ['Standard Processing', 'Thailand Digital Arrival Card', 'Valid for: ', '30 days after arrival', 'Max stay: ', '30 days per entry', 'Number of entries: ', 'Single entry', 'travelers', 'Test Test']
     await expect(page.getByRole('heading').first()).toContainText('Review your order')
     await expect(page.locator('footer')).toBeVisible()
     question_container_txt.forEach(async txt => await expect(question_container).toContainText(txt))
@@ -166,11 +166,16 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
     const sidebar_post_payment_txt = ['Thailand Digital Arrival Card', 'Trip details', 'Test Test', 'Personal details']
     sidebar_post_payment_txt.forEach(async txt => await expect(sidebar_checks).toContainText(txt))
     await percySnapshot(page, 'Post payment application')
-    await expect(page.getByTestId('General information')).toBeVisible()
+    await expect(page.getByTestId('General details')).toBeVisible()
     await page.getByPlaceholder('111-222-3333').fill('11111111')
     
     await page.getByTestId('boolean-WhatsApp').click()
-
+    const arrival_date_visible = page.locator('[name="general.arrival_date"]')
+    await expect(arrival_date_visible).toBeVisible()
+    await arrival_date_visible.click()
+    await expect(page.locator('.dp__outer_menu_wrap')).toBeVisible()
+    await page.locator('[data-dp-element="action-next"]').click()
+    await page.locator('.dp--future').filter({hasText: '12'}).first().click()
 
     //await page.locator('[name="general.city_current_residence"]').fill("Test")
     const next_btn = page.locator('id=btnContinueUnderSection')

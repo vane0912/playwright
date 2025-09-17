@@ -15,14 +15,14 @@ test('Travel Doc application pre and post payment are working Mobile', async({pa
     const container = page.locator('id=question-container')
     const container_txt = ['Apply now for your Thailand Digital Arrival Card', "Ensure you select the nationality of the passport you'll be traveling with.", "What's your nationality?", "Applying for", "50,000+ Reviews"]
     container_txt.forEach(async txt => await expect(container).toContainText(txt))
-
+    /*
     const arrival_date_visible = page.locator('[name="general.arrival_date"]')
     await expect(arrival_date_visible).toBeVisible()
     await arrival_date_visible.click()
     await expect(page.locator('.dp__outer_menu_wrap')).toBeVisible()
     await page.locator('[data-dp-element="action-next"]').click()
     await page.locator('.dp--future').filter({hasText: '2'}).first().click()
-
+    */
     const continue_sidebar = page.locator('id=btnContinueUnderSectionMobile')
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
@@ -95,7 +95,7 @@ test('Travel Doc application pre and post payment are working Mobile', async({pa
 
     // Validations Review_step
     const question_container = page.locator("id=question-container")
-    const question_container_txt = ['Arriving as soon as', 'Standard Processing', 'Thailand Digital Arrival Card', 'Valid for: ', '30 days after arrival', 'Max stay: ', '30 days per entry', 'Number of entries: ', 'Single entry', 'travelers', 'Test Test']
+    const question_container_txt = ['Standard Processing', 'Thailand Digital Arrival Card', 'Valid for: ', '30 days after arrival', 'Max stay: ', '30 days per entry', 'Number of entries: ', 'Single entry', 'travelers', 'Test Test']
     await expect(page.getByRole('heading', { name: 'Review your order' }).first()).toContainText('Review your order')
     question_container_txt.forEach(async txt => await expect(question_container).toContainText(txt))
   
@@ -132,6 +132,12 @@ test('Travel Doc application pre and post payment are working Mobile', async({pa
     await page.getByPlaceholder('111-222-3333').fill('11111111')
     
     await page.getByTestId('boolean-WhatsApp').click()
+    const arrival_date_visible = page.locator('[name="general.arrival_date"]')
+    await expect(arrival_date_visible).toBeVisible()
+    await arrival_date_visible.click()
+    await expect(page.locator('.dp__outer_menu_wrap')).toBeVisible()
+    await page.locator('[data-dp-element="action-next"]').click()
+    await page.locator('.dp--future').filter({hasText: '2'}).first().click()
     //await page.locator('[name="general.city_current_residence"]').fill("Test")
     const next_btn = page.locator('id=btnContinueUnderSection')
     await expect(next_btn).toBeEnabled()

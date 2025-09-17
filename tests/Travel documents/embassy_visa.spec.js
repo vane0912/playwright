@@ -17,7 +17,7 @@ test('Embassy Visa', async({page}) => {
   
     const selector_products = page.getByTestId('dropdown-general.visa_type_id');
     await selector_products.selectOption('5085')
-
+    /*
     const arrival_date_visible = page.locator('[name="general.arrival_date"]')
     await expect(arrival_date_visible).toBeVisible()
     await arrival_date_visible.click()
@@ -25,7 +25,7 @@ test('Embassy Visa', async({page}) => {
     await page.locator('[data-dp-element="action-next"]').click()
     await page.locator('[data-dp-element="action-next"]').click()
     await page.locator('.dp--future').filter({hasText: '12'}).first().click()
-
+    */
     const continue_sidebar = page.locator('id=btnContinueSidebar')
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
@@ -128,7 +128,13 @@ test('Embassy Visa', async({page}) => {
 
     await page.getByPlaceholder('111-222-3333').fill('11111111')
     await page.getByTestId('boolean-WhatsApp').click()
-
+    const arrival_date_visible = page.locator('[name="general.arrival_date"]')
+    await expect(arrival_date_visible).toBeVisible()
+    await arrival_date_visible.click()
+    await expect(page.locator('.dp__outer_menu_wrap')).toBeVisible()
+    await page.locator('[data-dp-element="action-next"]').click()
+    await page.locator('[data-dp-element="action-next"]').click()
+    await page.locator('.dp--future').filter({hasText: '12'}).first().click()
     const departure_date_visible = page.locator('[name="general.departure_date"]')
     await expect(departure_date_visible).toBeVisible()
     await departure_date_visible .click()
