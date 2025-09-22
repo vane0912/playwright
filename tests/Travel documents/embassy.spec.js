@@ -127,7 +127,7 @@ test('Embassy reg', async({page}) => {
   await expect(review_step_sidebar).toContainText('MX Embassy Registration')
   await expect(review_step_sidebar).toContainText('1 Traveler')
   await expect(review_step_sidebar).toContainText('Embassy Registration')
-  await expect(review_step_sidebar).toContainText('+ Embassy Registration Fee (MX)')
+  await expect(review_step_sidebar).toContainText('Embassy Registration Fee (MX)')
 
   await expect(review_step_sidebar).toContainText('$ 12.95')
   

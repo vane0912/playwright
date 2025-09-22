@@ -135,6 +135,8 @@ test('Embassy Visa', async({page}) => {
     await page.locator('[data-dp-element="action-next"]').click()
     await page.locator('[data-dp-element="action-next"]').click()
     await page.locator('.dp--future').filter({hasText: '12'}).first().click()
+    await page.waitForTimeout(5000)
+
     const departure_date_visible = page.locator('[name="general.departure_date"]')
     await expect(departure_date_visible).toBeVisible()
     await departure_date_visible .click()

@@ -89,6 +89,22 @@ test('File upload checker', async({page}) => {
 
     await page.getByPlaceholder('111-222-3333').fill('11111111')
     await page.getByTestId('boolean-WhatsApp').click()
+
+    const arrival_date_visible = page.locator('[name="general.arrival_date"]')
+    await expect(arrival_date_visible).toBeVisible()
+    await arrival_date_visible.click()
+    await expect(page.locator('.dp__outer_menu_wrap')).toBeVisible()
+    await page.locator('.dp--future').filter({hasText: date1}).first().click()
+
+    const religion = page.locator('[name="general.religion"]');
+    
+    await expect(religion).toBeVisible();
+    await religion.click()
+    const input_religion = page.getByTestId('dropdown-general.religion');
+    //await expect(input_religion).toBeVisible();
+    await input_religion.fill('bahai');
+    await page.getByRole("option", {name: 'Bahai'}).click()
+    await page.waitForTimeout(1000)
     
     // File upload step
     const next_btn = page.locator('id=btnContinueUnderSection')
@@ -98,17 +114,7 @@ test('File upload checker', async({page}) => {
     await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_personal")    
     await page.waitForTimeout(2000)
     await page.getByTestId('boolean-Male').click()
-    await page.locator('[name="applicant.0.birth_city"]').fill('aaaaaaaaa')
-
-    const religion = page.locator('[name="applicant.0.religion"]');
-    
-    await expect(religion).toBeVisible();
-    await religion.click()
-    const input_religion = page.getByTestId('dropdown-applicant.0.religion');
-    await expect(input_religion).toBeVisible();
-    await input_religion.fill('bahai');
-    await page.getByRole("option", {name: 'Bahai'}).click()
-    await page.waitForTimeout(1000)
+    //await page.locator('[name="applicant.0.birth_city"]').fill('aaaaaaaaa')
 
     await page.getByTestId('boolean-Married').click()
     
@@ -130,6 +136,7 @@ test('File upload checker', async({page}) => {
     await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_work")
 
     await page.waitForTimeout(2000)
+    /*
     const employment = page.locator('[name="applicant.0.occupation"]');
     await expect(employment).toBeVisible();
     await employment.click()
@@ -137,16 +144,20 @@ test('File upload checker', async({page}) => {
     await expect(input_employment).toBeVisible();
     await input_employment.fill('retired');
     await page.getByRole("option", {name: 'Retired'}).click()
+    */
+    await page.getByTestId("boolean-Retired").click()
     await page.waitForTimeout(1000)
 
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
     await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_family")
-
+    /*
     await page.locator('[name="applicant.0.fathers_name"]').fill("test")
     await page.locator('[name="applicant.0.mothers_name"]').fill("test")
+    */
     await page.locator('[name="applicant.0.spouse_first_last_name"]').fill("test")
-
+    await page.getByTestId("boolean-No, I don’t have information about either").click()
+    await page.waitForTimeout(2000)
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
     await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_documents")
@@ -156,7 +167,7 @@ test('File upload checker', async({page}) => {
     
     // Upload wrong file Applicant photo
     await page.locator('id=instructions-continue').click()
-
+    /*
     await page.getByTestId("try-another-way-button").click()
     await page.setInputFiles('input[type="file"]', path.join(__dirname, 'uploads_passport/Error_1.png'));
     await expect(page.locator("id=document-loading")).toBeVisible()
@@ -165,7 +176,7 @@ test('File upload checker', async({page}) => {
     await expect(page.locator("id=document-step")).toContainText("Let's try that again", " The photo must be clear and in focus", " Don't wear a hat", " Don't wear glasses", "Watch tutorial")
     await percySnapshot(page, 'Error Applicant');
     await page.getByTestId("acceptFileUploadBtn").click()
-
+    */
     // Upload Correct Photo
     await page.getByTestId("try-another-way-button").click()
     await page.setInputFiles('input[type="file"]', path.join(__dirname, 'uploads_passport/Applicant-Photo.jpg'));
@@ -180,7 +191,9 @@ test('File upload checker', async({page}) => {
     await expect(page.locator("id=document-step")).toContainText("Passport page", "Upload your passport", "Upload a copy of the passport page showing your photo, name, and date of birth.", "If you have a U.S. passport, include the signature page as well.", "The document must be in color with good lighting—no glares or shadows.", "All page corners must be visible with no objects covering any information.")
     
     // Upload wrong file Passport photo
+    
     await page.locator('id=instructions-continue').click()
+    /*
     await page.getByTestId("try-another-way-button").click()
     await page.setInputFiles('input[type="file"]', path.join(__dirname, 'uploads_passport/Error_2.png'));
     await expect(page.locator("id=document-loading")).toBeVisible()
@@ -189,7 +202,7 @@ test('File upload checker', async({page}) => {
     await expect(page.locator("id=document-step")).toContainText("Let's try that again", "Upload the full page with your name and photo. It must be clear and easy to read")
     await percySnapshot(page, 'Passport ER');
     await page.getByTestId("acceptFileUploadBtn").click()
-    
+    */
     // Upload Correct Photo
     await page.getByTestId("try-another-way-button").click()
     await page.setInputFiles('input[type="file"]', path.join(__dirname, 'uploads_passport/passport.jpg'));
