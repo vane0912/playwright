@@ -46,7 +46,7 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
     await expect(page.getByRole('heading')).toContainText('Thailand Digital Arrival Card')
     await expect(page.locator('footer')).toBeVisible()
     await expect(page.locator("id=question-container")).toContainText('Your personal details')
-    await expect(page.locator("id=question-container")).toContainText("These should match what's in your passport.")
+    await expect(page.locator("id=question-container")).toContainText("Enter the details exactly as they appear on your passport")
     await expect(page.locator("id=btnPreviousSidebar")).toBeVisible()    
 
     const sidebar_3a = ['Thailand Digital Arrival Card', '1 Traveler']

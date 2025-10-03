@@ -31,9 +31,9 @@ test('MIN', async({browser}) => {
     await page.getByTestId('applicant-details').click()
     await page.getByTestId('min_checkbox_first_name').first().click()
     await expect(page.locator('.popup-inner')).toBeVisible()
-    await page.getByTestId('Empty field').click()
+    await page.getByTestId('Non-English characters').click()
     await page.waitForTimeout(2000)
-    await expect(page.getByTestId('Empty field')).toBeVisible()
+    await expect(page.getByTestId('Non-English characters')).toBeVisible()
 
     await page.locator('#close').click()    
     

@@ -35,7 +35,7 @@ test('Travel Doc application pre and post payment are working Mobile', async({pa
     // General checks    
     await expect(page.getByRole('heading', { name: 'Thailand Digital Arrival Card' })).toContainText('Thailand Digital Arrival Card')
     await expect(page.locator("id=question-container")).toContainText('Your personal details')
-    await expect(page.locator("id=question-container")).toContainText("These should match what's in your passport.")
+    await expect(page.locator("id=question-container")).toContainText("Enter the details exactly as they appear on your passport")
 
     //
     await page.waitForTimeout(1000)

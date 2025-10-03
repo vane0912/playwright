@@ -196,7 +196,7 @@ test('Embassy Visa', async({page}) => {
     await expect(issued_country).toBeVisible();
     await issued_country.fill('Mexico');
     await page.getByRole("option", {name: 'Mexico flag Mexico'}).click()
-
+    
     await page.getByTestId('boolean-Male').click()
     
     await page.locator('[name="applicant.0.birth_city"]').fill("test")

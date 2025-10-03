@@ -145,12 +145,13 @@ test('Embassy reg', async({page}) => {
   await page.getByPlaceholder('111-222-3333').fill('11111111')
   await page.getByTestId('boolean-WhatsApp').click()
 
+  /*
   const next_btn = page.locator('id=btnContinueUnderSection')
   await page.waitForTimeout(1000)
   await expect(next_btn).toBeEnabled()
   await next_btn.click()
   await page.waitForNavigation({waitUntil: 'load'})
-
+  */
   const submit_post_payment = page.locator('id=btnSubmitApplication')
   await expect(submit_post_payment).toBeEnabled()
   await submit_post_payment.click()

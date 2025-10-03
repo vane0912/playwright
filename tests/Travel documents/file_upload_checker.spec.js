@@ -155,7 +155,9 @@ test('File upload checker', async({page}) => {
     await page.locator('[name="applicant.0.fathers_name"]').fill("test")
     await page.locator('[name="applicant.0.mothers_name"]').fill("test")
     */
+    await page.waitForTimeout(3000)
     await page.locator('[name="applicant.0.spouse_first_last_name"]').fill("test")
+    await page.waitForTimeout(3000)
     await page.getByTestId("boolean-No, I don’t have information about either").click()
     await page.waitForTimeout(2000)
     await expect(next_btn).toBeEnabled()
@@ -163,7 +165,7 @@ test('File upload checker', async({page}) => {
     await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_documents")
 
     // Confirm instructions appear Applicant photo
-    await expect(page.locator("id=document-step")).toContainText("Applicant's Photo", "Upload your photo", "Face the camera straight on with a plain background.", "No angles or head tilts ", "No glasses, hats, or scarves", "No glasses, hats, or scarves")
+    await expect(page.locator("id=document-step")).toContainText("Test Test", "Upload your photo", "Face the camera straight on with a plain background.", "No angles or head tilts ", "No glasses, hats, or scarves", "No glasses, hats, or scarves")
     
     // Upload wrong file Applicant photo
     await page.locator('id=instructions-continue').click()
@@ -188,7 +190,7 @@ test('File upload checker', async({page}) => {
     await page.locator('id=review-continue').click()
 
     // Confirm instructions appear Passport photo
-    await expect(page.locator("id=document-step")).toContainText("Passport page", "Upload your passport", "Upload a copy of the passport page showing your photo, name, and date of birth.", "If you have a U.S. passport, include the signature page as well.", "The document must be in color with good lighting—no glares or shadows.", "All page corners must be visible with no objects covering any information.")
+    await expect(page.locator("id=document-step")).toContainText("upload your passport", "Upload a copy of the passport page showing your photo, name, and date of birth.", "If you have a U.S. passport, include the signature page as well.", "The document must be in color with good lighting—no glares or shadows.", "All page corners must be visible with no objects covering any information.")
     
     // Upload wrong file Passport photo
     

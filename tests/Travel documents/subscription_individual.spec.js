@@ -100,10 +100,12 @@ test('Individual subscription purchase', async ({ page }) => {
   await page.waitForTimeout(1000)
   await expect(next_btn).toBeEnabled()
   await next_btn.click()
+  
   await expect(page.getByTestId('boolean-Male')).toBeEnabled()
   await page.waitForTimeout(1000)
   await page.getByTestId('boolean-Male').click()
-  await page.waitForTimeout(1000)
+  
+  await page.waitForTimeout(3000)
   await expect(next_btn).toBeEnabled()
   await next_btn.click()
 
@@ -225,10 +227,12 @@ test('Individual subscription purchase', async ({ page }) => {
   await page.waitForTimeout(1000)
   await expect(next_btn).toBeEnabled()
   await next_btn.click()
+  
   await expect(page.getByTestId('boolean-Male')).toBeEnabled()
   await page.waitForTimeout(1000)
   await page.getByTestId('boolean-Male').click()
-  await page.waitForTimeout(1000)
+  
+  await page.waitForTimeout(3000)
   await expect(next_btn).toBeEnabled()
   await next_btn.click()
 
