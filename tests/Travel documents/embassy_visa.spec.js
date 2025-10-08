@@ -116,13 +116,13 @@ test('Embassy Visa', async({page}) => {
     await page.waitForNavigation({waitUntil: 'load'})
     await page.getByTestId("transition-page-button").click()
     const request = await fetch("https://littleserver-production.up.railway.app/", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ 
-      Scheduling: page.url().split("/")[4] 
-    }),
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ 
+        Scheduling: page.url().split("/")[4] 
+      }),
     });
     await request.json()
 

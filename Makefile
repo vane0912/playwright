@@ -8,5 +8,5 @@ admin:
 	npx playwright test /tests/admin/
 test: 
 	npx playwright test /tests/Travel documents/ /tests/Passport-tests/ /tests/Mobile/ --workers 2 
-test2:
+translations:
 	npx playwright test uk_eta_sk.spec.js
