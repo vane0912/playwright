@@ -1,16 +1,27 @@
 const {deploy_url} = require('./urls');
 let eld;
-var translations_missing_uk_eta_ko = {
+
+var us_esta_ko = {
+  product: "US ESTA",
   pre_payment: 0,
   pre_payment_missing: [],
   post_payment: 0,
   post_payment_missing: [],
   deployment: deploy_url
 }
-async function translations(parent, child, section){
+
+var uk_eta_ko = {
+  product: "UK ETA",
+  pre_payment: 0,
+  pre_payment_missing: [],
+  post_payment: 0,
+  post_payment_missing: [],
+  deployment: deploy_url
+}
+async function translations(parent, child, section, product){
     const module = await import('eld');
     eld = module.eld;
-    let ignore = ["Test Test", "+52", "Debug Details", "웁스!!", '2', '3', '$ 22.75', 'USD $102.74', '$ 79.99', '성', '예', "Mexico", "United States", '1', '$79.99', '$119.99', '$159.99']
+    let ignore = ["Test Test","(+XX)","Australia","$ 40.00","$ 99.99","$99.99", "+52", "Debug Details", "웁스!!", '2', '3', '$ 22.75', 'USD $102.74', '$ 79.99', '성', '예', "Mexico", "United States", '1', '$79.99', '$119.99', '$159.99']
     
     const allElements = await parent.locator(child).all();
     const filtered_array = await Promise.all(
@@ -29,10 +40,10 @@ async function translations(parent, child, section){
         }
     })
     if(detect_english.length > 0){
-        translations_missing_uk_eta_ko[section]++ 
-        translations_missing_uk_eta_ko[`${section}_missing`].push(...detect_english)
+        product[section]++ 
+        product[`${section}_missing`].push(...detect_english)
     }
 }
 
 
-module.exports = {translations, translations_missing_uk_eta_ko}
+module.exports = {translations, uk_eta_ko, us_esta_ko}

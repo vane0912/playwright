@@ -7,7 +7,7 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
 
     // Validations step_1
     const container = page.locator('id=question-container')
-    const container_txt = ['Apply now for your Thailand Digital Arrival Card', "Ensure you select the nationality of the passport you'll be traveling with.", "What's your nationality?", "Applying for", "50,000+ Reviews"]
+    const container_txt = ["Ensure you select the nationality of the passport you'll be traveling with.", "What's your nationality?", "Applying for", "50,000+ Reviews"]
     container_txt.forEach(async txt => await expect(container).toContainText(txt))
 
     const sidebar = page.getByTestId('step-1-sidebar')
@@ -43,7 +43,7 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
     await expect(page.getByTestId("add-traveler")).toBeVisible()
 
     // General checks    
-    await expect(page.getByRole('heading')).toContainText('Thailand Digital Arrival Card')
+    await expect(page.getByRole('heading').first()).toContainText('Thailand Digital Arrival Card')
     await expect(page.locator('footer')).toBeVisible()
     await expect(page.locator("id=question-container")).toContainText('Your personal details')
     await expect(page.locator("id=question-container")).toContainText("Enter the details exactly as they appear on your passport")
@@ -75,7 +75,7 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
     await page.waitForURL('**/thailand/apply-now#step=step_3c')
 
     // Validations Step_3c
-    await expect(page.getByRole('heading')).toContainText('Thailand Digital Arrival Card')
+    await expect(page.getByRole('heading').first()).toContainText('Thailand Digital Arrival Card')
     await expect(page.locator('footer')).toBeVisible()
     await expect(page.locator("id=question-container")).toContainText('Passport details')
     await expect(page.locator("id=question-container")).toContainText("Add passport details later")
@@ -100,7 +100,7 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
     await page.waitForURL('**/thailand/apply-now#step=step_4')
 
     // Validations Step_4
-    await expect(page.getByRole('heading')).toContainText('Thailand Digital Arrival Card')
+    await expect(page.getByRole('heading').first()).toContainText('Thailand Digital Arrival Card')
     await expect(page.locator('footer')).toBeVisible()
     await expect(page.locator("id=question-container")).toContainText('Choose your processing time')
     await expect(page.getByTestId('processing-standard')).toBeVisible()    

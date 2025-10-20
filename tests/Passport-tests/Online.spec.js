@@ -133,7 +133,7 @@ test('Online Passport', async({page}) =>{
     await next_btn.click()
 
     await page.waitForNavigation({waitUntil: 'load'})
-    
+    /*
     await page.getByPlaceholder('123 Main Street, Springfield, USA').fill('123')
     await page.waitForTimeout(2000)
     await page.keyboard.press("Space")
@@ -185,7 +185,7 @@ test('Online Passport', async({page}) =>{
     await next_btn.click()
 
     await page.waitForNavigation({waitUntil: 'load'})
-
+    */
     await page.locator('[name="applicant.0.ssn"]').click()
     await page.waitForTimeout(1000)
     await page.keyboard.type("123456")

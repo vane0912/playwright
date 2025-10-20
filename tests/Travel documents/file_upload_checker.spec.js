@@ -190,7 +190,7 @@ test('File upload checker', async({page}) => {
     await page.locator('id=review-continue').click()
 
     // Confirm instructions appear Passport photo
-    await expect(page.locator("id=document-step")).toContainText("upload your passport", "Upload a copy of the passport page showing your photo, name, and date of birth.", "If you have a U.S. passport, include the signature page as well.", "The document must be in color with good lighting—no glares or shadows.", "All page corners must be visible with no objects covering any information.")
+    await expect(page.locator("id=document-step")).toContainText("Upload your passport", "Upload a copy of the passport page showing your photo, name, and date of birth.", "If you have a U.S. passport, include the signature page as well.", "The document must be in color with good lighting—no glares or shadows.", "All page corners must be visible with no objects covering any information.")
     
     // Upload wrong file Passport photo
     
