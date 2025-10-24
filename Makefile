@@ -12,4 +12,4 @@ test:
 test2: 
 	npx playwright test /tests/UK 
 translations:
-	npx playwright test us_esta.sk.spec.js --headed 
+	npx playwright test /tests/Translation

@@ -4,7 +4,7 @@ const path = require('path');
 const {translations, uk_eta_ko} = require('../functions');
 
 let Order_num
-test.skip('Check translations UK ETA korean', async ({ page }) => {
+test('Check translations UK ETA korean', async ({ page }) => {
     test.slow()
     var myDate = new Date(new Date(). getTime()+(10*24*60*60*1000));
     const datepicker_date = new Date(myDate);
@@ -135,7 +135,7 @@ test.skip('Check translations UK ETA korean', async ({ page }) => {
     
     //await page.getByTestId('boolean-Male').click()
     
-    await page.getByTestId("boolean-Unemployed").click()
+    //await page.getByTestId("boolean-Unemployed").click()
     await page.waitForTimeout(2000)
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
