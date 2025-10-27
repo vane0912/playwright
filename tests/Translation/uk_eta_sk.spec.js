@@ -131,11 +131,10 @@ test('Check translations UK ETA korean', async ({ page }) => {
     // Personal details
     await page.waitForURL(deploy_url + "ko/order/" + Order_num + "/continue#step=trav0_personal")    
     await page.waitForTimeout(2000)
-    await translations(page.locator('id=question-container'), "post_payment", uk_eta_ko)
-    
+    await translations(page.locator('id=question-container'), "div" ,"post_payment", uk_eta_ko)
     //await page.getByTestId('boolean-Male').click()
     
-    //await page.getByTestId("boolean-Unemployed").click()
+    await page.getByTestId("boolean-Unemployed").click()
     await page.waitForTimeout(2000)
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
@@ -190,7 +189,7 @@ test('Check translations UK ETA korean', async ({ page }) => {
 
     await page.locator('id=review-continue').click()
     await page.waitForURL(deploy_url + "ko/order/" + Order_num + "/continue#step=trav0_ocr_review")
-    await translations(page.locator('main'), "div", "post_payment")
+    await translations(page.locator('main'), "div", "post_payment", uk_eta_ko)
     await page.getByText("선택한 세부정보 사용").click()
     await translations(page.locator('id=question-container'), "div", "post_payment", uk_eta_ko)
 

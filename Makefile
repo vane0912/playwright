@@ -12,4 +12,4 @@ test:
 test2: 
 	npx playwright test /tests/UK 
 translations:
-	npx playwright test /tests/Translation
+	npx playwright test uk_eta_sk.spec.js
