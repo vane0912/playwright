@@ -21,7 +21,7 @@ var uk_eta_ko = {
 async function translations(parent, child, section, product){
     const module = await import('eld');
     eld = module.eld;
-    let ignore = ["Test Test","(+XX)","Australia","$ 40.00","$ 99.99","$99.99", "+52", "Debug Details", "웁스!!", '2', '3', '$ 22.75', 'USD $102.74', '$ 79.99', '성', '예', "Mexico", "United States", '1', '$79.99', '$119.99', '$159.99']
+    let ignore = ["Test Test","(+XX)","Australia","$ 40.00","$ 40.00","$ 99.99","$99.99", "+52", "Debug Details", "웁스!!", '2', '3', '$ 22.75', 'USD $102.74', '$ 79.99', '성', '예', "Mexico", "United States", '1', '$79.99', '$119.99', '$159.99']
     
     const allElements = await parent.locator(child).all();
     const filtered_array = await Promise.all(

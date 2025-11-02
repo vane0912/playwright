@@ -46,7 +46,7 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
     await expect(page.getByRole('heading').first()).toContainText('Thailand Digital Arrival Card')
     await expect(page.locator('footer')).toBeVisible()
     await expect(page.locator("id=question-container")).toContainText('Your personal details')
-    await expect(page.locator("id=question-container")).toContainText("Enter the details exactly as they appear on your passport")
+    await expect(page.locator("id=question-container")).toContainText("Enter the details as they appear on your passport")
     await expect(page.locator("id=btnPreviousSidebar")).toBeVisible()    
 
     const sidebar_3a = ['Thailand Digital Arrival Card', '1 Traveler']
@@ -108,7 +108,7 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
 
     sidebar_3a.forEach(async txt => await expect(sidebar_step_2).toContainText(txt))
 
-    await expect(sidebar_step_2).toContainText('$ 49.99')
+    await expect(sidebar_step_2).toContainText('$49.99')
     await expect(sidebar_step_2).toContainText('Standard, 24 hours')
 
     await expect(continue_sidebar).toBeEnabled()
@@ -133,7 +133,7 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
 
     await expect(review_step_sidebar).toContainText('Thailand Digital Arrival Card')
     await expect(review_step_sidebar).toContainText('1 Traveler')
-    await expect(review_step_sidebar).toContainText('$ 49.99')
+    await expect(review_step_sidebar).toContainText('$49.99')
     await expect(review_step_sidebar).toContainText('Standard, 24 hours')
     await percySnapshot(page, 'ReviewStepapplication')
 

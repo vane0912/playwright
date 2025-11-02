@@ -187,7 +187,7 @@ test('Embassy Visa', async({page}) => {
     await page.waitForTimeout(1000)
     await page.keyboard.press("Enter")
     await page.waitForTimeout(1000)
-    await page.locator('//li[@data-place-id="ChIJoZ8Hus00K4gRfgPGjqVFR5w"]').click()
+    await page.locator('//li[@data-place-id="ChIJ49W-BhhawokR4KLCF2oTVVo"]').click()
 
     const birth_country = page.locator('[name="applicant.0.secondary_document_issued_country"]');
     await expect(birth_country).toBeVisible();

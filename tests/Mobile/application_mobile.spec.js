@@ -35,7 +35,7 @@ test('Travel Doc application pre and post payment are working Mobile', async({pa
     // General checks    
     await expect(page.getByRole('heading', { name: 'Thailand Digital Arrival Card' })).toContainText('Thailand Digital Arrival Card')
     await expect(page.locator("id=question-container")).toContainText('Your personal details')
-    await expect(page.locator("id=question-container")).toContainText("Enter the details exactly as they appear on your passport")
+    await expect(page.locator("id=question-container")).toContainText("Enter the details as they appear on your passport")
 
     //
     await page.waitForTimeout(1000)
@@ -103,7 +103,7 @@ test('Travel Doc application pre and post payment are working Mobile', async({pa
 
     await expect(review_step_sidebar).toContainText('Thailand Digital Arrival Card')
     await expect(review_step_sidebar).toContainText('1 Traveler')
-    await expect(review_step_sidebar).toContainText('$ 49.99')
+    await expect(review_step_sidebar).toContainText('$49.99')
     await expect(review_step_sidebar).toContainText('Standard, 24 hours')
 
     await expect(continue_sidebar).toBeEnabled()
