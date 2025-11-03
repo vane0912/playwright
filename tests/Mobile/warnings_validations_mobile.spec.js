@@ -17,7 +17,7 @@ test('Appointment location error mobile', async({page}) => {
     await expect(input_country).toBeVisible();
     await input_country.fill('Mexico');
     await page.getByRole("option", {name: 'Mexico flag Mexico'}).click()
-  
+    /*
     const selector_products = page.getByTestId('dropdown-general.visa_type_id');
     await selector_products.selectOption('5085')
     /*

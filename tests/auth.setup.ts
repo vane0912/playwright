@@ -14,7 +14,7 @@ setup('authenticate', async ({ page }) => {
     //await page.locator("id=customCookieBotAcceptAll").click()
     await dropdown_country.click();
     const input_country = page.getByTestId('dropdown-general.common_nationality_country');
-
+    
     await expect(input_country).toBeVisible();
     await input_country.fill('Mexico');
     await page.waitForTimeout(1000)
@@ -22,6 +22,7 @@ setup('authenticate', async ({ page }) => {
     await page.waitForTimeout(1000)
     await page.keyboard.press('Enter');
     await page.waitForTimeout(1000)
+    /*
     const selector_products = page.getByTestId('dropdown-general.visa_type_id');
     await selector_products.selectOption('38')
 

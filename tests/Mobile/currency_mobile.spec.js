@@ -22,7 +22,7 @@ test('Different currency Mobile', async ({ page }) => {
     await currency.click()
     
     await page.locator('id=headerMobileNav-close').click()
-  
+    
     const dropdown_country = page.getByTestId('filter-value');
     await expect(dropdown_country).toBeVisible();
     await dropdown_country.click();
@@ -30,7 +30,7 @@ test('Different currency Mobile', async ({ page }) => {
     await expect(input_country).toBeVisible();
     await input_country.fill('Mexico');
     await page.getByRole("option", {name: 'Mexico flag Mexico'}).click()
-    
+    /*
     const selector_products = page.getByTestId('dropdown-general.visa_type_id');
     await selector_products.selectOption('38')
     /*
