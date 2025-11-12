@@ -118,7 +118,7 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
 
     sidebar_3a.forEach(async txt => await expect(sidebar_step_2).toContainText(txt))
 
-    await expect(sidebar_step_2).toContainText('$59.99')
+    await expect(sidebar_step_2).toContainText('$62.99')
     await expect(sidebar_step_2).toContainText('Standard, 24 hours')
 
     await expect(continue_sidebar).toBeEnabled()
@@ -143,7 +143,7 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
 
     await expect(review_step_sidebar).toContainText('Thailand Digital Arrival Card')
     await expect(review_step_sidebar).toContainText('1 Traveler')
-    await expect(review_step_sidebar).toContainText('$59.99')
+    await expect(review_step_sidebar).toContainText('$62.99')
     await expect(review_step_sidebar).toContainText('Standard, 24 hours')
     await percySnapshot(page, 'ReviewStepapplication')
 

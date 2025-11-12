@@ -8,6 +8,12 @@ test('Processing speeds appear and work', async({page}) => {
     const date1 = datepicker_date.getDate();
 
     await page.goto(deploy_url + 'india/apply-now')
+
+    const continue_sidebar = page.locator('id=btnContinueSidebar')
+    await expect(continue_sidebar).toBeEnabled()
+    await continue_sidebar.click()
+    
+    //await page.waitForURL('**/india/apply-now#step=step_2')
     /*
     const arrival_date_visible = page.locator('[name="general.arrival_date"]')
     await expect(arrival_date_visible).toBeVisible()
@@ -15,10 +21,11 @@ test('Processing speeds appear and work', async({page}) => {
     await expect(page.locator('.dp__outer_menu_wrap')).toBeVisible()
   
     await page.locator('.dp--future').filter({hasText: date1}).first().click()
-    */
-    const continue_sidebar = page.locator('id=btnContinueSidebar')
+    
+    //const continue_sidebar = page.locator('id=btnContinueSidebar')
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
+    */
     await page.waitForURL('**/india/apply-now#step=step_3a')
   
     await page.waitForTimeout(1000)

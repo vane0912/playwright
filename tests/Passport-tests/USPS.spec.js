@@ -133,7 +133,7 @@ test('USPS Passport', async({page}) =>{
     await next_btn.click()
     await page.waitForNavigation({waitUntil: 'load'})
     await page.waitForTimeout(2000)
-    await page.getByTestId("dropdown-applicant.0.marital_status").selectOption("Single")
+    await page.getByTestId("boolean-Single").click()
     await page.waitForTimeout(2000)
     await page.locator('[name="applicant.0.fathers_first_name"]').fill('test')
     await page.waitForTimeout(1000)
