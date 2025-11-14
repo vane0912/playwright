@@ -17,8 +17,8 @@ test('Payment with VISA', async({page}) => {
   const continue_sidebar = page.locator('id=btnContinueSidebar')
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
-  await page.waitForURL('**/thailand/apply-now#step=step_2')
-  
+  //await page.waitForURL('**/thailand/apply-now#step=step_2')
+  /*
   const arrival_date_visible = page.locator('[name="general.arrival_date"]')
   await expect(arrival_date_visible).toBeVisible()
   await arrival_date_visible.click()
@@ -28,6 +28,7 @@ test('Payment with VISA', async({page}) => {
 
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
+  */
   await page.waitForURL('**/thailand/apply-now#step=step_3a')
 
   const dob_day = page.locator('[name="applicant.0.dob.day"]')
@@ -128,17 +129,18 @@ test('Payment with Master Card', async({page}) => {
 
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    await page.waitForURL('**/thailand/apply-now#step=step_2')
+    //await page.waitForURL('**/thailand/apply-now#step=step_2')
+  /*
+  const arrival_date_visible = page.locator('[name="general.arrival_date"]')
+  await expect(arrival_date_visible).toBeVisible()
+  await arrival_date_visible.click()
+  await expect(page.locator('.dp__outer_menu_wrap')).toBeVisible()
+  await page.locator('[data-dp-element="action-next"]').click()
+  await page.locator('.dp--future').filter({hasText: '12'}).first().click()
 
-    const arrival_date_visible = page.locator('[name="general.arrival_date"]')
-    await expect(arrival_date_visible).toBeVisible()
-    await arrival_date_visible.click()
-    await expect(page.locator('.dp__outer_menu_wrap')).toBeVisible()
-    await page.locator('[data-dp-element="action-next"]').click()
-    await page.locator('.dp--future').filter({hasText: '12'}).first().click()
-
-    await expect(continue_sidebar).toBeEnabled()
-    await continue_sidebar.click()
+  await expect(continue_sidebar).toBeEnabled()
+  await continue_sidebar.click()
+  */
     await page.waitForURL('**/thailand/apply-now#step=step_3a')
   
     const dob_day = page.locator('[name="applicant.0.dob.day"]')
@@ -228,17 +230,18 @@ test('Payment with Amex', async({page}) => {
     const continue_sidebar = page.locator('id=btnContinueSidebar')
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    await page.waitForURL('**/thailand/apply-now#step=step_2')
-  
-    const arrival_date_visible = page.locator('[name="general.arrival_date"]')
-    await expect(arrival_date_visible).toBeVisible()
-    await arrival_date_visible.click()
-    await expect(page.locator('.dp__outer_menu_wrap')).toBeVisible()
-    await page.locator('[data-dp-element="action-next"]').click()
-    await page.locator('.dp--future').filter({hasText: '12'}).first().click()
+    //await page.waitForURL('**/thailand/apply-now#step=step_2')
+  /*
+  const arrival_date_visible = page.locator('[name="general.arrival_date"]')
+  await expect(arrival_date_visible).toBeVisible()
+  await arrival_date_visible.click()
+  await expect(page.locator('.dp__outer_menu_wrap')).toBeVisible()
+  await page.locator('[data-dp-element="action-next"]').click()
+  await page.locator('.dp--future').filter({hasText: '12'}).first().click()
 
-    await expect(continue_sidebar).toBeEnabled()
-    await continue_sidebar.click()
+  await expect(continue_sidebar).toBeEnabled()
+  await continue_sidebar.click()
+  */
     await page.waitForURL('**/thailand/apply-now#step=step_3a') 
   
     await page.waitForTimeout(1000)
@@ -326,17 +329,18 @@ test('Payment with Discover', async({page}) => {
     const continue_sidebar = page.locator('id=btnContinueSidebar')
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    await page.waitForURL('**/thailand/apply-now#step=step_2')
-    
-    const arrival_date_visible = page.locator('[name="general.arrival_date"]')
-    await expect(arrival_date_visible).toBeVisible()
-    await arrival_date_visible.click()
-    await expect(page.locator('.dp__outer_menu_wrap')).toBeVisible()
-    await page.locator('[data-dp-element="action-next"]').click()
-    await page.locator('.dp--future').filter({hasText: '12'}).first().click()
-  
-    await expect(continue_sidebar).toBeEnabled()
-    await continue_sidebar.click()
+    //await page.waitForURL('**/thailand/apply-now#step=step_2')
+  /*
+  const arrival_date_visible = page.locator('[name="general.arrival_date"]')
+  await expect(arrival_date_visible).toBeVisible()
+  await arrival_date_visible.click()
+  await expect(page.locator('.dp__outer_menu_wrap')).toBeVisible()
+  await page.locator('[data-dp-element="action-next"]').click()
+  await page.locator('.dp--future').filter({hasText: '12'}).first().click()
+
+  await expect(continue_sidebar).toBeEnabled()
+  await continue_sidebar.click()
+  */
     await page.waitForURL('**/thailand/apply-now#step=step_3a')
   
     await page.waitForTimeout(1000)

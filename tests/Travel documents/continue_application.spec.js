@@ -17,8 +17,8 @@ test('Continue with your application banner', async({page}) => {
   const continue_sidebar = page.locator('id=btnContinueSidebar')
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
-  await page.waitForURL('**/thailand/apply-now#step=step_2')
-  
+  //await page.waitForURL('**/thailand/apply-now#step=step_2')
+  /*
   const arrival_date_visible = page.locator('[name="general.arrival_date"]')
   await expect(arrival_date_visible).toBeVisible()
   await arrival_date_visible.click()
@@ -28,6 +28,7 @@ test('Continue with your application banner', async({page}) => {
 
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
+  */
   await page.waitForURL('**/thailand/apply-now#step=step_3a')
   await page.goto(deploy_url)
   await page.goto(deploy_url + 'thailand/apply-now')

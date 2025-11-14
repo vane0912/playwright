@@ -19,8 +19,9 @@ test('Buy super rush', async({page}) => {
   const continue_sidebar = page.locator('id=btnContinueSidebar')
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
-  await page.waitForURL('**/malaysia/apply-now#step=step_2')
-  
+
+  //await page.waitForURL('**/malaysia/apply-now#step=step_2')
+  /*
   const arrival_date_visible = page.locator('[name="general.arrival_date"]')
   await expect(arrival_date_visible).toBeVisible()
   await arrival_date_visible.click()
@@ -29,6 +30,7 @@ test('Buy super rush', async({page}) => {
   
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
+  */
   await page.waitForURL('**/malaysia/apply-now#step=step_3a')
   await expect(page.getByTestId("dropdown-prefill-selector")).toBeVisible()
   await page.getByTestId("dropdown-prefill-selector").selectOption("0")

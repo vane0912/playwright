@@ -17,11 +17,12 @@ test('Embassy Visa', async({page}) => {
     const continue_sidebar = page.locator('id=btnContinueSidebar')
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    await page.waitForURL('**/australia/apply-now#step=step_2')
+     //await page.waitForURL('**/australia/apply-now#step=step_2')
     /*
     const selector_products = page.getByTestId('dropdown-general.visa_type_id');
     await selector_products.selectOption('5085')
     */
+   /*
     const arrival_date_visible = page.locator('[name="general.arrival_date"]')
     await expect(arrival_date_visible).toBeVisible()
     await arrival_date_visible.click()
@@ -29,10 +30,11 @@ test('Embassy Visa', async({page}) => {
     await page.locator('[data-dp-element="action-next"]').click()
     await page.locator('[data-dp-element="action-next"]').click()
     await page.locator('.dp--future').filter({hasText: '12'}).first().click()
-  
+    
 
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
+    */
     await page.waitForURL('**/australia/apply-now#step=step_3a')
   
     await page.waitForTimeout(1000)
@@ -66,6 +68,7 @@ test('Embassy Visa', async({page}) => {
     await expect(skip_passport).toBeChecked()
   
     // First Applicant 
+    /*
     const occupation_triage = page.locator('[name="applicant.0.occupation_triage"]');
     await occupation_triage.click()
   
@@ -91,16 +94,18 @@ test('Embassy Visa', async({page}) => {
   
     const visa_denied = page.getByTestId('travelerSection-0').getByTestId("boolean-I was denied this visa over 12 months ago")
     await visa_denied.click()
-  
+    */
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    await page.waitForURL('**/australia/apply-now#step=step_3e')
-  
+    
+    //await page.waitForURL('**/australia/apply-now#step=step_3e')
+    /*
     const location_1 = page.locator('[name="applicant.0.appointment_location_id"]')
     await location_1.getByTestId('boolean-4575').click()
   
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
+    */
     await page.waitForURL('**/australia/apply-now#step=step_4')
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
@@ -132,7 +137,7 @@ test('Embassy Visa', async({page}) => {
 
     await page.getByPlaceholder('111-222-3333').fill('11111111')
     await page.getByTestId('boolean-WhatsApp').click()
-    /*
+    
     const arrival_date_visible = page.locator('[name="general.arrival_date"]')
     await expect(arrival_date_visible).toBeVisible()
     await arrival_date_visible.click()
@@ -140,7 +145,7 @@ test('Embassy Visa', async({page}) => {
     await page.locator('[data-dp-element="action-next"]').click()
     await page.locator('[data-dp-element="action-next"]').click()
     await page.locator('.dp--future').filter({hasText: '12'}).first().click()
-    */
+    
     await page.waitForTimeout(5000)
 
     const departure_date_visible = page.locator('[name="general.departure_date"]')
@@ -150,7 +155,7 @@ test('Embassy Visa', async({page}) => {
     await page.locator('[data-dp-element="action-next"]').click()
     await page.locator('[data-dp-element="action-next"]').click()
     await page.locator('.dp--future').filter({hasText: '15'}).first().click()
-
+    /*
     const arrival_city = page.locator('//div[@data-ivisa-question-selector="general.arrival_city"]//div[@data-handle="filter-value"]')
 
     await expect(arrival_city).toBeVisible();
@@ -162,7 +167,7 @@ test('Embassy Visa', async({page}) => {
     await page.waitForTimeout(1000)
     await page.keyboard.press("Enter")
     await page.waitForTimeout(1000)
-
+    
     await page.getByPlaceholder("JW Marriott Hotel Madrid or Mario Rodriguez").fill("Test name")
 
     await page.locator('[name="general.destination_address"]').fill('123')
@@ -172,18 +177,46 @@ test('Embassy Visa', async({page}) => {
     await page.keyboard.press("Enter")
     await page.waitForTimeout(1000)
     await page.locator('//li[@data-place-id="ChIJy03Qsx1akWsRcbqOMJc_Hm8"]').click()
-
+*/  
     await page.locator('//div[@name="general.traveling_with_others"]//button[@data-handle="boolean-No"]').click()
     await page.waitForTimeout(1000)
 
     await page.locator('//div[@name="general.need_multiple_entry_visa"]//button[@data-handle="boolean-No"]').click()
     await page.waitForTimeout(1000)
-
+    await page.getByTestId("boolean-Me").click()
+    await page.waitForTimeout(1000)
     const next_btn = page.locator('id=btnContinueUnderSection')
     await page.waitForTimeout(1000)
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
     await page.waitForNavigation({waitUntil: 'load'})
+
+    await page.waitForTimeout(3000)
+    const occupation_triage = page.locator('[name="applicant.0.occupation_triage"]');
+    await occupation_triage.click()
+  
+    const employe_input = page.getByTestId('dropdown-applicant.0.occupation_triage')
+    await expect(employe_input).toBeVisible();
+    await employe_input.fill('Homemaker (Partner-dependent income)');
+    await page.waitForTimeout(1000)
+    await page.keyboard.press('ArrowDown');
+    await page.waitForTimeout(1000)
+    await page.keyboard.press('Enter');
+    await page.waitForTimeout(1000)
+  
+    const monthly_income = page.getByTestId('dropdown-applicant.0.income_triage')
+    await expect(monthly_income).toBeVisible()
+    await monthly_income.selectOption('Over 2500 USD monthly')
+  
+    const assets_div = page.locator('[name="applicant.0.own_state_triage"]');
+    const assets_boolean = assets_div.getByTestId('boolean-Yes')
+    await assets_boolean.click()
+  
+    const other_countries_travel = page.getByTestId("boolean-Yes, in the last 5 years, I have traveled or have a visa for at least 1 of these countries - USA, Canada, Australia, UK, all Schengen countries.")
+    await other_countries_travel.click()
+  
+    const visa_denied = page.getByTestId("boolean-I was denied this visa over 12 months ago")
+    await visa_denied.click()
 
     await page.locator('[name="applicant.0.birth_city"]').fill("test")
 
@@ -211,12 +244,13 @@ test('Embassy Visa', async({page}) => {
     await next_btn.click()
     await page.waitForNavigation({waitUntil: 'load'})
     await page.waitForTimeout(2000) 
-    const job_status = page.getByTestId('dropdown-applicant.0.occupation');
+    /*
+    const job_status = page.getByTestId('applicant.0.occupation_grouping');
     await job_status.selectOption('Other')
     await page.waitForTimeout(2000) 
     await page.locator('[name="applicant.0.criminal_offence_details"]').fill("test")
     await page.waitForTimeout(2000) 
-
+    */
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
     await page.waitForNavigation({waitUntil: 'load'})

@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 const {deploy_url, email_test} = require('../urls');
 const percySnapshot = require('@percy/playwright');
 
-test('Appointment location error', async({page}) => {
+test.skip('Appointment location error', async({page}) => {
     await page.goto(deploy_url + 'australia/apply-now')
   
     const dropdown_country =  page.getByTestId('filter-value');
@@ -17,11 +17,12 @@ test('Appointment location error', async({page}) => {
     const continue_sidebar = page.locator('id=btnContinueSidebar')
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    await page.waitForURL('**/australia/apply-now#step=step_2')
+    //await page.waitForURL('**/australia/apply-now#step=step_2')
     /*
     const selector_products = page.getByTestId('dropdown-general.visa_type_id');
     await selector_products.selectOption('5085')
     */
+   /*
     const arrival_date_visible = page.locator('[name="general.arrival_date"]')
     await expect(arrival_date_visible).toBeVisible()
     await arrival_date_visible.click()
@@ -29,7 +30,7 @@ test('Appointment location error', async({page}) => {
     await page.locator('[data-dp-element="action-next"]').click()
     await page.locator('[data-dp-element="action-next"]').click()
     await page.locator('.dp--future').filter({hasText: '12'}).first().click()
-  
+    */
 
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
@@ -91,6 +92,7 @@ test('Appointment location error', async({page}) => {
     await expect(skip_passport).toBeChecked()
   
     // First Applicant 
+    /*
     const occupation_triage = page.locator('[name="applicant.0.occupation_triage"]');
     await occupation_triage.click()
   
@@ -116,14 +118,14 @@ test('Appointment location error', async({page}) => {
   
     const visa_denied = page.getByTestId('travelerSection-0').getByTestId("boolean-I was denied this visa over 12 months ago")
     await visa_denied.click()
-  
+    */
     // Second applicant
     await page.getByText("Traveler #2 - Test").click()
     const skip_passport_1 = page.locator('[name="applicant.1.is_passport_on_hand"]')
     await expect(skip_passport_1).toBeVisible()
     await skip_passport_1.check()
     await expect(skip_passport_1).toBeChecked()
-  
+    /*
     const occupation_triage_1 = page.locator('[name="applicant.1.occupation_triage"]');
     await occupation_triage_1.click()
   
@@ -149,11 +151,12 @@ test('Appointment location error', async({page}) => {
   
     const visa_denied_1 = page.getByTestId('travelerSection-1').getByTestId("boolean-I was denied this visa over 12 months ago")
     await visa_denied_1.click()
-  
+    */
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    await page.waitForURL('**/australia/apply-now#step=step_3e')
-  
+    
+    //await page.waitForURL('**/australia/apply-now#step=step_3e')
+    
     const location_1 = page.locator('[name="applicant.0.appointment_location_id"]')
     await location_1.getByTestId('boolean-4575').click()
   

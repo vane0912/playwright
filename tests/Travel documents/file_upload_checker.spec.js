@@ -94,13 +94,13 @@ test('File upload checker', async({page}) => {
 
     await page.getByPlaceholder('111-222-3333').fill('11111111')
     await page.getByTestId('boolean-WhatsApp').click()
-    /*
+    
     const arrival_date_visible = page.locator('[name="general.arrival_date"]')
     await expect(arrival_date_visible).toBeVisible()
     await arrival_date_visible.click()
     await expect(page.locator('.dp__outer_menu_wrap')).toBeVisible()
     await page.locator('.dp--future').filter({hasText: date1}).first().click()
-    */
+    
     const religion = page.locator('[name="general.religion"]');
     
     await expect(religion).toBeVisible();
