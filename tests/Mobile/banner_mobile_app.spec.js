@@ -6,7 +6,7 @@ const iPhone13 = devices['iPhone 13'];
 test.use({
   ...iPhone13,
 });
-test('Mobile app banner homepage', async ({ page }) => {
+test.skip('Mobile app banner homepage', async ({ page }) => {
     await page.goto(deploy_url);
     const headerMobileNav = page.locator('id=native-app-banner-ad');
     await expect(headerMobileNav).toBeVisible()

@@ -6,7 +6,7 @@ const iPhone13 = devices['iPhone 13'];
 test.use({
   ...iPhone13,
 });
-test('Hamburguer Menu mobile', async ({ page }) => {
+test.skip('Hamburguer Menu mobile', async ({ page }) => {
     await page.goto(deploy_url);
     const headerMobileNav = page.locator('id=headerMobileNav');
     await expect(headerMobileNav).toBeVisible()

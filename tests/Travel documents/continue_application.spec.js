@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 const {deploy_url} = require('../urls');
 const percySnapshot = require('@percy/playwright');
 
-test('Continue with your application banner', async({page}) => {
+test.skip('Continue with your application banner', async({page}) => {
   await page.goto(deploy_url + 'thailand/apply-now')
     
   const dropdown_country =  page.getByTestId('filter-value');

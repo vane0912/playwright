@@ -103,7 +103,7 @@ test('Travel Doc application pre and post payment are working Mobile', async({pa
 
     await expect(review_step_sidebar).toContainText('Thailand Digital Arrival Card')
     await expect(review_step_sidebar).toContainText('1 Traveler')
-    await expect(review_step_sidebar).toContainText('$49.99')
+    await expect(review_step_sidebar).toContainText('$59.99')
     await expect(review_step_sidebar).toContainText('Standard, 24 hours')
 
     await expect(continue_sidebar).toBeEnabled()

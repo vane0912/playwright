@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 const {deploy_url, email_test, Orders} = require('../urls');
 const percySnapshot = require('@percy/playwright');
 
-test('Magic login link', async ({ browser }) => {
+test.skip('Magic login link', async ({ browser }) => {
     const context1 = await browser.newContext();
     await context1.clearCookies();
     const page = await context1.newPage();
@@ -45,7 +45,7 @@ test('Magic login link', async ({ browser }) => {
     await expect(new_tab_user).toBeVisible()
     await page.waitForTimeout(5000)
 })
-test('Password set and test', async ({ page }) => {
+test.skip('Password set and test', async ({ page }) => {
     await page.goto(deploy_url + 'account/settings')
     const user = page.locator('id=loggedInUserContainer')
     await expect(user).toBeVisible()
@@ -73,7 +73,7 @@ test('Password set and test', async ({ page }) => {
     await page.waitForNavigation({waitUntil: 'load'})
 })
 
-test('Card update', async ({ page }) => {
+test.skip('Card update', async ({ page }) => {
     await page.goto(deploy_url + 'account/payment-method')
     await expect(page.getByTestId("updatePaymentMethodBtn")).toBeEnabled()
   

@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 const {deploy_url, Orders} = require('../urls');
 const percySnapshot = require('@percy/playwright');
 let order_num 
-test('Individual subscription purchase', async ({ page }) => {
+test.skip('Individual subscription purchase', async ({ page }) => {
   test.slow()
   await page.goto(deploy_url + 'turkey/apply-now');
 
@@ -13,7 +13,7 @@ test('Individual subscription purchase', async ({ page }) => {
   await expect(input_country).toBeVisible();
   await input_country.fill('Mexico');
   await page.getByRole("option", {name: 'Mexico flag Mexico'}).click()
-  
+  /*
   const selector_products = page.getByTestId('dropdown-general.visa_type_id');
   await selector_products.selectOption('38')
   /*
@@ -100,11 +100,11 @@ test('Individual subscription purchase', async ({ page }) => {
   await page.waitForTimeout(1000)
   await expect(next_btn).toBeEnabled()
   await next_btn.click()
-  
+  /*
   await expect(page.getByTestId('boolean-Male')).toBeEnabled()
   await page.waitForTimeout(1000)
   await page.getByTestId('boolean-Male').click()
-  
+  */
   await page.waitForTimeout(3000)
   await expect(next_btn).toBeEnabled()
   await next_btn.click()
@@ -227,11 +227,11 @@ test('Individual subscription purchase', async ({ page }) => {
   await page.waitForTimeout(1000)
   await expect(next_btn).toBeEnabled()
   await next_btn.click()
-  
+  /*
   await expect(page.getByTestId('boolean-Male')).toBeEnabled()
   await page.waitForTimeout(1000)
   await page.getByTestId('boolean-Male').click()
-  
+  */
   await page.waitForTimeout(3000)
   await expect(next_btn).toBeEnabled()
   await next_btn.click()

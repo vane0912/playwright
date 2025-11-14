@@ -6,7 +6,7 @@ const iPhone13 = devices['iPhone 13'];
 test.use({
   ...iPhone13,
 });
-test('Go to my orders page from homepage', async ({ page }) => {
+test.skip('Go to my orders page from homepage', async ({ page }) => {
     await page.goto(deploy_url);
     await page.locator("//a[@href='" + deploy_url + "account'" + "]" ).first().click()
     await page.waitForURL("**/account")

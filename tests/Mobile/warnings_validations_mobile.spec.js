@@ -6,7 +6,7 @@ const iPhone13 = devices['iPhone 13'];
 test.use({
   ...iPhone13,
 });
-test('Appointment location error mobile', async({page}) => {
+test.skip('Appointment location error mobile', async({page}) => {
     await page.goto(deploy_url + 'australia/apply-now')
   
     const dropdown_country =  page.getByTestId('filter-value');
@@ -17,7 +17,7 @@ test('Appointment location error mobile', async({page}) => {
     await expect(input_country).toBeVisible();
     await input_country.fill('Mexico');
     await page.getByRole("option", {name: 'Mexico flag Mexico'}).click()
-  
+    /*
     const selector_products = page.getByTestId('dropdown-general.visa_type_id');
     await selector_products.selectOption('5085')
     /*

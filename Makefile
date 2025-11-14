@@ -13,3 +13,6 @@ test2:
 	npx playwright test /tests/UK 
 translations:
 	npx playwright test /tests/Translation 
+
+status:
+	npx playwright test currency_mobile.spec.js different_currency.spec.js extra_order.spec.js extra_order.spec.js payments_spec.js 
