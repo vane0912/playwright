@@ -52,21 +52,22 @@ test('Autofill appears and works', async({page}) => {
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
 
-  const card_number = page.getByPlaceholder("Card number")
-  await expect(card_number).toBeVisible()
-  await card_number.fill('4556 7610 2998 3886')
-
-  const expiration_month = page.getByPlaceholder("MM/YY")
-  await expiration_month.fill('10/26')
-
-  const cvv = page.getByPlaceholder("CVV")
-  await cvv.fill('123')
-
-  const cardholder_name = page.getByPlaceholder("Cardholder name")
-  await cardholder_name.fill('John Smith')
+  const card_number = page.getByPlaceholder("1234 1234 1234 1234")
+    await expect(card_number).toBeVisible()
+    await card_number.fill('3782 8224 6310 005')
   
-  const zip_code = page.getByPlaceholder("ZIP code")
-  await zip_code.fill('12345')
+    const expiration_month = page.getByPlaceholder("MM/YY")
+    await expiration_month.fill('10/26')
+  
+    const cvv = page.getByPlaceholder("CVC")
+    await cvv.fill('1234')
+    /*
+    const cardholder_name = page.getByPlaceholder("Cardholder name")
+    await cardholder_name.fill('John Smith')
+    
+    const zip_code = page.getByPlaceholder("ZIP code")
+    await zip_code.fill('12345')
+    */
   
   const payment_btn = page.locator('id=btnSubmitPayment')
   await expect(payment_btn).toBeVisible()

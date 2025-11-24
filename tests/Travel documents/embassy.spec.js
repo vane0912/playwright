@@ -134,6 +134,22 @@ test('Embassy reg', async({page}) => {
   await expect(continue_step1).toBeEnabled()
   await percySnapshot(page, 'EmbassyRegReview')
   await continue_step1.click()
+  const card_number = page.getByPlaceholder("1234 1234 1234 1234")
+  await expect(card_number).toBeVisible()
+  await card_number.fill('3782 8224 6310 005')
+
+  const expiration_month = page.getByPlaceholder("MM/YY")
+  await expiration_month.fill('10/26')
+
+  const cvv = page.getByPlaceholder("CVC")
+  await cvv.fill('1234')
+  /*
+  const cardholder_name = page.getByPlaceholder("Cardholder name")
+  await cardholder_name.fill('John Smith')
+  
+  const zip_code = page.getByPlaceholder("ZIP code")
+  await zip_code.fill('12345')
+  */
 
   const payment_btn = page.locator('id=btnSubmitPayment')
   await expect(payment_btn).toBeVisible()

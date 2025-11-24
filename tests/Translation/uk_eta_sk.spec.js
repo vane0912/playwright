@@ -93,7 +93,23 @@ test('Check translations UK ETA korean', async ({ page }) => {
     await translations(page.locator('id=main'), "span", "pre_payment", uk_eta_ko)
     await translations(page.locator('id=question-container'), "div", "pre_payment", uk_eta_ko)
     await continue_sidebar.click()
-
+    const card_number = page.getByPlaceholder("1234 1234 1234 1234")
+    await expect(card_number).toBeVisible()
+    await card_number.fill('3782 8224 6310 005')
+  
+    const expiration_month = page.getByPlaceholder("MM/YY")
+    await expiration_month.fill('10/26')
+  
+    const cvv = page.getByPlaceholder("CVC")
+    await cvv.fill('1234')
+    /*
+    const cardholder_name = page.getByPlaceholder("Cardholder name")
+    await cardholder_name.fill('John Smith')
+    
+    const zip_code = page.getByPlaceholder("ZIP code")
+    await zip_code.fill('12345')
+    */
+   
     const payment_btn = page.locator('id=btnSubmitPayment')
     await expect(payment_btn).toBeVisible()
     await expect(payment_btn).toBeEnabled()
