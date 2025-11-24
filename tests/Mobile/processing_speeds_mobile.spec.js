@@ -62,7 +62,7 @@ test('Processing speeds appear and work for mobile', async({page}) => {
     const passport_year = page.locator('[name="applicant.0.passport_expiration_date.year"]')
     await passport_year.selectOption('2030')
     await page.waitForTimeout(4000)
-    
+    /*
     const dropdown_country = page.locator('[name="applicant.0.port_of_arrival"]');
     await expect(dropdown_country).toBeVisible();
     await dropdown_country.click();
@@ -71,7 +71,7 @@ test('Processing speeds appear and work for mobile', async({page}) => {
     await expect(input_country).toBeVisible();
     await input_country.fill('Ahmedabad Airport - Ahmedabad - AMD');
     await page.locator('//div[@value="Ahmedabad Airport - Ahmedabad - AMD"]').click()
-
+  */
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
     await page.waitForURL('**/india/apply-now#step=step_4')

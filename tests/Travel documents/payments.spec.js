@@ -86,6 +86,9 @@ test('Payment with VISA', async({page}) => {
 
   const cvv = stripeFrame.locator("id=Field-cvcInput")
   await cvv.fill('123')
+  const zip_code = stripeFrame.locator("id=Field-postalCodeInput")
+  await zip_code.fill('12345')
+  
   /*
   const cardholder_name = page.getByPlaceholder("Cardholder name")
   await cardholder_name.fill('John Smith')
@@ -197,6 +200,8 @@ test('Payment with Master Card', async({page}) => {
 
     const cvv = stripeFrame.locator("id=Field-cvcInput")
     await cvv.fill('123')
+    const zip_code = stripeFrame.locator("id=Field-postalCodeInput")
+  await zip_code.fill('12345')
     /*
     const cardholder_name = page.getByPlaceholder("Cardholder name")
     await cardholder_name.fill('John Smith')
@@ -295,6 +300,8 @@ test('Payment with Amex', async({page}) => {
 
   const cvv = stripeFrame.locator("id=Field-cvcInput")
   await cvv.fill('1234')
+  const zip_code = stripeFrame.locator("id=Field-postalCodeInput")
+  await zip_code.fill('12345')
   /*
   const cardholder_name = page.getByPlaceholder("Cardholder name")
   await cardholder_name.fill('John Smith')
@@ -393,6 +400,9 @@ test('Payment with Discover', async({page}) => {
 
   const cvv = stripeFrame.locator("id=Field-cvcInput")
   await cvv.fill('123')
+
+  const zip_code = stripeFrame.locator("id=Field-postalCodeInput")
+  await zip_code.fill('12345')
   /*
   const cardholder_name = page.getByPlaceholder("Cardholder name")
   await cardholder_name.fill('John Smith')

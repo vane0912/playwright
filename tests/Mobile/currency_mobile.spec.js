@@ -116,6 +116,11 @@ test('Different currency Mobile', async ({ page }) => {
     const zip_code = page.getByPlaceholder("ZIP code")
     await zip_code.fill('12345')
     */
+
+    const payment_btn = page.locator('id=btnSubmitPayment')
+    await expect(payment_btn).toBeVisible()
+    await expect(payment_btn).toBeEnabled()
+    await payment_btn.click()
     await page.waitForNavigation({waitUntil: 'load'})
     await page.getByTestId("transition-page-button").click()
     const request = await fetch("https://littleserver-production.up.railway.app/", {

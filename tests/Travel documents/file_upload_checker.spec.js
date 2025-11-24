@@ -58,15 +58,6 @@ test('File upload checker', async({page}) => {
     const passport_year = page.locator('[name="applicant.0.passport_expiration_date.year"]')
     await passport_year.selectOption('2030')
     await page.waitForTimeout(4000)
-    
-    const dropdown_country = page.locator('[name="applicant.0.port_of_arrival"]');
-    await expect(dropdown_country).toBeVisible();
-    await dropdown_country.click();
-    const input_country = page.getByTestId('dropdown-applicant.0.port_of_arrival');
-
-    await expect(input_country).toBeVisible();
-    await input_country.fill('Ahmedabad Airport - Ahmedabad - AMD');
-    await page.locator('//div[@value="Ahmedabad Airport - Ahmedabad - AMD"]').click()
 
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
@@ -134,6 +125,14 @@ test('File upload checker', async({page}) => {
     await page.waitForTimeout(2000)
     await page.getByTestId("boolean-No").click()
     await page.waitForTimeout(2000)
+     const dropdown_country = page.locator('[name="general.port_of_arrival"]');
+    await expect(dropdown_country).toBeVisible();
+    await dropdown_country.click();
+    const input_country = page.getByTestId('dropdown-general.port_of_arrival');
+
+    await expect(input_country).toBeVisible();
+    await input_country.fill('Ahmedabad Airport - Ahmedabad - AMD');
+    await page.locator('//div[@value="Ahmedabad Airport - Ahmedabad - AMD"]').click()
     await next_btn.click()
     await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_personal")    
     await page.waitForTimeout(2000)
