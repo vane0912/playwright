@@ -10,6 +10,6 @@ test:
 	npx playwright test /tests/Travel documents/ /tests/Passport-tests/ /tests/Mobile/ --workers 2 
 
 test2: 
-	npx playwright test /tests/UK 
+	npx playwright test pre_and_post_payment.spec.js --headed
 translations:
 	npx playwright test /tests/Translation 

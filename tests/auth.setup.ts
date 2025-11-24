@@ -104,15 +104,14 @@ setup('authenticate', async ({ page }) => {
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
 
-    const card_number = page.getByPlaceholder("1234 1234 1234 1234")
-    await expect(card_number).toBeVisible()
-    await card_number.fill('3782 8224 6310 005')
-  
-    const expiration_month = page.getByPlaceholder("MM/YY")
-    await expiration_month.fill('10/26')
-  
-    const cvv = page.getByPlaceholder("CVC")
-    await cvv.fill('1234')
+    const stripeFrame = page.frameLocator('iframe[name^="__privateStripeFrame"]').nth(1)
+  await stripeFrame.locator("id=Field-numberInput").fill('6011 1111 1111 1117');
+
+  const expiration_month = stripeFrame.locator("id=Field-expiryInput")
+  await expiration_month.fill('10/26')
+
+  const cvv = stripeFrame.locator("id=Field-cvcInput")
+  await cvv.fill('123')
     /*
     const cardholder_name = page.getByPlaceholder("Cardholder name")
     await cardholder_name.fill('John Smith')
