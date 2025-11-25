@@ -270,16 +270,11 @@ test('Embassy Visa', async({page}) => {
     await next_btn.click()
     await page.waitForNavigation({waitUntil: 'load'})
     await page.waitForTimeout(2000) 
-
-    await expect(next_btn).toBeEnabled()
-    await next_btn.click()
-    await page.waitForNavigation({waitUntil: 'load'})
-    await page.waitForTimeout(2000) 
-
     const marital_status = page.getByTestId('dropdown-applicant.0.marital_status');
     await marital_status.selectOption('Single / Never Married')
     await page.waitForTimeout(2000) 
-
+    await page.locator('//div[@name="applicant.0.family_residents"]//button[@data-handle="boolean-No"]').click()
+    await page.waitForTimeout(2000) 
     await page.locator('//div[@name="applicant.0.family_traveling_with"]//button[@data-handle="boolean-Yes"]').click()
     await page.waitForTimeout(2000) 
 

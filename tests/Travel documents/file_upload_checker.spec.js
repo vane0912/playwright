@@ -123,9 +123,9 @@ test('File upload checker', async({page}) => {
     await next_btn.click()
     await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=travel_general")   
     await page.waitForTimeout(2000)
-    await page.getByTestId("boolean-No").click()
+    await page.getByTestId("boolean-No").first().click()
     await page.waitForTimeout(2000)
-     const dropdown_country = page.locator('[name="general.port_of_arrival"]');
+    const dropdown_country = page.locator('[name="general.port_of_arrival"]');
     await expect(dropdown_country).toBeVisible();
     await dropdown_country.click();
     const input_country = page.getByTestId('dropdown-general.port_of_arrival');

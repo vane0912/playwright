@@ -123,6 +123,7 @@ test('Travel Doc application pre and post payment are working Mobile', async({pa
 
   const cvv = stripeFrame.locator("id=Field-cvcInput")
   await cvv.fill('123')
+  /*
   const zip_code = stripeFrame.locator("id=Field-postalCodeInput")
   await zip_code.fill('12345')
     /*
