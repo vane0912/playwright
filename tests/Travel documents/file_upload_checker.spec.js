@@ -58,15 +58,6 @@ test('File upload checker', async({page}) => {
     const passport_year = page.locator('[name="applicant.0.passport_expiration_date.year"]')
     await passport_year.selectOption('2030')
     await page.waitForTimeout(4000)
-    
-    const dropdown_country = page.locator('[name="applicant.0.port_of_arrival"]');
-    await expect(dropdown_country).toBeVisible();
-    await dropdown_country.click();
-    const input_country = page.getByTestId('dropdown-applicant.0.port_of_arrival');
-
-    await expect(input_country).toBeVisible();
-    await input_country.fill('Ahmedabad Airport - Ahmedabad - AMD');
-    await page.locator('//div[@value="Ahmedabad Airport - Ahmedabad - AMD"]').click()
 
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
@@ -82,7 +73,21 @@ test('File upload checker', async({page}) => {
     }
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
+    const stripeFrame = page.frameLocator('iframe[name^="__privateStripeFrame"]').nth(1)
+  await stripeFrame.locator("id=Field-numberInput").fill('6011 1111 1111 1117');
 
+  const expiration_month = stripeFrame.locator("id=Field-expiryInput")
+  await expiration_month.fill('10/26')
+
+  const cvv = stripeFrame.locator("id=Field-cvcInput")
+  await cvv.fill('123')
+    /*
+    const cardholder_name = page.getByPlaceholder("Cardholder name")
+    await cardholder_name.fill('John Smith')
+    
+    const zip_code = page.getByPlaceholder("ZIP code")
+    await zip_code.fill('12345')
+    */
     const payment_btn = page.locator('id=btnSubmitPayment')
     await expect(payment_btn).toBeVisible()
     await expect(payment_btn).toBeEnabled()
@@ -115,6 +120,19 @@ test('File upload checker', async({page}) => {
     const next_btn = page.locator('id=btnContinueUnderSection')
     await page.waitForTimeout(1000)
     await expect(next_btn).toBeEnabled()
+    await next_btn.click()
+    await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=travel_general")   
+    await page.waitForTimeout(2000)
+    await page.getByTestId("boolean-No").first().click()
+    await page.waitForTimeout(2000)
+    const dropdown_country = page.locator('[name="general.port_of_arrival"]');
+    await expect(dropdown_country).toBeVisible();
+    await dropdown_country.click();
+    const input_country = page.getByTestId('dropdown-general.port_of_arrival');
+
+    await expect(input_country).toBeVisible();
+    await input_country.fill('Ahmedabad Airport - Ahmedabad - AMD');
+    await page.locator('//div[@value="Ahmedabad Airport - Ahmedabad - AMD"]').click()
     await next_btn.click()
     await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_personal")    
     await page.waitForTimeout(2000)

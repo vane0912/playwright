@@ -8,7 +8,7 @@ test.use({
 });
 test('Go to my orders page from homepage', async ({ page }) => {
     await page.goto(deploy_url);
-    await page.locator("//a[@href='" + deploy_url + "account'" + "]" ).first().click()
+    await page.locator('id=loginBtn').click()
     await page.waitForURL("**/account")
     await expect(page.locator('//div[@data-vue-component="email-confirmed"]')).toBeVisible()
     await expect(page.getByTestId("action-needed-button")).toBeVisible()

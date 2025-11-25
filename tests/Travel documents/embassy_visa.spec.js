@@ -117,6 +117,21 @@ test('Embassy Visa', async({page}) => {
     }
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
+    const stripeFrame = page.frameLocator('iframe[name^="__privateStripeFrame"]').nth(1)
+  await stripeFrame.locator("id=Field-numberInput").fill('6011 1111 1111 1117');
+
+  const expiration_month = stripeFrame.locator("id=Field-expiryInput")
+  await expiration_month.fill('10/26')
+
+  const cvv = stripeFrame.locator("id=Field-cvcInput")
+  await cvv.fill('123')
+    /*
+    const cardholder_name = page.getByPlaceholder("Cardholder name")
+    await cardholder_name.fill('John Smith')
+    
+    const zip_code = page.getByPlaceholder("ZIP code")
+    await zip_code.fill('12345')
+    */
     const payment_btn = page.locator('id=btnSubmitPayment')
     await expect(payment_btn).toBeVisible()
     await expect(payment_btn).toBeEnabled()
@@ -255,12 +270,11 @@ test('Embassy Visa', async({page}) => {
     await next_btn.click()
     await page.waitForNavigation({waitUntil: 'load'})
     await page.waitForTimeout(2000) 
-
     const marital_status = page.getByTestId('dropdown-applicant.0.marital_status');
     await marital_status.selectOption('Single / Never Married')
     await page.waitForTimeout(2000) 
-
-
+    await page.locator('//div[@name="applicant.0.family_residents"]//button[@data-handle="boolean-No"]').click()
+    await page.waitForTimeout(2000) 
     await page.locator('//div[@name="applicant.0.family_traveling_with"]//button[@data-handle="boolean-Yes"]').click()
     await page.waitForTimeout(2000) 
 
@@ -268,7 +282,7 @@ test('Embassy Visa', async({page}) => {
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
     await page.waitForTimeout(2000) 
-
+    
     await page.locator('[name="amount"]').click()
     await page.waitForTimeout(1000)
     await page.keyboard.type("1234565", {delay: 100})
@@ -310,6 +324,9 @@ test('Embassy Visa', async({page}) => {
     await page.locator('id=instructions-continue').click()
     await page.locator('id=add-file-multiple-continue').click()
 
+    await page.locator('id=instructions-continue').click()
+    await page.locator('id=add-file-multiple-continue').click()
+    
     await page.locator('id=instructions-continue').click()
     await page.getByTestId("try-another-way-button").click()
     await page.setInputFiles('input[type="file"]', path.join(__dirname, 'uploads_passport/passport.jpg'));

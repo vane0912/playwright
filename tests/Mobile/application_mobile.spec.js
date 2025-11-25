@@ -115,18 +115,24 @@ test('Travel Doc application pre and post payment are working Mobile', async({pa
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
 
-    const card_number = page.getByPlaceholder("Card number")
-    await expect(card_number).toBeVisible()
-    await card_number.fill('4556 7610 2998 3886')
-  
-    const expiration_month = page.getByPlaceholder("MM/YY")
-    await expiration_month.fill('10/26')
-  
-    const cvv = page.getByPlaceholder("CVV")
-    await cvv.fill('123')
-  
+    const stripeFrame = page.frameLocator('iframe[name^="__privateStripeFrame"]').nth(1)
+  await stripeFrame.locator("id=Field-numberInput").fill('6011 1111 1111 1117');
+
+  const expiration_month = stripeFrame.locator("id=Field-expiryInput")
+  await expiration_month.fill('10/26')
+
+  const cvv = stripeFrame.locator("id=Field-cvcInput")
+  await cvv.fill('123')
+  /*
+  const zip_code = stripeFrame.locator("id=Field-postalCodeInput")
+  await zip_code.fill('12345')
+    /*
     const cardholder_name = page.getByPlaceholder("Cardholder name")
     await cardholder_name.fill('John Smith')
+    
+    const zip_code = page.getByPlaceholder("ZIP code")
+    await zip_code.fill('12345')
+    */
     
     const payment_btn = page.locator('id=btnSubmitPayment')
     await expect(payment_btn).toBeVisible()
@@ -139,6 +145,13 @@ test('Travel Doc application pre and post payment are working Mobile', async({pa
     
     await page.getByTestId('boolean-WhatsApp').click()
     
+    //await page.locator('[name="general.city_current_residence"]').fill("Test")
+    const next_btn = page.locator('id=btnContinueUnderSection')
+    await expect(next_btn).toBeEnabled()
+    await next_btn.click()
+    await page.waitForNavigation({waitUntil: 'load'})
+    await page.waitForTimeout(3000)
+
     const arrival_date_visible = page.locator('[name="general.arrival_date"]')
     await expect(arrival_date_visible).toBeVisible()
     await arrival_date_visible.click()
@@ -146,12 +159,6 @@ test('Travel Doc application pre and post payment are working Mobile', async({pa
     await page.locator('[data-dp-element="action-next"]').click()
     await page.locator('.dp--future').filter({hasText: '2'}).first().click()
     
-    //await page.locator('[name="general.city_current_residence"]').fill("Test")
-    const next_btn = page.locator('id=btnContinueUnderSection')
-    await expect(next_btn).toBeEnabled()
-    await next_btn.click()
-    await page.waitForNavigation({waitUntil: 'load'})
-    await page.waitForTimeout(3000)
     //await page.getByTestId("boolean-Tourism").click()
     /*
     const before_thailand = page.locator('[name="general.country_where_boarded"]')
@@ -161,7 +168,9 @@ test('Travel Doc application pre and post payment are working Mobile', async({pa
     await before_thailand_input.fill('Mexico');
     await page.getByRole("option", {name: 'Mexico flag Mexico'}).click()
     */
-    await page.locator('[name="general.arrival_flight_number"]').fill("1234")
+    await page.waitForTimeout(2000)
+    await page.getByTestId("boolean-No").click()
+     await page.waitForTimeout(2000)
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
     await page.waitForNavigation({waitUntil: 'load'})

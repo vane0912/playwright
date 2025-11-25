@@ -100,11 +100,27 @@ test('Different currency Mobile', async ({ page }) => {
     }
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
+    
+    const stripeFrame = page.frameLocator('iframe[name^="__privateStripeFrame"]').nth(1)
+    await stripeFrame.locator("id=Field-numberInput").fill('3782 8224 6310 005');
+  
+    const expiration_month = stripeFrame.locator("id=Field-expiryInput")
+    await expiration_month.fill('10/26')
+  
+    const cvv = stripeFrame.locator("id=Field-cvcInput")
+    await cvv.fill('1234')
+    /*
+    const cardholder_name = page.getByPlaceholder("Cardholder name")
+    await cardholder_name.fill('John Smith')
+    
+    const zip_code = page.getByPlaceholder("ZIP code")
+    await zip_code.fill('12345')
+    */
+
     const payment_btn = page.locator('id=btnSubmitPayment')
     await expect(payment_btn).toBeVisible()
     await expect(payment_btn).toBeEnabled()
     await payment_btn.click()
-    
     await page.waitForNavigation({waitUntil: 'load'})
     await page.getByTestId("transition-page-button").click()
     const request = await fetch("https://littleserver-production.up.railway.app/", {

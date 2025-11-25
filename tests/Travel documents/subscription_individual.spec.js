@@ -84,6 +84,21 @@ test('Individual subscription purchase', async ({ page }) => {
 
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
+  const stripeFrame = page.frameLocator('iframe[name^="__privateStripeFrame"]').nth(1)
+  await stripeFrame.locator("id=Field-numberInput").fill('6011 1111 1111 1117');
+
+  const expiration_month = stripeFrame.locator("id=Field-expiryInput")
+  await expiration_month.fill('10/26')
+
+  const cvv = stripeFrame.locator("id=Field-cvcInput")
+  await cvv.fill('123')
+  /*
+  const cardholder_name = page.getByPlaceholder("Cardholder name")
+  await cardholder_name.fill('John Smith')
+  
+  const zip_code = page.getByPlaceholder("ZIP code")
+  await zip_code.fill('12345')
+  */
   const payment_btn = page.locator('id=btnSubmitPayment')
   await expect(payment_btn).toBeVisible()
   await expect(payment_btn).toBeEnabled()
@@ -146,6 +161,13 @@ test('Individual subscription purchase', async ({ page }) => {
   await percySnapshot(page, 'Purchase Subscription modal');
   await page.getByTestId("purchase-subscription-button").click()
 
+  await page.getByPlaceholder("Card number").fill("4556 7610 2998 3886")
+  await page.getByPlaceholder("MM/YY").fill("10/29")
+  await page.getByPlaceholder("CVV").fill("123")
+  await page.getByPlaceholder("Cardholder name").fill("John Smith")
+  await page.waitForTimeout(3000)
+  await page.locator("id=btnSubmitPayment").click()
+  
   await page.waitForURL(deploy_url + "order/" + order_num + "?subscription=true")
 
   // Place free order 
