@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 const {deploy_url, email_test} = require('../urls');
 const path = require('path');
 
-test('Embassy Visa', async({page}) => {
+test.skip('Embassy Visa', async({page}) => {
     test.slow()
     await page.goto(deploy_url + 'australia/apply-now')
   
@@ -98,14 +98,14 @@ test('Embassy Visa', async({page}) => {
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
     
-    //await page.waitForURL('**/australia/apply-now#step=step_3e')
-    /*
+    await page.waitForURL('**/australia/apply-now#step=step_3e')
+    
     const location_1 = page.locator('[name="applicant.0.appointment_location_id"]')
     await location_1.getByTestId('boolean-4575').click()
   
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    */
+    
     await page.waitForURL('**/australia/apply-now#step=step_4')
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()

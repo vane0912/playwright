@@ -151,7 +151,7 @@ test('File upload checker', async({page}) => {
     await page.waitForTimeout(1000)
     await page.keyboard.press("Enter")
     await page.waitForTimeout(1000)
-    await page.locator('//li[@data-place-id="ChIJ49W-BhhawokR4KLCF2oTVVo"]').click()
+    await page.locator('//li[@data-place-id="ChIJhXW3YR8SK4cROnWOmEiRMLc"]').click()
 
     await page.waitForTimeout(1000)
     await expect(next_btn).toBeEnabled()
