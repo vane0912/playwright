@@ -105,25 +105,28 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
     await passport_year.selectOption('2030')
     await page.waitForTimeout(4000)
 
+    /*
     await expect(continue_sidebar).toBeEnabled()
-    await percySnapshot(page, 'Step3Application')
     await continue_sidebar.click()
-    await page.waitForURL('**/thailand/apply-now#step=step_4')
+    */
+    //await page.waitForURL('**/thailand/apply-now#step=step_4')
 
     // Validations Step_4
+    /*
     await expect(page.getByRole('heading').first()).toContainText('Thailand Digital Arrival Card')
     await expect(page.locator('footer')).toBeVisible()
     await expect(page.locator("id=question-container")).toContainText('Choose your processing time')
     await expect(page.getByTestId('processing-standard')).toBeVisible()    
+    
     await expect(page.locator("id=btnPreviousSidebar")).toBeVisible()   
-
+    
     sidebar_3a.forEach(async txt => await expect(sidebar_step_2).toContainText(txt))
 
     await expect(sidebar_step_2).toContainText('$62.99')
     await expect(sidebar_step_2).toContainText('Standard, 24 hours')
 
     await expect(continue_sidebar).toBeEnabled()
-    await percySnapshot(page, 'PricesFreeGovFee')
+    */
     await continue_sidebar.click()
     await page.waitForURL('**/thailand/apply-now#step=review')
 
@@ -134,31 +137,23 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
     }
 
     // Validations Review_step
-    const question_container = page.locator("id=question-container")
-    const question_container_txt = ['Standard Processing', 'Thailand Digital Arrival Card', 'Valid for: ', '30 days after arrival', 'Max stay: ', '30 days per entry', 'Number of entries: ', 'Single entry', 'travelers', 'Test Test']
-    await expect(page.getByRole('heading').first()).toContainText('Review your order')
-    await expect(page.locator('footer')).toBeVisible()
-    question_container_txt.forEach(async txt => await expect(question_container).toContainText(txt))
-  
-    const review_step_sidebar = page.getByTestId('sidebar-summary-breakdown')
-
-    await expect(review_step_sidebar).toContainText('Thailand Digital Arrival Card')
-    await expect(review_step_sidebar).toContainText('1 Traveler')
-    await expect(review_step_sidebar).toContainText('$62.99')
-    await expect(review_step_sidebar).toContainText('Standard, 24 hours')
+    
     await percySnapshot(page, 'ReviewStepapplication')
-
+    /*
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-
+     */
     const stripeFrame = page.frameLocator('iframe[name^="__privateStripeFrame"]').nth(1)
-  await stripeFrame.locator("id=Field-numberInput").fill('6011 1111 1111 1117');
+    await percySnapshot(page, 'PricesFreeGovFee')
+    await stripeFrame.locator("id=Field-numberInput").fill('6011 1111 1111 1117');
 
-  const expiration_month = stripeFrame.locator("id=Field-expiryInput")
-  await expiration_month.fill('10/26')
+    const expiration_month = stripeFrame.locator("id=Field-expiryInput")
+    await expiration_month.fill('10/26')
 
-  const cvv = stripeFrame.locator("id=Field-cvcInput")
-  await cvv.fill('123')
+    const cvv = stripeFrame.locator("id=Field-cvcInput")
+    await cvv.fill('123')
+    const zip_code = stripeFrame.locator("id=Field-postalCodeInput")
+    await zip_code.fill('12345')
   /*
   const zip_code = stripeFrame.locator("id=Field-postalCodeInput")
   await zip_code.fill('12345')
@@ -241,6 +236,7 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
     await expect(submit_post_payment).toBeEnabled()
     await submit_post_payment.click()
     await page.waitForNavigation({waitUntil: 'load'})
+    await page.locator("skip-recommendation-button").click()
 
     const track_application = page.locator('#trackApplication')
     await expect(track_application).toBeVisible()

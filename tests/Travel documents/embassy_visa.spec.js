@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 const {deploy_url, email_test} = require('../urls');
 const path = require('path');
 
-test.skip('Embassy Visa', async({page}) => {
+test('Embassy Visa', async({page}) => {
     test.slow()
     await page.goto(deploy_url + 'australia/apply-now')
   

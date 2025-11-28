@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 const {deploy_url, email_test} = require('../urls');
 const percySnapshot = require('@percy/playwright');
 
-test.skip('Appointment location error', async({page}) => {
+test('Appointment location error', async({page}) => {
     await page.goto(deploy_url + 'australia/apply-now')
   
     const dropdown_country =  page.getByTestId('filter-value');

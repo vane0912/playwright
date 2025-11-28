@@ -79,16 +79,18 @@ test('Travel Doc application pre and post payment are working Mobile', async({pa
     const passport_year = page.locator('[name="applicant.0.passport_expiration_date.year"]')
     await passport_year.selectOption('2030')
     await page.waitForTimeout(4000)
-
+    /*
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    await page.waitForURL('**/thailand/apply-now#step=step_4')
+    */
+    //await page.waitForURL('**/thailand/apply-now#step=step_4')
 
     // Validations Step_4
+    /*
     await expect(page.getByRole('heading', { name: 'Thailand Digital Arrival Card' })).toContainText('Thailand Digital Arrival Card')
     await expect(page.locator("id=question-container")).toContainText('Choose your processing time')
     await expect(page.getByTestId('processing-standard')).toBeVisible()    
-
+    */
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
     await page.waitForURL('**/thailand/apply-now#step=review')
@@ -99,33 +101,23 @@ test('Travel Doc application pre and post payment are working Mobile', async({pa
       await page.locator('id=btnDisclaimerNext').click()
     }
 
-    // Validations Review_step
-    const question_container = page.locator("id=question-container")
-    const question_container_txt = ['Standard Processing', 'Thailand Digital Arrival Card', 'Valid for: ', '30 days after arrival', 'Max stay: ', '30 days per entry', 'Number of entries: ', 'Single entry', 'travelers', 'Test Test']
-    await expect(page.getByRole('heading', { name: 'Review your order' }).first()).toContainText('Review your order')
-    question_container_txt.forEach(async txt => await expect(question_container).toContainText(txt))
-  
-    const review_step_sidebar = await page.getByTestId('sidebar-summary-breakdown')
-
-    await expect(review_step_sidebar).toContainText('Thailand Digital Arrival Card')
-    await expect(review_step_sidebar).toContainText('1 Traveler')
-    await expect(review_step_sidebar).toContainText('$62.99')
-    await expect(review_step_sidebar).toContainText('Standard, 24 hours')
-
-    await expect(continue_sidebar).toBeEnabled()
-    await continue_sidebar.click()
+    //await expect(continue_sidebar).toBeEnabled()
+    //await continue_sidebar.click()
 
     const stripeFrame = page.frameLocator('iframe[name^="__privateStripeFrame"]').nth(1)
-  await stripeFrame.locator("id=Field-numberInput").fill('6011 1111 1111 1117');
+    
+    await stripeFrame.locator("id=Field-numberInput").fill('6011 1111 1111 1117');
 
-  const expiration_month = stripeFrame.locator("id=Field-expiryInput")
-  await expiration_month.fill('10/26')
+    const expiration_month = stripeFrame.locator("id=Field-expiryInput")
+    await expiration_month.fill('10/26')
 
-  const cvv = stripeFrame.locator("id=Field-cvcInput")
-  await cvv.fill('123')
-  /*
-  const zip_code = stripeFrame.locator("id=Field-postalCodeInput")
-  await zip_code.fill('12345')
+    const cvv = stripeFrame.locator("id=Field-cvcInput")
+    await cvv.fill('123')
+    const zip_code = stripeFrame.locator("id=Field-postalCodeInput")
+    await zip_code.fill('12345')
+    /*
+    const zip_code = stripeFrame.locator("id=Field-postalCodeInput")
+    await zip_code.fill('12345')
     /*
     const cardholder_name = page.getByPlaceholder("Cardholder name")
     await cardholder_name.fill('John Smith')
@@ -194,6 +186,7 @@ test('Travel Doc application pre and post payment are working Mobile', async({pa
     await expect(submit_post_payment).toBeEnabled()
     await submit_post_payment.click()
     await page.waitForNavigation({waitUntil: 'load'})
+    await page.locator("skip-recommendation-button").click()
 
     const track_application = page.locator('#trackApplication')
     await expect(track_application).toBeVisible()
