@@ -186,7 +186,11 @@ test('Travel Doc application pre and post payment are working Mobile', async({pa
     await expect(submit_post_payment).toBeEnabled()
     await submit_post_payment.click()
     await page.waitForNavigation({waitUntil: 'load'})
-    await page.locator("skip-recommendation-button").click()
+    await page.waitForTimeout(2000)
+    const skip_recommend = await page.isVisible('id=skip-recommendation-button')
+    if (skip_recommend ){
+      await page.locator('id=skip-recommendation-button').click()
+    }
 
     const track_application = page.locator('#trackApplication')
     await expect(track_application).toBeVisible()

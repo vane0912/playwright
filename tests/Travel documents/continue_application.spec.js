@@ -32,8 +32,7 @@ test('Continue with your application banner', async({page}) => {
   await page.waitForURL('**/thailand/apply-now#step=step_3a')
   await page.goto(deploy_url)
   await page.goto(deploy_url + 'thailand/apply-now')
-  await expect(page.locator(".banner_container")).toBeVisible()
-  await expect(page.locator(".banner_container")).toContainText("You’ve already started an order.")
-  await expect(page.getByText("Go to application")).toBeVisible() 
+  await expect(page.locator("id=finishApplication")).toBeVisible()
+  await expect(page.locator("id=finishApplication")).toContainText("Finish Application")
   await percySnapshot(page, 'Continue with application banner');
 })

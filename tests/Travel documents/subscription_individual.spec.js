@@ -154,7 +154,7 @@ test('Individual subscription purchase', async ({ page }) => {
   await expect(submit_post_payment).toBeEnabled()
   await submit_post_payment.click()
   await page.waitForNavigation({waitUntil: 'load'})
-  await page.locator("skip-recommendation-button").click()
+  //await page.locator("skip-recommendation-button").click()
 
   await page.locator('id=trackApplication').click()
   
@@ -287,7 +287,7 @@ test('Individual subscription purchase', async ({ page }) => {
   await expect(submit_post_payment).toBeEnabled()
   await submit_post_payment.click()
   await page.waitForNavigation({waitUntil: 'load'})
-  await page.locator("skip-recommendation-button").click()
+  //await page.locator("skip-recommendation-button").click()
 
   await page.locator('id=trackApplication').click()
 

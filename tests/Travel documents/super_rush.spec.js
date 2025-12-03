@@ -1,5 +1,6 @@
 const { test, expect } = require('@playwright/test');
 const {deploy_url} = require('../urls');
+const percySnapshot = require('@percy/playwright');
 
 test('Buy super rush', async({page}) => {
   var myDate = new Date(new Date().getTime() + (11 * 24 * 60 * 60 * 1000));

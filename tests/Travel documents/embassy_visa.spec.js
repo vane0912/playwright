@@ -125,6 +125,8 @@ test('Embassy Visa', async({page}) => {
 
   const cvv = stripeFrame.locator("id=Field-cvcInput")
   await cvv.fill('123')
+  const zip_code = stripeFrame.locator("id=Field-postalCodeInput")
+    await zip_code.fill('12345')
     /*
     const cardholder_name = page.getByPlaceholder("Cardholder name")
     await cardholder_name.fill('John Smith')
@@ -241,7 +243,7 @@ test('Embassy Visa', async({page}) => {
     await page.waitForTimeout(1000)
     await page.keyboard.press("Enter")
     await page.waitForTimeout(1000)
-    await page.locator('//li[@data-place-id="ChIJ49W-BhhawokR4KLCF2oTVVo"]').click()
+    await page.locator('//li[@data-place-id="ChIJhXW3YR8SK4cROnWOmEiRMLc"]').click()
 
     const birth_country = page.locator('[name="applicant.0.secondary_document_issued_country"]');
     await expect(birth_country).toBeVisible();

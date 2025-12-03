@@ -101,6 +101,8 @@ test('Check translations UK ETA korean', async ({ page }) => {
 
   const cvv = stripeFrame.locator("id=Field-cvcInput")
   await cvv.fill('123')
+  const zip_code = stripeFrame.locator("id=Field-postalCodeInput")
+    await zip_code.fill('12345')
     /*
     const cardholder_name = page.getByPlaceholder("Cardholder name")
     await cardholder_name.fill('John Smith')
