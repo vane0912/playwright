@@ -64,11 +64,9 @@ test('Payment with VISA', async({page}) => {
   await passport_year.selectOption('2030')
   await page.waitForTimeout(4000)
 
-  /*
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    */
-    //await page.waitForURL('**/thailand/apply-now#step=step_4')
+  await page.waitForURL('**/thailand/apply-now#step=step_4')
 
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
@@ -78,10 +76,8 @@ test('Payment with VISA', async({page}) => {
   if (duplicate){
     await page.locator('id=btnDisclaimerNext').click()
   }
-  /*
   await expect(continue_sidebar).toBeEnabled()
-  await continue_sidebar.click()
-  */
+    await continue_sidebar.click()
   const stripeFrame = page.frameLocator('iframe[name^="__privateStripeFrame"]').nth(1)
   
   await stripeFrame.locator("id=Field-numberInput").fill('3782 8224 6310 005');
@@ -183,11 +179,9 @@ test('Payment with Master Card', async({page}) => {
     await passport_year.selectOption('2030')
     await page.waitForTimeout(4000)
     
-    /*
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    */
-    //await page.waitForURL('**/thailand/apply-now#step=step_4')
+    await page.waitForURL('**/thailand/apply-now#step=step_4')
   
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
@@ -197,10 +191,8 @@ test('Payment with Master Card', async({page}) => {
     if (duplicate){
       await page.locator('id=btnDisclaimerNext').click()
     }
-    /*
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    */
     const stripeFrame = page.frameLocator('iframe[name^="__privateStripeFrame"]').nth(1)
     
     await stripeFrame.locator("id=Field-numberInput").fill('5555 5555 5555 4444');
@@ -286,12 +278,10 @@ test('Payment with Amex', async({page}) => {
     const passport_year = page.locator('[name="applicant.0.passport_expiration_date.year"]')
     await passport_year.selectOption('2030')
     await page.waitForTimeout(4000)
-  
-    /*
+
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    */
-    //await page.waitForURL('**/thailand/apply-now#step=step_4')
+    await page.waitForURL('**/thailand/apply-now#step=step_4')
   
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
@@ -301,10 +291,8 @@ test('Payment with Amex', async({page}) => {
     if (duplicate){
       await page.locator('id=btnDisclaimerNext').click()
     }
-    /*
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    */
     const stripeFrame = page.frameLocator('iframe[name^="__privateStripeFrame"]').nth(1)
     
     await stripeFrame.locator("id=Field-numberInput").fill('3782 8224 6310 005');
@@ -390,11 +378,10 @@ test('Payment with Discover', async({page}) => {
     const passport_year = page.locator('[name="applicant.0.passport_expiration_date.year"]')
     await passport_year.selectOption('2030')
     await page.waitForTimeout(4000)
-  /*
+    
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    */
-    //await page.waitForURL('**/thailand/apply-now#step=step_4')
+    await page.waitForURL('**/thailand/apply-now#step=step_4')
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
     await page.waitForURL('**/thailand/apply-now#step=review')
@@ -403,10 +390,8 @@ test('Payment with Discover', async({page}) => {
     if (duplicate){
       await page.locator('id=btnDisclaimerNext').click()
     }
-    /*
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    */
     const stripeFrame = page.frameLocator('iframe[name^="__privateStripeFrame"]').nth(1)
     
     await stripeFrame.locator("id=Field-numberInput").fill('6011 1111 1111 1117');

@@ -8,6 +8,10 @@ test('Different currency', async ({ page }) => {
   await expect(currency).toBeVisible()
   await currency.click()
 
+  const language = page.locator("[value='EN']")
+  await expect(language).toBeVisible()
+  await language.click()
+
   const dropdown_currency = page.getByTestId('filter-value').filter({hasText: 'USD $'})
   await expect(dropdown_currency).toBeVisible()
   await dropdown_currency.click()
@@ -78,16 +82,13 @@ test('Different currency', async ({ page }) => {
   await passport_year.selectOption('2030')
   await page.waitForTimeout(4000)
 
-  /*
-    await expect(continue_sidebar).toBeEnabled()
-    await continue_sidebar.click()
-    */
-    //await page.waitForURL('**/turkey/apply-now#step=step_4')
-  /*
+  await expect(continue_sidebar).toBeEnabled()
+  await continue_sidebar.click()
+  await page.waitForURL('**/turkey/apply-now#step=step_4')
   await expect(page.getByTestId('processing-standard')).toBeVisible()
   const standar_processing = page.getByTestId('processing-standard')
   await expect(standar_processing).toBeVisible()
-  */
+  
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
   await page.waitForURL('**/turkey/apply-now#step=review')
@@ -100,15 +101,8 @@ test('Different currency', async ({ page }) => {
   await expect(total_price).toBeVisible()
   await percySnapshot(page, 'DifferentCurrency');
 
-/*
   await expect(continue_sidebar).toBeEnabled()
-  await continue_sidebar.click()
-  
-  const stripeFrame = page.frameLocator('iframe[name^="__privateStripeFrame"]').nth(1)
-  */
-  //await expect(continue_sidebar).toBeEnabled()
-    //await continue_sidebar.click()
-
+    await continue_sidebar.click()
     const stripeFrame = page.frameLocator('iframe[name^="__privateStripeFrame"]').nth(1)
     
     await stripeFrame.locator("id=Field-numberInput").fill('6011 1111 1111 1117');

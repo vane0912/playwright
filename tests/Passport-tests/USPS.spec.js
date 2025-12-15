@@ -151,6 +151,15 @@ test('USPS Passport', async({page}) =>{
     await next_btn.click()
     await page.waitForNavigation({waitUntil: 'load'})
     await page.waitForTimeout(2000)
+    await page.locator('//div[@name="applicant.0.father_information"]//div[@data-handle="boolean-No"]').click()
+    await page.waitForTimeout(2000)
+    await page.locator('//div[@name="applicant.0.mother_information"]//div[@data-handle="boolean-No"]').click()
+    await page.waitForTimeout(2000)
+    await page.getByTestId("boolean-Single").click()
+    await page.waitForTimeout(2000)
+    
+    /*
+    await page.waitForTimeout(2000)
     await page.getByTestId("boolean-Single").click()
     await page.waitForTimeout(2000)
     await page.locator('[name="applicant.0.fathers_first_name"]').fill('test')
@@ -166,7 +175,7 @@ test('USPS Passport', async({page}) =>{
     await page.waitForTimeout(2000)
     await page.locator('[name="applicant.0.mothers_last_name"]').pressSequentially('test', { delay: 100 })
     await page.waitForTimeout(1000)
-
+    */
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
 

@@ -64,17 +64,15 @@ test('Individual subscription purchase', async ({ page }) => {
   const passport_year = page.locator('[name="applicant.0.passport_expiration_date.year"]')
   await passport_year.selectOption('2030')
   await page.waitForTimeout(4000)
-
-  /*
-    await expect(continue_sidebar).toBeEnabled()
-    await continue_sidebar.click()
-    */
-    //await page.waitForURL('**/turkey/apply-now#step=step_4')
-  /*
+  await expect(continue_sidebar).toBeEnabled()
+  await continue_sidebar.click()
+    
+  await page.waitForURL('**/turkey/apply-now#step=step_4')
+  
   await expect(page.getByTestId('processing-standard')).toBeVisible()
   const standar_processing = page.getByTestId('processing-standard')
   await expect(standar_processing).toBeVisible()
-  */
+
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
   await page.waitForURL('**/turkey/apply-now#step=review')
@@ -83,10 +81,8 @@ test('Individual subscription purchase', async ({ page }) => {
   if (duplicate){
     await page.locator('id=btnDisclaimerNext').click()
   }
-  /*
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
-  */
   const stripeFrame = page.frameLocator('iframe[name^="__privateStripeFrame"]').nth(1)
   
 
@@ -154,7 +150,7 @@ test('Individual subscription purchase', async ({ page }) => {
   await expect(submit_post_payment).toBeEnabled()
   await submit_post_payment.click()
   await page.waitForNavigation({waitUntil: 'load'})
-  //await page.locator("skip-recommendation-button").click()
+  await page.locator('id=skip-recommendation-button').click()    
 
   await page.locator('id=trackApplication').click()
   
@@ -226,16 +222,15 @@ test('Individual subscription purchase', async ({ page }) => {
   await passport_year.selectOption('2030')
   await page.waitForTimeout(4000)
 
-  /*
-    await expect(continue_sidebar).toBeEnabled()
-    await continue_sidebar.click()
-    */
-    //await page.waitForURL('**/turkey/apply-now#step=step_4')
-  /*
+  await expect(continue_sidebar).toBeEnabled()
+  await continue_sidebar.click()
+  
+  await page.waitForURL('**/turkey/apply-now#step=step_4')
+  
   await expect(page.getByTestId('processing-standard')).toBeVisible()
   await expect(standar_processing).toBeVisible()
   await percySnapshot(page, 'Discount sidebar');
-  */
+
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
 
@@ -287,7 +282,10 @@ test('Individual subscription purchase', async ({ page }) => {
   await expect(submit_post_payment).toBeEnabled()
   await submit_post_payment.click()
   await page.waitForNavigation({waitUntil: 'load'})
-  //await page.locator("skip-recommendation-button").click()
+  if (skip_recommend ){
+    await page.locator('id=skip-recommendation-button').click()
+  }
+
 
   await page.locator('id=trackApplication').click()
 

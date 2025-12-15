@@ -40,7 +40,7 @@ test('Travel Doc application pre and post payment are working Mobile', async({pa
 
     // General checks    
     await expect(page.getByRole('heading', { name: 'Thailand Digital Arrival Card' })).toContainText('Thailand Digital Arrival Card')
-    await expect(page.locator("id=question-container")).toContainText('Your personal details')
+    await expect(page.locator("id=question-container")).toContainText('Personal details')
     await expect(page.locator("id=question-container")).toContainText("Enter the details as they appear on your passport")
 
     //
@@ -79,11 +79,10 @@ test('Travel Doc application pre and post payment are working Mobile', async({pa
     const passport_year = page.locator('[name="applicant.0.passport_expiration_date.year"]')
     await passport_year.selectOption('2030')
     await page.waitForTimeout(4000)
-    /*
+    
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    */
-    //await page.waitForURL('**/thailand/apply-now#step=step_4')
+    await page.waitForURL('**/thailand/apply-now#step=step_4')
 
     // Validations Step_4
     /*
@@ -101,8 +100,8 @@ test('Travel Doc application pre and post payment are working Mobile', async({pa
       await page.locator('id=btnDisclaimerNext').click()
     }
 
-    //await expect(continue_sidebar).toBeEnabled()
-    //await continue_sidebar.click()
+    await expect(continue_sidebar).toBeEnabled()
+    await continue_sidebar.click()
 
     const stripeFrame = page.frameLocator('iframe[name^="__privateStripeFrame"]').nth(1)
     
@@ -139,11 +138,12 @@ test('Travel Doc application pre and post payment are working Mobile', async({pa
     
     //await page.locator('[name="general.city_current_residence"]').fill("Test")
     const next_btn = page.locator('id=btnContinueUnderSection')
+    /*
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
     await page.waitForNavigation({waitUntil: 'load'})
     await page.waitForTimeout(3000)
-
+    */
     const arrival_date_visible = page.locator('[name="general.arrival_date"]')
     await expect(arrival_date_visible).toBeVisible()
     await arrival_date_visible.click()

@@ -58,14 +58,11 @@ test('Extra Order', async ({ page }) => {
   const passport_year = page.locator('[name="applicant.0.passport_expiration_date.year"]')
   await passport_year.selectOption('2030')
   await page.waitForTimeout(4000)
+  await expect(continue_sidebar).toBeEnabled()
+  await continue_sidebar.click()
 
-  /*
-    await expect(continue_sidebar).toBeEnabled()
-    await continue_sidebar.click()
-    */
-    //await page.waitForURL('**/turkey/apply-now#step=step_4')
-
-  //await expect(page.getByTestId('processing-standard')).toBeVisible()
+  await page.waitForURL('**/turkey/apply-now#step=step_4')
+  await expect(page.getByTestId('processing-standard')).toBeVisible()
   
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
@@ -75,14 +72,8 @@ test('Extra Order', async ({ page }) => {
   if (duplicate){
     await page.locator('id=btnDisclaimerNext').click()
   }
-  /*
   await expect(continue_sidebar).toBeEnabled()
-  await continue_sidebar.click()
-  
-  const stripeFrame = page.frameLocator('iframe[name^="__privateStripeFrame"]').nth(1)
-  */
-    //await expect(continue_sidebar).toBeEnabled()
-    //await continue_sidebar.click()
+    await continue_sidebar.click()
 
     const stripeFrame = page.frameLocator('iframe[name^="__privateStripeFrame"]').nth(1)
     

@@ -37,11 +37,10 @@ test('Autofill appears and works', async({page}) => {
   await continue_sidebar.click()
   await page.waitForURL('**/thailand/apply-now#step=step_3c')
 
-  /*
-    await expect(continue_sidebar).toBeEnabled()
-    await continue_sidebar.click()
-    */
-    //await page.waitForURL('**/thailand/apply-now#step=step_4')
+  
+  await expect(continue_sidebar).toBeEnabled()
+  await continue_sidebar.click()
+  await page.waitForURL('**/thailand/apply-now#step=step_4')
   await page.waitForTimeout(3000)
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
@@ -51,14 +50,8 @@ test('Autofill appears and works', async({page}) => {
   if (duplicate){
     await page.locator('id=btnDisclaimerNext').click()
   }
-  /*
   await expect(continue_sidebar).toBeEnabled()
-  await continue_sidebar.click()
-  
-  const stripeFrame = page.frameLocator('iframe[name^="__privateStripeFrame"]').nth(1)
-  */
-  //await expect(continue_sidebar).toBeEnabled()
-    //await continue_sidebar.click()
+    await continue_sidebar.click()
 
     const stripeFrame = page.frameLocator('iframe[name^="__privateStripeFrame"]').nth(1)
     

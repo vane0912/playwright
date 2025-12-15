@@ -195,10 +195,10 @@ test('Embassy Visa', async({page}) => {
     await page.waitForTimeout(1000)
     await page.locator('//li[@data-place-id="ChIJy03Qsx1akWsRcbqOMJc_Hm8"]').click()
 */  
-    await page.locator('//div[@name="general.traveling_with_others"]//button[@data-handle="boolean-No"]').click()
+    await page.locator('//div[@name="general.traveling_with_others"]//div[@data-handle="boolean-No"]').click()
     await page.waitForTimeout(1000)
 
-    await page.locator('//div[@name="general.need_multiple_entry_visa"]//button[@data-handle="boolean-No"]').click()
+    await page.locator('//div[@name="general.need_multiple_entry_visa"]//div[@data-handle="boolean-No"]').click()
     await page.waitForTimeout(1000)
     await page.getByTestId("boolean-Me").click()
     await page.waitForTimeout(1000)
@@ -275,9 +275,9 @@ test('Embassy Visa', async({page}) => {
     const marital_status = page.getByTestId('dropdown-applicant.0.marital_status');
     await marital_status.selectOption('Single / Never Married')
     await page.waitForTimeout(2000) 
-    await page.locator('//div[@name="applicant.0.family_residents"]//button[@data-handle="boolean-No"]').click()
+    await page.locator('//div[@name="applicant.0.family_residents"]//div[@data-handle="boolean-No"]').click()
     await page.waitForTimeout(2000) 
-    await page.locator('//div[@name="applicant.0.family_traveling_with"]//button[@data-handle="boolean-Yes"]').click()
+    await page.locator('//div[@name="applicant.0.family_traveling_with"]//div[@data-handle="boolean-Yes"]').click()
     await page.waitForTimeout(2000) 
 
 
@@ -296,11 +296,11 @@ test('Embassy Visa', async({page}) => {
     await page.waitForNavigation({waitUntil: 'load'})
     await page.waitForTimeout(2000) 
     
-    await page.locator('//div[@name="applicant.0.previously_visited"]//button[@data-handle="boolean-No"]').click()
+    await page.locator('//div[@name="applicant.0.previously_visited"]//div[@data-handle="boolean-No"]').click()
     await page.waitForTimeout(1000)
-    await page.locator('//div[@name="applicant.0.current_visas"]//button[@data-handle="boolean-No"]').click()
+    await page.locator('//div[@name="applicant.0.current_visas"]//div[@data-handle="boolean-No"]').click()
     await page.waitForTimeout(1000)
-    await page.locator('//div[@name="applicant.0.refused_visa"]//button[@data-handle="boolean-No"]').click()
+    await page.locator('//div[@name="applicant.0.refused_visa"]//div[@data-handle="boolean-No"]').click()
     await page.waitForTimeout(1000)
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
@@ -352,7 +352,7 @@ test('Embassy Visa', async({page}) => {
 
     await page.waitForTimeout(1000)
 
-    await page.locator('//div[@name="applicant.0.other_document"]//button[@data-handle="boolean-No"]').click()
+    await page.locator('//div[@name="applicant.0.other_document"]//div[@data-handle="boolean-No"]').click()
     
     const submit_post_payment = page.locator('id=btnSubmitApplication')
     await expect(submit_post_payment).toBeEnabled()

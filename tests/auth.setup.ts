@@ -87,11 +87,10 @@ setup('authenticate', async ({ page }) => {
     const passport_year = page.locator('[name="applicant.0.passport_expiration_date.year"]')
     await passport_year.selectOption('2030')
     await page.waitForTimeout(4000)
-    /*
+    
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    */
-    //await page.waitForURL('**/turkey/apply-now#step=step_4')
+    await page.waitForURL('**/turkey/apply-now#step=step_4')
     
     await continue_sidebar.click()
     await page.waitForURL('**/turkey/apply-now#step=review')
@@ -100,13 +99,12 @@ setup('authenticate', async ({ page }) => {
     if (duplicate){
       await page.locator('id=btnDisclaimerNext').click()
     }
-    /*
     const denial_protection = page.getByRole('checkbox')
     await denial_protection.check() 
     await expect(denial_protection).toBeChecked()
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    */
+    
     const stripeFrame = page.frameLocator('iframe[name^="__privateStripeFrame"]').nth(1)
     
     await stripeFrame.locator("id=Field-numberInput").fill('6011 1111 1111 1117');

@@ -117,6 +117,9 @@ test('File upload checker', async({page}) => {
     await input_religion.fill('bahai');
     await page.getByRole("option", {name: 'Bahai'}).click()
     await page.waitForTimeout(1000)
+    await page.waitForTimeout(2000)
+    await page.getByTestId("boolean-No").first().click()
+    await page.waitForTimeout(2000)
     
     // File upload step
     const next_btn = page.locator('id=btnContinueUnderSection')
@@ -124,9 +127,6 @@ test('File upload checker', async({page}) => {
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
     await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=travel_general")   
-    await page.waitForTimeout(2000)
-    await page.getByTestId("boolean-No").first().click()
-    await page.waitForTimeout(2000)
     const dropdown_country = page.locator('[name="general.port_of_arrival"]');
     await expect(dropdown_country).toBeVisible();
     await dropdown_country.click();

@@ -82,16 +82,14 @@ test('Different currency Mobile', async ({ page }) => {
     await passport_year.selectOption('2030')
     await page.waitForTimeout(4000)
   
-    /*
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    */
-    //await page.waitForURL('**/turkey/apply-now#step=step_4')
-    /*
+    await page.waitForURL('**/turkey/apply-now#step=step_4')
+
     await expect(page.getByTestId('processing-standard')).toBeVisible()
     const standar_processing = page.getByTestId('processing-standard')
     await expect(standar_processing).toBeVisible()
-    */
+    
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
     await page.waitForURL('**/turkey/apply-now#step=review')
@@ -100,14 +98,8 @@ test('Different currency Mobile', async ({ page }) => {
     if (duplicate){
       await page.locator('id=btnDisclaimerNext').click()
     }
-    /*
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    
-    const stripeFrame = page.frameLocator('iframe[name^="__privateStripeFrame"]').nth(1)
-    */
-    //await expect(continue_sidebar).toBeEnabled()
-    //await continue_sidebar.click()
 
     const stripeFrame = page.frameLocator('iframe[name^="__privateStripeFrame"]').nth(1)
     
