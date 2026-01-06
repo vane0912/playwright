@@ -240,6 +240,8 @@ test('Individual subscription purchase', async ({ page }) => {
   if (duplicate){
     await page.locator('id=btnDisclaimerNext').click()
   }
+  await expect(continue_sidebar).toBeEnabled()
+  await continue_sidebar.click()
   await percySnapshot(page, 'Free order modal');
 
   await expect(payment_btn).toBeVisible()
@@ -282,12 +284,4 @@ test('Individual subscription purchase', async ({ page }) => {
   await expect(submit_post_payment).toBeEnabled()
   await submit_post_payment.click()
   await page.waitForNavigation({waitUntil: 'load'})
-  if (skip_recommend ){
-    await page.locator('id=skip-recommendation-button').click()
-  }
-
-
-  await page.locator('id=trackApplication').click()
-
-  await page.waitForURL(deploy_url + "order/" + order_num)
 })

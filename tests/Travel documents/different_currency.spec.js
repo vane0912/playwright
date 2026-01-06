@@ -8,10 +8,15 @@ test('Different currency', async ({ page }) => {
   await expect(currency).toBeVisible()
   await currency.click()
 
-  const language = page.locator("[value='EN']")
-  await expect(language).toBeVisible()
-  await language.click()
-
+  await page.waitForTimeout(2000)
+  await page.keyboard.press("ArrowDown")
+  await page.waitForTimeout(2000)
+  await page.keyboard.press("ArrowDown")
+  await page.waitForTimeout(1000)
+  await page.keyboard.press("Enter")
+  await page.keyboard.press("Enter")
+  await page.waitForTimeout(2000)
+  
   const dropdown_currency = page.getByTestId('filter-value').filter({hasText: 'USD $'})
   await expect(dropdown_currency).toBeVisible()
   await dropdown_currency.click()

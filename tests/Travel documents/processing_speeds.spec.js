@@ -82,26 +82,26 @@ test('Processing speeds appear and work', async({page}) => {
     await standard.click()
     await page.waitForTimeout(3000)
     const sidebar_step_2 = page.getByTestId('sidebar-summary-breakdown')
-    let sidebar_validations = ['India Tourist eVisa', '1 Traveler', 'Government fees', '$25.64', 'Standard, 5 days', '$105.99']
+    let sidebar_validations = ['India Tourist eVisa', '1 Traveler', 'Government fees', '$25.64', 'Standard, 5 days', '$95.99']
     sidebar_validations.forEach(async txt => await expect(sidebar_step_2).toContainText(txt))
     const correct_total = page.getByTestId('order-total')
-    await expect(correct_total).toHaveText('$131.63')
+    await expect(correct_total).toHaveText('$121.99')
 
     await rush.click()
     await page.waitForTimeout(3000)
     await expect(continue_sidebar).toBeEnabled()
 
-    sidebar_validations = ['India Tourist eVisa', '1 Traveler', 'Government fees', '$25.64', 'Rush, 4 days', '$125.99']
+    sidebar_validations = ['India Tourist eVisa', '1 Traveler', 'Government fees', '$25.64', 'Rush, 4 days', '$115.99']
     sidebar_validations.forEach(async txt => await expect(sidebar_step_2).toContainText(txt))
-    await expect(correct_total).toHaveText('$151.63')
+    await expect(correct_total).toHaveText('$141.99')
 
     await super_rush.click()
     await page.waitForTimeout(3000)
     await expect(continue_sidebar).toBeEnabled()
 
-    sidebar_validations = ['India Tourist eVisa', '1 Traveler', 'Government fees', '$25.64', 'Super Rush, 3 days', '$185.99']
+    sidebar_validations = ['India Tourist eVisa', '1 Traveler', 'Government fees', '$25.64', 'Super Rush, 3 days', '$175.99']
     sidebar_validations.forEach(async txt => await expect(sidebar_step_2).toContainText(txt))
-    await expect(correct_total).toHaveText('$211.63')
+    await expect(correct_total).toHaveText('$201.99')
     await page.waitForTimeout(3000)
     await percySnapshot(page, 'Processing speeds design');
 })

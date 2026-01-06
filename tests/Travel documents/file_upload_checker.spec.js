@@ -116,11 +116,7 @@ test('File upload checker', async({page}) => {
     //await expect(input_religion).toBeVisible();
     await input_religion.fill('bahai');
     await page.getByRole("option", {name: 'Bahai'}).click()
-    await page.waitForTimeout(1000)
-    await page.waitForTimeout(2000)
-    await page.getByTestId("boolean-No").first().click()
-    await page.waitForTimeout(2000)
-    
+  
     // File upload step
     const next_btn = page.locator('id=btnContinueUnderSection')
     await page.waitForTimeout(1000)
@@ -184,6 +180,12 @@ test('File upload checker', async({page}) => {
     await page.locator('[name="applicant.0.spouse_first_last_name"]').fill("test")
     await page.waitForTimeout(3000)
     await page.getByTestId("boolean-No, I don’t have information about either").click()
+    await page.waitForTimeout(2000)
+    await expect(next_btn).toBeEnabled()
+    await next_btn.click()
+    await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_travel")
+    await page.waitForTimeout(2000)
+    await page.getByTestId("boolean-No").first().click()
     await page.waitForTimeout(2000)
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
