@@ -1,6 +1,7 @@
 const { test, expect } = require('@playwright/test');
 const {deploy_url, email_test} = require('../urls');
 const percySnapshot = require('@percy/playwright');
+const { newPaymentCheckout } = require('../functions');
 
 test('Travel Doc application pre and post payment are working', async({page}) => {
     await page.goto(deploy_url + 'thailand/apply-now')
@@ -108,59 +109,7 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
     
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    await page.waitForURL('**/thailand/apply-now#step=step_4')
-
-    // Validations Step_4
-    
-    await expect(page.getByRole('heading').first()).toContainText('Thailand Digital Arrival Card')
-    await expect(page.locator('footer')).toBeVisible()
-    await expect(page.locator("id=question-container")).toContainText('Choose your processing time')
-    await expect(page.getByTestId('processing-standard')).toBeVisible()    
-    
-    await expect(page.locator("id=btnPreviousSidebar")).toBeVisible()   
-    
-    sidebar_3a.forEach(async txt => await expect(sidebar_step_2).toContainText(txt))
-
-    await expect(sidebar_step_2).toContainText('$72.99')
-    await expect(sidebar_step_2).toContainText('Standard, 24 hours')
-
-    await expect(continue_sidebar).toBeEnabled()
-    
-    await continue_sidebar.click()
-    await page.waitForURL('**/thailand/apply-now#step=review')
-
-    await page.waitForTimeout(2000)
-    const duplicate = await page.isVisible('id=btnDisclaimerNext')
-    if (duplicate){
-      await page.locator('id=btnDisclaimerNext').click()
-    }
-
-    // Validations Review_step
-    
-    await percySnapshot(page, 'ReviewStepapplication')
-    await expect(continue_sidebar).toBeEnabled()
-    await continue_sidebar.click()
-    const stripeFrame = page.frameLocator('iframe[name^="__privateStripeFrame"]').nth(1)
-    await percySnapshot(page, 'PricesFreeGovFee')
-    await stripeFrame.locator("id=Field-numberInput").fill('6011 1111 1111 1117');
-
-    const expiration_month = stripeFrame.locator("id=Field-expiryInput")
-    await expiration_month.fill('10/26')
-
-    const cvv = stripeFrame.locator("id=Field-cvcInput")
-    await cvv.fill('123')
-    const zip_code = stripeFrame.locator("id=Field-postalCodeInput")
-    await zip_code.fill('12345')
-  /*
-  const zip_code = stripeFrame.locator("id=Field-postalCodeInput")
-  await zip_code.fill('12345')
-    /*
-    const cardholder_name = page.getByPlaceholder("Cardholder name")
-    await cardholder_name.fill('John Smith')
-    
-    const zip_code = page.getByPlaceholder("ZIP code")
-    await zip_code.fill('12345')
-    */
+    await newPaymentCheckout(page,"**/thailand/apply-now#", '6011 1111 1111 1117', '123')
     
     const payment_btn = page.locator('id=btnSubmitPayment')
     await expect(payment_btn).toBeVisible()

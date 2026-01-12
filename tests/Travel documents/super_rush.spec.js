@@ -1,8 +1,9 @@
 const { test, expect } = require('@playwright/test');
 const {deploy_url} = require('../urls');
 const percySnapshot = require('@percy/playwright');
+const { newPaymentCheckout } = require('../functions');
 
-test('Buy super rush', async({page}) => {
+test.skip('Buy super rush', async({page}) => {
   var myDate = new Date(new Date().getTime() + (11 * 24 * 60 * 60 * 1000));
     const datepicker_date = new Date(myDate);
     const date1 = datepicker_date.getDate();

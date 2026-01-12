@@ -45,5 +45,66 @@ async function translations(parent, child, section, product){
     }
 }
 
+async function newPaymentCheckout(page,url,creditCard, cvvNum){
+    await page.waitForURL(url + 'step=review')
+    await page.waitForTimeout(2000)
+    const duplicate = await page.isVisible('id=btnDisclaimerNext')
+    if (duplicate){
+      await page.locator('id=btnDisclaimerNext').click()
+    }
+    const stripeFrame = page.frameLocator('iframe[name^="__privateStripeFrame"]').nth(1)
+    
+    await stripeFrame.locator("id=Field-numberInput").fill(creditCard);
 
-module.exports = {translations, uk_eta_ko, us_esta_ko}
+    const expiration_month = stripeFrame.locator("id=Field-expiryInput")
+    await expiration_month.fill('10/26')
+
+    const cvv = stripeFrame.locator("id=Field-cvcInput")
+    await cvv.fill(cvvNum)
+    const zip_code = stripeFrame.locator("id=Field-postalCodeInput")
+    await zip_code.fill('12345')
+    /*
+    const cardholder_name = page.getByPlaceholder("Cardholder name")
+    await cardholder_name.fill('John Smith')
+    
+    const zip_code = page.getByPlaceholder("ZIP code")
+    await zip_code.fill('12345')
+    */ 
+}
+async function oldPaymentCheckout(page, url, creditCard, cvvNum){
+    await page.waitForURL('**/turkey/apply-now#step=step_4')
+    const continue_sidebar = page.locator('id=btnContinueSidebar')
+    await continue_sidebar.click()
+    await page.waitForURL('**/turkey/apply-now#step=review')
+    await page.waitForTimeout(2000)
+    const duplicate = await page.isVisible('id=btnDisclaimerNext')
+    if (duplicate){
+      await page.locator('id=btnDisclaimerNext').click()
+    }
+    const denial_protection = page.getByRole('checkbox')
+    await denial_protection.check() 
+    await expect(denial_protection).toBeChecked()
+    await expect(continue_sidebar).toBeEnabled()
+    await continue_sidebar.click()
+    
+    const stripeFrame = page.frameLocator('iframe[name^="__privateStripeFrame"]').nth(1)
+    
+    await stripeFrame.locator("id=Field-numberInput").fill('6011 1111 1111 1117');
+
+    const expiration_month = stripeFrame.locator("id=Field-expiryInput")
+    await expiration_month.fill('10/26')
+
+    const cvv = stripeFrame.locator("id=Field-cvcInput")
+    await cvv.fill(cvvNum)
+    const zip_code = stripeFrame.locator("id=Field-postalCodeInput")
+    await zip_code.fill('12345')
+    /*
+    const cardholder_name = page.getByPlaceholder("Cardholder name")
+    await cardholder_name.fill('John Smith')
+    
+    const zip_code = page.getByPlaceholder("ZIP code")
+    await zip_code.fill('12345')
+    */ 
+}
+
+module.exports = {translations, uk_eta_ko, us_esta_ko, newPaymentCheckout}

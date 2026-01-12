@@ -1,5 +1,6 @@
 const { test, expect } = require('@playwright/test');
 const {deploy_url, Orders} = require('../urls');
+const { newPaymentCheckout } = require('../functions');
 const percySnapshot = require('@percy/playwright');
 
 test('Different currency', async ({ page }) => {
@@ -89,43 +90,7 @@ test('Different currency', async ({ page }) => {
 
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
-  await page.waitForURL('**/turkey/apply-now#step=step_4')
-  await expect(page.getByTestId('processing-standard')).toBeVisible()
-  const standar_processing = page.getByTestId('processing-standard')
-  await expect(standar_processing).toBeVisible()
-  
-  await expect(continue_sidebar).toBeEnabled()
-  await continue_sidebar.click()
-  await page.waitForURL('**/turkey/apply-now#step=review')
-  await page.waitForTimeout(2000)
-  const duplicate = await page.isVisible('id=btnDisclaimerNext')
-  if (duplicate){
-    await page.locator('id=btnDisclaimerNext').click()
-  }
-  const total_price = page.getByTestId('order-total')
-  await expect(total_price).toBeVisible()
-  await percySnapshot(page, 'DifferentCurrency');
-
-  await expect(continue_sidebar).toBeEnabled()
-    await continue_sidebar.click()
-    const stripeFrame = page.frameLocator('iframe[name^="__privateStripeFrame"]').nth(1)
-    
-    await stripeFrame.locator("id=Field-numberInput").fill('6011 1111 1111 1117');
-
-    const expiration_month = stripeFrame.locator("id=Field-expiryInput")
-    await expiration_month.fill('10/26')
-
-    const cvv = stripeFrame.locator("id=Field-cvcInput")
-    await cvv.fill('123')
-    const zip_code = stripeFrame.locator("id=Field-postalCodeInput")
-    await zip_code.fill('12345')
-    /*
-    const cardholder_name = page.getByPlaceholder("Cardholder name")
-    await cardholder_name.fill('John Smith')
-    
-    const zip_code = page.getByPlaceholder("ZIP code")
-    await zip_code.fill('12345')
-    */
+  await newPaymentCheckout(page,"**/turkey/apply-now#", '6011 1111 1111 1117', '123')
   const payment_btn = page.locator('id=btnSubmitPayment')
   await expect(payment_btn).toBeVisible()
   await expect(payment_btn).toBeEnabled()

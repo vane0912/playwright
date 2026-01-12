@@ -1,4 +1,5 @@
 const { test, expect } = require('@playwright/test');
+
 const {deploy_url} = require('../urls');
 const path = require('path');
 
@@ -91,7 +92,7 @@ test('UK ETA ORDER 2', async({page}) => {
     const zip_code = page.getByPlaceholder("ZIP code")
     await zip_code.fill('12345')
     */
-   
+    
     const payment_btn = page.locator('id=btnSubmitPayment')
     await expect(payment_btn).toBeVisible()
     await expect(payment_btn).toBeEnabled()
