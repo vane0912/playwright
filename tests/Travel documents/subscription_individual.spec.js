@@ -206,8 +206,6 @@ test('Individual subscription purchase', async ({ page }) => {
   if (duplicate){
     await page.locator('id=btnDisclaimerNext').click()
   }
-  await expect(continue_sidebar).toBeEnabled()
-  await continue_sidebar.click()
   const stripeFrame = page.frameLocator('iframe[name^="__privateStripeFrame"]').nth(1)
   
 
