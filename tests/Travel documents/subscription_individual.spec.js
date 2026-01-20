@@ -206,18 +206,6 @@ test('Individual subscription purchase', async ({ page }) => {
   if (duplicate){
     await page.locator('id=btnDisclaimerNext').click()
   }
-  const stripeFrame = page.frameLocator('iframe[name^="__privateStripeFrame"]').nth(1)
-  
-
-  await stripeFrame.locator("id=Field-numberInput").fill('6011 1111 1111 1117');
-
-  const expiration_month = stripeFrame.locator("id=Field-expiryInput")
-  await expiration_month.fill('10/26')
-
-  const cvv = stripeFrame.locator("id=Field-cvcInput")
-  await cvv.fill('123')
-  const zip_code = stripeFrame.locator("id=Field-postalCodeInput")
-  await zip_code.fill('12345')
   /*
   const cardholder_name = page.getByPlaceholder("Cardholder name")
   await cardholder_name.fill('John Smith')

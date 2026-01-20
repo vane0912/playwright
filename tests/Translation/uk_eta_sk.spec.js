@@ -72,7 +72,9 @@ test('Check translations UK ETA korean', async ({ page }) => {
 
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-
+    await page.waitForURL('**/ko/united-kingdom/apply-now#step=step_4')
+    await expect(continue_sidebar).toBeEnabled()
+    await continue_sidebar.click()
     await newPaymentCheckout(page,"**/ko/united-kingdom/apply-now#", '6011 1111 1111 1117', '123')
     const payment_btn = page.locator('id=btnSubmitPayment')
     await expect(payment_btn).toBeVisible()
@@ -103,7 +105,7 @@ test('Check translations UK ETA korean', async ({ page }) => {
     await page.waitForTimeout(1000)
     await page.keyboard.press("Enter")
     await page.waitForTimeout(1000)
-    await page.locator('//li[@data-place-id="ChIJhXW3YR8SK4cROnWOmEiRMLc"]').click()
+    await page.locator('//li[@data-place-id="ChIJWy8aLa3HwoAR2aaEiB_BXTc"]').click()
     await page.waitForTimeout(1000)
     
     await expect(next_btn).toBeEnabled()

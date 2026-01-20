@@ -8,7 +8,7 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
 
     // Validations step_1
     const container = page.locator('id=question-container')
-    const container_txt = ["Ensure you select the nationality of the passport you'll be traveling with.", "What's your nationality?", "Applying for", "50,000+ Reviews"]
+    const container_txt = ["The Thailand Digital Arrival Card is mandatory for Mexico passport holders traveling to ThailandYour passport Mexico", "Your passport", "Applying for", "50,000+ Reviews"]
     container_txt.forEach(async txt => await expect(container).toContainText(txt))
 
     const sidebar = page.getByTestId('step-1-sidebar')

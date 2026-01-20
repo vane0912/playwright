@@ -14,7 +14,7 @@ test('Cancelled', async({browser}) => {
     page.on('dialog', async (dialog) => {
         await dialog.accept(Order.Cancelled);
     });
-    await page.goto(deploy_url + 'admin/users/27659/edit')
+    await page.goto(deploy_url + 'admin/users/1919083/edit')
     await page.getByPlaceholder('1234567 or you@email.com').fill('sergio@admin.com')
     await page.getByRole("button", {name: 'Continue'}).click()
     //await page.locator("id=customCookieBotAcceptAll").click()
@@ -22,7 +22,7 @@ test('Cancelled', async({browser}) => {
     await page.locator('#password_login_input').fill('testivisa5!')
     await page.locator('#log_in_button').click()
 
-    await page.waitForURL('**/admin/users/27659/edit')
+    await page.waitForURL('**/admin/users/1919083/edit')
     await page.locator('[name="employee_role"]').selectOption("admin")
     await page.waitForTimeout(5000)
     await page.getByText("Update user").click()

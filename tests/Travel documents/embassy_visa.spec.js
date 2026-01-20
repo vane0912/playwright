@@ -56,10 +56,10 @@ test('Embassy Visa', async({page}) => {
   
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-
-    await page.waitForURL('**/australia/apply-now#step=step_3b')
-    await expect(continue_sidebar).toBeEnabled()
-    await continue_sidebar.click()
+    
+    //await page.waitForURL('**/australia/apply-now#step=step_3b')
+    //await expect(continue_sidebar).toBeEnabled()
+    //await continue_sidebar.click()
 
     await page.waitForURL('**/australia/apply-now#step=step_3c')
 
@@ -217,7 +217,7 @@ test('Embassy Visa', async({page}) => {
     await page.waitForTimeout(1000)
     await page.keyboard.press("Enter")
     await page.waitForTimeout(1000)
-    await page.locator('//li[@data-place-id="ChIJhXW3YR8SK4cROnWOmEiRMLc"]').click()
+    await page.locator('//li[@data-place-id="ChIJWy8aLa3HwoAR2aaEiB_BXTc"]').click()
 
     const birth_country = page.locator('[name="applicant.0.secondary_document_issued_country"]');
     await expect(birth_country).toBeVisible();

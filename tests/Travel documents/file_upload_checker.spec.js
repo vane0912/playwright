@@ -76,12 +76,6 @@ test('File upload checker', async({page}) => {
     await page.getByPlaceholder('111-222-3333').fill('11111111')
     await page.getByTestId('boolean-WhatsApp').click()
     
-    const arrival_date_visible = page.locator('[name="general.arrival_date"]')
-    await expect(arrival_date_visible).toBeVisible()
-    await arrival_date_visible.click()
-    await expect(page.locator('.dp__outer_menu_wrap')).toBeVisible()
-    await page.locator('.dp--future').filter({hasText: date1}).first().click()
-    
     const religion = page.locator('[name="general.religion"]');
     
     await expect(religion).toBeVisible();
@@ -97,6 +91,11 @@ test('File upload checker', async({page}) => {
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
     await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=travel_general")   
+      const arrival_date_visible = page.locator('[name="general.arrival_date"]')
+    await expect(arrival_date_visible).toBeVisible()
+    await arrival_date_visible.click()
+    await expect(page.locator('.dp__outer_menu_wrap')).toBeVisible()
+    await page.locator('.dp--future').filter({hasText: date1}).first().click()
     const dropdown_country = page.locator('[name="general.port_of_arrival"]');
     await expect(dropdown_country).toBeVisible();
     await dropdown_country.click();
@@ -123,7 +122,7 @@ test('File upload checker', async({page}) => {
     await page.waitForTimeout(1000)
     await page.keyboard.press("Enter")
     await page.waitForTimeout(1000)
-    await page.locator('//li[@data-place-id="ChIJhXW3YR8SK4cROnWOmEiRMLc"]').click()
+    await page.locator('//li[@data-place-id="ChIJWy8aLa3HwoAR2aaEiB_BXTc"]').click()
 
     await page.waitForTimeout(1000)
     await expect(next_btn).toBeEnabled()
