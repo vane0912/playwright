@@ -107,4 +107,29 @@ async function oldPaymentCheckout(page, url, creditCard, cvvNum){
     */ 
 }
 
-module.exports = {translations, uk_eta_ko, us_esta_ko, newPaymentCheckout}
+async function step_1(page,country,url){
+    await page.goto(deploy_url + url)
+    await page.waitForURL(deploy_url + url)
+    const dropdown_country =  page.getByTestId('filter-value');
+    
+    await dropdown_country.click();
+    const input_country = page.getByTestId('dropdown-general.common_nationality_country');
+    if(country === "us"){
+        await input_country.fill('united states');
+        await page.getByRole("option", {name: 'United States flag United States'}).click()
+    }else{
+        await input_country.fill('Mexico');
+        await page.getByRole("option", {name: 'Mexico flag Mexico'}).click()
+    }
+    await page.waitForTimeout(5000)
+    const continue_sidebar = page.locator('id=btnContinueSidebar')
+    await continue_sidebar.click()
+    await page.waitForURL('**/'+ url + '#step=step_3a')
+}
+module.exports = {
+    translations,
+    uk_eta_ko,
+    us_esta_ko, 
+    newPaymentCheckout, 
+    step_1
+}

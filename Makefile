@@ -9,7 +9,7 @@ admin:
 test: 
 	npx playwright test /tests/Travel documents/ /tests/Passport-tests/ /tests/Mobile/ --workers 2 
 
-test2: 
-	npx playwright test auth.setup.ts
+refactor: 
+	npx playwright test payments.spec.js
 translations:
 	npx playwright test /tests/Translation 

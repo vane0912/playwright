@@ -1,7 +1,7 @@
 const { test, expect } = require('@playwright/test');
 const {deploy_url} = require('../urls');
 const percySnapshot = require('@percy/playwright');
-const { newPaymentCheckout } = require('../functions');
+const appFunctions = require('../functions')
 
 const path = require('path');
 
@@ -12,23 +12,8 @@ test('File upload checker', async({page}) => {
     const datepicker_date = new Date(myDate);
     const date1 = datepicker_date.getDate();
 
-    await page.goto(deploy_url + 'india/apply-now')
+   await appFunctions.step_1(page,"us", "india/apply-now")
     const continue_sidebar = page.locator('id=btnContinueSidebar')
-    /*
-    await expect(continue_sidebar).toBeEnabled()
-    await continue_sidebar.click()
-    */
-    //await page.waitForURL('**/india/apply-now#step=step_2')
-    /*
-    const arrival_date_visible = page.locator('[name="general.arrival_date"]')
-    await expect(arrival_date_visible).toBeVisible()
-    await arrival_date_visible.click()
-    await expect(page.locator('.dp__outer_menu_wrap')).toBeVisible()
-    await page.locator('.dp--future').filter({hasText: date1}).first().click()
-    */
-    await expect(continue_sidebar).toBeEnabled()
-    await continue_sidebar.click()
-    await page.waitForURL('**/india/apply-now#step=step_3a')
   
     await page.waitForTimeout(1000)
     const dob_day = page.locator('[name="applicant.0.dob.day"]')
@@ -63,7 +48,7 @@ test('File upload checker', async({page}) => {
 
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    await newPaymentCheckout(page,"**/india/apply-now#", '6011 1111 1111 1117', '123')
+    await appFunctions.newPaymentCheckout(page,"**/india/apply-now#", '6011 1111 1111 1117', '123')
     const payment_btn = page.locator('id=btnSubmitPayment')
     await expect(payment_btn).toBeVisible()
     await expect(payment_btn).toBeEnabled()

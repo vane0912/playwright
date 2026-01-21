@@ -1,39 +1,10 @@
 const { test, expect } = require('@playwright/test');
-const {deploy_url, Orders} = require('../urls');
 const percySnapshot = require('@percy/playwright');
-const { newPaymentCheckout } = require('../functions');
+const appFunctions = require('../functions')
 let order_num 
 test('Individual subscription purchase', async ({ page }) => {
   test.slow()
-  await page.goto(deploy_url + 'turkey/apply-now');
-
-  const dropdown_country = page.getByTestId('filter-value');
-  await expect(dropdown_country).toBeVisible();
-  await dropdown_country.click();
-  const input_country = page.getByTestId('dropdown-general.common_nationality_country');
-  await expect(input_country).toBeVisible();
-  await input_country.fill('Mexico');
-  await page.getByRole("option", {name: 'Mexico flag Mexico'}).click()
-  const continue_sidebar = page.locator('id=btnContinueSidebar')
-  await expect(continue_sidebar).toBeEnabled()
-  await continue_sidebar.click()
-  //await page.waitForURL('**/turkey/apply-now#step=step_2')
-  /*
-  const selector_products = page.getByTestId('dropdown-general.visa_type_id');
-  await selector_products.selectOption('38')
-  
- 
-  const arrival_date_visible = page.locator('[name="general.arrival_date"]')
-  await expect(arrival_date_visible).toBeVisible()
-  await arrival_date_visible.click()
-  await expect(page.locator('.dp__outer_menu_wrap')).toBeVisible()
-  await page.locator('[data-dp-element="action-next"]').click()
-  await page.locator('.dp--future').filter({hasText: '12'}).first().click()
-  
-  await expect(continue_sidebar).toBeEnabled()
-  await continue_sidebar.click()
-   */
-  await page.waitForURL('**/turkey/apply-now#step=step_3a')
+  await appFunctions.step_1(page,"us", "turkey/apply-now")
   
   await page.waitForTimeout(1000)
   const dob_day = page.locator('[name="applicant.0.dob.day"]')
@@ -68,7 +39,7 @@ test('Individual subscription purchase', async ({ page }) => {
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
     
-  await newPaymentCheckout(page,"**/turkey/apply-now#", '6011 1111 1111 1117', '123')
+  await appFunctions.newPaymentCheckout(page,"**/turkey/apply-now#", '6011 1111 1111 1117', '123')
   const payment_btn = page.locator('id=btnSubmitPayment')
   await expect(payment_btn).toBeVisible()
   await expect(payment_btn).toBeEnabled()
@@ -117,7 +88,7 @@ test('Individual subscription purchase', async ({ page }) => {
   await expect(submit_post_payment).toBeEnabled()
   await submit_post_payment.click()
   await page.waitForNavigation({waitUntil: 'load'})
-  await page.locator('id=skip-recommendation-button').click()    
+  //await page.locator('id=skip-recommendation-button').click()    
 
   await page.locator('id=trackApplication').click()
   
