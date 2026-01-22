@@ -4,27 +4,9 @@ const appFunctions = require('../functions')
 let order_num 
 test('Individual subscription purchase', async ({ page }) => {
   test.slow()
-  await appFunctions.step_1(page,"us", "turkey/apply-now")
-  
-  await page.waitForTimeout(1000)
-  const dob_day = page.locator('[name="applicant.0.dob.day"]')
-  await dob_day.selectOption('13')
-  const dob_month = page.locator('[name="applicant.0.dob.month"]')
-  await dob_month.selectOption('7')
-  const dob_year = page.locator('[name="applicant.0.dob.year"]')
-  await dob_year.selectOption('2002')
-  const name_applicant = page.locator('[name="applicant.0.first_name"]')
-  await expect(name_applicant).toBeVisible()
-  await name_applicant.fill('Test')
-  
-  await page.waitForTimeout(1000)
-  const last_name = page.locator('[name="applicant.0.last_name"]')
-  await last_name.fill('Test')
-  await page.waitForTimeout(1000)
-
-  await expect(continue_sidebar).toBeEnabled()
-  await continue_sidebar.click()
-  await page.waitForURL('**/turkey/apply-now#step=step_3c')
+  await appFunctions.step_1(page,"mx", "turkey/apply-now")
+  const continue_sidebar = page.locator('id=btnContinueSidebar')
+  await appFunctions.step_2(page,continue_sidebar, "**/turkey/apply-now#step=step_3c")
   
   const passport_num = page.locator('[name="applicant.0.passport_num"]')
   await expect(passport_num).toBeVisible()
@@ -114,44 +96,9 @@ test('Individual subscription purchase', async ({ page }) => {
   await page.waitForURL(deploy_url + "order/" + order_num + "?subscription=true")
 
   // Place free order 
-  await page.goto(deploy_url + 'turkey/apply-now');
+  await appFunctions.step_1(page,"mx", "turkey/apply-now")
 
-  await expect(dropdown_country).toBeVisible();
-  await dropdown_country.click();
-  await expect(input_country).toBeVisible();
-  await input_country.fill('Mexico');
-  await page.getByRole("option", {name: 'Mexico flag Mexico'}).click()
-  await expect(continue_sidebar).toBeEnabled()
-  await continue_sidebar.click()
-  //await page.waitForURL('**/turkey/apply-now#step=step_2')
-  /*
-  await selector_products.selectOption('38')
-  
-  await expect(arrival_date_visible).toBeVisible()
-  await arrival_date_visible.click()
-  await expect(page.locator('.dp__outer_menu_wrap')).toBeVisible()
-  await page.locator('[data-dp-element="action-next"]').click()
-  await page.locator('.dp--future').filter({hasText: '12'}).first().click()
-  
-  await expect(continue_sidebar).toBeEnabled()
-  await continue_sidebar.click()
-  */
-  await page.waitForURL('**/turkey/apply-now#step=step_3a')
-  
-  await page.waitForTimeout(1000)
-  await dob_day.selectOption('13')
-  await dob_month.selectOption('7')
-  await dob_year.selectOption('2002')
-  await expect(name_applicant).toBeVisible()
-  await name_applicant.fill('Test')
-  
-  await page.waitForTimeout(1000)
-  await last_name.fill('Test')
-  await page.waitForTimeout(1000)
-
-  await expect(continue_sidebar).toBeEnabled()
-  await continue_sidebar.click()
-  await page.waitForURL('**/turkey/apply-now#step=step_3c')
+  await appFunctions.step_2(page,continue_sidebar, "**/turkey/apply-now#step=step_3c")
   
   await expect(passport_num).toBeVisible()
   await passport_num.fill('123456789')

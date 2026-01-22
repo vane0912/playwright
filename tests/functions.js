@@ -1,4 +1,5 @@
 const {deploy_url} = require('./urls');
+const { expect } = require('@playwright/test');
 let eld;
 
 var us_esta_ko = {
@@ -126,10 +127,34 @@ async function step_1(page,country,url){
     await continue_sidebar.click()
     await page.waitForURL('**/'+ url + '#step=step_3a')
 }
+
+async function step_2(page,continue_sidebar,url){
+    const dob_day = page.locator('[name="applicant.0.dob.day"]')
+    await dob_day.selectOption('13')
+
+    const dob_month = page.locator('[name="applicant.0.dob.month"]')
+    await dob_month.selectOption('7')
+
+    const dob_year = page.locator('[name="applicant.0.dob.year"]')
+    await dob_year.selectOption('2000')
+
+    const name_applicant = page.locator('[name="applicant.0.first_name"]')
+    await name_applicant.fill('Test')
+    
+    await page.waitForTimeout(1000)
+    const last_name = page.locator('[name="applicant.0.last_name"]')
+    await last_name.fill('Test')
+    await page.waitForTimeout(1000)
+    
+    await expect(continue_sidebar).toBeEnabled()
+    await continue_sidebar.click()
+    await page.waitForURL(url)
+}
 module.exports = {
     translations,
     uk_eta_ko,
     us_esta_ko, 
     newPaymentCheckout, 
-    step_1
+    step_1,
+    step_2
 }
