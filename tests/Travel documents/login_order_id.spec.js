@@ -1,11 +1,9 @@
 const { test, expect } = require('@playwright/test');
 const {deploy_url, Orders} = require('../urls');
-const { newPaymentCheckout } = require('../functions');
+const appFunctions = require('../functions')
 test('Log in with ID', async ({ page }) => {
   await appFunctions.step_1(page,"mx", "turkey/apply-now")
   const continue_sidebar = page.locator('id=btnContinueSidebar')
-  await expect(continue_sidebar).toBeEnabled()
-  await continue_sidebar.click()
   await appFunctions.step_2(page,continue_sidebar, "**/turkey/apply-now#step=step_3c")
   
   const passport_num = page.locator('[name="applicant.0.passport_num"]')
@@ -22,7 +20,7 @@ test('Log in with ID', async ({ page }) => {
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
   
-  await newPaymentCheckout(page,"**/turkey/apply-now#", '6011 1111 1111 1117', '123')
+  await appFunctions.newPaymentCheckout(page,"**/turkey/apply-now#", '6011 1111 1111 1117', '123')
   const payment_btn = page.locator('id=btnSubmitPayment')
   await expect(payment_btn).toBeVisible()
   await expect(payment_btn).toBeEnabled()

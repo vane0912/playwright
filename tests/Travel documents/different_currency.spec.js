@@ -1,6 +1,6 @@
 const { test, expect } = require('@playwright/test');
 const {deploy_url, Orders} = require('../urls');
-const { newPaymentCheckout } = require('../functions');
+const appFunctions = require('../functions')
 const percySnapshot = require('@percy/playwright');
 
 test('Different currency', async ({ page }) => {
@@ -72,7 +72,7 @@ test('Different currency', async ({ page }) => {
 
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
-  await newPaymentCheckout(page,"**/turkey/apply-now#", '6011 1111 1111 1117', '123')
+  await appFunctions.newPaymentCheckout(page,"**/turkey/apply-now#", '6011 1111 1111 1117', '123')
   const payment_btn = page.locator('id=btnSubmitPayment')
   await expect(payment_btn).toBeVisible()
   await expect(payment_btn).toBeEnabled()

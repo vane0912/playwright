@@ -1,6 +1,8 @@
 const { test, expect } = require('@playwright/test');
 const percySnapshot = require('@percy/playwright');
 const appFunctions = require('../functions')
+const {deploy_url} = require('../urls');
+
 let order_num 
 test('Individual subscription purchase', async ({ page }) => {
   test.slow()
@@ -70,7 +72,7 @@ test('Individual subscription purchase', async ({ page }) => {
   await expect(submit_post_payment).toBeEnabled()
   await submit_post_payment.click()
   await page.waitForNavigation({waitUntil: 'load'})
-  //await page.locator('id=skip-recommendation-button').click()    
+  await page.locator('id=skip-recommendation-button').click()    
 
   await page.locator('id=trackApplication').click()
   

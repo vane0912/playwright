@@ -1,7 +1,6 @@
 const { test, expect } = require('@playwright/test');
-const {deploy_url} = require('../urls');
+const appFunctions = require('../functions')
 const percySnapshot = require('@percy/playwright');
-const { newPaymentCheckout } = require('../functions');
 
 test('Buy rush speed', async({page}) => {
     await appFunctions.step_1(page,"us", "india/apply-now")
@@ -33,7 +32,7 @@ test('Buy rush speed', async({page}) => {
     */
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    await newPaymentCheckout(page,"**/india/apply-now#", '6011 1111 1111 1117', '123')
+    await appFunctions.newPaymentCheckout(page,"**/india/apply-now#", '6011 1111 1111 1117', '123')
     await percySnapshot(page, 'ProcessingSpeedsIndia')
 
     const payment_btn = page.locator('id=btnSubmitPayment')
