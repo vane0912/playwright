@@ -1,5 +1,7 @@
 const { test, expect } = require('@playwright/test');
 const {deploy_url} = require('../urls');
+const appFunctions = require('../functions')
+
 const path = require('path');
 
 test('USPS Passport', async({page}) =>{
@@ -62,25 +64,8 @@ test('USPS Passport', async({page}) =>{
 
     await page.locator('#btnContinueSidebar').click()
 
-    await page.waitForURL('**/passport-renewal/united-states/application#step=review')
-    await page.waitForTimeout(2000)
-
-    const duplicate = await page.isVisible('id=btnDisclaimerNext')
-    if (duplicate){
-      await page.locator('id=btnDisclaimerNext').click()
-    }
-    await page.getByRole('button', { name: 'Continue to payment' }).click()
-
-    const stripeFrame = page.frameLocator('iframe[name^="__privateStripeFrame"]').nth(1)
-    await stripeFrame.locator("id=Field-numberInput").fill('6011 1111 1111 1117');
-    
-    const expiration_month = stripeFrame.locator("id=Field-expiryInput")
-    await expiration_month.fill('10/26')
-    
-    const cvv = stripeFrame.locator("id=Field-cvcInput")
-    await cvv.fill('123')
-    const zip_code = stripeFrame.locator("id=Field-postalCodeInput")
-    await zip_code.fill('12345')
+    await appFunctions.newPaymentCheckout(page,"**/passport-renewal/united-states/application#","4111111111111111", "123", true)
+   
     /*
     const cardholder_name = page.getByPlaceholder("Cardholder name")
     await cardholder_name.fill('John Smith')

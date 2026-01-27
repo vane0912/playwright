@@ -46,8 +46,11 @@ async function translations(parent, child, section, product){
     }
 }
 
-async function newPaymentCheckout(page,url,creditCard, cvvNum){
+async function newPaymentCheckout(page,url,creditCard, cvvNum,continuebtn){
     await page.waitForURL(url + 'step=review')
+    if(continuebtn){
+        await page.getByRole('button', { name: 'Continue to payment' }).click()
+    }
     await page.waitForTimeout(2000)
     const duplicate = await page.isVisible('id=btnDisclaimerNext')
     if (duplicate){
@@ -55,14 +58,14 @@ async function newPaymentCheckout(page,url,creditCard, cvvNum){
     }
     const stripeFrame = page.frameLocator('iframe[name^="__privateStripeFrame"]').nth(1)
     
-    await stripeFrame.locator("id=Field-numberInput").fill(creditCard);
+    await stripeFrame.locator("id=payment-numberInput").fill(creditCard);
 
-    const expiration_month = stripeFrame.locator("id=Field-expiryInput")
+    const expiration_month = stripeFrame.locator("id=payment-expiryInput")
     await expiration_month.fill('10/26')
 
-    const cvv = stripeFrame.locator("id=Field-cvcInput")
+    const cvv = stripeFrame.locator("id=payment-cvcInput")
     await cvv.fill(cvvNum)
-    const zip_code = stripeFrame.locator("id=Field-postalCodeInput")
+    const zip_code = stripeFrame.locator("id=payment-postalCodeInput")
     await zip_code.fill('12345')
     /*
     const cardholder_name = page.getByPlaceholder("Cardholder name")
@@ -150,6 +153,22 @@ async function step_2(page,continue_sidebar,url){
     await continue_sidebar.click()
     await page.waitForURL(url)
 }
+
+async function step_3c(page,continue_sidebar){
+    const passport_num = page.locator('[name="applicant.0.passport_num"]')
+    await expect(passport_num).toBeVisible()
+    await passport_num.fill('123456789')
+    const passport_day = page.locator('[name="applicant.0.passport_expiration_date.day"]')
+    await passport_day.selectOption('13')
+    const passport_month = page.locator('[name="applicant.0.passport_expiration_date.month"]')
+    await passport_month.selectOption('7')
+    const passport_year = page.locator('[name="applicant.0.passport_expiration_date.year"]')
+    await passport_year.selectOption('2030')
+    await page.waitForTimeout(4000)
+    await expect(continue_sidebar).toBeEnabled()
+    await continue_sidebar.click()
+}
+
 module.exports = {
     translations,
     uk_eta_ko,

@@ -7,19 +7,7 @@ test('Payment with VISA', async({page}) => {
   
   await appFunctions.step_2(page,continue_sidebar, "**/thailand/apply-now#step=step_3c")
 
-  const passport_num = page.locator('[name="applicant.0.passport_num"]')
-  await expect(passport_num).toBeVisible()
-  await passport_num.fill('123456789')
-  const passport_day = page.locator('[name="applicant.0.passport_expiration_date.day"]')
-  await passport_day.selectOption('13')
-  const passport_month = page.locator('[name="applicant.0.passport_expiration_date.month"]')
-  await passport_month.selectOption('7')
-  const passport_year = page.locator('[name="applicant.0.passport_expiration_date.year"]')
-  await passport_year.selectOption('2030')
-  await page.waitForTimeout(4000)
-
-  await expect(continue_sidebar).toBeEnabled()
-  await continue_sidebar.click()
+  await appFunctions.step_3c(page,continue_sidebar)
   
   await appFunctions.newPaymentCheckout(page,"**/thailand/apply-now#", '3782 8224 6310 005', '1234')
   const payment_btn = page.locator('id=btnSubmitPayment')
@@ -46,19 +34,7 @@ test('Payment with Master Card', async({page}) => {
 
     await appFunctions.step_2(page, continue_sidebar, "**/thailand/apply-now#step=step_3c")
   
-    const passport_num = page.locator('[name="applicant.0.passport_num"]')
-    await expect(passport_num).toBeVisible()
-    await passport_num.fill('123456789')
-    const passport_day = page.locator('[name="applicant.0.passport_expiration_date.day"]')
-    await passport_day.selectOption('13')
-    const passport_month = page.locator('[name="applicant.0.passport_expiration_date.month"]')
-    await passport_month.selectOption('7')
-    const passport_year = page.locator('[name="applicant.0.passport_expiration_date.year"]')
-    await passport_year.selectOption('2030')
-    await page.waitForTimeout(4000)
-    
-    await expect(continue_sidebar).toBeEnabled()
-    await continue_sidebar.click()
+    await appFunctions.step_3c(page,continue_sidebar)
     
     await appFunctions.newPaymentCheckout(page,"**/thailand/apply-now#", '5555 5555 5555 4444', '123')
     const payment_btn = page.locator('id=btnSubmitPayment')
@@ -74,19 +50,7 @@ test('Payment with Amex', async({page}) => {
   
   await appFunctions.step_2(page, continue_sidebar, "**/thailand/apply-now#step=step_3c")
   
-    const passport_num = page.locator('[name="applicant.0.passport_num"]')
-    await expect(passport_num).toBeVisible()
-    await passport_num.fill('123456789')
-    const passport_day = page.locator('[name="applicant.0.passport_expiration_date.day"]')
-    await passport_day.selectOption('13')
-    const passport_month = page.locator('[name="applicant.0.passport_expiration_date.month"]')
-    await passport_month.selectOption('7')
-    const passport_year = page.locator('[name="applicant.0.passport_expiration_date.year"]')
-    await passport_year.selectOption('2030')
-    await page.waitForTimeout(4000)
-
-    await expect(continue_sidebar).toBeEnabled()
-    await continue_sidebar.click()
+  await appFunctions.step_3c(page,continue_sidebar)
     
     await appFunctions.newPaymentCheckout(page,"**/thailand/apply-now#", '3782 8224 6310 005', '1234')
     const payment_btn = page.locator('id=btnSubmitPayment')
@@ -102,20 +66,8 @@ test('Payment with Discover', async({page}) => {
   
   await appFunctions.step_2(page, continue_sidebar, "**/thailand/apply-now#step=step_3c")
   
-    const passport_num = page.locator('[name="applicant.0.passport_num"]')
-    await expect(passport_num).toBeVisible()
-    await passport_num.fill('123456789')
-    const passport_day = page.locator('[name="applicant.0.passport_expiration_date.day"]')
-    await passport_day.selectOption('13')
-    const passport_month = page.locator('[name="applicant.0.passport_expiration_date.month"]')
-    await passport_month.selectOption('7')
-    const passport_year = page.locator('[name="applicant.0.passport_expiration_date.year"]')
-    await passport_year.selectOption('2030')
-    await page.waitForTimeout(4000)
-    
-    await expect(continue_sidebar).toBeEnabled()
-    await continue_sidebar.click()
-    
+  await appFunctions.step_3c(page,continue_sidebar)
+  
     await appFunctions.newPaymentCheckout(page,"**/thailand/apply-now#", '6011 1111 1111 1117', '1234')
     const payment_btn = page.locator('id=btnSubmitPayment')
     await expect(payment_btn).toBeVisible()

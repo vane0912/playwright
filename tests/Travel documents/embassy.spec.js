@@ -1,4 +1,5 @@
 const { test, expect } = require('@playwright/test');
+const appFunctions = require('../functions')
 const {deploy_url} = require('../urls');
 const percySnapshot = require('@percy/playwright');
 
@@ -108,49 +109,7 @@ test('Embassy reg', async({page}) => {
   await expect(continue_step1).toBeEnabled()
   await continue_step1.click()
 
-  await page.waitForURL('**/embassy-registration#step=review')
-
-  await page.waitForTimeout(2000)
-  const duplicate = await page.isVisible('id=btnDisclaimerNext')
-  if (duplicate){
-    await page.locator('id=btnDisclaimerNext').click()
-  }
-
-  const review_container = page.getByTestId("reviewStepContainer")
-  const review_container_txt = ['MX Embassy Registration', 'travelers', 'Test Test']
-  await expect(page.getByRole('heading').first()).toContainText('Review your order')
-  await expect(page.locator('footer')).toBeVisible()
-  review_container_txt.forEach(async txt => await expect(review_container).toContainText(txt))
-
-  const review_step_sidebar = await page.getByTestId('sidebar-summary-breakdown')
-
-  await expect(review_step_sidebar).toContainText('MX Embassy Registration')
-  await expect(review_step_sidebar).toContainText('1 Traveler')
-  await expect(review_step_sidebar).toContainText('Embassy Registration')
-  await expect(review_step_sidebar).toContainText('Embassy Registration Fee (MX)')
-
-  await expect(review_step_sidebar).toContainText('$12.95')
-  
-  await expect(continue_step1).toBeEnabled()
-  await percySnapshot(page, 'EmbassyRegReview')
-  await continue_step1.click()
-  const stripeFrame = page.frameLocator('iframe[name^="__privateStripeFrame"]').nth(1)
-  await stripeFrame.locator("id=Field-numberInput").fill('6011 1111 1111 1117');
-
-  const expiration_month = stripeFrame.locator("id=Field-expiryInput")
-  await expiration_month.fill('10/26')
-
-  const cvv = stripeFrame.locator("id=Field-cvcInput")
-  await cvv.fill('123')
-  const zip_code = stripeFrame.locator("id=Field-postalCodeInput")
-    await zip_code.fill('12345')
-    /*
-    const cardholder_name = page.getByPlaceholder("Cardholder name")
-    await cardholder_name.fill('John Smith')
-    
-    const zip_code = page.getByPlaceholder("ZIP code")
-    await zip_code.fill('12345')
-    */
+  await appFunctions.newPaymentCheckout(page,"**/embassy-registration#","4111111111111111", "123", true)
 
   const payment_btn = page.locator('id=btnSubmitPayment')
   await expect(payment_btn).toBeVisible()

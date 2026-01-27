@@ -1,6 +1,7 @@
 const { test, expect } = require('@playwright/test');
 const {deploy_url} = require('../urls');
 const percySnapshot = require('@percy/playwright');
+const appFunctions = require('../functions')
 
 test.skip('Processing speeds appear and work', async({page}) => {
     var myDate = new Date(new Date().getTime() + (11 * 24 * 60 * 60 * 1000));
@@ -26,38 +27,9 @@ test.skip('Processing speeds appear and work', async({page}) => {
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
     */
-    await page.waitForURL('**/india/apply-now#step=step_3a')
-  
-    await page.waitForTimeout(1000)
-    const dob_day = page.locator('[name="applicant.0.dob.day"]')
-    await dob_day.selectOption('13')
-    const dob_month = page.locator('[name="applicant.0.dob.month"]')
-    await dob_month.selectOption('7')
-    const dob_year = page.locator('[name="applicant.0.dob.year"]')
-    await dob_year.selectOption('2000')
-    const name_applicant = page.locator('[name="applicant.0.first_name"]')
-    await expect(name_applicant).toBeVisible()
-    await name_applicant.fill('Test')
-    
-    await page.waitForTimeout(1000)
-    const last_name = page.locator('[name="applicant.0.last_name"]')
-    await last_name.fill('Test')
-    await page.waitForTimeout(1000)
-  
-    await expect(continue_sidebar).toBeEnabled()
-    await continue_sidebar.click()
-    await page.waitForURL('**/india/apply-now#step=step_3c')
+    await appFunctions.step_2(page,continue_sidebar, "**/india/apply-now#step=step_3c")
 
-    const passport_num = page.locator('[name="applicant.0.passport_num"]')
-    await expect(passport_num).toBeVisible()
-    await passport_num.fill('123456789')
-    const passport_day = page.locator('[name="applicant.0.passport_expiration_date.day"]')
-    await passport_day.selectOption('13')
-    const passport_month = page.locator('[name="applicant.0.passport_expiration_date.month"]')
-    await passport_month.selectOption('7')
-    const passport_year = page.locator('[name="applicant.0.passport_expiration_date.year"]')
-    await passport_year.selectOption('2030')
-    await page.waitForTimeout(4000)
+    await appFunctions.step_3c(page,continue_sidebar)
     /*
     const dropdown_country = page.locator('[name="applicant.0.port_of_arrival"]');
     await expect(dropdown_country).toBeVisible();
