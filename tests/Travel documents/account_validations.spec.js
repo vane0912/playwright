@@ -75,7 +75,7 @@ test('Password set and test', async ({ page }) => {
 
 test('Card update', async ({ page }) => {
     await page.goto(deploy_url + 'account/payment-method')
-    await expect(page.getByTestId("addPaymentMethodBtn")).toBeEnabled()
+    await expect(page.getByTestId("updatePaymentMethodBtn")).toBeEnabled()
   
     await page.goto(deploy_url + 'account/payment-method/edit')
     await page.getByPlaceholder("Card number").fill("4556 7610 2998 3886")

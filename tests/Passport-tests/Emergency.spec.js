@@ -37,13 +37,6 @@ test('Emergency Passport', async({page}) =>{
     await percySnapshot(page, 'PassportStep2')
     await page.locator('#btnContinueSidebar').click()
 
-    await page.waitForURL('**/passport-renewal/united-states/application#step=step_4')
-    await page.waitForTimeout(2000)
-
-    await page.getByText("Emergency Service", {exact: true}).click()
-    await percySnapshot(page, 'PassportSpeedStep')
-    await page.locator('#btnContinueSidebar').waitFor()
-    await page.locator('#btnContinueSidebar').click()
     await page.locator('[name="applicant.0.shipping_address"]').fill('123')
     await page.waitForTimeout(2000)
     await page.keyboard.press("Space")
@@ -66,8 +59,17 @@ test('Emergency Passport', async({page}) =>{
     await page.waitForTimeout(1000)
 
     await page.locator('#btnContinueSidebar').click()
+    await page.waitForTimeout(3000)
 
-   await appFunctions.newPaymentCheckout(page,"**/passport-renewal/united-states/application#","4111111111111111", "123", true)
+    const duplicate = await page.isVisible('id=btnDisclaimerNext')
+    if (duplicate){
+      await page.locator('id=btnDisclaimerNext').click()
+    }
+
+    await page.getByText("Emergency Service", {exact: true}).click()
+    await percySnapshot(page, 'PassportSpeedStep')
+
+   await appFunctions.newPaymentCheckout(page,"**/passport-renewal/united-states/application#","4111111111111111", "123", false)
 
     const payment_btn = page.locator('id=btnSubmitPayment')
     await expect(payment_btn).toBeVisible()

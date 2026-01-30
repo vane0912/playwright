@@ -109,7 +109,7 @@ test('Embassy reg', async({page}) => {
   await expect(continue_step1).toBeEnabled()
   await continue_step1.click()
 
-  await appFunctions.newPaymentCheckout(page,"**/embassy-registration#","4111111111111111", "123", true)
+  await appFunctions.newPaymentCheckout(page,"**/embassy-registration#","4111111111111111", "123", false)
 
   const payment_btn = page.locator('id=btnSubmitPayment')
   await expect(payment_btn).toBeVisible()

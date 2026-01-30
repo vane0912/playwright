@@ -65,7 +65,7 @@ test('File upload checker', async({page}) => {
 
     const country_before_india =  page.getByTestId('filter-value').nth(1);
     await country_before_india.click();
-    const select_country = page.getByTestId('dropdown-general.10_years_country.0.country_where_boarded');
+    const select_country = page.getByTestId('dropdown-general.ten_years_countries.0.country_where_boarded');
     await select_country.fill('united states');
     await page.getByRole("option", {name: 'United States flag United States'}).click()
 
@@ -88,7 +88,7 @@ test('File upload checker', async({page}) => {
     await page.waitForTimeout(1000)
     await page.keyboard.press("Enter")
     await page.waitForTimeout(1000)
-    await page.locator('//li[@data-place-id="ChIJWy8aLa3HwoAR2aaEiB_BXTc"]').click()
+    await page.locator('//li[@data-place-id="ChIJ49W-BhhawokR4KLCF2oTVVo"]').click()
 
     await page.waitForTimeout(1000)
     await expect(next_btn).toBeEnabled()

@@ -1,70 +1,31 @@
 const { test, expect } = require('@playwright/test');
-const {deploy_url} = require('../urls');
+const passportSteps = require("../Functions/passport")
 const appFunctions = require('../functions')
 
 const path = require('path');
 
 test('USPS Passport', async({page}) =>{
     test.slow()
-    await page.goto(deploy_url + 'passport-renewal/united-states/application')
-    await page.waitForTimeout(2000)
-    await page.locator("id=btnContinueSidebar").click()
-    await page.waitForURL('**/passport-renewal/united-states/application#step=step_2')
-
-    await expect(page.getByPlaceholder('John William')).toBeVisible()
-
-    const dob_day = page.locator('[name="general.dob.day"]')
-    await dob_day.selectOption('13')
-
-    const dob_month = page.locator('[name="general.dob.month"]')
-    await dob_month.selectOption('7')
-
-    const dob_year = page.locator('[name="general.dob.year"]')
-    await dob_year.selectOption('2000')
-
-    const name_applicant = page.locator('[name="general.first_name"]')
-    await expect(name_applicant).toBeVisible()
-    await name_applicant.fill('Test')
+    await passportSteps.step_1_passport(page)
     
-    await page.waitForTimeout(1000)
-    const last_name = page.locator('[name="general.last_name"]')
-    await last_name.fill('Test')
-    await page.waitForTimeout(1000)
-    
-    await expect(page.locator('#btnContinueSidebar')).toBeEnabled()
-    await page.locator('#btnContinueSidebar').click()
-
-    await page.waitForURL('**/passport-renewal/united-states/application#step=step_4')
-    await page.waitForTimeout(2000)
-
-    await page.getByText("Expedited Service", {exact: true}).click()
+    const continue_sidebar = page.locator('#btnContinueSidebar')
+    await continue_sidebar.click()
 
     await page.locator('#btnContinueSidebar').waitFor()
     await page.locator('#btnContinueSidebar').click()
-    await page.locator('[name="applicant.0.shipping_address"]').fill('123')
-    await page.waitForTimeout(2000)
-    await page.keyboard.press("Space")
-    await page.waitForTimeout(1000)
-    await page.keyboard.press("Enter")
-    await page.waitForTimeout(1000)
-
-    const state = page.locator('[name="applicant.0.shipping_state"]');
-    await expect(state).toBeVisible();
-    await state.click();
-    const input_state = page.getByTestId('dropdown-applicant.0.shipping_state');
-
-    await expect(input_state).toBeVisible();
-    await input_state.fill('Alabama');
-    await page.getByRole("option", {name: ' Alabama'}).click()
-    await page.waitForTimeout(1000)
-    await page.locator('[name="applicant.0.shipping_zip"]').pressSequentially('test', { delay: 100 })
-    await page.waitForTimeout(1000)
-    await page.locator('[name="applicant.0.shipping_city"]').pressSequentially('test', { delay: 100 })
-    await page.waitForTimeout(1000)
-
+    //
+    await passportSteps.step_3_passport(page)
     await page.locator('#btnContinueSidebar').click()
 
-    await appFunctions.newPaymentCheckout(page,"**/passport-renewal/united-states/application#","4111111111111111", "123", true)
+    await page.waitForTimeout(3000)
+    const duplicate = await page.isVisible('id=btnDisclaimerNext')
+    if (duplicate){
+      await page.locator('id=btnDisclaimerNext').click()
+    }
+
+    await page.getByText("Expedited Service", {exact: true}).click()
+
+    await appFunctions.newPaymentCheckout(page,"**/passport-renewal/united-states/application#","4111111111111111", "123", false)
    
     /*
     const cardholder_name = page.getByPlaceholder("Cardholder name")

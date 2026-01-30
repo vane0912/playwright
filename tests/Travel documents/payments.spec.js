@@ -52,12 +52,12 @@ test('Payment with Amex', async({page}) => {
   
   await appFunctions.step_3c(page,continue_sidebar)
     
-    await appFunctions.newPaymentCheckout(page,"**/thailand/apply-now#", '3782 8224 6310 005', '1234')
-    const payment_btn = page.locator('id=btnSubmitPayment')
-    await expect(payment_btn).toBeVisible()
-    await expect(payment_btn).toBeEnabled()
-    await payment_btn.click()
-    await page.waitForNavigation({waitUntil: 'load'})
+  await appFunctions.newPaymentCheckout(page,"**/thailand/apply-now#", '3782 8224 6310 005', '1234')
+  const payment_btn = page.locator('id=btnSubmitPayment')
+  await expect(payment_btn).toBeVisible()
+  await expect(payment_btn).toBeEnabled()
+  await payment_btn.click()
+  await page.waitForNavigation({waitUntil: 'load'})
 })
   
 test('Payment with Discover', async({page}) => {
@@ -68,7 +68,7 @@ test('Payment with Discover', async({page}) => {
   
   await appFunctions.step_3c(page,continue_sidebar)
   
-    await appFunctions.newPaymentCheckout(page,"**/thailand/apply-now#", '6011 1111 1111 1117', '1234')
+    await appFunctions.newPaymentCheckout(page,"**/thailand/apply-now#", '6011 1111 1111 1117', '123')
     const payment_btn = page.locator('id=btnSubmitPayment')
     await expect(payment_btn).toBeVisible()
     await expect(payment_btn).toBeEnabled()
