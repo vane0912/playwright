@@ -21,6 +21,9 @@ test('Check pre-payment translations UK ETA korean', async ({ page }) => {
 
         await appFunctions.translations(page.locator('id=main'), "pre_payment", appFunctions.uk_eta, languages[i])
         await appFunctions.step_3c(page,continue_sidebar)
+        await page.waitForURL('**/' + languages[i] + '/united-kingdom/apply-now#step=review')
+        await page.waitForTimeout(5000)
+        await appFunctions.translations(page.locator('id=main'), "pre_payment", appFunctions.uk_eta, languages[i])
     }
 })
 

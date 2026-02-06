@@ -9,8 +9,9 @@ test('Payment with VISA', async({page}) => {
   await page.waitForURL("**/thailand/apply-now#step=step_3c")
 
   await appFunctions.step_3c(page,continue_sidebar)
-  
-  await appFunctions.newPaymentCheckout(page,"**/thailand/apply-now#", '3782 8224 6310 005', '1234')
+
+  await page.waitForURL("**/thailand/apply-now#step=review")
+  await appFunctions.newPaymentCheckout(page, '3782 8224 6310 005', '1234')
   const payment_btn = page.locator('id=btnSubmitPayment')
   await expect(payment_btn).toBeVisible()
   await expect(payment_btn).toBeEnabled()
@@ -37,8 +38,8 @@ test('Payment with Master Card', async({page}) => {
   await page.waitForURL("**/thailand/apply-now#step=step_3c")
 
   await appFunctions.step_3c(page,continue_sidebar)
-  
-  await appFunctions.newPaymentCheckout(page,"**/thailand/apply-now#", '5555 5555 5555 4444', '123')
+  await page.waitForURL("**/thailand/apply-now#step=review")
+  await appFunctions.newPaymentCheckout(page,'5555 5555 5555 4444', '123')
   const payment_btn = page.locator('id=btnSubmitPayment')
   await expect(payment_btn).toBeVisible()
   await expect(payment_btn).toBeEnabled()
@@ -54,8 +55,9 @@ test('Payment with Amex', async({page}) => {
   await page.waitForURL("**/thailand/apply-now#step=step_3c")
   
   await appFunctions.step_3c(page,continue_sidebar)
-    
-  await appFunctions.newPaymentCheckout(page,"**/thailand/apply-now#", '3782 8224 6310 005', '1234')
+  await page.waitForURL("**/thailand/apply-now#step=review")
+
+  await appFunctions.newPaymentCheckout(page,'3782 8224 6310 005', '1234')
   const payment_btn = page.locator('id=btnSubmitPayment')
   await expect(payment_btn).toBeVisible()
   await expect(payment_btn).toBeEnabled()
@@ -71,8 +73,9 @@ test('Payment with Discover', async({page}) => {
   await page.waitForURL("**/thailand/apply-now#step=step_3c")
   
   await appFunctions.step_3c(page,continue_sidebar)
+  await page.waitForURL("**/thailand/apply-now#step=review")
   
-    await appFunctions.newPaymentCheckout(page,"**/thailand/apply-now#", '6011 1111 1111 1117', '123')
+    await appFunctions.newPaymentCheckout(page,'6011 1111 1111 1117', '123')
     const payment_btn = page.locator('id=btnSubmitPayment')
     await expect(payment_btn).toBeVisible()
     await expect(payment_btn).toBeEnabled()

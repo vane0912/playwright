@@ -53,8 +53,9 @@ test('Embassy Visa', async({page}) => {
   
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    
-    await appFunctions.newPaymentCheckout(page,"**/australia/apply-now#", '6011 1111 1111 1117', '123')
+    await page.waitForURL('**/australia/apply-now#step=review')
+
+    await appFunctions.newPaymentCheckout(page, '6011 1111 1111 1117', '123')
     const payment_btn = page.locator('id=btnSubmitPayment')
     await expect(payment_btn).toBeVisible()
     await expect(payment_btn).toBeEnabled()

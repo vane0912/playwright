@@ -32,7 +32,8 @@ test('Individual subscription purchase', async ({ page }) => {
 
     return
   }
-  await appFunctions.newPaymentCheckout(page,"**/turkey/apply-now#", '6011 1111 1111 1117', '123')
+  await page.waitForURL("**/turkey/apply-now#step=review")
+  await appFunctions.newPaymentCheckout(page, '6011 1111 1111 1117', '123')
 
   const payment_btn = page.locator('id=btnSubmitPayment')
   await expect(payment_btn).toBeVisible()

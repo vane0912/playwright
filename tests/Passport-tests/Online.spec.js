@@ -23,8 +23,9 @@ test('Online Passport', async({page}) =>{
     }
 
     await page.getByText('Standard Service', { exact: true }).click()
+    await page.waitForURL('**/passport-renewal/united-states/application#step=review')
 
-    await appFunctions.newPaymentCheckout(page,"**/passport-renewal/united-states/application#","4111111111111111", "123", false)
+    await appFunctions.newPaymentCheckout(page,"4111111111111111", "123", false)
 
     const payment_btn = page.locator('id=btnSubmitPayment')
     await expect(payment_btn).toBeVisible()

@@ -43,8 +43,9 @@ test('Processing speeds appear and work', async({page}) => {
     await page.getByText("Super Rush").click()
     await page.waitForTimeout(3000)
     await expect(correct_total).toHaveText('$205.99')
+    await page.waitForURL("**/india/apply-now#step=step_review")
 
-    await appFunctions.newPaymentCheckout(page,"**/india/apply-now#", '6011 1111 1111 1117', '123')
+    await appFunctions.newPaymentCheckout(page,'6011 1111 1111 1117', '123')
     const payment_btn = page.locator('id=btnSubmitPayment')
     await expect(payment_btn).toBeVisible()
     await expect(payment_btn).toBeEnabled()

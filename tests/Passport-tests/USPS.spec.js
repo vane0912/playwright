@@ -25,7 +25,8 @@ test('USPS Passport', async({page}) =>{
 
     await page.getByText("Expedited Service", {exact: true}).click()
 
-    await appFunctions.newPaymentCheckout(page,"**/passport-renewal/united-states/application#","4111111111111111", "123", false)
+    await page.waitForURL('**/passport-renewal/united-states/application#step=review')
+    await appFunctions.newPaymentCheckout(page,"4111111111111111", "123", false)
    
     /*
     const cardholder_name = page.getByPlaceholder("Cardholder name")

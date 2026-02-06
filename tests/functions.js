@@ -65,8 +65,7 @@ async function translations(selector, section, product, language){
 
 }
 
-async function newPaymentCheckout(page,url,creditCard, cvvNum,continuebtn){
-    await page.waitForURL(url + 'step=review')
+async function newPaymentCheckout(page,creditCard, cvvNum,continuebtn){
     if(continuebtn){
         await page.getByRole('button', { name: 'Continue to payment' }).click()
     }

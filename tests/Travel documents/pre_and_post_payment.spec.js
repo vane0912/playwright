@@ -96,8 +96,9 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
     sidebar_3a.forEach(async txt => await expect(sidebar_step_2).toContainText(txt))
 
     await appFunctions.step_3c(page,continue_sidebar)
+    await page.waitForURL('**/thailand/apply-now#step=review')
 
-    await appFunctions.newPaymentCheckout(page,"**/thailand/apply-now#", '6011 1111 1111 1117', '123')
+    await appFunctions.newPaymentCheckout(page, '6011 1111 1111 1117', '123')
     
     const payment_btn = page.locator('id=btnSubmitPayment')
     await expect(payment_btn).toBeVisible()
