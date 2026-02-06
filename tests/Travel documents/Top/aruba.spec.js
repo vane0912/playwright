@@ -3,7 +3,7 @@ const { test, expect } = require('@playwright/test');
 const appFunctions = require('../../functions')
 
 
-test('Extra Order', async ({ page }) => {
+test('Aruba ED Card', async ({ page }) => {
   await appFunctions.step_1(page,"us", "aruba/apply-now")
   const continue_sidebar = page.locator('id=btnContinueSidebar')
 
@@ -38,6 +38,14 @@ test('Extra Order', async ({ page }) => {
   const input_airline = page.getByTestId('dropdown-general.arrival_flight_airline');
   await input_airline.fill("AA")
   await page.getByRole("option", {name: 'American Airlines (AA)'}).click()
+  await page.locator('[name="general.arrival_flight_number"]').fill("12345")
+  await page.waitForTimeout(2000)
+  const next_btn = page.locator('id=btnContinueUnderSection')
+  await page.waitForTimeout(1000)
+  await expect(next_btn).toBeEnabled()
+  await next_btn.click()
+  await page.waitForTimeout(2000)
+  await expect(page.locator(".input-error")).toContainText("Please provide a valid arrival flight number ")
 
   const url = 'https://api.aviationstack.com/v1/flights?limit=1&airline_icao=AAL&access_key=' + process.env.FLIGHT_API;
   const options = {method: 'GET', headers: {Accept: 'application/json'}};
@@ -53,8 +61,6 @@ test('Extra Order', async ({ page }) => {
   await page.locator('[name="general.arrival_flight_number"]').fill(flight_number)
   await page.waitForTimeout(2000)
 
-  const next_btn = page.locator('id=btnContinueUnderSection')
-  await page.waitForTimeout(1000)
   await expect(next_btn).toBeEnabled()
   await next_btn.click()
   await page.waitForTimeout(2000)
