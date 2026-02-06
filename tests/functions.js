@@ -11,19 +11,32 @@ var us_esta_ko = {
   deployment: deploy_url
 }
 
-var uk_eta_ko = {
+var uk_eta = {
   product: "UK ETA",
-  pre_payment: 0,
-  pre_payment_missing: [],
-  post_payment: 0,
-  post_payment_missing: [],
+  languages: [
+    {
+        translations: "ko",
+        pre_payment: 0,
+        ko_pre_payment: [],
+        ko_post_payment: [],
+        post_payment: 0
+
+    },
+    {
+        translations: "ja",
+        pre_payment: 0,
+        ja_pre_payment: [],
+        ja_post_payment: [],
+        post_payment: 0
+    }
+  ],
   deployment: deploy_url
 }
-async function translations(parent, child, section, product){
+async function translations(selector, section, product, language){
     const module = await import('eld');
     eld = module.eld;
-    
-    const allElements = await parent.locator(child).all();
+    let ignore = []
+    const allElements = await selector.all();
     const filtered_array = await Promise.all(
         allElements.map(async (el) => {
             let get_text = (await el.textContent())?.trim();
@@ -33,19 +46,23 @@ async function translations(parent, child, section, product){
         })
     )
     const remove_undefined = filtered_array.filter(Boolean);
-    product[`${section}_missing`].push(...remove_undefined)
-    /*
+    
     let detect_english = remove_undefined.filter((text) => {
         const words_to_ignore = ignore.some(word => text.includes(word))
-        if (!words_to_ignore && eld.detect(text).language !== "ko"){
+        if (!words_to_ignore && eld.detect(text).language !== language){
             return text
         }
     })
     if(detect_english.length > 0){
-        product[section]++ 
-        product[`${section}_missing`].push(...detect_english)
+        product.languages.forEach(element => {    
+            if(element.translations === language){
+                element[section]++
+                element[`${language}_${section}`].push(...detect_english)
+                console.log(element)
+            }
+        });
     }
-    */
+
 }
 
 async function newPaymentCheckout(page,url,creditCard, cvvNum,continuebtn){
@@ -126,7 +143,7 @@ async function step_1(page,country,url){
     await page.waitForURL('**/'+ url + '#step=step_3a')
 }
 
-async function step_2(page,continue_sidebar,url){
+async function step_2(page,continue_sidebar){
     const dob_day = page.locator('[name="applicant.0.dob.day"]')
     await dob_day.selectOption('13')
 
@@ -146,7 +163,6 @@ async function step_2(page,continue_sidebar,url){
     
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    await page.waitForURL(url)
 }
 
 async function step_3c(page,continue_sidebar){
@@ -166,7 +182,7 @@ async function step_3c(page,continue_sidebar){
 
 module.exports = {
     translations,
-    uk_eta_ko,
+    uk_eta,
     us_esta_ko, 
     newPaymentCheckout, 
     step_1,

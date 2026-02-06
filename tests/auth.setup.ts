@@ -15,7 +15,9 @@ setup('authenticate', async ({ page }) => {
     await page.locator('[name="general.email"]').fill(email_test)
 
     await page.waitForTimeout(1000)
-    await appFunctions.step_2(page, continue_sidebar, "**/turkey/apply-now#step=step_3c")
+    await appFunctions.step_2(page, continue_sidebar)
+
+    await page.waitForURL("**/turkey/apply-now#step=step_3c")
     
     const dropdown_country_step3c = page.locator('[name="applicant.0.nationality_country"]');
     await expect(dropdown_country_step3c).toBeVisible();

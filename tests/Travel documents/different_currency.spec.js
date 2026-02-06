@@ -57,7 +57,8 @@ test('Different currency', async ({ page }) => {
   */
   await page.waitForURL('**/turkey/apply-now#step=step_3a')
   
-  await appFunctions.step_2(page,continue_sidebar, "**/turkey/apply-now#step=step_3c")
+  await appFunctions.step_2(page,continue_sidebar)
+  await page.waitForURL("**/turkey/apply-now#step=step_3c")
   
   await appFunctions.step_3c(page,continue_sidebar)
 

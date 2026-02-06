@@ -7,7 +7,8 @@ test('Embassy Visa', async({page}) => {
     await appFunctions.step_1(page,"mx", "australia/apply-now")
     const continue_sidebar = page.locator('id=btnContinueSidebar')
   
-    await appFunctions.step_2(page,continue_sidebar, "**/australia/apply-now#step=step_3c")
+    await appFunctions.step_2(page,continue_sidebar)
+    await page.waitForURL("**/australia/apply-now#step=step_3c")
 
     const skip_passport = page.locator('[name="applicant.0.is_passport_on_hand"]')
     await expect(skip_passport).toBeVisible()

@@ -15,7 +15,8 @@ test('File upload checker', async({page}) => {
    await appFunctions.step_1(page,"us", "india/apply-now")
     const continue_sidebar = page.locator('id=btnContinueSidebar')
   
-    await appFunctions.step_2(page,continue_sidebar, "**/india/apply-now#step=step_3c")
+    await appFunctions.step_2(page,continue_sidebar)
+    await page.waitForURL("**/india/apply-now#step=step_3c")
 
    await appFunctions.step_3c(page,continue_sidebar)
 
@@ -122,12 +123,14 @@ test('File upload checker', async({page}) => {
     await page.waitForTimeout(2000)
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
-    await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_travel")
+    //await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_travel")
+    /*
     await page.waitForTimeout(2000)
     await page.getByTestId("boolean-No").first().click()
     await page.waitForTimeout(2000)
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
+    */
     await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_documents")
 
     // Confirm instructions appear Applicant photo

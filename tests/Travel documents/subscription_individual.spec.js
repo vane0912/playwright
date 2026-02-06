@@ -8,11 +8,32 @@ test('Individual subscription purchase', async ({ page }) => {
   test.slow()
   await appFunctions.step_1(page,"mx", "turkey/apply-now")
   const continue_sidebar = page.locator('id=btnContinueSidebar')
-  await appFunctions.step_2(page,continue_sidebar, "**/turkey/apply-now#step=step_3c")
+  await appFunctions.step_2(page,continue_sidebar)
+  await page.waitForURL("**/turkey/apply-now#step=step_3c")
   
   await appFunctions.step_3c(page,continue_sidebar)
+
+  await page.waitForURL('**/turkey/apply-now#step=review')
+  await page.waitForTimeout(2000)
+  const duplicate = await page.isVisible('id=btnDisclaimerNext')
+  if (duplicate){
+    await page.locator('id=btnDisclaimerNext').click()
+  }
+
+  const has_subscription = await page.getByText("Confirmation").isVisible()
+  if (has_subscription){
+    const payment_btn = page.locator('id=btnSubmitPayment')
+    await expect(payment_btn).toBeVisible()
+    await expect(payment_btn).toBeEnabled()
+    await payment_btn.click()
     
+    await page.waitForNavigation({waitUntil: 'load'})
+    await page.getByTestId("transition-page-button").click()
+
+    return
+  }
   await appFunctions.newPaymentCheckout(page,"**/turkey/apply-now#", '6011 1111 1111 1117', '123')
+
   const payment_btn = page.locator('id=btnSubmitPayment')
   await expect(payment_btn).toBeVisible()
   await expect(payment_btn).toBeEnabled()
@@ -61,7 +82,11 @@ test('Individual subscription purchase', async ({ page }) => {
   await expect(submit_post_payment).toBeEnabled()
   await submit_post_payment.click()
   await page.waitForNavigation({waitUntil: 'load'})
-  await page.locator('id=skip-recommendation-button').click()    
+  await page.waitForTimeout(3000)
+  const skip_recomendation = await page.locator('id=skip-recommendation-button').isVisible()
+  if(skip_recomendation){
+    await page.locator('id=skip-recommendation-button').click()    
+  }
 
   await page.locator('id=trackApplication').click()
   
@@ -76,44 +101,22 @@ test('Individual subscription purchase', async ({ page }) => {
   await page.waitForTimeout(3000)
   await percySnapshot(page, 'Purchase Subscription modal');
   await page.getByTestId("purchase-subscription-button").click()
-  /*
-  await page.getByPlaceholder("Card number").fill("4556 7610 2998 3886")
-  await page.getByPlaceholder("MM/YY").fill("10/29")
-  await page.getByPlaceholder("CVV").fill("123")
-  await page.getByPlaceholder("Cardholder name").fill("John Smith")
-  await page.waitForTimeout(3000)
-  await page.locator("id=btnSubmitPayment").click()
-  */
+  
   await page.waitForURL(deploy_url + "order/" + order_num + "?subscription=true")
 
   // Place free order 
   await appFunctions.step_1(page,"mx", "turkey/apply-now")
 
-  await appFunctions.step_2(page,continue_sidebar, "**/turkey/apply-now#step=step_3c")
+  await appFunctions.step_2(page,continue_sidebar)
+  await page.waitForURL("**/turkey/apply-now#step=step_3c")
   
   await appFunctions.step_3c(page,continue_sidebar)
   
-   await page.waitForURL('**/turkey/apply-now#step=step_4')
-  
-  await expect(page.getByTestId('processing-standard')).toBeVisible()
-  const standar_processing = page.getByTestId('processing-standard')
-  await expect(standar_processing).toBeVisible()
-
-  await expect(continue_sidebar).toBeEnabled()
-  await continue_sidebar.click()
   await page.waitForURL('**/turkey/apply-now#step=review')
   await page.waitForTimeout(2000)
-  const duplicate = await page.isVisible('id=btnDisclaimerNext')
   if (duplicate){
     await page.locator('id=btnDisclaimerNext').click()
   }
-  /*
-  const cardholder_name = page.getByPlaceholder("Cardholder name")
-  await cardholder_name.fill('John Smith')
-  
-  const zip_code = page.getByPlaceholder("ZIP code")
-  await zip_code.fill('12345')
-  */
 
   await expect(payment_btn).toBeVisible()
   await expect(payment_btn).toBeEnabled()

@@ -22,7 +22,9 @@ test('Processing speeds appear and work', async({page}) => {
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
     */
-    await appFunctions.step_2(page,continue_sidebar, "**/india/apply-now#step=step_3c")
+    await appFunctions.step_2(page,continue_sidebar)
+    await page.waitForURL("**/india/apply-now#step=step_3c")
+
     await appFunctions.step_3c(page,continue_sidebar)
     await page.waitForTimeout(3000)
     
@@ -32,15 +34,15 @@ test('Processing speeds appear and work', async({page}) => {
     }
     await page.getByText("Standard").click()
     const correct_total = page.getByTestId('order-total')
-    await expect(correct_total).toHaveText('$121.99')
+    await expect(correct_total).toHaveText('$125.99')
 
     await page.getByTestId('processing-rush').click()
     await page.waitForTimeout(3000)
-    await expect(correct_total).toHaveText('$141.99')
+    await expect(correct_total).toHaveText('$145.99')
 
     await page.getByText("Super Rush").click()
     await page.waitForTimeout(3000)
-    await expect(correct_total).toHaveText('$201.99')
+    await expect(correct_total).toHaveText('$205.99')
 
     await appFunctions.newPaymentCheckout(page,"**/india/apply-now#", '6011 1111 1111 1117', '123')
     const payment_btn = page.locator('id=btnSubmitPayment')

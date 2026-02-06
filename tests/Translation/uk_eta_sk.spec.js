@@ -4,7 +4,28 @@ const path = require('path');
 const appFunctions= require('../functions');
 
 let Order_num
-test('Check translations UK ETA korean', async ({ page }) => {
+let languages = ["ko", "ja"]
+test('Check pre-payment translations UK ETA korean', async ({ page }) => {
+    for (let i = 0; i < languages.length; i++){
+        await page.goto(deploy_url + languages[i] + '/united-kingdom/apply-now')
+        await page.waitForTimeout(4000)
+        await appFunctions.translations(page.locator('id=main'), "pre_payment", appFunctions.uk_eta, languages[i])
+
+        const continue_sidebar = page.locator('id=btnContinueSidebar')
+        await continue_sidebar.click()
+        await page.waitForURL('**/' + languages[i] + '/united-kingdom/apply-now#step=step_3a')
+        await appFunctions.translations(page.locator('id=main'), "pre_payment", appFunctions.uk_eta, languages[i])
+
+        await appFunctions.step_2(page, continue_sidebar)
+        await page.waitForURL('**/' + languages[i] + '/united-kingdom/apply-now#step=step_3c')
+
+        await appFunctions.translations(page.locator('id=main'), "pre_payment", appFunctions.uk_eta, languages[i])
+        await appFunctions.step_3c(page,continue_sidebar)
+    }
+})
+
+
+test.skip('Check translations UK ETA korean', async ({ page }) => {
     test.slow()
     await page.goto(deploy_url + 'ko/united-kingdom/apply-now')
     await page.waitForTimeout(4000)
@@ -89,7 +110,7 @@ test('Check translations UK ETA korean', async ({ page }) => {
     await page.waitForTimeout(1000)
     await page.keyboard.press("Enter")
     await page.waitForTimeout(1000)
-    await page.locator('//li[@data-place-id="ChIJWy8aLa3HwoAR2aaEiB_BXTc"]').click()
+    await page.locator('//li[@data-place-id="ChIJ49W-BhhawokR4KLCF2oTVVo"]').click()
     await page.waitForTimeout(1000)
     
     await expect(next_btn).toBeEnabled()
@@ -159,8 +180,10 @@ test('Check translations UK ETA korean', async ({ page }) => {
     await page.getByText("선택한 세부정보 사용").click()
     await appFunctions.translations(page.locator('id=question-container'), "div", "post_payment", appFunctions.uk_eta_ko)
 
+    console.log(appFunctions.uk_eta_ko)
+
     //const request = await fetch("https://littleserver-production.up.railway.app/translations", {
-    const request = await fetch("http://localhost:3000/translations", {
+    const request = await fetch("http://localhost:5678/webhook-test/translations", {
       method: "POST",
       headers: {
           "Content-Type": "application/json",

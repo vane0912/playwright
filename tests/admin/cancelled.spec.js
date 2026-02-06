@@ -1,5 +1,5 @@
 const { test, expect } = require('@playwright/test');
-const {deploy_url, Orders} = require('../urls');
+const {deploy_url} = require('../urls');
 const path = require('path');
 
 
