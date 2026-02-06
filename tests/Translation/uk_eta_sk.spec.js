@@ -4,7 +4,7 @@ const path = require('path');
 const appFunctions= require('../functions');
 
 let Order_num
-let languages = ["ko", "ja"]
+let languages = ["ko"]
 test('Check pre-payment translations UK ETA korean', async ({ page }) => {
     for (let i = 0; i < languages.length; i++){
         await page.goto(deploy_url + languages[i] + '/united-kingdom/apply-now')

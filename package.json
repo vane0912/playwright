@@ -13,7 +13,7 @@
     "@percy/playwright": "^1.0.8",
     "@playwright/test": "^1.49.1",
     "@types/node": "^22.10.7",
-    "dotenv": "^16.5.0"
+    "dotenv": "^16.6.1"
   },
   "dependencies": {
     "eld": "^1.0.1",

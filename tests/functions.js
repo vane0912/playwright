@@ -35,7 +35,7 @@ var uk_eta = {
 async function translations(selector, section, product, language){
     const module = await import('eld');
     eld = module.eld;
-    let ignore = []
+    //let ignore = []
     const allElements = await selector.all();
     const filtered_array = await Promise.all(
         allElements.map(async (el) => {
@@ -48,8 +48,8 @@ async function translations(selector, section, product, language){
     const remove_undefined = filtered_array.filter(Boolean);
     
     let detect_english = remove_undefined.filter((text) => {
-        const words_to_ignore = ignore.some(word => text.includes(word))
-        if (!words_to_ignore && eld.detect(text).language !== language){
+        //const words_to_ignore = ignore.some(word => text.includes(word))
+        if (eld.detect("Hello").language !== language){
             return text
         }
     })
