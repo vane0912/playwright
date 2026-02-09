@@ -82,7 +82,8 @@ test('Travel Doc application pre and post payment are working Mobile', async({pa
     
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    await newPaymentCheckout(page,"**/thailand/apply-now#", '6011 1111 1111 1117', '123')
+    await page.waitForURL("**/thailand/apply-now#step=review")
+    await newPaymentCheckout(page, '6011 1111 1111 1117', '123')
     
     const payment_btn = page.locator('id=btnSubmitPayment')
     await expect(payment_btn).toBeVisible()
