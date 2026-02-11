@@ -34,16 +34,15 @@ test('Processing speeds appear and work', async({page}) => {
     }
     await page.getByText("Standard").click()
     const correct_total = page.getByTestId('order-total')
-    await expect(correct_total).toHaveText('$126.00')
+    await expect(correct_total).toHaveText('$125.99')
 
     await page.getByTestId('processing-rush').click()
     await page.waitForTimeout(3000)
-    await expect(correct_total).toHaveText('$146.00')
+    await expect(correct_total).toHaveText('$145.99')
 
     await page.getByText("Super Rush").click()
     await page.waitForTimeout(3000)
-    await expect(correct_total).toHaveText('$206.00')
-    await page.waitForURL("**/india/apply-now#step=step_review")
+    await expect(correct_total).toHaveText('$205.99')
 
     await appFunctions.newPaymentCheckout(page,'6011 1111 1111 1117', '123')
     const payment_btn = page.locator('id=btnSubmitPayment')

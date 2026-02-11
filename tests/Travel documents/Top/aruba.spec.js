@@ -1,6 +1,7 @@
 require('dotenv').config();
 const { test, expect } = require('@playwright/test');
 const appFunctions = require('../../functions')
+const selectors = require('../../selectors')
 
 
 test('Aruba ED Card', async ({ page }) => {
@@ -23,15 +24,8 @@ test('Aruba ED Card', async ({ page }) => {
   await page.getByTestId("transition-page-button").click()
   
   
-  await page.getByPlaceholder('111-222-3333').fill('11111111')
-  await page.getByTestId('boolean-WhatsApp').click()
-  
-  const arrival_date_visible = page.locator('[name="general.arrival_date"]')
-  await expect(arrival_date_visible).toBeVisible()
-  await arrival_date_visible.click()
-  await expect(page.locator('.dp__outer_menu_wrap')).toBeVisible()
-  await page.locator('[data-dp-element="action-next"]').click()
-  await page.locator('.dp--future').filter({hasText: '12'}).first().click()
+  await selectors.phoneNumber(page)
+  await selectors.arrival_date(page)
 
   const arrival_airline =  page.getByTestId('filter-value').nth(1);
   await arrival_airline.click();

@@ -1,6 +1,6 @@
 const {deploy_url} = require('./urls');
+const cld = require('cld')
 const { expect } = require('@playwright/test');
-let eld;
 
 var us_esta_ko = {
   product: "US ESTA",
@@ -28,28 +28,43 @@ var uk_eta = {
         ja_pre_payment: [],
         ja_post_payment: [],
         post_payment: 0
+    },
+    {
+        translations: "ru",
+        pre_payment: 0,
+        ru_pre_payment: [],
+        ru_post_payment: [],
+        post_payment: 0
+
+    },
+    {
+        translations: "tr",
+        pre_payment: 0,
+        tr_pre_payment: [],
+        tr_post_payment: [],
+        post_payment: 0
     }
   ],
   deployment: deploy_url
 }
 async function translations(selector, section, product, language){
-    const module = await import('eld');
-    eld = module.eld;
-    //let ignore = []
+
     const allElements = await selector.all();
     const filtered_array = await Promise.all(
         allElements.map(async (el) => {
-            let get_text = (await el.textContent())?.trim();
+            let get_text = (await el.textContent())?.trim()?.replace(/\n/g, ' ').replace(/[0-9]/g, '').replace(/[!@#$%^&*(),.?":{}|<>+]/g, '');
             if(get_text && get_text.length > 0){
                 return get_text
             }
         })
     )
     const remove_undefined = filtered_array.filter(Boolean);
-    
-    let detect_english = remove_undefined.filter((text) => {
-        //const words_to_ignore = ignore.some(word => text.includes(word))
-        if (eld.detect("Hello").language !== language){
+
+    let detect_english = remove_undefined.filter(async (text) => {
+        const detect = await cld.detect(text)
+        const check_includes = detect.chunks.some(chunk => chunk.code === "en")
+
+        if (check_includes){
             return text
         }
     })
@@ -58,11 +73,9 @@ async function translations(selector, section, product, language){
             if(element.translations === language){
                 element[section]++
                 element[`${language}_${section}`].push(...detect_english)
-                console.log(element)
             }
         });
     }
-
 }
 
 async function newPaymentCheckout(page,creditCard, cvvNum,continuebtn){
@@ -150,7 +163,7 @@ async function step_2(page,continue_sidebar){
     await dob_month.selectOption('7')
 
     const dob_year = page.locator('[name="applicant.0.dob.year"]')
-    await dob_year.selectOption('2000')
+    await dob_year.selectOption('2001')
 
     const name_applicant = page.locator('[name="applicant.0.first_name"]')
     await name_applicant.fill('Test')
