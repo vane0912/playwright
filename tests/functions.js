@@ -2,31 +2,44 @@ const {deploy_url} = require('./urls');
 const cld = require('cld')
 const { expect } = require('@playwright/test');
 
-var us_esta_ko = {
-  product: "US ESTA",
-  pre_payment: 0,
-  pre_payment_missing: [],
-  post_payment: 0,
-  post_payment_missing: [],
-  deployment: deploy_url
-}
-
 var uk_eta = {
   product: "UK ETA",
   languages: [
     {
-        translations: "ko",
+        translations: "pt",
         pre_payment: 0,
-        ko_pre_payment: [],
-        ko_post_payment: [],
+        pt_pre_payment: [],
+        pt_post_payment: [],
         post_payment: 0
 
     },
     {
-        translations: "ja",
+        translations: "de",
         pre_payment: 0,
-        ja_pre_payment: [],
-        ja_post_payment: [],
+        de_pre_payment: [],
+        de_post_payment: [],
+        post_payment: 0
+    },
+    {
+        translations: "fr",
+        pre_payment: 0,
+        fr_pre_payment: [],
+        fr_post_payment: [],
+        post_payment: 0
+
+    },
+    {
+        translations: "it",
+        pre_payment: 0,
+        it_pre_payment: [],
+        it_post_payment: [],
+        post_payment: 0
+    },
+    {
+        translations: "es",
+        pre_payment: 0,
+        es_pre_payment: [],
+        es_post_payment: [],
         post_payment: 0
     },
     {
@@ -35,7 +48,6 @@ var uk_eta = {
         ru_pre_payment: [],
         ru_post_payment: [],
         post_payment: 0
-
     },
     {
         translations: "tr",
@@ -44,6 +56,7 @@ var uk_eta = {
         tr_post_payment: [],
         post_payment: 0
     }
+
   ],
   deployment: deploy_url
 }
@@ -195,7 +208,6 @@ async function step_3c(page,continue_sidebar){
 module.exports = {
     translations,
     uk_eta,
-    us_esta_ko, 
     newPaymentCheckout, 
     step_1,
     step_2,

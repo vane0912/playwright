@@ -67,6 +67,24 @@ const passportPhoto = async (page) => {
     await expect(page.locator("id=document-step")).toContainText("Your upload passed our initial review!", "One of our experts will do a final review to ensure it meets all requirements. If it doesn't, we’ll contact you. ", "Don't like it? ", "You can take a new one")
     await page.locator('id=review-continue').click()
 }
+
+const dropdownSelector = async (page, name, dataHandle, text, value) => {
+    await page.locator('[name="' + name + '"]').click()
+    await page.waitForTimeout(2000)
+    await page.getByTestId(dataHandle).fill(text)
+    await page.getByRole('option', {value: value}).click()
+    await page.waitForTimeout(2000)
+}
+
+const datePicker = async (page, name, day, month, year) =>{
+    await page.locator('[name="' + name + '.day"]').selectOption(day)
+    await page.waitForTimeout(2000)
+    await page.locator('[name="' + name + '.month"]').selectOption(month)
+    await page.waitForTimeout(2000)
+    await page.locator('[name="' + name + '.year"]').selectOption(year)
+    await page.waitForTimeout(2000)
+}
+
 module.exports = {
     arrival_date,
     phoneNumber,
@@ -76,5 +94,7 @@ module.exports = {
     addressApi,
     dropdownOptions,
     applicantPhoto,
-    passportPhoto
+    passportPhoto,
+    dropdownSelector,
+    datePicker
 }
