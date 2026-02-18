@@ -8,7 +8,24 @@ test('Individual subscription purchase', async ({ page }) => {
   test.slow()
   await appFunctions.step_1(page,"mx", "turkey/apply-now")
   const continue_sidebar = page.locator('id=btnContinueSidebar')
-  await appFunctions.step_2(page,continue_sidebar)
+
+  
+  const dob_day = page.locator('[name="applicant.0.dob.day"]')
+  await dob_day.selectOption('13')
+  const dob_month = page.locator('[name="applicant.0.dob.month"]')
+  await dob_month.selectOption('8')
+  const dob_year = page.locator('[name="applicant.0.dob.year"]')
+  await dob_year.selectOption('2001')
+  const name_applicant = page.locator('[name="applicant.0.first_name"]')
+  await name_applicant.fill('Test')
+  
+  await page.waitForTimeout(1000)
+  const last_name = page.locator('[name="applicant.0.last_name"]')
+  await last_name.fill('Test')
+  await page.waitForTimeout(1000)
+  
+  await expect(continue_sidebar).toBeEnabled()
+  await continue_sidebar.click()
   await page.waitForURL("**/turkey/apply-now#step=step_3c")
   
   await appFunctions.step_3c(page,continue_sidebar)
@@ -108,7 +125,17 @@ test('Individual subscription purchase', async ({ page }) => {
   // Place free order 
   await appFunctions.step_1(page,"mx", "turkey/apply-now")
 
-  await appFunctions.step_2(page,continue_sidebar)
+  await dob_day.selectOption('13')
+  await dob_month.selectOption('8')
+  await dob_year.selectOption('2001')
+  await name_applicant.fill('Test')
+  
+  await page.waitForTimeout(1000)
+  await last_name.fill('Test')
+  await page.waitForTimeout(1000)
+  
+  await expect(continue_sidebar).toBeEnabled()
+  await continue_sidebar.click()
   await page.waitForURL("**/turkey/apply-now#step=step_3c")
   
   await appFunctions.step_3c(page,continue_sidebar)

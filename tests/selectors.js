@@ -10,8 +10,8 @@ async function arrival_date(page){
   await page.locator('.dp--future').filter({hasText: '12'}).first().click()
 }
 
-async function departure_date(page){
-  const departure_date_visible = page.locator('[name="general.departure_date"]')
+async function departure_date(page, name){
+  const departure_date_visible = page.locator('[name="' + name + '"]')
   await expect(departure_date_visible).toBeVisible()
   await departure_date_visible.click()
   await expect(page.locator('.dp__outer_menu_wrap')).toBeVisible()
@@ -30,7 +30,7 @@ async function addressApi(page, name) {
     await page.waitForTimeout(1000)
     await page.keyboard.press("Enter")
     await page.waitForTimeout(1000)
-    await page.locator('//li[@data-place-id="ChIJeyRnclRJxkcRxIZpwvHtnCk"]').click()
+    await page.locator('//li[@data-type="place"]').first().click()
     await page.waitForTimeout(1000)
 }
 
