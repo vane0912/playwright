@@ -2,6 +2,7 @@ const { test, expect } = require('@playwright/test');
 const {deploy_url} = require('../urls');
 const percySnapshot = require('@percy/playwright');
 const appFunctions = require('../functions')
+const selectors = require('../selectors')
 
 const path = require('path');
 
@@ -84,13 +85,7 @@ test('File upload checker', async({page}) => {
     await next_btn.click()
     await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_residency_information_after_payment")
     
-    await page.getByPlaceholder('1234 Sesame St. Apt. 3, Springtown, IL 55555').fill('123')
-    await page.waitForTimeout(2000)
-    await page.keyboard.press("Space")
-    await page.waitForTimeout(1000)
-    await page.keyboard.press("Enter")
-    await page.waitForTimeout(1000)
-    await page.locator('//li[@data-place-id="ChIJ49W-BhhawokR4KLCF2oTVVo"]').click()
+    await selectors.addressApi(page, "applicant.0.home_address")
 
     await page.waitForTimeout(1000)
     await expect(next_btn).toBeEnabled()

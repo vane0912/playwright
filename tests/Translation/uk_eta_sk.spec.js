@@ -1,4 +1,4 @@
-const { test, expect, selectors } = require('@playwright/test');
+const { test, expect } = require('@playwright/test');
 const {deploy_url} = require('../urls');
 const path = require('path');
 const appFunctions= require('../functions');

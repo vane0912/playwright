@@ -1,5 +1,6 @@
 const { test, expect } = require('@playwright/test');
 const appFunctions = require('../functions')
+const selectors = require('../selectors')
 const path = require('path');
 
 test('Embassy Visa', async({page}) => {
@@ -158,14 +159,7 @@ test('Embassy Visa', async({page}) => {
     await visa_denied.click()
 
     await page.locator('[name="applicant.0.birth_city"]').fill("test")
-
-    await page.getByPlaceholder('1234 Sesame St. Apt. 3, Springtown, IL 55555').fill('123')
-    await page.waitForTimeout(2000)
-    await page.keyboard.press("Space")
-    await page.waitForTimeout(1000)
-    await page.keyboard.press("Enter")
-    await page.waitForTimeout(1000)
-    await page.locator('//li[@data-place-id="ChIJ49W-BhhawokR4KLCF2oTVVo"]').click()
+    await selectors.addressApi(page, "applicant.0.home_address")
 
     const birth_country = page.locator('[name="applicant.0.secondary_document_issued_country"]');
     await expect(birth_country).toBeVisible();

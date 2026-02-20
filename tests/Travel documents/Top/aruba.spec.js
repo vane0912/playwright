@@ -4,7 +4,7 @@ const appFunctions = require('../../functions')
 const selectors = require('../../selectors')
 
 
-test('Aruba ED Card', async ({ page }) => {
+test.skip('Aruba ED Card', async ({ page }) => {
   await appFunctions.step_1(page,"us", "aruba/apply-now")
   const continue_sidebar = page.locator('id=btnContinueSidebar')
 

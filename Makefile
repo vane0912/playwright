@@ -15,4 +15,4 @@ translations:
 	npx playwright test /tests/Translation 
 
 test2:
-	npx playwright test jamaica.spec.js --headed
+	npx playwright test payments.spec.js 
