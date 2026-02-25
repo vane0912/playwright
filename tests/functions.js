@@ -6,57 +6,13 @@ var uk_eta = {
   product: "UK ETA",
   languages: [
     {
-        translations: "pt",
+        translations: "",
         pre_payment: 0,
-        pt_pre_payment: [],
-        pt_post_payment: [],
+        pre_payment_missing: [],
+        post_payment_missing: [],
         post_payment: 0
 
-    },
-    {
-        translations: "de",
-        pre_payment: 0,
-        de_pre_payment: [],
-        de_post_payment: [],
-        post_payment: 0
-    },
-    {
-        translations: "fr",
-        pre_payment: 0,
-        fr_pre_payment: [],
-        fr_post_payment: [],
-        post_payment: 0
-
-    },
-    {
-        translations: "it",
-        pre_payment: 0,
-        it_pre_payment: [],
-        it_post_payment: [],
-        post_payment: 0
-    },
-    {
-        translations: "es",
-        pre_payment: 0,
-        es_pre_payment: [],
-        es_post_payment: [],
-        post_payment: 0
-    },
-    {
-        translations: "ru",
-        pre_payment: 0,
-        ru_pre_payment: [],
-        ru_post_payment: [],
-        post_payment: 0
-    },
-    {
-        translations: "tr",
-        pre_payment: 0,
-        tr_pre_payment: [],
-        tr_post_payment: [],
-        post_payment: 0
     }
-
   ],
   deployment: deploy_url
 }
@@ -83,10 +39,9 @@ async function translations(selector, section, product, language){
     })
     if(detect_english.length > 0){
         product.languages.forEach(element => {    
-            if(element.translations === language){
-                element[section]++
-                element[`${language}_${section}`].push(...detect_english)
-            }
+            element[section]++
+            element.translations = language
+            element[`${section}_missing`].push(...detect_english)
         });
     }
 }
