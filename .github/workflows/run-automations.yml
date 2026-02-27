@@ -32,7 +32,7 @@ jobs:
           FLIGHT_API: ${{ secrets.FLIGHT_API }}
           
         run: |
-          npx percy exec -- npx playwright test
+          npx percy exec -- npx playwright test /tests/Travel documents/ /tests/Passport-tests/ /tests/Mobile/ /tests/visual/ --workers 2 
 
       - name: Upload Playwright report
         if: always()
