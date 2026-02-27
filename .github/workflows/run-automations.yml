@@ -29,6 +29,7 @@ jobs:
       - name: Run Playwright with Percy
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+          FLIGHT_API: ${{ secrets.FLIGHT_API }}
           
         run: |
           npx percy exec -- npx playwright test
