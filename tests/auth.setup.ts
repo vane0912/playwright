@@ -1,4 +1,4 @@
-import { test as setup, expect } from '@playwright/test';
+import test, { test as setup, expect } from '@playwright/test';
 import {deploy_url, email_test} from './urls'
 import * as appFunctions from './functions'
 import fs from 'fs';
@@ -8,6 +8,7 @@ const authFile = path.join(__dirname, '../.auth/user.json');
 
 setup('authenticate', async ({ page }) => {
   if(!fs.existsSync(authFile)){
+    test.slow()
     await appFunctions.step_1(page,"mx", "turkey/apply-now")
     const continue_sidebar = page.locator('id=btnContinueSidebar')
 
