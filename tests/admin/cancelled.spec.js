@@ -22,7 +22,7 @@ test('Cancelled', async({browser}) => {
     await page.locator('#password_login_input').fill('testivisa5!')
     await page.locator('#log_in_button').click()
 
-    await page.waitForURL('**/admin/users/1919083/edit')
+    await page.waitForURL('**/admin/users/1919083/edit?statsig=6f8f6461')
     await page.locator('[name="employee_role"]').selectOption("admin")
     await page.waitForTimeout(5000)
     await page.getByText("Update user").click()

@@ -3,7 +3,7 @@ const cld = require('cld')
 const { expect } = require('@playwright/test');
 
 var uk_eta = {
-  product: "UK ETA",
+  product: "Thailand Digital Arrival Card",
   languages: [
     {
         translations: "",
@@ -109,15 +109,17 @@ async function step_1(page,country,url){
     const dropdown_country =  page.getByTestId('filter-value');
     
     await dropdown_country.click();
+    await page.waitForTimeout(3000)
     const input_country = page.getByTestId('dropdown-general.common_nationality_country');
     if(country === "us"){
         await input_country.fill('united states');
         await page.getByRole("option", {name: 'United States flag United States'}).click()
     }else{
+        
         await input_country.fill('Mexico');
         await page.getByRole("option", {name: 'Mexico flag Mexico'}).click()
     }
-    await page.waitForTimeout(5000)
+    await page.waitForTimeout(8000)
     const continue_sidebar = page.locator('id=btnContinueSidebar')
     await continue_sidebar.click()
     await page.waitForURL('**/'+ url + '#step=step_3a')

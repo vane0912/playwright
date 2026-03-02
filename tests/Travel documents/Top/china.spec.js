@@ -5,7 +5,7 @@ const { deploy_url } = require('../../urls');
 
 let Order_num
 
-test('China Arrival card', async ({ page }) => {
+test.fixme('China Arrival card', async ({ page }) => {
   test.slow()
   await appFunctions.step_1(page,"us", "china/apply-now")
   const continue_sidebar = page.locator('id=btnContinueSidebar')

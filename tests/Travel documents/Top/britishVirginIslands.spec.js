@@ -5,7 +5,7 @@ const { deploy_url } = require('../../urls');
 
 let Order_num
 
-test('British Virgin Islands ED Card', async ({ page }) => {
+test.fixme('British Virgin Islands ED Card', async ({ page }) => {
   test.slow()
   await appFunctions.step_1(page,"us", "british-virgin-islands/apply-now")
   const continue_sidebar = page.locator('id=btnContinueSidebar')

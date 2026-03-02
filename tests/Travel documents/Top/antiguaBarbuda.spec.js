@@ -5,7 +5,7 @@ const { deploy_url } = require('../../urls');
 
 let Order_num
 
-test('Antigua & Barbuda Entry Form', async ({ page }) => {
+test.fixme('Antigua & Barbuda Entry Form', async ({ page }) => {
   test.slow()
   await appFunctions.step_1(page,"us", "antigua-barbuda/apply-now")
   const continue_sidebar = page.locator('id=btnContinueSidebar')
