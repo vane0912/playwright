@@ -35,10 +35,6 @@ test('Dominican Republic eTicket', async ({ page }) => {
 
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=travel_general")
   await selectors.booleanOptions(page, "general.flight_reservation", "boolean-No")
-  await expect(next_btn).toBeEnabled()
-  await next_btn.click()
-
-  await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=departure_details")
   await selectors.departure_date(page, "general.departure_date")
   await selectors.inputText(page, "general.departure_flight_number", "1234")
   await expect(next_btn).toBeEnabled()

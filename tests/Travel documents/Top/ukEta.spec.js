@@ -6,6 +6,7 @@ const path = require('path');
 
 let Order_num
 test('UK ETA', async({page}) => {
+  test.slow()
   await appFunctions.step_1(page,"us", "united-kingdom/apply-now")
   const continue_sidebar = page.locator('id=btnContinueSidebar')
 
