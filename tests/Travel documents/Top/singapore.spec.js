@@ -40,6 +40,7 @@ test('Singapore Arrival Card', async ({ page }) => {
   await expect(next_btn).toBeEnabled()
   await next_btn.click()
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_passport_after_payment")
+  await selectors.dropdownSelector(page, "applicant.0.home_country", "dropdown-applicant.0.home_country", "mexico", "MX")
   const submit_post_payment = page.locator('id=btnSubmitApplication')
   await submit_post_payment.click()
   await page.waitForURL(deploy_url + "order-received-page/" + Order_num)

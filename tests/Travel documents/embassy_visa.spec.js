@@ -48,7 +48,11 @@ test('Embassy Visa', async({page}) => {
     await continue_sidebar.click()
     
     await page.waitForURL('**/australia/apply-now#step=step_3e')
-    
+    await page.locator('[name="applicant.0.home_country"]').click()
+    await page.waitForTimeout(2000)
+    await page.getByTestId("dropdown-applicant.0.home_country").fill("mexico")
+    await page.getByRole('option', { name: 'Mexico flag Mexico' }).click()
+    await page.waitForTimeout(2000)
     const location_1 = page.locator('[name="applicant.0.appointment_location_id"]')
     await location_1.getByTestId('boolean-4575').click()
   

@@ -152,6 +152,11 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
     await page.waitForTimeout(1000)
     await page.getByTestId('boolean-Male').click()
     await page.waitForTimeout(1000)
+    await page.locator('[name="applicant.0.home_country"]').click()
+    await page.waitForTimeout(2000)
+    await page.getByTestId("dropdown-applicant.0.home_country").fill("mexico")
+    await page.getByRole('option', {value: 'MX'}).click()
+    await page.waitForTimeout(2000)
     /*
     // Sidebar checks
     sidebar_post_payment_txt.forEach(async txt => await expect(sidebar_checks).toContainText(txt))

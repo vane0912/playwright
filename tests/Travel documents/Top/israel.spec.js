@@ -47,6 +47,7 @@ test('Israel ETA', async ({ page }) => {
   await page.waitForTimeout(2000)
   await selectors.inputText(page, "applicant.0.home_city", "test")
   await page.waitForTimeout(2000)
+  await selectors.dropdownSelector(page, "applicant.0.home_country", "dropdown-applicant.0.home_country", "mexico", "MX")
   await expect(next_btn).toBeEnabled()
   await next_btn.click()
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_work")

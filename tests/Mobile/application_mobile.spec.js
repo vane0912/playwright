@@ -131,6 +131,11 @@ test('Travel Doc application pre and post payment are working Mobile', async({pa
     await page.waitForTimeout(1000)
     await page.getByTestId('boolean-Male').click()
     await page.waitForTimeout(1000)
+    await page.locator('[name="applicant.0.home_country"]').click()
+    await page.waitForTimeout(2000)
+    await page.getByTestId("dropdown-applicant.0.home_country").fill("mexico")
+    await page.getByRole('option', {value: 'MX'}).click()
+    await page.waitForTimeout(2000)
     /*
     const host_city = page.locator('[name="applicant.0.profession_occupation"]')
     await host_city.click()
