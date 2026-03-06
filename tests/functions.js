@@ -114,8 +114,10 @@ async function step_1(page,country,url){
     if(country === "us"){
         await input_country.fill('united states');
         await page.getByRole("option", {name: 'United States flag United States'}).click()
+    }else if(country === "au"){
+        await input_country.fill('Australia');
+        await page.getByRole("option", {name: 'Australia flag Australia'}).click()
     }else{
-        
         await input_country.fill('Mexico');
         await page.getByRole("option", {name: 'Mexico flag Mexico'}).click()
     }

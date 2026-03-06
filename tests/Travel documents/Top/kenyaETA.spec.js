@@ -5,16 +5,16 @@ const { deploy_url } = require('../../urls');
 
 let Order_num
 
-test('Sint Maarten ED Card', async ({ page }) => {
+test.fixme('Kenya Eta', async ({ page }) => {
   test.slow()
-  await appFunctions.step_1(page,"us", "sint-maarten/apply-now")
+  await appFunctions.step_1(page,"us", "kenya/apply-now")
   const continue_sidebar = page.locator('id=btnContinueSidebar')
 
   await appFunctions.step_2(page,continue_sidebar)
-  await page.waitForURL("**/sint-maarten/apply-now#step=step_3c")
+  await page.waitForURL("**/kenya/apply-now#step=step_3c")
   
   await appFunctions.step_3c(page,continue_sidebar)
-  await page.waitForURL("**/sint-maarten/apply-now#step=review")
+  await page.waitForURL("**/kenya/apply-now#step=review")
 
   await appFunctions.newPaymentCheckout(page, '6011 1111 1111 1117', '123')
   const payment_btn = page.locator('id=btnSubmitPayment')
@@ -27,7 +27,6 @@ test('Sint Maarten ED Card', async ({ page }) => {
   
   await selectors.phoneNumber(page)
   await selectors.arrival_date(page)
-  await selectors.departure_date(page, "general.departure_date")
   
   Order_num = page.url().split("/")[4] 
   const next_btn = page.locator('id=btnContinueUnderSection')

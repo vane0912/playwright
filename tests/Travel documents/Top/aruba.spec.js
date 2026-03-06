@@ -4,7 +4,15 @@ const appFunctions = require('../../functions')
 const selectors = require('../../selectors')
 
 
-test.skip('Aruba ED Card', async ({ page }) => {
+test('Aruba ED Card', async ({ page }) => {
+  const month = new Intl.DateTimeFormat('en-US', { month: 'numeric' }).format(new Date());
+  const now = new Date();
+  const day = now.getDate();
+  await page.goto('https://www.flightstats.com/v2/flight-tracker/arrivals/AUA?year=2026&month=' + month + '&date=' + day +'&hour=12')
+  const getFlightInfo = await page.locator('.table__CellText-sc-1x7nv9w-15').nth(0).textContent()
+  const getFlightAirline = await page.locator('.table__SubText-sc-1x7nv9w-16').nth(0).textContent()
+  const flight_number = getFlightInfo.replace(/\D/g, "");
+
   await appFunctions.step_1(page,"us", "aruba/apply-now")
   const continue_sidebar = page.locator('id=btnContinueSidebar')
 
@@ -26,12 +34,14 @@ test.skip('Aruba ED Card', async ({ page }) => {
   
   await selectors.phoneNumber(page)
   await selectors.arrival_date(page)
+  await selectors.booleanOptions(page, 'general.flight_reservation', 'boolean-Yes')
 
   const arrival_airline =  page.getByTestId('filter-value').nth(1);
   await arrival_airline.click();
   const input_airline = page.getByTestId('dropdown-general.arrival_flight_airline');
-  await input_airline.fill("AA")
-  await page.getByRole("option", {name: 'American Airlines (AA)'}).click()
+  await input_airline.fill(getFlightAirline)
+  await page.waitForTimeout(2000)
+  await page.keyboard.press('Enter')
   await page.locator('[name="general.arrival_flight_number"]').fill("12345")
   await page.waitForTimeout(2000)
   const next_btn = page.locator('id=btnContinueUnderSection')
@@ -41,17 +51,6 @@ test.skip('Aruba ED Card', async ({ page }) => {
   await page.waitForTimeout(2000)
   await expect(page.locator(".input-error")).toContainText("Please provide a valid arrival flight number ")
 
-  const url = 'https://api.aviationstack.com/v1/flights?limit=1&airline_icao=AAL&access_key=' + process.env.FLIGHT_API;
-  const options = {method: 'GET', headers: {Accept: 'application/json'}};
-  let flight_number 
-  try {
-    const response = await fetch(url, options);
-    const data = await response.json();
-    flight_number = data.data[0].flight.number
-  } catch (error) {
-    console.error(error);
-  }
-
   await page.locator('[name="general.arrival_flight_number"]').fill(flight_number)
   await page.waitForTimeout(2000)
 
@@ -59,6 +58,7 @@ test.skip('Aruba ED Card', async ({ page }) => {
   await next_btn.click()
   await page.waitForTimeout(2000)
   await page.getByTestId('boolean-Male').click()
+  await selectors.dropdownSelector(page, "applicant.0.home_country", "dropdown-applicant.0.home_country", "mexico", "MX")
   await page.waitForTimeout(2000)
 
   const submit_post_payment = page.locator('id=btnSubmitApplication')
