@@ -1,5 +1,5 @@
 const { test, expect } = require('@playwright/test');
-const {fastpassport} = require('../urls');
+const {fastpassport} = require('../../urls');
 const appFunctions = require('../../functions')
 const selectors = require('../../selectors')
 const path = require('path');

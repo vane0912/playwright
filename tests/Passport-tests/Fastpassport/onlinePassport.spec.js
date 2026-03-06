@@ -1,8 +1,9 @@
 const { test, expect } = require('@playwright/test');
+const {fastpassport} = require('../../urls');
 const appFunctions = require('../../functions')
 const selectors = require('../../selectors')
-const passportSteps = require("../../Functions/passport")
 const path = require('path');
+const percySnapshot = require('@percy/playwright');
 
 test('Online Passport', async({page}) =>{
     test.slow()
