@@ -65,10 +65,10 @@ async function newPaymentCheckout(page,creditCard, cvvNum,continuebtn){
     /*
     const zip_code = stripeFrame.locator("id=payment-postalCodeInput")
     await zip_code.fill('12345')
-    /*
-    const cardholder_name = page.getByPlaceholder("Cardholder name")
+    */
+    const cardholder_name = page.locator('[name="full_name"]')
     await cardholder_name.fill('John Smith')
-    
+    /*
     const zip_code = page.getByPlaceholder("ZIP code")
     await zip_code.fill('12345')
     */ 

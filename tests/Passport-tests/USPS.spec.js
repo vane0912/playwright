@@ -1,11 +1,16 @@
 const { test, expect } = require('@playwright/test');
 const passportSteps = require("../Functions/passport")
 const appFunctions = require('../functions')
+const {deploy_url} = require('../urls');
 
 const path = require('path');
 
 test('USPS Passport', async({page}) =>{
     test.slow()
+    await page.goto(deploy_url + 'passport-renewal/united-states/application')
+    await page.waitForTimeout(2000)
+    await page.locator("id=btnContinueSidebar").click()
+    await page.waitForURL('**/passport-renewal/united-states/application#step=step_2')
     await passportSteps.step_1_passport(page)
     
     const continue_sidebar = page.locator('#btnContinueSidebar')
@@ -27,14 +32,6 @@ test('USPS Passport', async({page}) =>{
 
     await page.waitForURL('**/passport-renewal/united-states/application#step=review')
     await appFunctions.newPaymentCheckout(page,"4111111111111111", "123", false)
-   
-    /*
-    const cardholder_name = page.getByPlaceholder("Cardholder name")
-    await cardholder_name.fill('John Smith')
-    
-    const zip_code = page.getByPlaceholder("ZIP code")
-    await zip_code.fill('12345')
-    */
    
     const payment_btn = page.locator('id=btnSubmitPayment')
     await expect(payment_btn).toBeVisible()

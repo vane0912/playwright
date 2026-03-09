@@ -33,6 +33,7 @@ test('Sri Lanka Tourist ETA', async ({ page }) => {
   await next_btn.click()
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_personal")
   await selectors.booleanOptions(page, 'applicant.0.gender', 'boolean-Male')
+  await selectors.booleanOptions(page, 'applicant.0.marital_status', 'boolean-Single')
   await expect(next_btn).toBeEnabled()
   await next_btn.click()
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_travel")

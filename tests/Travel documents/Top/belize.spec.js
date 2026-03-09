@@ -37,7 +37,10 @@ test('Belize Travel Declaration', async ({ page }) => {
   await next_btn.click()
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_passport_after_payment")
   await selectors.datePicker(page, "applicant.0.passport_issued_date", '1', '9', '2013')
+
   await selectors.dropdownSelector(page, "applicant.0.home_country", "dropdown-applicant.0.home_country", "mexico", "MX")
+  await selectors.booleanOptions(page, 'applicant.0.marital_status', 'boolean-Single')
+  await selectors.booleanOptions(page, 'applicant.0.occupation', 'boolean-Unemployed')
   await page.locator("id=btnSubmitApplication").click()
   await page.waitForURL(deploy_url + "order-received-page/" + Order_num)
   await page.waitForTimeout(4000)

@@ -26,6 +26,7 @@ test('Dominican Republic eTicket', async ({ page }) => {
   
   await selectors.phoneNumber(page)
   await selectors.arrival_date(page)
+  await selectors.dropdownSelector(page, "general.home_country", "dropdown-general.home_country", "mexico", "MX")
   
   Order_num = page.url().split("/")[4] 
   const next_btn = page.locator('id=btnContinueUnderSection')
@@ -37,7 +38,6 @@ test('Dominican Republic eTicket', async ({ page }) => {
   await selectors.booleanOptions(page, "general.flight_reservation", "boolean-No")
   await selectors.departure_date(page, "general.departure_date")
   await selectors.inputText(page, "general.departure_flight_number", "1234")
-  await selectors.dropdownSelector(page, "general.home_country", "dropdown-general.home_country", "mexico", "MX")
   await expect(next_btn).toBeEnabled()
   await next_btn.click()
 

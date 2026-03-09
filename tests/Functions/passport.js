@@ -1,12 +1,7 @@
 const {deploy_url} = require('../urls.js');
 const { expect } = require('@playwright/test');
 
-async function step_1_passport(page){
-    await page.goto(deploy_url + 'passport-renewal/united-states/application')
-    await page.waitForTimeout(2000)
-    await page.locator("id=btnContinueSidebar").click()
-    await page.waitForURL('**/passport-renewal/united-states/application#step=step_2')
-
+async function step_1_passport(page, email){
     await expect(page.getByPlaceholder('John William')).toBeVisible()
 
     const dob_day = page.locator('[name="general.dob.day"]')
@@ -26,6 +21,9 @@ async function step_1_passport(page){
     const last_name = page.locator('[name="general.last_name"]')
     await last_name.fill('Test')
     await page.waitForTimeout(1000)
+    if(email){
+        await page.locator('[name="general.email"]').fill(email)
+    }
 }
 
 async function step_2_passport(page, passportType){

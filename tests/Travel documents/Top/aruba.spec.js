@@ -36,13 +36,8 @@ test('Aruba ED Card', async ({ page }) => {
   await selectors.arrival_date(page)
   await selectors.booleanOptions(page, 'general.flight_reservation', 'boolean-Yes')
 
-  const arrival_airline =  page.getByTestId('filter-value').nth(1);
-  await arrival_airline.click();
-  const input_airline = page.getByTestId('dropdown-general.arrival_flight_airline');
-  await input_airline.fill(getFlightAirline)
-  await page.waitForTimeout(2000)
-  await page.keyboard.press('Enter')
-  await page.locator('[name="general.arrival_flight_number"]').fill("12345")
+  await selectors.flightDropdown(page, 'general.arrival_flight_airline', 'dropdown-general.arrival_flight_airline', getFlightAirline)
+  await selectors.inputText(page, "general.arrival_flight_number", '12345')
   await page.waitForTimeout(2000)
   const next_btn = page.locator('id=btnContinueUnderSection')
   await page.waitForTimeout(1000)
@@ -50,8 +45,7 @@ test('Aruba ED Card', async ({ page }) => {
   await next_btn.click()
   await page.waitForTimeout(2000)
   await expect(page.locator(".input-error")).toContainText("Please provide a valid arrival flight number ")
-
-  await page.locator('[name="general.arrival_flight_number"]').fill(flight_number)
+  await selectors.inputText(page, "general.arrival_flight_number", flight_number)
   await page.waitForTimeout(2000)
 
   await expect(next_btn).toBeEnabled()

@@ -1,10 +1,15 @@
 const { test, expect } = require('@playwright/test');
 const appFunctions = require('../functions')
 const passportSteps = require("../Functions/passport")
+const {deploy_url} = require('../urls');
 const path = require('path');
 
 test('Online Passport', async({page}) =>{
     test.slow()
+    await page.goto(deploy_url + 'passport-renewal/united-states/application')
+    await page.waitForTimeout(2000)
+    await page.locator("id=btnContinueSidebar").click()
+    await page.waitForURL('**/passport-renewal/united-states/application#step=step_2')
     await passportSteps.step_1_passport(page)
 
     const continue_sidebar = page.locator('#btnContinueSidebar')

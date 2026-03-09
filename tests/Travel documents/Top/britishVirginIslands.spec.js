@@ -5,13 +5,14 @@ const { deploy_url } = require('../../urls');
 
 let Order_num
 
-test.fixme('British Virgin Islands ED Card', async ({ page }) => {
+test.skip('British Virgin Islands ED Card', async ({ page }) => {
   test.slow()
   const month = new Intl.DateTimeFormat('en-US', { month: 'numeric' }).format(new Date());
   const now = new Date();
   const day = now.getDate();
   await page.goto('https://www.flightstats.com/v2/flight-tracker/arrivals/EIS?year=2026&month=' + month + '&date=' + day +'&hour=12')
-  const getFlightInfo = await page.locator('.table__CellText-sc-1x7nv9w-15').nth(0).textContent()
+  const getFlightInfo = await page.locator('.table__CellText-sc-1x7nv9w-15').nth(3).textContent()
+  const getFlightAirline = await page.locator('.table__SubText-sc-1x7nv9w-16').nth(3).textContent()
   const flight_number = getFlightInfo.replace(/\D/g, "");
 
   await appFunctions.step_1(page,"us", "british-virgin-islands/apply-now")
@@ -42,7 +43,8 @@ test.fixme('British Virgin Islands ED Card', async ({ page }) => {
   await next_btn.click()
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=travel_general")
   await page.waitForTimeout(2000)
-  await selectors.dropdownSelector(page, 'general.arrival_flight_airline','dropdown-general.arrival_flight_airline', '21', '2I')
+  await selectors.flightDropdown(page, "general.arrival_flight_airline", "dropdown-general.arrival_flight_airline", getFlightAirline)
+  await page.waitForTimeout(2000)
   await selectors.inputText(page, 'general.arrival_flight_number', flight_number)
   await selectors.inputText(page, "general.embarkation_port", "sad")
   await page.waitForTimeout(2000)

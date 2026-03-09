@@ -5,7 +5,7 @@ const { deploy_url } = require('../../urls');
 
 let Order_num
 
-test.fixme('Antigua & Barbuda Entry Form', async ({ page }) => {
+test('Antigua & Barbuda Entry Form', async ({ page }) => {
   test.slow()
   await appFunctions.step_1(page,"us", "antigua-barbuda/apply-now")
   const continue_sidebar = page.locator('id=btnContinueSidebar')
@@ -56,9 +56,7 @@ test.fixme('Antigua & Barbuda Entry Form', async ({ page }) => {
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_travel")
   await page.waitForTimeout(2000)
   await selectors.inputText(page, "applicant.0.arrival_flight_number", "12345")
-
   await selectors.departure_date(page, 'applicant.0.departure_date')
-
   await selectors.dropdownSelector(page, "applicant.0.arrival_flight_airline", "dropdown-applicant.0.arrival_flight_airline","21", "2I")
   await selectors.inputText(page, "applicant.0.departure_flight_number", "12345")
   await selectors.dropdownSelector(page, "applicant.0.departure_flight_airline", "dropdown-applicant.0.departure_flight_airline","21", "2I")

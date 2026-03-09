@@ -5,7 +5,7 @@ const { deploy_url } = require('../../urls');
 
 let Order_num
 
-test.fixme('China Arrival card', async ({ page }) => {
+test('China Arrival card', async ({ page }) => {
   test.slow()
   await appFunctions.step_1(page,"us", "china/apply-now")
   const continue_sidebar = page.locator('id=btnContinueSidebar')
@@ -34,8 +34,7 @@ test.fixme('China Arrival card', async ({ page }) => {
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=travel_general")
   await selectors.arrival_date(page)
   await selectors.dropdownSelector(page, 'general.arrival_city', 'dropdown-general.arrival_city', 'changsha', 'Changsha')
-  await selectors.departure_date(page, "general.departure_date")
-  await selectors.booleanOptions(page, 'general.port_of_arrival', 'boolean-Beijing Capital International Airport') 
+  await selectors.booleanOptions(page, 'general.port_of_arrival', 'boolean-Changsha') 
   await selectors.booleanOptions(page, 'general.flight_reservation', 'boolean-No')
   await selectors.dropdownSelector(page, 'general.city_list_with_dates.0.arrival_city_china', 'dropdown-general.city_list_with_dates.0.arrival_city_china', 'aba', 'Aba')
   await selectors.inputText(page, 'general.city_of_departure', 'Test')
@@ -43,6 +42,7 @@ test.fixme('China Arrival card', async ({ page }) => {
   await expect(next_btn).toBeEnabled()
   await next_btn.click()
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=accommodation")
+  await page.waitForTimeout(2000)
   await selectors.inputText(page, 'general.destination_location_name', 'test')
   await selectors.addressApi(page, 'general.destination_address')
   await expect(next_btn).toBeEnabled()

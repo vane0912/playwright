@@ -72,7 +72,7 @@ const dropdownSelector = async (page, name, dataHandle, text, value) => {
     await page.locator('[name="' + name + '"]').click()
     await page.waitForTimeout(2000)
     await page.getByTestId(dataHandle).fill(text)
-    await page.getByRole('option', {value: value}).click()
+    await page.locator('[name="' + name + '"]').getByRole('option', {value: value}).click()
     await page.waitForTimeout(2000)
 }
 
@@ -85,6 +85,20 @@ const datePicker = async (page, name, day, month, year) =>{
     await page.waitForTimeout(2000)
 }
 
+const flightDropdown = async (page, name, dataHandle, text) => {
+    await page.locator('[name="' + name + '"]').click()
+    await page.waitForTimeout(2000)
+    await page.getByTestId(dataHandle).fill(text)
+    await page.waitForTimeout(2000)
+    await page.keyboard.press('Enter')
+}
+
+const phoneWithDropdown = async (page, name) => {
+    await page.locator('[name="' + name + '"]').getByTestId("filter-value").click()
+    await page.locator('[name="' + name + '"]').getByTestId("dial-codes").fill("52")
+    await page.locator('[name="' + name + '"]').getByRole('option', {value: "+52"}).click()
+    await page.locator('[name="' + name + '"]').locator("[name='telephone']").fill("12345")
+}
 module.exports = {
     arrival_date,
     phoneNumber,
@@ -96,5 +110,7 @@ module.exports = {
     applicantPhoto,
     passportPhoto,
     dropdownSelector,
-    datePicker
+    datePicker,
+    flightDropdown,
+    phoneWithDropdown
 }
