@@ -3,13 +3,15 @@ const percySnapshot = require('@percy/playwright');
 const {general_url, deploy_url} = require('../../urls');
 const appFunctions = require('../../functions')
 const selectors = require('../../selectors')
+const randomEmail = require('random-email')
+let fastpassportEmail = randomEmail()
 
 test('FastPassport - United Kingdom', async({page, context}) =>{
   test.slow()
   await page.goto(general_url + 'fastpassport.visachinaonline.com/passport-renewal/united-kingdom/application#step=step_1')
   await selectors.inputText(page, "general.first_name", "Test")
   await selectors.inputText(page, "general.last_name", "Test")
-  await selectors.inputText(page, "general.email", "ukpassport1@fastpassport.com")
+  await selectors.inputText(page, "general.email", fastpassportEmail)
   const continue_sidebar = page.locator('#btnContinueSidebar')
   await continue_sidebar.click()
   await page.waitForURL('**/passport-renewal/united-kingdom/application#step=step_3')

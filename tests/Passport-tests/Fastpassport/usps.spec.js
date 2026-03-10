@@ -4,10 +4,9 @@ const appFunctions = require('../../functions')
 const passportSteps = require('../../Functions/passport')
 const selectors = require('../../selectors')
 const randomEmail = require('random-email')
+let fastpassportEmail = randomEmail()
 
-let fastpassportEmail = "usps@fastpassport.com"
-
-test('FastPassport - USPS Emergency', async({page, context}) => {
+test('FastPassport - USPS Emergency', async({page}) => {
   test.slow()
   await page.goto(general_url + 'fastpassport.visachinaonline.com/passport-renewal/united-states')
   await page.reload()
@@ -15,7 +14,8 @@ test('FastPassport - USPS Emergency', async({page, context}) => {
   await page.waitForURL('**/passport-renewal/united-states/application#step=step_1')
   const continue_sidebar = page.locator('#btnContinueSidebar')
   await continue_sidebar.click()
-  await passportSteps.step_1_passport(page, fastpassportEmail)
+  
+  await passportSteps.step_1_passport(page,  fastpassportEmail)
   await continue_sidebar.click()
   await passportSteps.step_3_passport(page)
   await continue_sidebar.click()

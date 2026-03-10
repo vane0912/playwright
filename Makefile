@@ -10,7 +10,7 @@ test:
 	npx playwright test /tests/Travel documents/ /tests/Passport-tests/ /tests/Mobile/ --workers 3 
 
 refactor: 
-	npx playwright test ukPassport.spec.js --headed
+	npx playwright test usps.spec.js --headed
 translations:
 	npx playwright test /tests/Translation 
 

@@ -4,7 +4,7 @@ const appFunctions = require('../../functions')
 const passportSteps = require('../../Functions/passport')
 const selectors = require('../../selectors')
 const percySnapshot = require('@percy/playwright');
-let fastpassportEmail = "automations43@fastpassport.com"
+let fastpassportEmail = "automations@fastpassport.com"
 
 test.describe.configure({ mode: 'serial' });
 test('Fastpassport - Account creation, logging and password creation', async ({page}) => {
