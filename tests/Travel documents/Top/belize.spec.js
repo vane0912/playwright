@@ -6,7 +6,6 @@ const { deploy_url } = require('../../urls');
 let Order_num
 
 test('Belize Travel Declaration', async ({ page }) => {
-  test.slow()
   await appFunctions.step_1(page,"au", "belize/apply-now")
   const continue_sidebar = page.locator('id=btnContinueSidebar')
 

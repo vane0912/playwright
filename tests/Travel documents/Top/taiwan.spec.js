@@ -6,7 +6,6 @@ const { deploy_url } = require('../../urls');
 let Order_num
 
 test('Taiwan Arrival Card Application', async ({ page }) => {
-  test.slow()
   await appFunctions.step_1(page,"au", "taiwan/apply-now")
   const continue_sidebar = page.locator('id=btnContinueSidebar')
 
@@ -40,6 +39,8 @@ test('Taiwan Arrival Card Application', async ({ page }) => {
   await selectors.booleanOptions(page, 'general.destination_location_type', 'boolean-Hotel')
   await selectors.inputText(page, 'general.destination_location_name', 'Test')
   await expect(next_btn).toBeEnabled()
+  await next_btn.click()
+  await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_step_3c")
   await next_btn.click()
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_personal")
   await selectors.booleanOptions(page, 'applicant.0.gender', 'boolean-Male')

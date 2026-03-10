@@ -6,7 +6,6 @@ const { deploy_url } = require('../../urls');
 let Order_num
 
 test('Barbados ED Card', async ({ page }) => {
-  test.slow()
   await appFunctions.step_1(page,"au", "barbados/apply-now")
   const continue_sidebar = page.locator('id=btnContinueSidebar')
 
@@ -35,6 +34,14 @@ test('Barbados ED Card', async ({ page }) => {
   await selectors.booleanOptions(page, 'general.flight_reservation', 'boolean-No')
   await selectors.dropdownSelector(page, "general.journey_originate_from", "dropdown-general.journey_originate_from", "mexico", "MX")
   await selectors.inputText(page, 'general.journey_originate_port', '123')
+  await expect(next_btn).toBeEnabled()
+  await next_btn.click()
+  await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_step_3c")
+  await selectors.inputText(page, "applicant.0.passport_num", "123456789")
+  await expect(next_btn).toBeEnabled()
+  await next_btn.click()
+  await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_personal")
+  await selectors.booleanOptions(page, "applicant.0.gender", "boolean-Female")
   await expect(next_btn).toBeEnabled()
   await next_btn.click()
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_residency_information_after_payment")

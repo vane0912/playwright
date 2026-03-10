@@ -6,7 +6,6 @@ const { deploy_url } = require('../../urls');
 let Order_num
 
 test('Mauritius Travel Digital Form', async ({ page }) => {
-  test.slow()
   await appFunctions.step_1(page,"au", "mauritius/apply-now")
   const continue_sidebar = page.locator('id=btnContinueSidebar')
 
@@ -39,6 +38,8 @@ test('Mauritius Travel Digital Form', async ({ page }) => {
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=residence_general")
   await selectors.addressApi(page, 'general.home_address')
   await expect(next_btn).toBeEnabled()
+  await next_btn.click()
+  await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_step_3c")
   await next_btn.click()
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_personal")
   await selectors.booleanOptions(page, 'applicant.0.gender', 'boolean-Male')

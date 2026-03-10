@@ -6,7 +6,6 @@ const { deploy_url } = require('../../urls');
 let Order_num
 
 test('Curacao Immigration Card + Passenger Locator Card', async ({ page }) => {
-  test.slow()
   await appFunctions.step_1(page,"us", "curacao/apply-now")
   const continue_sidebar = page.locator('id=btnContinueSidebar')
 

@@ -6,7 +6,6 @@ const { deploy_url } = require('../../urls');
 let Order_num
 
 test('Colombia Check-MIG', async ({ page }) => {
-  test.slow()
   await appFunctions.step_1(page,"au", "colombia/apply-now")
   const continue_sidebar = page.locator('id=btnContinueSidebar')
 
@@ -35,6 +34,8 @@ test('Colombia Check-MIG', async ({ page }) => {
   await selectors.dropdownSelector(page, 'general.arrival_location', 'dropdown-general.arrival_location', 'Armenia', 'Armenia (AXM), El Eden Airport')
   await selectors.inputText(page, 'general.arrival_flight_number', '123')
   await expect(next_btn).toBeEnabled()
+  await next_btn.click()
+  await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_step_3c")
   await next_btn.click()
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_personal")
   await selectors.booleanOptions(page, 'applicant.0.gender', 'boolean-Male')

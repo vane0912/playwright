@@ -4,7 +4,7 @@ const appFunctions = require('../../functions')
 const passportSteps = require('../../Functions/passport')
 const selectors = require('../../selectors')
 const percySnapshot = require('@percy/playwright');
-let fastpassportEmail = "automations@fastpassport.com"
+let fastpassportEmail = "automations93@fastpassport.com"
 
 test.describe.configure({ mode: 'serial' });
 test('Fastpassport - Account creation, logging and password creation', async ({page}) => {
@@ -20,6 +20,11 @@ test('Fastpassport - Account creation, logging and password creation', async ({p
   await continue_sidebar.click()
   await passportSteps.step_1_passport(page, fastpassportEmail)
   await continue_sidebar.click()
+  await page.waitForTimeout(3000)
+  const passwordModal = await page.locator("[name='password']").isVisible()
+  if(passwordModal){
+    return
+  }
   await passportSteps.step_3_passport(page)
   await continue_sidebar.click()
   await page.waitForTimeout(3000)
@@ -46,7 +51,7 @@ test('Fastpassport - Account creation, logging and password creation', async ({p
   await page.locator('id=password_repeat').fill('testivisa5!')
   await page.getByTestId("updatePasswordBtn").click()
   
-  await page.waitForURL(deploy_url + 'login')
+  await page.waitForTimeout(5000)
   await page.goto(general_url + 'fastpassport.visachinaonline.com/login')
   await page.getByRole("button").getByText("OK").click()
   await page.locator("id=loggedInUserContainer").click()
@@ -60,7 +65,7 @@ test('Fastpassport - Account creation, logging and password creation', async ({p
   await expect(page.locator("id=loggedInUserContainer")).toBeVisible()
 })
 
-test('FastPassport - Online Passport', async({page}) =>{
+test('FastPassport - Online Passport', async({page, browser}) =>{
   test.slow()
   await page.goto(general_url + 'fastpassport.visachinaonline.com/passport-renewal/united-states')
   await page.reload()
@@ -136,12 +141,11 @@ test('FastPassport - Online Passport', async({page}) =>{
   await page.locator('#password_login_input').fill('testivisa5!')
   await page.locator('#log_in_button').click()
   await page.waitForURL('**/admin')
-
+  const search_order = page.locator('//li[@onclick="searchOrderID();"]')
+  await search_order.click()
   page.on('dialog', async (dialog) => {
       await dialog.accept(Order_num);
   });
-  const search_order = page.locator('//li[@onclick="searchOrderID();"]')
-  await search_order.click()
   await page.getByTestId('applicant-details').click()
   await page.getByTestId('min_checkbox_birth_city').first().click()
   await expect(page.locator('.popup-inner')).toBeVisible()
@@ -156,4 +160,26 @@ test('FastPassport - Online Passport', async({page}) =>{
   await expect(page.getByTestId('submitChangeStatus')).toBeEnabled()
   await page.getByTestId('submitChangeStatus').click()
   await page.waitForURL('**/admin/orders/my_orders?redirect_to_first_order=1')
+})
+
+test('Fix Min', async({browser}) => {
+  test.slow()
+  const context = await browser.newContext({
+      httpCredentials: {
+        username: 'admin',
+        password: 'testivisa5!',
+      },
+  });
+  const page = await context.newPage();
+  await page.goto(deploy_url + 'mail')
+  await page.getByText("ACTION REQUIRED: Updates needed for your application").first().click()
+  const iframe = page.frameLocator('iframe');
+  const [newTab] = await Promise.all([
+    page.context().waitForEvent('page'),
+    page.waitForTimeout(3000),
+    percySnapshot(page, "minEmailPassport"),
+    iframe.getByText('Update details now').click(),
+  ]);
+  await newTab.waitForLoadState()
+  await page.waitForTimeout(10000)
 })

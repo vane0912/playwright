@@ -129,6 +129,8 @@ test('Embassy reg', async({page}) => {
   await next_btn.click()
   await page.waitForNavigation({waitUntil: 'load'})
   */
+  await page.locator("id=btnContinueUnderSection").click()
+  await page.waitForNavigation()
   const submit_post_payment = page.locator('id=btnSubmitApplication')
   await expect(submit_post_payment).toBeEnabled()
   await submit_post_payment.click()

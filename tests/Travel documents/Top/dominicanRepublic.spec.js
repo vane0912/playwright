@@ -40,6 +40,8 @@ test('Dominican Republic eTicket', async ({ page }) => {
   await selectors.inputText(page, "general.departure_flight_number", "1234")
   await expect(next_btn).toBeEnabled()
   await next_btn.click()
+  await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_step_3c")
+  await next_btn.click()
 
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_personal")
   await selectors.booleanOptions(page, "applicant.0.gender", "boolean-Female")
