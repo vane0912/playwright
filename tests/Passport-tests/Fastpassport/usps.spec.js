@@ -3,6 +3,8 @@ const {general_url, deploy_url} = require('../../urls');
 const appFunctions = require('../../functions')
 const passportSteps = require('../../Functions/passport')
 const selectors = require('../../selectors')
+const randomEmail = require('random-email')
+
 let fastpassportEmail = "usps@fastpassport.com"
 
 test('FastPassport - USPS Emergency', async({page, context}) => {

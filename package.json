@@ -24,6 +24,7 @@
     "cld": "^2.10.1",
     "eld": "^1.0.1",
     "percy": "^5.0.0",
-    "playwright": "^1.58.2"
+    "playwright": "^1.58.2",
+    "random-email": "^1.0.3"
   }
 }
