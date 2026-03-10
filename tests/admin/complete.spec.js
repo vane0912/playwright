@@ -51,13 +51,8 @@ test('Complete and CMM', async ({ browser }) => {
       iframe.getByText('Pay now').click(),
     ]);
     await newTab.waitForLoadState()
-
-    
-
     await expect(newTab.getByText("Additional charge approved.")).toBeVisible()
-
     await page.getByRole('button', { name: 'OK' }).click()
-    
     await page.getByTestId('applicant-details').click()
     await page.getByTestId('show-docs-applicant-0').click()
     await page.getByTestId('upload-docs-0').selectOption('visa')

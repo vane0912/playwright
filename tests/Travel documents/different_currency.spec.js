@@ -30,6 +30,7 @@ test('Different currency', async ({ page }) => {
   await percySnapshot(page, 'Update currency modal');
   await page.locator('id=updatePrefButton').click()
   await page.waitForTimeout(3000)
+  
   const dropdown_country = page.getByTestId('filter-value');
   await expect(dropdown_country).toBeVisible();
   await dropdown_country.click();
