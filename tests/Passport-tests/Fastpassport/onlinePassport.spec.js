@@ -65,7 +65,7 @@ test('Fastpassport - Account creation, logging and password creation', async ({p
   await expect(page.locator("id=loggedInUserContainer")).toBeVisible()
 })
 
-test('FastPassport - Online Passport', async({page, browser}) =>{
+test('FastPassport - Online Passport and MIN status', async({page, browser}) =>{
   test.slow()
   await page.goto(general_url + 'fastpassport.visachinaonline.com/passport-renewal/united-states')
   await page.reload()
@@ -141,11 +141,12 @@ test('FastPassport - Online Passport', async({page, browser}) =>{
   await page.locator('#password_login_input').fill('testivisa5!')
   await page.locator('#log_in_button').click()
   await page.waitForURL('**/admin')
-  const search_order = page.locator('//li[@onclick="searchOrderID();"]')
-  await search_order.click()
+  await page.waitForTimeout(3000)
   page.on('dialog', async (dialog) => {
       await dialog.accept(Order_num);
   });
+  const search_order = page.locator('//li[@onclick="searchOrderID();"]');
+  await search_order.click()
   await page.getByTestId('applicant-details').click()
   await page.getByTestId('min_checkbox_birth_city').first().click()
   await expect(page.locator('.popup-inner')).toBeVisible()
@@ -181,5 +182,12 @@ test('Fix Min', async({browser}) => {
     iframe.getByText('Update details now').click(),
   ]);
   await newTab.waitForLoadState()
-  await page.waitForTimeout(10000)
+  await page.waitForTimeout(3000)
+  await percySnapshot(newTab, "MinScreen")
+  await newTab.getByTestId("min-splash-button").click()
+  await newTab.waitForTimeout(3000)
+  await percySnapshot(newTab, "SolveMin")
+  await selectors.inputText(newTab, "applicant.0.birth_city", "Test")
+  await newTab.locator("id=btnSubmitApplication").click()
+  await newTab.waitForNavigation()
 })

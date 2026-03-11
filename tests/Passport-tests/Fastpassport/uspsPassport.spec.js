@@ -1,5 +1,6 @@
 const { test, expect } = require('@playwright/test');
 const {general_url, deploy_url} = require('../../urls');
+const path = require('path');
 const appFunctions = require('../../functions')
 const passportSteps = require('../../Functions/passport')
 const selectors = require('../../selectors')
@@ -37,6 +38,7 @@ test('FastPassport - USPS Emergency', async({page}) => {
   await page.waitForNavigation({waitUntil: 'load'})
   await page.getByTestId("transition-page-button").click()
   await selectors.phoneNumber(page)
+  let Order_num = page.url().split("/")[4] 
   const next_btn = page.locator('id=btnContinueUnderSection')
   await page.waitForTimeout(1000)
   await expect(next_btn).toBeEnabled()
@@ -80,4 +82,46 @@ test('FastPassport - USPS Emergency', async({page}) => {
   await page.waitForNavigation({waitUntil: 'load'})
   const track_application = page.locator('#trackApplication')
   await expect(track_application).toBeVisible()
+
+  await page.goto(general_url + 'admin.visachinaonline.com/login')
+  await page.getByPlaceholder('1234567 or you@email.com').fill('david@admin.com')
+  await page.getByRole("button", {name: 'Continue'}).click()
+  
+  await page.locator('#password_login_input').fill('testivisa5!')
+  await page.locator('#log_in_button').click()
+  await page.waitForURL('**/admin')
+  await page.waitForTimeout(3000)
+  page.on('dialog', async (dialog) => {
+      await dialog.accept(Order_num);
+  });
+  const search_order = page.locator('//li[@onclick="searchOrderID();"]');
+  await search_order.click()
+  await page.locator('[name="change-status"]').selectOption('prepare_for_shipping')
+  await expect(page.getByTestId('submitChangeStatus')).toBeEnabled()
+  await page.getByTestId('submitChangeStatus').click()
+  await expect(page.getByText("All Passport Renewal applicants must have a Gov Application and Applicant Photo deliverable.")).toBeVisible()
+  await page.getByTestId("alert-modal-button").click()
+  await page.locator("id=goBackButton").click()
+  await page.getByTestId("applicant-details").click()
+  
+  await page.getByTestId('show-docs-applicant-0').click()
+  await page.getByTestId('upload-docs-0').selectOption('applicant_photo_cleaned')
+  await page.getByTestId('deliverable-upload-applicant-0').setInputFiles(path.resolve('tests/Passport-tests/uploads_passport/passport.jpg'))
+  await expect(page.getByTestId('save-uploaded-docs-0')).toBeEnabled()
+  await page.getByTestId('save-uploaded-docs-0').click()
+  await page.waitForTimeout(8000)
+  await expect(page.locator('.upload-input-wrap')).toBeVisible()
+  // Applicant image
+  await page.getByTestId('upload-docs-0').selectOption('passport_renewal_gov_application')
+  await page.getByTestId('deliverable-upload-applicant-0').setInputFiles(path.resolve('tests/Passport-tests/uploads_passport/passport.jpg'))
+  await expect(page.getByTestId('save-uploaded-docs-0')).toBeEnabled()
+  await page.getByTestId('save-uploaded-docs-0').click()
+  await page.waitForTimeout(8000)
+  await expect(page.locator('.upload-input-wrap')).toBeVisible()
+  
+  await page.locator('[name="change-status"]').selectOption('prepare_for_shipping')
+  await expect(page.getByTestId('submitChangeStatus')).toBeEnabled()
+  await page.getByTestId('submitChangeStatus').click()
+  await page.waitForURL('**/admin/orders/my_orders?redirect_to_first_order=1')
+
 })
