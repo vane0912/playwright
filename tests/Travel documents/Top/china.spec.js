@@ -67,6 +67,7 @@ test('China Arrival card', async ({ page }) => {
   await passport_issue_year.selectOption('2028')  
   await page.waitForTimeout(1000)
   await selectors.booleanOptions(page,'applicant.0.applied_visa', 'boolean-Yes')
+  await selectors.inputText(page, "applicant.0.visa_number", "12345")
   await page.locator("id=btnSubmitApplication").click()
   await page.waitForURL(deploy_url + "order-received-page/" + Order_num)
   await page.waitForTimeout(4000)

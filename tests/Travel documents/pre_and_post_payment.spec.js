@@ -2,6 +2,7 @@ const { test, expect } = require('@playwright/test');
 const {deploy_url, email_test} = require('../urls');
 const percySnapshot = require('@percy/playwright');
 const appFunctions = require('../functions')
+const selectors = require('../selectors')
 
 test('Travel Doc application pre and post payment are working', async({page}) => {
     await page.goto(deploy_url + 'thailand/apply-now')
@@ -112,37 +113,18 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
     const sidebar_checks = page.locator('//div[@data-vue-component="product-application-suspense-wrapper"]')
     const sidebar_post_payment_txt = ['Thailand Digital Arrival Card', 'Trip details', 'Test Test', 'Personal details']
     sidebar_post_payment_txt.forEach(async txt => await expect(sidebar_checks).toContainText(txt))
-    await percySnapshot(page, 'Post payment application')
+    await percySnapshot(page, 'PostPaymentApplication')
     await expect(page.getByTestId('General details')).toBeVisible()
     await page.getByPlaceholder('111-222-3333').fill('11111111')
     
     await page.getByTestId('boolean-WhatsApp').click()
-    
-    //await page.locator('[name="general.city_current_residence"]').fill("Test")
     const next_btn = page.locator('id=btnContinueUnderSection')
-    /*
-    await expect(next_btn).toBeEnabled()
-    await next_btn.click()
-    await page.waitForNavigation({waitUntil: 'load'})
-    await page.waitForTimeout(2000)
-    */
     const arrival_date_visible = page.locator('[name="general.arrival_date"]')
     await expect(arrival_date_visible).toBeVisible()
     await arrival_date_visible.click()
     await expect(page.locator('.dp__outer_menu_wrap')).toBeVisible()
     await page.locator('[data-dp-element="action-next"]').click()
     await page.locator('.dp--future').filter({hasText: '12'}).first().click()
-    //await page.getByTestId("boolean-Tourism").click()
-    /*
-    const before_thailand = page.locator('[name="general.country_where_boarded"]')
-    await before_thailand.click()
-    const before_thailand_input = page.getByTestId('dropdown-general.country_where_boarded');
-    await expect(before_thailand_input).toBeVisible();
-    await before_thailand_input.fill('Mexico');
-    await page.waitForTimeout(2000)
-    await page.getByRole("option", {name: 'Mexico flag Mexico'}).click()
-    await page.waitForTimeout(2000)
-    */
     await page.getByTestId("boolean-No").click()
     await page.waitForTimeout(2000)
     await expect(next_btn).toBeEnabled()
@@ -152,11 +134,7 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
     await page.waitForTimeout(1000)
     await page.getByTestId('boolean-Male').click()
     await page.waitForTimeout(1000)
-    await page.locator('[name="applicant.0.home_country"]').click()
-    await page.waitForTimeout(2000)
-    await page.getByTestId("dropdown-applicant.0.home_country").fill("mexico")
-    await page.getByRole('option', {value: 'MX'}).click()
-    await page.waitForTimeout(2000)
+    await selectors.dropdownSelector(page, "applicant.0.home_country", "dropdown-applicant.0.home_country", "mexico", "MX")
     /*
     // Sidebar checks
     sidebar_post_payment_txt.forEach(async txt => await expect(sidebar_checks).toContainText(txt))

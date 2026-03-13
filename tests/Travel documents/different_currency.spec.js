@@ -1,9 +1,11 @@
 const { test, expect } = require('@playwright/test');
-const {deploy_url, Orders} = require('../urls');
+const {deploy_url, general_url} = require('../urls');
 const appFunctions = require('../functions')
 const percySnapshot = require('@percy/playwright');
+const path = require('path');
 
 test('Different currency', async ({ page }) => {
+  test.slow()
   await page.goto(deploy_url + 'turkey/apply-now');
   const currency = page.locator('id=currencyHeader');
   await expect(currency).toBeVisible()
@@ -72,16 +74,7 @@ test('Different currency', async ({ page }) => {
   
   await page.waitForNavigation({waitUntil: 'load'})
   await page.getByTestId("transition-page-button").click()
-  const request = await fetch("https://littleserver-production.up.railway.app/", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ 
-      Rejected: page.url().split("/")[4] 
-    }),
-  });
-  await request.json()
+  let Order_num = page.url().split("/")[4];
 
   await page.getByPlaceholder('111-222-3333').fill('11111111')
   await page.getByTestId('boolean-WhatsApp').click()
@@ -122,4 +115,26 @@ test('Different currency', async ({ page }) => {
   await expect(submit_post_payment).toBeEnabled()
   await submit_post_payment.click()
   await page.waitForNavigation({waitUntil: 'load'})
+
+  await page.goto(general_url + 'admin.visachinaonline.com/login')
+  await page.getByPlaceholder('1234567 or you@email.com').fill('david@admin.com')
+  await page.getByRole("button", {name: 'Continue'}).click()
+  await page.locator('#password_login_input').fill('testivisa5!')
+  await page.locator('#log_in_button').click()
+  await page.waitForURL('**/admin')
+  page.on('dialog', async (dialog) => {
+      await dialog.accept(Order_num);
+  });
+  const search_order = page.locator('//li[@onclick="searchOrderID();"]');
+  await search_order.click()
+
+  await page.getByTestId('applicant-details').click()
+  await page.getByTestId('show-docs-applicant-0').click()
+  await page.getByTestId('upload-docs-0').selectOption('reject_letter')
+  await page.getByTestId('deliverable-upload-applicant-0').setInputFiles(path.join(__dirname, 'uploads/deliverable.jpg'))
+  await expect(page.getByTestId('save-uploaded-docs-0')).toBeEnabled()
+  await page.getByTestId('save-uploaded-docs-0').click()
+  await page.waitForTimeout(10000)
+  await expect(page.locator('.upload-input-wrap')).toBeVisible()
+  await expect(page.getByTestId('order-status')).toHaveText('Rejected By Gov')
 })

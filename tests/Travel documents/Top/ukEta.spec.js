@@ -1,10 +1,11 @@
 const { test, expect } = require('@playwright/test');
-const {deploy_url} = require('../../urls');
+const {deploy_url, general_url} = require('../../urls');
 const appFunctions = require('../../functions');
 const selectors = require('../../selectors')
 const path = require('path');
 
 let Order_num
+test.describe.configure({ mode: 'serial' });
 test('UK ETA', async({page}) => {
   test.slow()
   await appFunctions.step_1(page,"us", "united-kingdom/apply-now")
@@ -78,8 +79,32 @@ test('UK ETA', async({page}) => {
   if(skip_recomendation){
     await page.locator('id=skip-recommendation-button').click()    
   }
-  
   await page.locator('id=trackApplication').click()
-  
   await page.waitForURL(deploy_url + "order/" + Order_num)
+})
+
+test('Send order to WOG', async ({page}) => {
+  await page.goto(general_url + 'admin.visachinaonline.com/login')
+  await page.getByPlaceholder('1234567 or you@email.com').fill('david@admin.com')
+  await page.getByRole("button", {name: 'Continue'}).click()
+  
+  await page.locator('#password_login_input').fill('testivisa5!')
+  await page.locator('#log_in_button').click()
+  await page.waitForURL('**/admin')
+  await page.waitForTimeout(3000)
+  page.on('dialog', async (dialog) => {
+      await dialog.accept(Order_num);
+  });
+  const search_order = page.locator('//li[@onclick="searchOrderID();"]');
+  await search_order.click()
+  await page.getByTestId('applicant-details').click()
+  await page.getByTestId("show-docs-applicant-0").click()
+  await page.locator("div").getByText("Passport Personal Details Scan").first().click()
+  await page.getByRole("button").getByText("Correct Info").click()
+  await page.locator("div").getByText("Applicant Photo").first().click()
+  await page.getByRole("button").getByText("Correct Info").click()
+  await page.waitForTimeout(3000)
+  await page.locator('[name="change-status"]').selectOption('reviewed')
+  await page.getByTestId('submitChangeStatus').click()
+  await page.waitForURL('**/admin/orders/my_orders?redirect_to_first_order=1')
 })

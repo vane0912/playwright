@@ -109,7 +109,7 @@ async function step_1(page,country,url){
     const dropdown_country =  page.getByTestId('filter-value');
     
     await dropdown_country.click();
-    await page.waitForTimeout(4000)
+    await page.waitForTimeout(3000)
     const input_country = page.getByTestId('dropdown-general.common_nationality_country');
     if(country === "us"){
         await input_country.fill('united states');
@@ -121,7 +121,7 @@ async function step_1(page,country,url){
         await input_country.fill('Mexico');
         await page.getByRole("option", {name: 'Mexico flag Mexico'}).click()
     }
-    await page.waitForTimeout(8000)
+    await page.waitForTimeout(4000)
     const continue_sidebar = page.locator('id=btnContinueSidebar')
     await continue_sidebar.click()
     await page.waitForURL('**/'+ url + '#step=step_3a')

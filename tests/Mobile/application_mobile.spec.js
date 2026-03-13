@@ -1,5 +1,6 @@
 const { test, expect, devices } = require('@playwright/test');
-const { deploy_url, email_test } = require('../urls');
+const { deploy_url} = require('../urls');
+const selectors = require('../selectors')
 const { newPaymentCheckout } = require('../functions');
 const iPhone13 = devices['iPhone 13'];
 
@@ -20,18 +21,6 @@ test('Travel Doc application pre and post payment are working Mobile', async({pa
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
     
-    //await page.waitForURL('**/thailand/apply-now#step=step_2')
-    /*
-    const arrival_date_visible = page.locator('[name="general.arrival_date"]')
-    await expect(arrival_date_visible).toBeVisible()
-    await arrival_date_visible.click()
-    await expect(page.locator('.dp__outer_menu_wrap')).toBeVisible()
-    await page.locator('[data-dp-element="action-next"]').click()
-    await page.locator('.dp--future').filter({hasText: '2'}).first().click()
-    
-    await expect(continue_sidebar).toBeEnabled()
-    await continue_sidebar.click()
-    */
     await page.waitForURL('**/thailand/apply-now#step=step_3a')
       
     // Validations Step_3a
@@ -131,10 +120,7 @@ test('Travel Doc application pre and post payment are working Mobile', async({pa
     await page.waitForTimeout(1000)
     await page.getByTestId('boolean-Male').click()
     await page.waitForTimeout(1000)
-    await page.locator('[name="applicant.0.home_country"]').click()
-    await page.waitForTimeout(2000)
-    await page.getByTestId("dropdown-applicant.0.home_country").fill("mexico")
-    await page.getByRole('option', {value: 'MX'}).click()
+    await selectors.dropdownSelector(page, "applicant.0.home_country", "dropdown-applicant.0.home_country", "mexico", "MX")
     await page.waitForTimeout(2000)
     /*
     const host_city = page.locator('[name="applicant.0.profession_occupation"]')

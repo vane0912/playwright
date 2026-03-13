@@ -1,12 +1,11 @@
 const { test, expect, devices } = require('@playwright/test');
-const { deploy_url } = require('../urls');
+const { deploy_url, general_url } = require('../urls');
 const { newPaymentCheckout } = require('../functions');
 const iPhone13 = devices['iPhone 13'];
 
 test.use({
   ...iPhone13,
 });
-
 test('Different currency Mobile', async ({ page }) => {
     await page.goto(deploy_url + 'turkey/apply-now');
     const headerMobileNav = page.locator('id=headerMobileNav');
@@ -33,21 +32,6 @@ test('Different currency Mobile', async ({ page }) => {
     const continue_sidebar = page.locator('id=btnContinueUnderSectionMobile')
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-
-    /*
-    const selector_products = page.getByTestId('dropdown-general.visa_type_id');
-    await selector_products.selectOption('38')
-    
-    const arrival_date_visible = page.locator('[name="general.arrival_date"]')
-    await expect(arrival_date_visible).toBeVisible()
-    await arrival_date_visible.click()
-    await expect(page.locator('.dp__outer_menu_wrap')).toBeVisible()
-    await page.locator('[data-dp-element="action-next"]').click()
-    await page.locator('.dp--future').filter({hasText: '12'}).first().click()
-    
-    await expect(continue_sidebar).toBeEnabled()
-    await continue_sidebar.click()
-    */
     await page.waitForURL('**/turkey/apply-now#step=step_3a')
     
     await page.waitForTimeout(1000)
@@ -93,17 +77,7 @@ test('Different currency Mobile', async ({ page }) => {
     await payment_btn.click()
     await page.waitForNavigation({waitUntil: 'load'})
     await page.getByTestId("transition-page-button").click()
-    const request = await fetch("https://littleserver-production.up.railway.app/", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ 
-          MIN: page.url().split("/")[4] 
-        }),
-    });
-    await request.json()
-  
+
     await page.getByPlaceholder('111-222-3333').fill('11111111')
     await page.getByTestId('boolean-WhatsApp').click()
     
@@ -143,4 +117,4 @@ test('Different currency Mobile', async ({ page }) => {
     await expect(submit_post_payment).toBeEnabled()
     await submit_post_payment.click()
     await page.waitForNavigation({waitUntil: 'load'})
-  })
+})

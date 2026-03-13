@@ -189,5 +189,5 @@ test('Fix Min', async({browser}) => {
   await percySnapshot(newTab, "SolveMin")
   await selectors.inputText(newTab, "applicant.0.birth_city", "Test")
   await newTab.locator("id=btnSubmitApplication").click()
-  await newTab.waitForNavigation()
+  await newTab.waitForNavigation({waitUntil: 'load'})
 })

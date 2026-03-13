@@ -5,9 +5,11 @@ const appFunctions = require('../../functions')
 const passportSteps = require('../../Functions/passport')
 const selectors = require('../../selectors')
 const randomEmail = require('random-email')
+const percySnapshot = require('@percy/playwright');
 let fastpassportEmail = randomEmail({domain: "fastpassport.com"})
 
-test('FastPassport - USPS Emergency - Preparing for shipping', async({page}) => {
+test.describe.configure({ mode: 'serial' });
+test('FastPassport - USPS Emergency - Complete', async({page}) => {
   test.slow()
   await page.goto(general_url + 'fastpassport.visachinaonline.com/passport-renewal/united-states')
   await page.reload()
@@ -123,7 +125,7 @@ test('FastPassport - USPS Emergency - Preparing for shipping', async({page}) => 
   await expect(page.getByTestId('submitChangeStatus')).toBeEnabled()
   await page.getByTestId('submitChangeStatus').click()
   await page.waitForURL('**/admin/orders/my_orders?redirect_to_first_order=1')
-  // Shipped to customer
+
   await search_order.click()
   await page.getByTestId("dl-manage-order-title").click()
   await page.getByRole("button").locator("span").getByText('Change status to "Shipped to Customer"').click()
@@ -131,24 +133,19 @@ test('FastPassport - USPS Emergency - Preparing for shipping', async({page}) => 
   await expect(page.getByTestId('submitChangeStatus')).toBeEnabled()
   await page.getByTestId('submitChangeStatus').click()
   await page.waitForURL('**/admin/orders/my_orders?redirect_to_first_order=1')
-  // With partner
-  await search_order.click()
-  await page.getByTestId("dl-manage-order-title").click()
-  await page.locator('[name="change-status"]').selectOption('with_partner')
-  await page.getByTestId("alert-modal-button").click()
-  await page.getByRole("checkbox").uncheck()
-  await page.getByTestId('submitChangeStatus').click()
-  await page.waitForURL('**/admin/orders/my_orders?redirect_to_first_order=1')
-  await search_order.click()
-  // WOG
-  await page.getByTestId("add_annotation_button").click()
-  await page.getByTestId("annotation_type_select").selectOption("gov_confirmation_id")
-  await page.locator("input").nth(1).fill("1234")
-  await page.getByTestId("save_annotation_button").click()
-  await page.getByTestId("dl-manage-order-title").click()
-  await page.locator('[name="change-status"]').selectOption('waiting_on_gov')
-  await expect(page.getByPlaceholder('Separate with , or ;')).toBeVisible()
-  await expect(page.getByTestId('submitChangeStatus')).toBeEnabled()
-  await page.getByTestId('submitChangeStatus').click()
-  await page.waitForURL('**/admin/orders/my_orders?redirect_to_first_order=1')
+})
+
+test('Check complete orders', async({browser}) => {
+  test.slow()
+  const context = await browser.newContext({
+      httpCredentials: {
+        username: 'admin',
+        password: 'testivisa5!',
+      },
+  });
+  const page = await context.newPage();
+  await page.goto(deploy_url + 'mail')
+  await page.getByText("Your passport kit is on it’s way!").first().click()
+  await page.waitForTimeout(5000)
+  await percySnapshot(page, "completeEmailPassport")
 })
