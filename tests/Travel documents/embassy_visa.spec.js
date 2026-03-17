@@ -41,7 +41,6 @@ test('Embassy Visa', async({page}) => {
     await page.waitForNavigation({waitUntil: 'load'})
     await page.getByTestId("transition-page-button").click()
     let Order_num = page.url().split("/")[4] 
-    await request.json()
     await page.getByPlaceholder('111-222-3333').fill('11111111')
     await page.getByTestId('boolean-WhatsApp').click()
     await selectors.arrival_date(page)
@@ -67,6 +66,7 @@ test('Embassy Visa', async({page}) => {
     await visa_denied.click()
     await page.locator('[name="applicant.0.birth_city"]').fill("test")
     await selectors.addressApi(page, "applicant.0.home_address")
+    await page.waitForTimeout(1000)
     await selectors.dropdownSelector(page, "applicant.0.secondary_document_issued_country", "dropdown-applicant.0.secondary_document_issued_country'", "Mexico", "Mexico flag Mexico")
     await page.getByTestId('boolean-Male').click()
     await page.locator('[name="applicant.0.birth_city"]').fill("test")

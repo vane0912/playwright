@@ -10,7 +10,7 @@ test:
 	npx playwright test /tests/Travel documents/ /tests/Passport-tests/ /tests/Mobile/ --workers 3 
 
 refactor: 
-	npx playwright test uspsPassport.spec.js
+	npx playwright test embassy_visa.spec.js
 translations:
 	npx playwright test /tests/Translation 
 
