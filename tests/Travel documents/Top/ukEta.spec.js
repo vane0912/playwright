@@ -97,6 +97,7 @@ test('Send order to WOG', async ({page}) => {
   });
   const search_order = page.locator('//li[@onclick="searchOrderID();"]');
   await search_order.click()
+  await page.waitForTimeout(3000)
   await page.getByTestId('applicant-details').click()
   await page.getByTestId("show-docs-applicant-0").click()
   await page.locator("div").getByText("Passport Personal Details Scan").first().click()
@@ -104,7 +105,7 @@ test('Send order to WOG', async ({page}) => {
   await page.locator("div").getByText("Applicant Photo").first().click()
   await page.getByRole("button").getByText("Correct Info").click()
   await page.waitForTimeout(3000)
-  await page.locator('[name="change-status"]').selectOption('reviewed')
+  await page.locator('[name="change-status"]').selectOption('ready_for_bot')
   await page.getByTestId('submitChangeStatus').click()
   await page.waitForURL('**/admin/orders/my_orders?redirect_to_first_order=1')
 })

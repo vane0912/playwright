@@ -1,16 +1,16 @@
 report:
 	npx playwright show-report
 failed:
-	npx playwright test --last-failed --headed
+	npx playwright test --last-failed
 all: 
-	npx percy exec -- npx playwright test /tests/Travel documents/ /tests/Passport-tests/ /tests/Mobile/ /tests/visual/ --workers 2 
+	npx percy exec -- npx playwright test /tests/Travel documents/ /tests/Passport-tests/ /tests/Mobile/ /tests/visual/
 admin: 
 	npx playwright test /tests/admin/
 test: 
 	npx playwright test /tests/Travel documents/ /tests/Passport-tests/ /tests/Mobile/ --workers 3 
 
 refactor: 
-	npx playwright test embassy_visa.spec.js
+	npx playwright test ukEta.spec.js --headed
 translations:
 	npx playwright test /tests/Translation 
 

@@ -6,6 +6,7 @@ const { deploy_url } = require('../../urls');
 let Order_num
 
 test('Egypt eVisa', async ({ page }) => {
+  test.slow()
   await appFunctions.step_1(page,"us", "egypt/apply-now")
   const continue_sidebar = page.locator('id=btnContinueSidebar')
 

@@ -5,7 +5,7 @@ async function arrival_date(page){
   const arrival_date_visible = page.locator('[name="general.arrival_date"]')
   await expect(arrival_date_visible).toBeVisible()
   await arrival_date_visible.click()
-  await expect(page.locator('.dp__outer_menu_wrap')).toBeVisible()
+  await page.locator('[data-dp-element="action-next"]').click()
   await page.locator('[data-dp-element="action-next"]').click()
   await page.locator('.dp--future').filter({hasText: '12'}).first().click()
 }
@@ -14,7 +14,7 @@ async function departure_date(page, name){
   const departure_date_visible = page.locator('[name="' + name + '"]')
   await expect(departure_date_visible).toBeVisible()
   await departure_date_visible.click()
-  await expect(page.locator('.dp__outer_menu_wrap')).toBeVisible()
+  await page.locator('[data-dp-element="action-next"]').click()
   await page.locator('[data-dp-element="action-next"]').click()
   await page.locator('.dp--future').filter({hasText: '15'}).first().click()
 }

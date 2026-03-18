@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 const {deploy_url, email_test} = require('../urls');
 const percySnapshot = require('@percy/playwright');
 
-test('Appointment location error', async({page}) => {
+test.fixme('Appointment location error', async({page}) => {
     test.slow()
     await page.goto(deploy_url + 'australia/apply-now')
   

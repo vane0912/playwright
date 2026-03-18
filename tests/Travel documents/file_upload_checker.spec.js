@@ -115,7 +115,7 @@ test('File upload checker', async({page}) => {
     await page.waitForTimeout(3000)
     await page.locator('[name="applicant.0.spouse_first_last_name"]').fill("test")
     await page.waitForTimeout(3000)
-    await page.getByTestId("boolean-No, I don’t have information about either").click()
+    await page.getByTestId("boolean-No, I don’t know their names").click()
     await page.waitForTimeout(2000)
     await expect(next_btn).toBeEnabled()
     await next_btn.click()

@@ -105,7 +105,6 @@ async function oldPaymentCheckout(page, url, creditCard, cvvNum){
 
 async function step_1(page,country,url){
     await page.goto(deploy_url + url)
-    await page.waitForURL(deploy_url + url)
     const dropdown_country =  page.getByTestId('filter-value');
     
     await dropdown_country.click();

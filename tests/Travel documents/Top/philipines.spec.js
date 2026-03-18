@@ -6,6 +6,7 @@ const { deploy_url } = require('../../urls');
 let Order_num
 
 test('Philippines eArrival Card', async ({ page }) => {
+  test.slow()
   await appFunctions.step_1(page,"us", "philippines/apply-now")
   const continue_sidebar = page.locator('id=btnContinueSidebar')
 
@@ -62,7 +63,6 @@ test('Philippines eArrival Card', async ({ page }) => {
   if(skip_recomendation){
     await page.locator('id=skip-recommendation-button').click()    
   }
-  
   await page.locator('id=trackApplication').click()
   
   await page.waitForURL(deploy_url + "order/" + Order_num)

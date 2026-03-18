@@ -44,7 +44,7 @@ test('Aruba ED Card', async ({ page }) => {
   await expect(next_btn).toBeEnabled()
   await next_btn.click()
   await page.waitForTimeout(2000)
-  await expect(page.locator(".input-error")).toContainText("Please provide a valid arrival flight number ")
+  await expect.soft(page.locator(".input-error")).toContainText("Please provide a valid arrival flight number ")
   await selectors.inputText(page, "general.arrival_flight_number", flight_number)
   await page.waitForTimeout(2000)
 

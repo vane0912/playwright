@@ -56,7 +56,7 @@ test('Israel ETA', async ({ page }) => {
   await expect(next_btn).toBeEnabled()
   await next_btn.click()
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_family")
-  await selectors.booleanOptions(page, "applicant.0.applicable_statement","boolean-No, I don’t have information about either")
+  await selectors.booleanOptions(page, "applicant.0.applicable_statement","boolean-No, I don’t know their names")
   await expect(next_btn).toBeEnabled()
   await next_btn.click()
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_past_travel")
