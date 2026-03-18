@@ -1,6 +1,7 @@
 const { test, expect } = require('@playwright/test');
 const percySnapshot = require('@percy/playwright');
 const appFunctions = require('../functions')
+const selectors = require('../selectors')
 const {deploy_url} = require('../urls');
 
 let Order_num 
