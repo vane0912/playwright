@@ -140,17 +140,15 @@ test('FastPassport - USPS Emergency - Preparing for shipping', async({page}) => 
   await page.getByTestId('submitChangeStatus').click()
   await page.waitForURL('**/admin/orders/my_orders?redirect_to_first_order=1')
   await search_order.click()
-  // WOG
-  /*
+  await page.locator("section").locator('[aria-labelledby="order-annotations-title"]').click()
   await page.getByTestId("add_annotation_button").click()
   await page.getByTestId("annotation_type_select").selectOption("gov_confirmation_id")
-  await page.locator("input").nth(1).fill("1234")
+  await page.locator("section").locator('[aria-labelledby="order-annotations-title"]').locator("input").fill("1234")
   await page.getByTestId("save_annotation_button").click()
   await page.getByTestId("dl-manage-order-title").click()
   await page.locator('[name="change-status"]').selectOption('waiting_on_gov')
   await expect(page.getByPlaceholder('Separate with , or ;')).toBeVisible()
   await expect(page.getByTestId('submitChangeStatus')).toBeEnabled()
   await page.getByTestId('submitChangeStatus').click()
-  */
-  //await page.waitForURL('**/admin/orders/my_orders?redirect_to_first_order=1')
+  await page.waitForURL('**/admin/orders/my_orders?redirect_to_first_order=1')
 })
