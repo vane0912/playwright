@@ -7,10 +7,10 @@ all:
 admin: 
 	npx playwright test /tests/admin/
 test: 
-	npx playwright test /tests/Travel documents/ /tests/Passport-tests/ /tests/Mobile/ --workers 3 
+	npx playwright test /tests/Travel documents/ /tests/Passport-tests/ /tests/Mobile/ --workers 4 
 
 refactor: 
-	npx playwright test familySubscription.spec.js 
+	npx playwright test embassy_visa.spec.js 
 translations:
 	npx playwright test /tests/Translation 
 

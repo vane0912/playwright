@@ -76,6 +76,7 @@ test('Embassy Visa', async({page}) => {
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
     await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_family")
+    await page.waitForTimeout(2000)
     await selectors.dropdownOptions(page, "dropdown-applicant.0.marital_status", "Single / Never Married")
     await selectors.booleanOptions(page, "applicant.0.family_residents", "boolean-No")
     await selectors.booleanOptions(page, "applicant.0.family_traveling_with", "boolean-Yes")

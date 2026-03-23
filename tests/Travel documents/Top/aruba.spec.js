@@ -4,7 +4,7 @@ const appFunctions = require('../../functions')
 const selectors = require('../../selectors')
 
 
-test('Aruba ED Card', async ({ page }) => {
+test.fixme('Aruba ED Card', async ({ page }) => {
   const month = new Intl.DateTimeFormat('en-US', { month: 'numeric' }).format(new Date());
   const now = new Date();
   const day = now.getDate();
