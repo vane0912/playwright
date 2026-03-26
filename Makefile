@@ -17,5 +17,8 @@ translations:
 fastPassport:
 	npx playwright test /tests/Passport-tests/Fastpassport
 
+testAuth:
+	npx playwright test auth.setup.ts
+
 status:
 	npx playwright test payments.spec.js extra_order.spec.js different_currency.spec.js currency_mobile.spec.js
