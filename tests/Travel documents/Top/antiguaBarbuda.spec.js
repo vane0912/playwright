@@ -7,15 +7,13 @@ let Order_num
 
 test('Antigua & Barbuda Entry Form', async ({ page }) => {
   test.slow()
-  await appFunctions.step_1(page,"us", "antigua-barbuda/apply-now")
-  const continue_sidebar = page.locator('id=btnContinueSidebar')
-
-  await appFunctions.step_2(page,continue_sidebar)
-  await page.waitForURL("**/antigua-barbuda/apply-now#step=step_3c")
-  
-  await appFunctions.step_3c(page,continue_sidebar)
-  await page.waitForURL("**/antigua-barbuda/apply-now#step=review")
-
+  await page.goto(deploy_url + 'antigua-barbuda/apply-now')
+  await appFunctions.autofillExisting(page, "antigua-barbuda/apply-now/edit-traveler/0")
+  await page.waitForURL("**/antigua-barbuda/apply-now/traveler-review")
+  const continue_sidebar = page.getByRole("button").getByText("Continue")
+  await continue_sidebar.click()
+  await page.waitForURL("**/antigua-barbuda/apply-now/contact-details")
+  await continue_sidebar.click() 
   await appFunctions.newPaymentCheckout(page, '6011 1111 1111 1117', '123')
   const payment_btn = page.locator('id=btnSubmitPayment')
   await expect(payment_btn).toBeVisible()
@@ -37,6 +35,7 @@ test('Antigua & Barbuda Entry Form', async ({ page }) => {
   await page.waitForTimeout(2000)
   await selectors.inputText(page, "general.destination_location_name", 'Test')
   await selectors.addressApi(page, "general.destination_address")
+  await selectors.booleanOptions(page, 'general.type_accommodation', 'option-Host')
   await page.waitForTimeout(2000)
   await expect(next_btn).toBeEnabled()
   await next_btn.click()

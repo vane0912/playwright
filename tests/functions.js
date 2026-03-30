@@ -102,31 +102,24 @@ async function oldPaymentCheckout(page, url, creditCard, cvvNum){
     await zip_code.fill('12345')
     */ 
 }
-
-async function step_1(page,country,url){
-    await page.goto(deploy_url + url)
-    const dropdown_country =  page.getByTestId('filter-value');
-    
-    await dropdown_country.click();
-    await page.waitForTimeout(3000)
-    const input_country = page.getByTestId('dropdown-general.common_nationality_country');
-    if(country === "us"){
-        await input_country.fill('united states');
-        await page.getByRole("option", {name: 'United States flag United States'}).click()
-    }else if(country === "au"){
-        await input_country.fill('Australia');
-        await page.getByRole("option", {name: 'Australia flag Australia'}).click()
-    }else{
-        await input_country.fill('Mexico');
-        await page.getByRole("option", {name: 'Mexico flag Mexico'}).click()
-    }
-    await page.waitForTimeout(4000)
-    const continue_sidebar = page.locator('id=btnContinueSidebar')
+async function autofillExisting(page, url) {
+    await page.getByRole("radiogroup").nth(0).click()
+    await page.getByRole("button").getByText("Confirm").click()
+    await page.waitForURL(deploy_url + url)
+    await page.waitForTimeout(2000)
+    await page.locator('[name="applicant.0.is_passport_on_hand"]').getByTestId("option-true").click()
+    await page.waitForTimeout(2000)
+    await page.locator('[name="applicant.0.are_employed"]').getByTestId("option-true").click()
+    await page.waitForTimeout(2000)
+    await page.locator('[name="applicant.0.criminal_offence"]').getByTestId("option-false").click()
+    await page.waitForTimeout(2000)
+    await page.locator('[name="applicant.0.specific_travel_plans"]').getByTestId("option-false").click()
+    await page.waitForTimeout(2000)
+    await page.getByTestId("dropdown-applicant.0.reason_for_travel").selectOption({value: "Tourism"})
+    const continue_sidebar = page.getByRole("button").getByText("Continue")
     await continue_sidebar.click()
-    await page.waitForURL('**/'+ url + '#step=step_3a')
 }
-
-async function step_2(page,continue_sidebar){
+async function step_1(page){
     const dob_day = page.locator('[name="applicant.0.dob.day"]')
     await dob_day.selectOption('13')
 
@@ -143,12 +136,12 @@ async function step_2(page,continue_sidebar){
     const last_name = page.locator('[name="applicant.0.last_name"]')
     await last_name.fill('Test')
     await page.waitForTimeout(1000)
-    
-    await expect(continue_sidebar).toBeEnabled()
-    await continue_sidebar.click()
+    await page.getByTestId('option-Male').click()  
 }
 
-async function step_3c(page,continue_sidebar){
+
+async function step_2(page, continue_sidebar){
+    await page.getByTestId('option-true').click()  
     const passport_num = page.locator('[name="applicant.0.passport_num"]')
     await expect(passport_num).toBeVisible()
     await passport_num.fill('123456789')
@@ -158,10 +151,42 @@ async function step_3c(page,continue_sidebar){
     await passport_month.selectOption('7')
     const passport_year = page.locator('[name="applicant.0.passport_expiration_date.year"]')
     await passport_year.selectOption('2030')
-    await page.waitForTimeout(4000)
+    await page.waitForTimeout(2000)
+    const passport_issue_day = page.locator('[name="applicant.0.passport_issued_date.day"]')
+    await passport_issue_day.selectOption('13')
+    const passport_issue_month = page.locator('[name="applicant.0.passport_issued_date.month"]')
+    await passport_issue_month.selectOption('7')
+    const passport_issue_year = page.locator('[name="applicant.0.passport_issued_date.year"]')
+    await passport_issue_year.selectOption('2024')
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
 }
+
+async function step_3c(page,continue_sidebar){
+    await page.locator('[name="applicant.0.home_address"]').fill('123')
+    await page.waitForTimeout(2000)
+    await page.keyboard.press("Space")
+    await page.waitForTimeout(1000)
+    await page.keyboard.press("Enter")
+    await page.waitForTimeout(1000)
+    await page.locator('//li[@data-type="place"]').first().click()
+    await page.waitForTimeout(1000)
+    await expect(continue_sidebar).toBeEnabled()
+    await continue_sidebar.click()
+}
+async function additionalInfo(page,continue_sidebar){
+    await page.waitForTimeout(2000)
+    await page.locator('[name="applicant.0.are_employed"]').getByTestId("option-false").click()
+    await page.waitForTimeout(2000)
+    await page.locator('[name="applicant.0.criminal_offence"]').getByTestId("option-false").click()
+    await page.waitForTimeout(2000)
+    await page.locator('[name="applicant.0.specific_travel_plans"]').getByTestId("option-false").click()
+    await page.waitForTimeout(2000)
+    await page.getByTestId("dropdown-applicant.0.reason_for_travel").selectOption({value: "Tourism"})
+    await expect(continue_sidebar).toBeEnabled()
+    await continue_sidebar.click()
+}
+
 
 module.exports = {
     translations,
@@ -169,5 +194,7 @@ module.exports = {
     newPaymentCheckout, 
     step_1,
     step_2,
-    step_3c
+    step_3c,
+    additionalInfo,
+    autofillExisting
 }

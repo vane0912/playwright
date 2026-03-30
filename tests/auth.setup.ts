@@ -9,44 +9,23 @@ const authFile = path.join(__dirname, '../.auth/user.json');
 setup('authenticate', async ({ page }) => {
   if(!fs.existsSync(authFile)){
     test.slow()
-    await appFunctions.step_1(page,"mx", "turkey/apply-now")
-    const continue_sidebar = page.locator('id=btnContinueSidebar')
-
+    await page.goto(deploy_url + 'turkey/apply-now')
+    await appFunctions.step_1(page)
+    const continue_sidebar = page.getByRole("button").getByText("Continue")
+    await continue_sidebar.click()
+    await page.waitForURL("**/turkey/apply-now/passport-details/0")
+    await appFunctions.step_2(page, continue_sidebar)
+    await page.waitForURL("**/turkey/apply-now/address-details/0")
+    await appFunctions.step_3c(page, continue_sidebar)
+    await page.waitForURL("**/turkey/apply-now/additional-info/0")
+    await appFunctions.additionalInfo(page, continue_sidebar)
+    await page.waitForURL("**/turkey/apply-now/traveler-review")
+    await continue_sidebar.click()
+    await page.waitForURL("**/turkey/apply-now/contact-details")
     await expect(page.locator('[name="general.email"]')).toBeVisible()
     await page.locator('[name="general.email"]').fill(email_test)
-
-    await page.waitForTimeout(1000)
-    await appFunctions.step_2(page, continue_sidebar)
-
-    await page.waitForURL("**/turkey/apply-now#step=step_3c")
-    
-    const dropdown_country_step3c = page.locator('[name="applicant.0.nationality_country"]');
-    await expect(dropdown_country_step3c).toBeVisible();
-    await dropdown_country_step3c.click();
-    const input_country_3c = page.getByTestId('dropdown-applicant.0.nationality_country');
-    await expect(input_country_3c).toBeVisible();
-    await input_country_3c.fill('Mexico');
-    await page.getByRole("option", {name: 'Mexico flag Mexico'}).click()
-
-    
-    const passport_num = page.locator('[name="applicant.0.passport_num"]')
-    await expect(passport_num).toBeVisible()
-    await passport_num.fill('123456789')
-
-    const passport_day = page.locator('[name="applicant.0.passport_expiration_date.day"]')
-    await passport_day.selectOption('13')
-
-    const passport_month = page.locator('[name="applicant.0.passport_expiration_date.month"]')
-    await passport_month.selectOption('7')
-
-    const passport_year = page.locator('[name="applicant.0.passport_expiration_date.year"]')
-    await passport_year.selectOption('2030')
-    await page.waitForTimeout(4000)
-    
-    await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    await page.waitForURL("**/turkey/apply-now#step=review")
-    
+    await page.waitForURL("**/turkey/apply-now/checkout")
     await appFunctions.newPaymentCheckout(page, '6011 1111 1111 1117', '123')
 
     const payment_btn = page.locator('id=btnSubmitPayment')

@@ -10,15 +10,13 @@ test:
 	npx playwright test /tests/Travel documents/ /tests/Passport-tests/ /tests/Mobile/ --workers 4 
 
 refactor: 
-	npx playwright test embassy_visa.spec.js 
+	npx playwright test antiguaBarbuda.spec.js 
 translations:
 	npx playwright test /tests/Translation 
 
 fastPassport:
 	npx playwright test /tests/Passport-tests/Fastpassport
 
-testAuth:
-	npx playwright test auth.setup.ts
 
 status:
 	npx playwright test payments.spec.js extra_order.spec.js different_currency.spec.js currency_mobile.spec.js

@@ -20,7 +20,7 @@ async function departure_date(page, name){
 }
 async function phoneNumber(page) {
     await page.getByPlaceholder('111-222-3333').fill('11111111')
-    await page.getByTestId('boolean-WhatsApp').click()
+    await page.getByTestId('option-WhatsApp').click()
 }
 
 async function addressApi(page, name) {
