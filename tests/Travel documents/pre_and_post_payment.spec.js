@@ -125,7 +125,7 @@ test('Travel Doc application pre and post payment are working', async({page}) =>
     await expect(page.locator('.dp__outer_menu_wrap')).toBeVisible()
     await page.locator('[data-dp-element="action-next"]').click()
     await page.locator('.dp--future').filter({hasText: '12'}).first().click()
-    await page.getByTestId("boolean-No").click()
+    await page.getByTestId("option-No").click()
     await page.waitForTimeout(2000)
     await expect(next_btn).toBeEnabled()
     await next_btn.click()

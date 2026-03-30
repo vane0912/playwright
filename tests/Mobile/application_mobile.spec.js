@@ -100,7 +100,7 @@ test('Travel Doc application pre and post payment are working Mobile', async({pa
     await page.locator('[data-dp-element="action-next"]').click()
     await page.locator('.dp--future').filter({hasText: '2'}).first().click()
     
-    //await page.getByTestId("boolean-Tourism").click()
+    //await page.getByTestId("option-Tourism").click()
     /*
     const before_thailand = page.locator('[name="general.country_where_boarded"]')
     await before_thailand.click()
@@ -110,7 +110,7 @@ test('Travel Doc application pre and post payment are working Mobile', async({pa
     await page.getByRole("option", {name: 'Mexico flag Mexico'}).click()
     */
     await page.waitForTimeout(2000)
-    await page.getByTestId("boolean-No").click()
+    await page.getByTestId("option-No").click()
      await page.waitForTimeout(2000)
     await expect(next_btn).toBeEnabled()
     await next_btn.click()

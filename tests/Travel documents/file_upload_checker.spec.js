@@ -102,7 +102,7 @@ test('File upload checker', async({page}) => {
     await input_employment.fill('retired');
     await page.getByRole("option", {name: 'Retired'}).click()
     */
-    await page.getByTestId("boolean-Retired").click()
+    await page.getByTestId("option-Retired").click()
     await page.waitForTimeout(1000)
 
     await expect(next_btn).toBeEnabled()
@@ -115,14 +115,14 @@ test('File upload checker', async({page}) => {
     await page.waitForTimeout(3000)
     await page.locator('[name="applicant.0.spouse_first_last_name"]').fill("test")
     await page.waitForTimeout(3000)
-    await page.getByTestId("boolean-No, I don’t know their names").click()
+    await page.getByTestId("option-No, I don’t know their names").click()
     await page.waitForTimeout(2000)
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
     //await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_travel")
     /*
     await page.waitForTimeout(2000)
-    await page.getByTestId("boolean-No").first().click()
+    await page.getByTestId("option-No").first().click()
     await page.waitForTimeout(2000)
     await expect(next_btn).toBeEnabled()
     await next_btn.click()

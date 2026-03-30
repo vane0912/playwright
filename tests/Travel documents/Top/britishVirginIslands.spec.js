@@ -35,7 +35,7 @@ test.skip('British Virgin Islands ED Card', async ({ page }) => {
   
   await selectors.phoneNumber(page)
   await selectors.arrival_date(page)
-  await selectors.booleanOptions(page, "general.traveling_with_others", "boolean-No")
+  await selectors.booleanOptions(page, "general.traveling_with_others", "option-No")
   Order_num = page.url().split("/")[4] 
   const next_btn = page.locator('id=btnContinueUnderSection')
   await page.waitForTimeout(1000)
@@ -51,7 +51,7 @@ test.skip('British Virgin Islands ED Card', async ({ page }) => {
   await expect(next_btn).toBeEnabled()
   await next_btn.click()
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=accommodation")
-  await selectors.booleanOptions(page, "general.type_of_contact", "boolean-Hotel")
+  await selectors.booleanOptions(page, "general.type_of_contact", "option-Hotel")
   await selectors.addressApi(page, 'general.residential_address')
   await selectors.inputText(page, 'general.residential_zip', '12345')
   await expect(next_btn).toBeEnabled()

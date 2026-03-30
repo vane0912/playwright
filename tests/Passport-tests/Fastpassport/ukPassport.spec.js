@@ -53,7 +53,7 @@ test('FastPassport - United Kingdom', async({page, context}) =>{
   await page.selectOption("[name='applicant.0.dob.month']", "1")
   await page.waitForTimeout(1000)
   await page.selectOption("[name='applicant.0.dob.year']", "1999")
-  await selectors.booleanOptions(page, "applicant.0.gender", "boolean-Male")
+  await selectors.booleanOptions(page, "applicant.0.gender", "option-Male")
   await selectors.inputText(page, "applicant.0.birth_city", "Test")
   await next_btn.click()
   await page.waitForURL(general_url + 'fastpassport.visachinaonline.com/order/' + Order_num + '/continue#step=trav0_residency_information')

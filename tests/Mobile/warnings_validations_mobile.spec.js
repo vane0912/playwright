@@ -116,10 +116,10 @@ test.skip('Appointment location error mobile', async({page}) => {
     const assets_boolean = assets_div.getByTestId('boolean-Yes')
     await assets_boolean.click()
   
-    const other_countries_travel = page.getByTestId('travelerSection-0').getByTestId("boolean-Yes, in the last 5 years, I have traveled out of my home country and returned.")
+    const other_countries_travel = page.getByTestId('travelerSection-0').getByTestId("option-Yes, in the last 5 years, I have traveled out of my home country and returned.")
     await other_countries_travel.click()
   
-    const visa_denied = page.getByTestId('travelerSection-0').getByTestId("boolean-I was denied this visa over 12 months ago")
+    const visa_denied = page.getByTestId('travelerSection-0').getByTestId("option-I was denied this visa over 12 months ago")
     await visa_denied.click()
     */
     // Second applicant
@@ -152,7 +152,7 @@ test.skip('Appointment location error mobile', async({page}) => {
     const other_countries_travel_1 = page.getByTestId('travelerSection-1').getByTestId('boolean-Yes, in the last 5 years, I have traveled out of my home country and returned.')
     await other_countries_travel_1.click()
   
-    const visa_denied_1 = page.getByTestId('travelerSection-1').getByTestId("boolean-I was denied this visa over 12 months ago")
+    const visa_denied_1 = page.getByTestId('travelerSection-1').getByTestId("option-I was denied this visa over 12 months ago")
     await visa_denied_1.click()
     */
     await expect(continue_sidebar).toBeEnabled()

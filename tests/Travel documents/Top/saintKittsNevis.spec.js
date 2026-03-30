@@ -69,7 +69,7 @@ test.fixme('Saint Kitts and Nevis ETA ', async ({ page }) => {
   await expect(next_btn).toBeEnabled()
   await next_btn.click()
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_declarations")
-  await selectors.booleanOptions(page, "applicant.0.declarations_us", "boolean-No")
+  await selectors.booleanOptions(page, "applicant.0.declarations_us", "option-No")
   await expect(next_btn).toBeEnabled()
   await next_btn.click()
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_documents")

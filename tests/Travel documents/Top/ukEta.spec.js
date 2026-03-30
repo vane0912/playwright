@@ -43,7 +43,7 @@ test('UK ETA', async({page}) => {
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_personal")    
   await page.waitForTimeout(2000)
   
-  await page.getByTestId("boolean-Unemployed").click()
+  await page.getByTestId("option-Unemployed").click()
   await page.waitForTimeout(2000)
   await expect(next_btn).toBeEnabled()
   await next_btn.click()

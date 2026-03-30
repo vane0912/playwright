@@ -128,7 +128,7 @@ test('UK ETA ORDER 2', async({page}) => {
     
     //await page.getByTestId('boolean-Male').click()
     
-    await page.getByTestId("boolean-Unemployed").click()
+    await page.getByTestId("option-Unemployed").click()
     await page.waitForTimeout(2000)
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
@@ -138,7 +138,7 @@ test('UK ETA ORDER 2', async({page}) => {
     
     await page.waitForTimeout(2000)
     await translations(page, page.locator('id=question-container'), "div")
-    const employment = page.getByTestId("boolean-No")
+    const employment = page.getByTestId("option-No")
     await expect(employment).toBeVisible();
     await employment.click()
     await page.waitForTimeout(1000)

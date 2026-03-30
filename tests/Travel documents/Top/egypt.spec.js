@@ -36,8 +36,8 @@ test('Egypt eVisa', async ({ page }) => {
   await next_btn.click()
 
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_personal")
-  await selectors.booleanOptions(page, "applicant.0.marital_status", "boolean-Single")
-  await selectors.booleanOptions(page, "applicant.0.occupation", "boolean-Unemployed")
+  await selectors.booleanOptions(page, "applicant.0.marital_status", "option-Single")
+  await selectors.booleanOptions(page, "applicant.0.occupation", "option-Unemployed")
   await expect(next_btn).toBeEnabled()
   await next_btn.click()
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_residency_information_after_payment")

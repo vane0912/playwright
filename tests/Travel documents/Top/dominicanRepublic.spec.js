@@ -35,7 +35,7 @@ test('Dominican Republic eTicket', async ({ page }) => {
   await next_btn.click()
 
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=travel_general")
-  await selectors.booleanOptions(page, "general.flight_reservation", "boolean-No")
+  await selectors.booleanOptions(page, "general.flight_reservation", "option-No")
   await selectors.departure_date(page, "general.departure_date")
   await selectors.inputText(page, "general.departure_flight_number", "1234")
   await expect(next_btn).toBeEnabled()
@@ -44,8 +44,8 @@ test('Dominican Republic eTicket', async ({ page }) => {
   await next_btn.click()
 
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_personal")
-  await selectors.booleanOptions(page, "applicant.0.gender", "boolean-Female")
-  await selectors.booleanOptions(page, "applicant.0.marital_status", "boolean-Single")
+  await selectors.booleanOptions(page, "applicant.0.gender", "option-Female")
+  await selectors.booleanOptions(page, "applicant.0.marital_status", "option-Single")
   await page.locator("id=btnSubmitApplication").click()
   await page.waitForURL(deploy_url + "order-received-page/" + Order_num)
   await page.waitForTimeout(4000)

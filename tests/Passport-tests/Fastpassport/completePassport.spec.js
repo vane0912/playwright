@@ -57,9 +57,9 @@ test('FastPassport - USPS Emergency - Complete', async({page}) => {
   await expect(next_btn).toBeEnabled()
   await next_btn.click()
 
-  await selectors.booleanOptions(page, "applicant.0.marital_status", "boolean-Single")
-  await selectors.booleanOptions(page, "applicant.0.father_information", "boolean-No")
-  await selectors.booleanOptions(page, "applicant.0.mother_information", "boolean-No")
+  await selectors.booleanOptions(page, "applicant.0.marital_status", "option-Single")
+  await selectors.booleanOptions(page, "applicant.0.father_information", "option-No")
+  await selectors.booleanOptions(page, "applicant.0.mother_information", "option-No")
 
   await expect(next_btn).toBeEnabled()
   await next_btn.click()

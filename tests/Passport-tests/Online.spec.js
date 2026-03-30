@@ -161,13 +161,13 @@ test('Online Passport', async({page}) =>{
     await page.locator('[name="applicant.0.fathers_first_name"]').fill('test')
     await page.waitForTimeout(1000)
     await page.locator('[name="applicant.0.fathers_last_name"]').fill('test')
-    await page.locator('//div[@name="applicant.0.father_us_citizen"]//button[@data-handle="boolean-Yes"]').click()
+    await page.locator('//div[@name="applicant.0.father_us_citizen"]//button[@data-handle="option-Yes"]').click()
     
     await page.locator('[name="applicant.0.mothers_first_name"]').fill('test')
     await page.waitForTimeout(1000)
 
     await page.waitForTimeout(2000)
-    await page.locator('//div[@name="applicant.0.mother_us_citizen"]//button[@data-handle="boolean-Yes"]').click()
+    await page.locator('//div[@name="applicant.0.mother_us_citizen"]//button[@data-handle="option-Yes"]').click()
     await page.waitForTimeout(2000)
     await page.locator('[name="applicant.0.mothers_last_name"]').pressSequentially('test', { delay: 100 })
     await page.waitForTimeout(1000)

@@ -27,7 +27,7 @@ test('Curacao Immigration Card + Passenger Locator Card', async ({ page }) => {
   await selectors.phoneNumber(page)
   await selectors.dropdownSelector(page,"general.destination_location_name", "dropdown-general.destination_location_name", "abc", "ABC Apartments")
   await selectors.arrival_date(page)
-  await selectors.booleanOptions(page, "general.flight_reservation", "boolean-No")
+  await selectors.booleanOptions(page, "general.flight_reservation", "option-No")
   await selectors.dropdownSelector(page,"general.city_of_departure", "dropdown-general.city_of_departure", "amsterdam", "Amsterdam")
 
   Order_num = page.url().split("/")[4] 
@@ -36,7 +36,7 @@ test('Curacao Immigration Card + Passenger Locator Card', async ({ page }) => {
   await expect(next_btn).toBeEnabled()
   await next_btn.click()
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_passport_after_payment")
-  await selectors.booleanOptions(page, "applicant.0.gender", "boolean-Male")
+  await selectors.booleanOptions(page, "applicant.0.gender", "option-Male")
   await selectors.dropdownSelector(page, "applicant.0.home_country", "dropdown-applicant.0.home_country", "mexico", "MX")
   await page.locator("id=btnSubmitApplication").click()
   await page.waitForURL(deploy_url + "order-received-page/" + Order_num)
