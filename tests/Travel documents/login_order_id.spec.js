@@ -3,14 +3,13 @@ const {deploy_url, Orders} = require('../urls');
 const appFunctions = require('../functions')
 
 test('Log in with ID', async ({ page }) => {
-  await appFunctions.step_1(page,"mx", "turkey/apply-now")
-  const continue_sidebar = page.locator('id=btnContinueSidebar')
-  await appFunctions.step_2(page,continue_sidebar)
-  await page.waitForURL("**/turkey/apply-now#step=step_3c")
-
-  await appFunctions.step_3c(page,continue_sidebar) 
-  await page.waitForURL("**/turkey/apply-now#step=review")
-  
+  await page.goto(deploy_url + 'turkey/apply-now')
+  await appFunctions.autofillExisting(page, "turkey/apply-now/edit-traveler/0")
+  await page.waitForURL("**/turkey/apply-now/traveler-review")
+  const continue_sidebar = page.getByRole("button").getByText("Continue")
+  await continue_sidebar.click()
+  await page.waitForURL("**/turkey/apply-now/contact-details")
+  await continue_sidebar.click() 
   await appFunctions.newPaymentCheckout(page, '6011 1111 1111 1117', '123')
   const payment_btn = page.locator('id=btnSubmitPayment')
   await expect(payment_btn).toBeVisible()

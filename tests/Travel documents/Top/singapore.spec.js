@@ -6,27 +6,26 @@ const { deploy_url } = require('../../urls');
 let Order_num
 
 test('Singapore Arrival Card', async ({ page }) => {
-  await appFunctions.step_1(page,"us", "singapore/apply-now")
-  const continue_sidebar = page.locator('id=btnContinueSidebar')
-
-  await appFunctions.step_2(page,continue_sidebar)
-  await page.waitForURL("**/singapore/apply-now#step=step_3c")
-  
-  await appFunctions.step_3c(page,continue_sidebar)
-  await page.waitForURL("**/singapore/apply-now#step=review")
-
+  await page.goto(deploy_url + 'singapore/apply-now')
+  await appFunctions.autofillExisting(page, "singapore/apply-now/edit-traveler/0")
+  await page.waitForURL("**/singapore/apply-now/traveler-review")
+  const continue_sidebar = page.getByRole("button").getByText("Continue")
+  await continue_sidebar.click()
+  await page.waitForURL("**/singapore/apply-now/contact-details")
+  await continue_sidebar.click() 
   await appFunctions.newPaymentCheckout(page, '6011 1111 1111 1117', '123')
   const payment_btn = page.locator('id=btnSubmitPayment')
   await expect(payment_btn).toBeVisible()
   await expect(payment_btn).toBeEnabled()
   await payment_btn.click()
   
+  
   await page.waitForNavigation({waitUntil: 'load'})
   await page.getByTestId("transition-page-button").click()
   
   await selectors.phoneNumber(page)
   await selectors.arrival_date(page)
-  await selectors.booleanOptions(page, "general.flight_reservation", "boolean-No")
+  await selectors.booleanOptions(page, "general.flight_reservation", "option-No")
   await selectors.departure_date(page, "general.departure_date")
   
   Order_num = page.url().split("/")[4] 
@@ -37,7 +36,7 @@ test('Singapore Arrival Card', async ({ page }) => {
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_step_3c")
   await next_btn.click()
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_personal")
-  await selectors.booleanOptions(page, "applicant.0.gender", "boolean-Female")
+  await selectors.booleanOptions(page, "applicant.0.gender", "option-Female")
   await selectors.dropdownSelector(page, "applicant.0.home_country", "dropdown-applicant.0.home_country", "mexico", "MX")
   const submit_post_payment = page.locator('id=btnSubmitApplication')
   await submit_post_payment.click()

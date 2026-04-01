@@ -7,15 +7,13 @@ let Order_num
 
 test('Jamaica C5-Form Application', async ({ page }) => {
   test.slow()
-  await appFunctions.step_1(page,"us", "jamaica/apply-now")
-  const continue_sidebar = page.locator('id=btnContinueSidebar')
-
-  await appFunctions.step_2(page,continue_sidebar)
-  await page.waitForURL("**/jamaica/apply-now#step=step_3c")
-  
-  await appFunctions.step_3c(page,continue_sidebar)
-  await page.waitForURL("**/jamaica/apply-now#step=review")
-
+  await page.goto(deploy_url + 'jamaica/apply-now')
+  await appFunctions.autofillExisting(page, "jamaica/apply-now/edit-traveler/0")
+  await page.waitForURL("**/jamaica/apply-now/traveler-review")
+  const continue_sidebar = page.getByRole("button").getByText("Continue")
+  await continue_sidebar.click()
+  await page.waitForURL("**/jamaica/apply-now/contact-details")
+  await continue_sidebar.click() 
   await appFunctions.newPaymentCheckout(page, '6011 1111 1111 1117', '123')
   const payment_btn = page.locator('id=btnSubmitPayment')
   await expect(payment_btn).toBeVisible()
@@ -35,7 +33,7 @@ test('Jamaica C5-Form Application', async ({ page }) => {
   await expect(next_btn).toBeEnabled()
   await next_btn.click()
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_passport_after_payment")
-  await selectors.booleanOptions(page, "applicant.0.gender", "boolean-Male")
+  await selectors.booleanOptions(page, "applicant.0.gender", "option-Male")
   await page.locator("id=btnSubmitApplication").click()
   await page.waitForURL(deploy_url + "order-received-page/" + Order_num)
   await page.waitForTimeout(4000)

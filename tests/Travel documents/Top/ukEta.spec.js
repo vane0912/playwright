@@ -8,27 +8,26 @@ let Order_num
 test.describe.configure({ mode: 'serial' });
 test('UK ETA', async({page}) => {
   test.slow()
-  await appFunctions.step_1(page,"us", "united-kingdom/apply-now")
-  const continue_sidebar = page.locator('id=btnContinueSidebar')
-
-  await appFunctions.step_2(page,continue_sidebar)
-  await page.waitForURL("**/united-kingdom/apply-now#step=step_3c")
-  
-  await appFunctions.step_3c(page,continue_sidebar)
-  await page.waitForURL("**/united-kingdom/apply-now#step=review")
-
+  await page.goto(deploy_url + 'united-kingdom/apply-now')
+  await appFunctions.autofillExisting(page, "united-kingdom/apply-now/edit-traveler/0")
+  await page.waitForURL("**/united-kingdom/apply-now/traveler-review")
+  const continue_sidebar = page.getByRole("button").getByText("Continue")
+  await continue_sidebar.click()
+  await page.waitForURL("**/united-kingdom/apply-now/contact-details")
+  await continue_sidebar.click() 
   await appFunctions.newPaymentCheckout(page, '6011 1111 1111 1117', '123')
   const payment_btn = page.locator('id=btnSubmitPayment')
   await expect(payment_btn).toBeVisible()
   await expect(payment_btn).toBeEnabled()
   await payment_btn.click()
   
+  
   await page.waitForNavigation({waitUntil: 'load'})
   await page.getByTestId("transition-page-button").click()
     
   Order_num = page.url().split("/")[4] 
   await page.getByPlaceholder('111-222-3333').fill('11111111')
-  await page.getByTestId('boolean-WhatsApp').click()
+  await page.getByTestId('option-WhatsApp').click()
   const next_btn = page.locator('id=btnContinueUnderSection')
   await page.waitForTimeout(1000)
   await expect(next_btn).toBeEnabled()
@@ -43,7 +42,7 @@ test('UK ETA', async({page}) => {
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_personal")    
   await page.waitForTimeout(2000)
   
-  await page.getByTestId("boolean-Unemployed").click()
+  await page.getByTestId("option-Unemployed").click()
   await page.waitForTimeout(2000)
   await expect(next_btn).toBeEnabled()
   await next_btn.click()

@@ -13,27 +13,25 @@ test('File upload checker', async({page}) => {
     const datepicker_date = new Date(myDate);
     const date1 = datepicker_date.getDate();
 
-   await appFunctions.step_1(page,"us", "india/apply-now")
-    const continue_sidebar = page.locator('id=btnContinueSidebar')
-  
-    await appFunctions.step_2(page,continue_sidebar)
-    await page.waitForURL("**/india/apply-now#step=step_3c")
-
-   await appFunctions.step_3c(page,continue_sidebar)
-   await page.waitForURL("**/india/apply-now#step=review")
-
+    await page.goto(deploy_url + 'india/apply-now')
+    await appFunctions.autofillExisting(page, "india/apply-now/edit-traveler/0")
+    await page.waitForURL("**/india/apply-now/traveler-review")
+    const continue_sidebar = page.getByRole("button").getByText("Continue")
+    await continue_sidebar.click()
+    await page.waitForURL("**/india/apply-now/contact-details")
+    await continue_sidebar.click() 
     await appFunctions.newPaymentCheckout(page, '6011 1111 1111 1117', '123')
     const payment_btn = page.locator('id=btnSubmitPayment')
     await expect(payment_btn).toBeVisible()
     await expect(payment_btn).toBeEnabled()
     await payment_btn.click()
-    
+
     await page.waitForNavigation({waitUntil: 'load'})
     await page.getByTestId("transition-page-button").click()
     Order_num = page.url().split("/")[4] 
 
     await page.getByPlaceholder('111-222-3333').fill('11111111')
-    await page.getByTestId('boolean-WhatsApp').click()
+    await page.getByTestId('option-WhatsApp').click()
     
     const religion = page.locator('[name="general.religion"]');
     
@@ -76,10 +74,10 @@ test('File upload checker', async({page}) => {
     await next_btn.click()
     await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_personal")    
     await page.waitForTimeout(2000)
-    await page.getByTestId('boolean-Male').click()
+    await page.getByTestId('option-Male').click()
     //await page.locator('[name="applicant.0.birth_city"]').fill('aaaaaaaaa')
 
-    await page.getByTestId('boolean-Married').click()
+    await page.getByTestId('option-Married').click()
     
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
@@ -102,7 +100,7 @@ test('File upload checker', async({page}) => {
     await input_employment.fill('retired');
     await page.getByRole("option", {name: 'Retired'}).click()
     */
-    await page.getByTestId("boolean-Retired").click()
+    await page.getByTestId("option-Retired").click()
     await page.waitForTimeout(1000)
 
     await expect(next_btn).toBeEnabled()
@@ -115,18 +113,10 @@ test('File upload checker', async({page}) => {
     await page.waitForTimeout(3000)
     await page.locator('[name="applicant.0.spouse_first_last_name"]').fill("test")
     await page.waitForTimeout(3000)
-    await page.getByTestId("boolean-No, I don’t know their names").click()
+    await page.getByTestId("option-No, I don’t know their names").click()
     await page.waitForTimeout(2000)
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
-    //await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_travel")
-    /*
-    await page.waitForTimeout(2000)
-    await page.getByTestId("boolean-No").first().click()
-    await page.waitForTimeout(2000)
-    await expect(next_btn).toBeEnabled()
-    await next_btn.click()
-    */
     await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_documents")
 
     // Confirm instructions appear Applicant photo
@@ -134,16 +124,7 @@ test('File upload checker', async({page}) => {
     
     // Upload wrong file Applicant photo
     await page.locator('id=instructions-continue').click()
-    /*
-    await page.getByTestId("try-another-way-button").click()
-    await page.setInputFiles('input[type="file"]', path.join(__dirname, 'uploads_passport/Error_1.png'));
-    await expect(page.locator("id=document-loading")).toBeVisible()
-    await page.waitForTimeout(14000)
-    await expect(page.locator("id=document-loading")).toBeHidden()
-    await expect(page.locator("id=document-step")).toContainText("Let's try that again", " The photo must be clear and in focus", " Don't wear a hat", " Don't wear glasses", "Watch tutorial")
-    await percySnapshot(page, 'Error Applicant');
-    await page.getByTestId("acceptFileUploadBtn").click()
-    */
+    
     // Upload Correct Photo
     await page.getByTestId("try-another-way-button").click()
     await page.setInputFiles('input[type="file"]', path.join(__dirname, 'uploads_passport/Applicant-Photo.jpg'));

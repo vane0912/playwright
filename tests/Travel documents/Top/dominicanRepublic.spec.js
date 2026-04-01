@@ -6,15 +6,13 @@ const { deploy_url } = require('../../urls');
 let Order_num
 
 test('Dominican Republic eTicket', async ({ page }) => {
-  await appFunctions.step_1(page,"us", "dominican-republic/apply-now")
-  const continue_sidebar = page.locator('id=btnContinueSidebar')
-
-  await appFunctions.step_2(page,continue_sidebar)
-  await page.waitForURL("**/dominican-republic/apply-now#step=step_3c")
-  
-  await appFunctions.step_3c(page,continue_sidebar)
-  await page.waitForURL("**/dominican-republic/apply-now#step=review")
-
+  await page.goto(deploy_url + 'dominican-republic/apply-now')
+  await appFunctions.autofillExisting(page, "dominican-republic/apply-now/edit-traveler/0")
+  await page.waitForURL("**/dominican-republic/apply-now/traveler-review")
+  const continue_sidebar = page.getByRole("button").getByText("Continue")
+  await continue_sidebar.click()
+  await page.waitForURL("**/dominican-republic/apply-now/contact-details")
+  await continue_sidebar.click() 
   await appFunctions.newPaymentCheckout(page, '6011 1111 1111 1117', '123')
   const payment_btn = page.locator('id=btnSubmitPayment')
   await expect(payment_btn).toBeVisible()
@@ -35,8 +33,9 @@ test('Dominican Republic eTicket', async ({ page }) => {
   await next_btn.click()
 
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=travel_general")
-  await selectors.booleanOptions(page, "general.flight_reservation", "boolean-No")
+  await selectors.booleanOptions(page, "general.flight_reservation", "option-No")
   await selectors.departure_date(page, "general.departure_date")
+  await selectors.dropdownSelector(page, "general.airport", "dropdown-general.airport", "azs", "AZS - Aeropuerto Internacional Presidente Juan Bosh")
   await selectors.inputText(page, "general.departure_flight_number", "1234")
   await expect(next_btn).toBeEnabled()
   await next_btn.click()
@@ -44,8 +43,8 @@ test('Dominican Republic eTicket', async ({ page }) => {
   await next_btn.click()
 
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_personal")
-  await selectors.booleanOptions(page, "applicant.0.gender", "boolean-Female")
-  await selectors.booleanOptions(page, "applicant.0.marital_status", "boolean-Single")
+  await selectors.booleanOptions(page, "applicant.0.gender", "option-Female")
+  await selectors.booleanOptions(page, "applicant.0.marital_status", "option-Single")
   await page.locator("id=btnSubmitApplication").click()
   await page.waitForURL(deploy_url + "order-received-page/" + Order_num)
   await page.waitForTimeout(4000)

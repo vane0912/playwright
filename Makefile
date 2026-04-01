@@ -10,7 +10,7 @@ test:
 	npx playwright test /tests/Travel documents/ /tests/Passport-tests/ /tests/Mobile/ --workers 4 
 
 refactor: 
-	npx playwright test antiguaBarbuda.spec.js 
+	npx playwright test /tests/Travel documents/Top
 translations:
 	npx playwright test /tests/Translation 
 

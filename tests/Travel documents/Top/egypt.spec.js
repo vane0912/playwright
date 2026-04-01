@@ -7,15 +7,13 @@ let Order_num
 
 test('Egypt eVisa', async ({ page }) => {
   test.slow()
-  await appFunctions.step_1(page,"us", "egypt/apply-now")
-  const continue_sidebar = page.locator('id=btnContinueSidebar')
-
-  await appFunctions.step_2(page,continue_sidebar)
-  await page.waitForURL("**/egypt/apply-now#step=step_3c")
-  
-  await appFunctions.step_3c(page,continue_sidebar)
-  await page.waitForURL("**/egypt/apply-now#step=review")
-
+  await page.goto(deploy_url + 'egypt/apply-now')
+  await appFunctions.autofillExisting(page, "egypt/apply-now/edit-traveler/0")
+  await page.waitForURL("**/egypt/apply-now/traveler-review")
+  const continue_sidebar = page.getByRole("button").getByText("Continue")
+  await continue_sidebar.click()
+  await page.waitForURL("**/egypt/apply-now/contact-details")
+  await continue_sidebar.click() 
   await appFunctions.newPaymentCheckout(page, '6011 1111 1111 1117', '123')
   const payment_btn = page.locator('id=btnSubmitPayment')
   await expect(payment_btn).toBeVisible()
@@ -36,8 +34,8 @@ test('Egypt eVisa', async ({ page }) => {
   await next_btn.click()
 
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_personal")
-  await selectors.booleanOptions(page, "applicant.0.marital_status", "boolean-Single")
-  await selectors.booleanOptions(page, "applicant.0.occupation", "boolean-Unemployed")
+  await selectors.booleanOptions(page, "applicant.0.marital_status", "option-Single")
+  await selectors.booleanOptions(page, "applicant.0.occupation", "option-Unemployed")
   await expect(next_btn).toBeEnabled()
   await next_btn.click()
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_residency_information_after_payment")

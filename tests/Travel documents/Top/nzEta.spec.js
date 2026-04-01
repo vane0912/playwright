@@ -7,15 +7,13 @@ const path = require('path');
 let Order_num
 
 test('New Zealand ETA', async ({ page }) => {
-  await appFunctions.step_1(page,"us", "new-zealand/apply-now")
-  const continue_sidebar = page.locator('id=btnContinueSidebar')
-
-  await appFunctions.step_2(page,continue_sidebar)
-  await page.waitForURL("**/new-zealand/apply-now#step=step_3c")
-  
-  await appFunctions.step_3c(page,continue_sidebar)
-  await page.waitForURL("**/new-zealand/apply-now#step=review")
-
+  await page.goto(deploy_url + 'new-zealand/apply-now')
+  await appFunctions.autofillExisting(page, "new-zealand/apply-now/edit-traveler/0")
+  await page.waitForURL("**/new-zealand/apply-now/traveler-review")
+  const continue_sidebar = page.getByRole("button").getByText("Continue")
+  await continue_sidebar.click()
+  await page.waitForURL("**/new-zealand/apply-now/contact-details")
+  await continue_sidebar.click() 
   await appFunctions.newPaymentCheckout(page, '6011 1111 1111 1117', '123')
   const payment_btn = page.locator('id=btnSubmitPayment')
   await expect(payment_btn).toBeVisible()
@@ -27,7 +25,7 @@ test('New Zealand ETA', async ({ page }) => {
   
   
   await page.getByPlaceholder('111-222-3333').fill('11111111')
-  await page.getByTestId('boolean-WhatsApp').click()
+  await page.getByTestId('option-WhatsApp').click()
   
   Order_num = page.url().split("/")[4] 
   const next_btn = page.locator('id=btnContinueUnderSection')
@@ -40,7 +38,7 @@ test('New Zealand ETA', async ({ page }) => {
   await next_btn.click()
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_passport_after_payment")
   await page.waitForTimeout(2000)
-  await page.getByTestId('boolean-Male').click()
+  await page.getByTestId('option-Male').click()
   await page.waitForTimeout(2000)
   await expect(next_btn).toBeEnabled()
   await next_btn.click()

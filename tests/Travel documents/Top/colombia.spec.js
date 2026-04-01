@@ -8,15 +8,13 @@ let Order_num
 
 test.describe.configure({ mode: 'serial' });
 test('Colombia Check-MIG and MIN status', async ({ page }) => {
-  await appFunctions.step_1(page,"au", "colombia/apply-now")
-  const continue_sidebar = page.locator('id=btnContinueSidebar')
-
-  await appFunctions.step_2(page,continue_sidebar)
-  await page.waitForURL("**/colombia/apply-now#step=step_3c")
-  
-  await appFunctions.step_3c(page,continue_sidebar)
-  await page.waitForURL("**/colombia/apply-now#step=review")
-
+  await page.goto(deploy_url + 'colombia/apply-now')
+  await appFunctions.autofillExisting(page, "colombia/apply-now/edit-traveler/0")
+  await page.waitForURL("**/colombia/apply-now/traveler-review")
+  const continue_sidebar = page.getByRole("button").getByText("Continue")
+  await continue_sidebar.click()
+  await page.waitForURL("**/colombia/apply-now/contact-details")
+  await continue_sidebar.click() 
   await appFunctions.newPaymentCheckout(page, '6011 1111 1111 1117', '123')
   const payment_btn = page.locator('id=btnSubmitPayment')
   await expect(payment_btn).toBeVisible()
@@ -40,7 +38,7 @@ test('Colombia Check-MIG and MIN status', async ({ page }) => {
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_step_3c")
   await next_btn.click()
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_personal")
-  await selectors.booleanOptions(page, 'applicant.0.gender', 'boolean-Male')
+  await selectors.booleanOptions(page, 'applicant.0.gender', 'option-Male')
   await selectors.dropdownSelector(page, "applicant.0.home_country", "dropdown-applicant.0.home_country", "mexico", "MX")
   await page.locator("id=btnSubmitApplication").click()
   await page.waitForURL(deploy_url + "order-received-page/" + Order_num)

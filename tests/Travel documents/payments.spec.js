@@ -1,18 +1,16 @@
 const { test, expect } = require('@playwright/test');
 const appFunctions = require('../functions')
-const {general_url} = require('../urls');
+const {general_url, deploy_url} = require('../urls');
 const percySnapshot = require('@percy/playwright');
 
 test('Payment with VISA and Cancelled order Status', async({page}) => {
-  await appFunctions.step_1(page,"us", "thailand/apply-now")
-  const continue_sidebar = page.locator('id=btnContinueSidebar')
-  
-  await appFunctions.step_2(page,continue_sidebar)
-  await page.waitForURL("**/thailand/apply-now#step=step_3c")
-
-  await appFunctions.step_3c(page,continue_sidebar)
-
-  await page.waitForURL("**/thailand/apply-now#step=review")
+  await page.goto(deploy_url + 'thailand/apply-now')
+  await appFunctions.autofillExisting(page, "thailand/apply-now/edit-traveler/0")
+  await page.waitForURL("**/thailand/apply-now/traveler-review")
+  const continue_sidebar = page.getByRole("button").getByText("Continue")
+  await continue_sidebar.click()
+  await page.waitForURL("**/thailand/apply-now/contact-details")
+  await continue_sidebar.click() 
   await appFunctions.newPaymentCheckout(page, '3782 8224 6310 005', '1234')
   const payment_btn = page.locator('id=btnSubmitPayment')
   await expect(payment_btn).toBeVisible()
@@ -59,7 +57,7 @@ test('Payment with VISA and Cancelled order Status', async({page}) => {
   await percySnapshot(page, "CancelledStatus")
 })
   
-test.skip('Payment with Master Card', async({page}) => {
+test('Payment with Master Card', async({page}) => {
   await appFunctions.step_1(page,"us", "thailand/apply-now")
   const continue_sidebar = page.locator('id=btnContinueSidebar')
 
@@ -76,15 +74,14 @@ test.skip('Payment with Master Card', async({page}) => {
   await page.waitForNavigation({waitUntil: 'load'})
 })
   
-test.skip('Payment with Amex', async({page}) => {
-  await appFunctions.step_1(page,"us", "thailand/apply-now")
-  const continue_sidebar = page.locator('id=btnContinueSidebar')
-  
-  await appFunctions.step_2(page,continue_sidebar)
-  await page.waitForURL("**/thailand/apply-now#step=step_3c")
-  
-  await appFunctions.step_3c(page,continue_sidebar)
-  await page.waitForURL("**/thailand/apply-now#step=review")
+test('Payment with Amex', async({page}) => {
+  await page.goto(deploy_url + 'thailand/apply-now')
+  await appFunctions.autofillExisting(page, "thailand/apply-now/edit-traveler/0")
+  await page.waitForURL("**/thailand/apply-now/traveler-review")
+  const continue_sidebar = page.getByRole("button").getByText("Continue")
+  await continue_sidebar.click()
+  await page.waitForURL("**/thailand/apply-now/contact-details")
+  await continue_sidebar.click() 
 
   await appFunctions.newPaymentCheckout(page,'3782 8224 6310 005', '1234')
   const payment_btn = page.locator('id=btnSubmitPayment')
@@ -94,16 +91,14 @@ test.skip('Payment with Amex', async({page}) => {
   await page.waitForNavigation({waitUntil: 'load'})
 })
   
-test.skip('Payment with Discover', async({page}) => {
-  await appFunctions.step_1(page,"us", "thailand/apply-now")
-  const continue_sidebar = page.locator('id=btnContinueSidebar')
-  
-  await appFunctions.step_2(page,continue_sidebar)
-  await page.waitForURL("**/thailand/apply-now#step=step_3c")
-  
-  await appFunctions.step_3c(page,continue_sidebar)
-  await page.waitForURL("**/thailand/apply-now#step=review")
-  
+test('Payment with Discover', async({page}) => {
+  await page.goto(deploy_url + 'thailand/apply-now')
+  await appFunctions.autofillExisting(page, "thailand/apply-now/edit-traveler/0")
+  await page.waitForURL("**/thailand/apply-now/traveler-review")
+  const continue_sidebar = page.getByRole("button").getByText("Continue")
+  await continue_sidebar.click()
+  await page.waitForURL("**/thailand/apply-now/contact-details")
+  await continue_sidebar.click() 
     await appFunctions.newPaymentCheckout(page,'6011 1111 1111 1117', '123')
     const payment_btn = page.locator('id=btnSubmitPayment')
     await expect(payment_btn).toBeVisible()

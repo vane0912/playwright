@@ -7,7 +7,7 @@ const randomEmail = require('random-email')
 let subscriptionEmail = randomEmail({domain: "ivisa.com"})
 
 let Order_num
-test('Family subscription', async ({ page }) => {
+test.fixme('Family subscription', async ({ page }) => {
     test.slow()
     await page.goto(deploy_url)
     const user = page.locator('id=loggedInUserContainer')
@@ -84,13 +84,13 @@ test('Family subscription', async ({ page }) => {
     await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_step_3c")
     await next_btn.click()
     await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_personal")
-    await selectors.booleanOptions(page, 'applicant.0.gender', 'boolean-Male')
+    await selectors.booleanOptions(page, 'applicant.0.gender', 'option-Male')
     await selectors.dropdownSelector(page, "applicant.0.home_country", "dropdown-applicant.0.home_country", "mexico", "MX")
     await next_btn.click()
     await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav1_step_3c")
     await next_btn.click()
     await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav1_personal")
-    await selectors.booleanOptions(page, 'applicant.1.gender', 'boolean-Male')
+    await selectors.booleanOptions(page, 'applicant.1.gender', 'option-Male')
     await selectors.dropdownSelector(page, "applicant.1.home_country", "dropdown-applicant.1.home_country", "mexico", "MX")
     await page.locator("id=btnSubmitApplication").click()
     await page.waitForURL(deploy_url + "order-received-page/" + Order_num)

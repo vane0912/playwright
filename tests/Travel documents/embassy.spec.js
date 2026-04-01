@@ -63,9 +63,9 @@ test('Embassy reg', async({page}) => {
   await percySnapshot(page, 'EmbassyRegStep2')
 
 
-  await expect(page.getByTestId('boolean-Male')).toBeEnabled()
+  await expect(page.getByTestId('option-Male')).toBeEnabled()
   await page.waitForTimeout(1000)
-  await page.getByTestId('boolean-Male').click()
+  await page.getByTestId('option-Male').click()
   await page.waitForTimeout(1000)
 
   const dropdown_birth_country = page.locator('[name="applicant.0.birth_country"]');
@@ -123,7 +123,7 @@ test('Embassy reg', async({page}) => {
   await page.getByTestId("transition-page-button").click()
   Order_num = page.url().split("/")[4] 
   await page.getByPlaceholder('111-222-3333').fill('11111111')
-  await page.getByTestId('boolean-WhatsApp').click()
+  await page.getByTestId('option-WhatsApp').click()
   await page.locator("id=btnContinueUnderSection").click()
   await page.waitForNavigation()
   const submit_post_payment = page.locator('id=btnSubmitApplication')

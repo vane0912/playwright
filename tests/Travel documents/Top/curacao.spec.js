@@ -6,15 +6,13 @@ const { deploy_url } = require('../../urls');
 let Order_num
 
 test('Curacao Immigration Card + Passenger Locator Card', async ({ page }) => {
-  await appFunctions.step_1(page,"us", "curacao/apply-now")
-  const continue_sidebar = page.locator('id=btnContinueSidebar')
-
-  await appFunctions.step_2(page,continue_sidebar)
-  await page.waitForURL("**/curacao/apply-now#step=step_3c")
-  
-  await appFunctions.step_3c(page,continue_sidebar)
-  await page.waitForURL("**/curacao/apply-now#step=review")
-
+  await page.goto(deploy_url + 'curacao/apply-now')
+  await appFunctions.autofillExisting(page, "curacao/apply-now/edit-traveler/0")
+  await page.waitForURL("**/curacao/apply-now/traveler-review")
+  const continue_sidebar = page.getByRole("button").getByText("Continue")
+  await continue_sidebar.click()
+  await page.waitForURL("**/curacao/apply-now/contact-details")
+  await continue_sidebar.click() 
   await appFunctions.newPaymentCheckout(page, '6011 1111 1111 1117', '123')
   const payment_btn = page.locator('id=btnSubmitPayment')
   await expect(payment_btn).toBeVisible()
@@ -27,7 +25,7 @@ test('Curacao Immigration Card + Passenger Locator Card', async ({ page }) => {
   await selectors.phoneNumber(page)
   await selectors.dropdownSelector(page,"general.destination_location_name", "dropdown-general.destination_location_name", "abc", "ABC Apartments")
   await selectors.arrival_date(page)
-  await selectors.booleanOptions(page, "general.flight_reservation", "boolean-No")
+  await selectors.booleanOptions(page, "general.flight_reservation", "option-No")
   await selectors.dropdownSelector(page,"general.city_of_departure", "dropdown-general.city_of_departure", "amsterdam", "Amsterdam")
 
   Order_num = page.url().split("/")[4] 
@@ -36,7 +34,7 @@ test('Curacao Immigration Card + Passenger Locator Card', async ({ page }) => {
   await expect(next_btn).toBeEnabled()
   await next_btn.click()
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_passport_after_payment")
-  await selectors.booleanOptions(page, "applicant.0.gender", "boolean-Male")
+  await selectors.booleanOptions(page, "applicant.0.gender", "option-Male")
   await selectors.dropdownSelector(page, "applicant.0.home_country", "dropdown-applicant.0.home_country", "mexico", "MX")
   await page.locator("id=btnSubmitApplication").click()
   await page.waitForURL(deploy_url + "order-received-page/" + Order_num)

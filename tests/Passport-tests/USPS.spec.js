@@ -42,9 +42,9 @@ test('USPS Passport', async({page}) =>{
     await page.waitForNavigation({waitUntil: 'load'})
     await page.getByTestId("transition-page-button").click()
 
-    await page.getByTestId('boolean-WhatsApp').dispatchEvent('click')
+    await page.getByTestId('option-WhatsApp').dispatchEvent('click')
     
-    await page.getByTestId('boolean-Standard — 28 pages').dispatchEvent('click')
+    await page.getByTestId('option-Standard — 28 pages').dispatchEvent('click')
 
     await page.getByPlaceholder('111-222-3333').click()
     await page.waitForTimeout(1000)
@@ -68,7 +68,7 @@ test('USPS Passport', async({page}) =>{
     await page.waitForTimeout(1000)
 
     await page.locator('[name="applicant.0.birth_city"]').fill('aaaaaaaaa')
-    //await page.getByTestId('boolean-Female').dispatchEvent('click')
+    //await page.getByTestId('option-Female').dispatchEvent('click')
     //await page.waitForTimeout(1000)
     
     const eye_color = page.locator('[name="applicant.0.appearance_1"]');
@@ -95,27 +95,27 @@ test('USPS Passport', async({page}) =>{
     await next_btn.click()
     await page.waitForNavigation({waitUntil: 'load'})
     await page.waitForTimeout(2000)
-    await page.locator('//div[@name="applicant.0.father_information"]//div[@data-handle="boolean-No"]').click()
+    await page.locator('//div[@name="applicant.0.father_information"]//div[@data-handle="option-No"]').click()
     await page.waitForTimeout(2000)
-    await page.locator('//div[@name="applicant.0.mother_information"]//div[@data-handle="boolean-No"]').click()
+    await page.locator('//div[@name="applicant.0.mother_information"]//div[@data-handle="option-No"]').click()
     await page.waitForTimeout(2000)
-    await page.getByTestId("boolean-Single").click()
+    await page.getByTestId("option-Single").click()
     await page.waitForTimeout(2000)
     
     /*
     await page.waitForTimeout(2000)
-    await page.getByTestId("boolean-Single").click()
+    await page.getByTestId("option-Single").click()
     await page.waitForTimeout(2000)
     await page.locator('[name="applicant.0.fathers_first_name"]').fill('test')
     await page.waitForTimeout(1000)
     await page.locator('[name="applicant.0.fathers_last_name"]').fill('test')
-    await page.locator('//div[@name="applicant.0.father_us_citizen"]//button[@data-handle="boolean-Yes"]').click()
+    await page.locator('//div[@name="applicant.0.father_us_citizen"]//button[@data-handle="option-Yes"]').click()
     
     await page.locator('[name="applicant.0.mothers_first_name"]').fill('test')
     await page.waitForTimeout(1000)
 
     await page.waitForTimeout(2000)
-    await page.locator('//div[@name="applicant.0.mother_us_citizen"]//button[@data-handle="boolean-Yes"]').click()
+    await page.locator('//div[@name="applicant.0.mother_us_citizen"]//button[@data-handle="option-Yes"]').click()
     await page.waitForTimeout(2000)
     await page.locator('[name="applicant.0.mothers_last_name"]').pressSequentially('test', { delay: 100 })
     await page.waitForTimeout(1000)
@@ -139,13 +139,13 @@ test('USPS Passport', async({page}) =>{
     await page.locator('[name="applicant.0.fathers_first_name"]').fill('test')
     await page.waitForTimeout(1000)
     await page.locator('[name="applicant.0.fathers_last_name"]').fill('test')
-    await page.locator('//div[@name="applicant.0.father_us_citizen"]//button[@data-handle="boolean-Yes"]').click()
+    await page.locator('//div[@name="applicant.0.father_us_citizen"]//button[@data-handle="option-Yes"]').click()
     
     await page.locator('[name="applicant.0.mothers_first_name"]').fill('test')
     await page.waitForTimeout(1000)
 
     await page.waitForTimeout(2000)
-    await page.locator('//div[@name="applicant.0.mother_us_citizen"]//button[@data-handle="boolean-Yes"]').click()
+    await page.locator('//div[@name="applicant.0.mother_us_citizen"]//button[@data-handle="option-Yes"]').click()
     await page.waitForTimeout(2000)
     await page.locator('[name="applicant.0.mothers_last_name"]').pressSequentially('test', { delay: 100 })
     await page.waitForTimeout(1000)

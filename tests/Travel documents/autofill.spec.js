@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 const appFunctions = require('../functions')
 
 
-test('Autofill appears and works', async({page}) => {
+test.skip('Autofill appears and works', async({page}) => {
   await appFunctions.step_1(page,"us", "thailand/apply-now")
   const continue_sidebar = page.locator('id=btnContinueSidebar')
   

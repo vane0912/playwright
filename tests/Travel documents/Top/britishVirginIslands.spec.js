@@ -15,15 +15,13 @@ test.skip('British Virgin Islands ED Card', async ({ page }) => {
   const getFlightAirline = await page.locator('.table__SubText-sc-1x7nv9w-16').nth(3).textContent()
   const flight_number = getFlightInfo.replace(/\D/g, "");
 
-  await appFunctions.step_1(page,"us", "british-virgin-islands/apply-now")
-  const continue_sidebar = page.locator('id=btnContinueSidebar')
-
-  await appFunctions.step_2(page,continue_sidebar)
-  await page.waitForURL("**/british-virgin-islands/apply-now#step=step_3c")
-  
-  await appFunctions.step_3c(page,continue_sidebar)
-  await page.waitForURL("**/british-virgin-islands/apply-now#step=review")
-
+  await page.goto(deploy_url + 'british-virgin-islands/apply-now')
+  await appFunctions.autofillExisting(page, "british-virgin-islands/apply-now/edit-traveler/0")
+  await page.waitForURL("**/british-virgin-islands/apply-now/traveler-review")
+  const continue_sidebar = page.getByRole("button").getByText("Continue")
+  await continue_sidebar.click()
+  await page.waitForURL("**/british-virgin-islands/apply-now/contact-details")
+  await continue_sidebar.click() 
   await appFunctions.newPaymentCheckout(page, '6011 1111 1111 1117', '123')
   const payment_btn = page.locator('id=btnSubmitPayment')
   await expect(payment_btn).toBeVisible()
@@ -35,7 +33,7 @@ test.skip('British Virgin Islands ED Card', async ({ page }) => {
   
   await selectors.phoneNumber(page)
   await selectors.arrival_date(page)
-  await selectors.booleanOptions(page, "general.traveling_with_others", "boolean-No")
+  await selectors.booleanOptions(page, "general.traveling_with_others", "option-No")
   Order_num = page.url().split("/")[4] 
   const next_btn = page.locator('id=btnContinueUnderSection')
   await page.waitForTimeout(1000)
@@ -51,13 +49,13 @@ test.skip('British Virgin Islands ED Card', async ({ page }) => {
   await expect(next_btn).toBeEnabled()
   await next_btn.click()
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=accommodation")
-  await selectors.booleanOptions(page, "general.type_of_contact", "boolean-Hotel")
+  await selectors.booleanOptions(page, "general.type_of_contact", "option-Hotel")
   await selectors.addressApi(page, 'general.residential_address')
   await selectors.inputText(page, 'general.residential_zip', '12345')
   await expect(next_btn).toBeEnabled()
   await next_btn.click()
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_personal")
-  await selectors.booleanOptions(page, 'applicant.0.gender', 'boolean-Female')
+  await selectors.booleanOptions(page, 'applicant.0.gender', 'option-Female')
   await expect(next_btn).toBeEnabled()
   await next_btn.click()
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_residency_information_after_payment")

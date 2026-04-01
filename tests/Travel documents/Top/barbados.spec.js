@@ -6,15 +6,13 @@ const { deploy_url } = require('../../urls');
 let Order_num
 
 test('Barbados ED Card', async ({ page }) => {
-  await appFunctions.step_1(page,"au", "barbados/apply-now")
-  const continue_sidebar = page.locator('id=btnContinueSidebar')
-
-  await appFunctions.step_2(page,continue_sidebar)
-  await page.waitForURL("**/barbados/apply-now#step=step_3c")
-  
-  await appFunctions.step_3c(page,continue_sidebar)
-  await page.waitForURL("**/barbados/apply-now#step=review")
-
+  await page.goto(deploy_url + 'barbados/apply-now')
+  await appFunctions.autofillExisting(page, "barbados/apply-now/edit-traveler/0")
+  await page.waitForURL("**/barbados/apply-now/traveler-review")
+  const continue_sidebar = page.getByRole("button").getByText("Continue")
+  await continue_sidebar.click()
+  await page.waitForURL("**/barbados/apply-now/contact-details")
+  await continue_sidebar.click() 
   await appFunctions.newPaymentCheckout(page, '6011 1111 1111 1117', '123')
   const payment_btn = page.locator('id=btnSubmitPayment')
   await expect(payment_btn).toBeVisible()
@@ -31,7 +29,7 @@ test('Barbados ED Card', async ({ page }) => {
   await expect(next_btn).toBeEnabled()
   await next_btn.click()
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=travel_general")
-  await selectors.booleanOptions(page, 'general.flight_reservation', 'boolean-No')
+  await selectors.booleanOptions(page, 'general.flight_reservation', 'option-No')
   await selectors.dropdownSelector(page, "general.journey_originate_from", "dropdown-general.journey_originate_from", "mexico", "MX")
   await selectors.inputText(page, 'general.journey_originate_port', '123')
   await expect(next_btn).toBeEnabled()
@@ -41,7 +39,7 @@ test('Barbados ED Card', async ({ page }) => {
   await expect(next_btn).toBeEnabled()
   await next_btn.click()
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_personal")
-  await selectors.booleanOptions(page, "applicant.0.gender", "boolean-Female")
+  await selectors.booleanOptions(page, "applicant.0.gender", "option-Female")
   await expect(next_btn).toBeEnabled()
   await next_btn.click()
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_residency_information_after_payment")

@@ -6,15 +6,13 @@ const { deploy_url } = require('../../urls');
 let Order_num
 
 test('Belize Travel Declaration', async ({ page }) => {
-  await appFunctions.step_1(page,"au", "belize/apply-now")
-  const continue_sidebar = page.locator('id=btnContinueSidebar')
-
-  await appFunctions.step_2(page,continue_sidebar)
-  await page.waitForURL("**/belize/apply-now#step=step_3c")
-  
-  await appFunctions.step_3c(page,continue_sidebar)
-  await page.waitForURL("**/belize/apply-now#step=review")
-
+  await page.goto(deploy_url + 'belize/apply-now')
+  await appFunctions.autofillExisting(page, "belize/apply-now/edit-traveler/0")
+  await page.waitForURL("**/belize/apply-now/traveler-review")
+  const continue_sidebar = page.getByRole("button").getByText("Continue")
+  await continue_sidebar.click()
+  await page.waitForURL("**/belize/apply-now/contact-details")
+  await continue_sidebar.click() 
   await appFunctions.newPaymentCheckout(page, '6011 1111 1111 1117', '123')
   const payment_btn = page.locator('id=btnSubmitPayment')
   await expect(payment_btn).toBeVisible()
@@ -31,15 +29,15 @@ test('Belize Travel Declaration', async ({ page }) => {
   await expect(next_btn).toBeEnabled()
   await next_btn.click()
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_personal")
-  await selectors.booleanOptions(page, 'applicant.0.gender', 'boolean-Male')
+  await selectors.booleanOptions(page, 'applicant.0.gender', 'option-Male')
   await expect(next_btn).toBeEnabled()
   await next_btn.click()
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_passport_after_payment")
   await selectors.datePicker(page, "applicant.0.passport_issued_date", '1', '9', '2013')
 
   await selectors.dropdownSelector(page, "applicant.0.home_country", "dropdown-applicant.0.home_country", "mexico", "MX")
-  await selectors.booleanOptions(page, 'applicant.0.marital_status', 'boolean-Single')
-  await selectors.booleanOptions(page, 'applicant.0.occupation', 'boolean-Unemployed')
+  await selectors.booleanOptions(page, 'applicant.0.marital_status', 'option-Single')
+  await selectors.booleanOptions(page, 'applicant.0.occupation', 'option-Unemployed')
   await page.locator("id=btnSubmitApplication").click()
   await page.waitForURL(deploy_url + "order-received-page/" + Order_num)
   await page.waitForTimeout(4000)

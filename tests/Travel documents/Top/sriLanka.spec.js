@@ -7,20 +7,19 @@ let Order_num
 
 test('Sri Lanka Tourist ETA', async ({ page }) => {
   test.slow()
-  await appFunctions.step_1(page,"au", "sri-lanka/apply-now")
-  const continue_sidebar = page.locator('id=btnContinueSidebar')
-
-  await appFunctions.step_2(page,continue_sidebar)
-  await page.waitForURL("**/sri-lanka/apply-now#step=step_3c")
-  
-  await appFunctions.step_3c(page,continue_sidebar)
-  await page.waitForURL("**/sri-lanka/apply-now#step=review")
-
+  await page.goto(deploy_url + 'sri-lanka/apply-now')
+  await appFunctions.autofillExisting(page, "sri-lanka/apply-now/edit-traveler/0")
+  await page.waitForURL("**/sri-lanka/apply-now/traveler-review")
+  const continue_sidebar = page.getByRole("button").getByText("Continue")
+  await continue_sidebar.click()
+  await page.waitForURL("**/sri-lanka/apply-now/contact-details")
+  await continue_sidebar.click() 
   await appFunctions.newPaymentCheckout(page, '6011 1111 1111 1117', '123')
   const payment_btn = page.locator('id=btnSubmitPayment')
   await expect(payment_btn).toBeVisible()
   await expect(payment_btn).toBeEnabled()
   await payment_btn.click()
+  
   
   await page.waitForNavigation({waitUntil: 'load'})
   await page.getByTestId("transition-page-button").click()
@@ -33,8 +32,8 @@ test('Sri Lanka Tourist ETA', async ({ page }) => {
   await next_btn.click()
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_personal")
   await selectors.dropdownSelector(page, "applicant.0.home_country", "dropdown-applicant.0.home_country", "mexico", "MX")
-  await selectors.booleanOptions(page, 'applicant.0.gender', 'boolean-Male')
-  await selectors.booleanOptions(page, 'applicant.0.marital_status', 'boolean-Single')
+  await selectors.booleanOptions(page, 'applicant.0.gender', 'option-Male')
+  await selectors.booleanOptions(page, 'applicant.0.marital_status', 'option-Single')
   await expect(next_btn).toBeEnabled()
   await next_btn.click()
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_ocr_review")

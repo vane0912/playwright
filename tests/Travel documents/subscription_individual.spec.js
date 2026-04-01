@@ -7,36 +7,22 @@ const {deploy_url} = require('../urls');
 let Order_num 
 test('Individual subscription purchase', async ({ page }) => {
   test.slow()
-  await appFunctions.step_1(page,"mx", "colombia/apply-now")
-  const continue_sidebar = page.locator('id=btnContinueSidebar')
-
-  
-  const dob_day = page.locator('[name="applicant.0.dob.day"]')
-  await dob_day.selectOption('13')
-  const dob_month = page.locator('[name="applicant.0.dob.month"]')
-  await dob_month.selectOption('8')
-  const dob_year = page.locator('[name="applicant.0.dob.year"]')
-  await dob_year.selectOption('2001')
-  const name_applicant = page.locator('[name="applicant.0.first_name"]')
-  await name_applicant.fill('Test')
-  
-  await page.waitForTimeout(1000)
-  const last_name = page.locator('[name="applicant.0.last_name"]')
-  await last_name.fill('Test')
-  await page.waitForTimeout(1000)
-  
-  await expect(continue_sidebar).toBeEnabled()
+  await page.goto(deploy_url + 'thailand/apply-now')
+  await page.getByRole("button").getByText("Add New Traveler").click()
+  await appFunctions.step_1(page, "individual")
+  const continue_sidebar = page.getByRole("button").getByText("Continue")
   await continue_sidebar.click()
-  await page.waitForURL("**/colombia/apply-now#step=step_3c")
-  
-  await appFunctions.step_3c(page,continue_sidebar)
-
-  await page.waitForURL('**/colombia/apply-now#step=review')
-  await page.waitForTimeout(2000)
-  const duplicate = await page.isVisible('id=btnDisclaimerNext')
-  if (duplicate){
-    await page.locator('id=btnDisclaimerNext').click()
-  }
+  await page.waitForURL("**/colombia/apply-now/passport-details/0")
+  await appFunctions.step_2(page, continue_sidebar)
+  await page.waitForURL("**/colombia/apply-now/address-details/0")
+  await appFunctions.step_3c(page, continue_sidebar)
+  await page.waitForURL("**/colombia/apply-now/additional-info/0")
+  await appFunctions.additionalInfo(page, continue_sidebar)
+  await page.waitForURL("**/colombia/apply-now/traveler-review")
+  await continue_sidebar.click()
+  await page.waitForURL("**/colombia/apply-now/contact-details")
+  await continue_sidebar.click()
+  await page.waitForURL("**/colombia/apply-now/checkout")
 
   const has_subscription = await page.getByText("Confirmation").isVisible()
   if (has_subscription){
@@ -50,7 +36,6 @@ test('Individual subscription purchase', async ({ page }) => {
 
     return
   }
-  await page.waitForURL("**/colombia/apply-now#step=review")
   await appFunctions.newPaymentCheckout(page, '6011 1111 1111 1117', '123')
 
   const payment_btn = page.locator('id=btnSubmitPayment')
@@ -75,7 +60,7 @@ test('Individual subscription purchase', async ({ page }) => {
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_step_3c")
   await next_btn.click()
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_personal")
-  await selectors.booleanOptions(page, 'applicant.0.gender', 'boolean-Male')
+  await selectors.booleanOptions(page, 'applicant.0.gender', 'option-Male')
   await selectors.dropdownSelector(page, "applicant.0.home_country", "dropdown-applicant.0.home_country", "mexico", "MX")
   await page.locator("id=btnSubmitApplication").click()
   await page.waitForURL(deploy_url + "order-received-page/" + Order_num)
@@ -104,24 +89,12 @@ test('Individual subscription purchase', async ({ page }) => {
   await page.waitForURL(deploy_url + "order/" + Order_num + "?subscription=true")
 
   // Place free order 
-  await appFunctions.step_1(page,"mx", "colombia/apply-now")
-
-  await dob_day.selectOption('13')
-  await dob_month.selectOption('8')
-  await dob_year.selectOption('2001')
-  await name_applicant.fill('Test')
-  
-  await page.waitForTimeout(1000)
-  await last_name.fill('Test')
-  await page.waitForTimeout(1000)
-  
-  await expect(continue_sidebar).toBeEnabled()
-  await continue_sidebar.click()
-  await page.waitForURL("**/colombia/apply-now#step=step_3c")
-  
-  await appFunctions.step_3c(page,continue_sidebar)
-  
-  await page.waitForURL('**/colombia/apply-now#step=review')
+ await page.goto(deploy_url + 'colombia/apply-now')
+ await appFunctions.autofillExisting(page, "colombia/apply-now/edit-traveler/0", false, true)
+ await page.waitForURL("**/colombia/apply-now/traveler-review")
+ await continue_sidebar.click()
+ await page.waitForURL("**/colombia/apply-now/contact-details")
+  await continue_sidebar.click() 
   await page.waitForTimeout(2000)
   if (duplicate){
     await page.locator('id=btnDisclaimerNext').click()
@@ -148,7 +121,7 @@ test('Individual subscription purchase', async ({ page }) => {
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_step_3c")
   await next_btn.click()
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_personal")
-  await selectors.booleanOptions(page, 'applicant.0.gender', 'boolean-Male')
+  await selectors.booleanOptions(page, 'applicant.0.gender', 'option-Male')
   await selectors.dropdownSelector(page, "applicant.0.home_country", "dropdown-applicant.0.home_country", "mexico", "MX")
   await page.locator("id=btnSubmitApplication").click()
   await page.waitForURL(deploy_url + "order-received-page/" + Order_num)

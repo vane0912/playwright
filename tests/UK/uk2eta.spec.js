@@ -103,7 +103,7 @@ test('UK ETA ORDER 2', async({page}) => {
     await page.getByTestId("transition-page-button").click()
     Order_num = page.url().split("/")[4] 
     await page.getByPlaceholder('111-222-3333').fill('11111111')
-    await page.getByTestId('boolean-WhatsApp').click()
+    await page.getByTestId('option-WhatsApp').click()
 
     const next_btn = page.locator('id=btnContinueUnderSection')
     await page.waitForTimeout(1000)
@@ -126,9 +126,9 @@ test('UK ETA ORDER 2', async({page}) => {
     await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_personal")    
     await page.waitForTimeout(2000)
     
-    //await page.getByTestId('boolean-Male').click()
+    //await page.getByTestId('option-Male').click()
     
-    await page.getByTestId("boolean-Unemployed").click()
+    await page.getByTestId("option-Unemployed").click()
     await page.waitForTimeout(2000)
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
@@ -138,7 +138,7 @@ test('UK ETA ORDER 2', async({page}) => {
     
     await page.waitForTimeout(2000)
     await translations(page, page.locator('id=question-container'), "div")
-    const employment = page.getByTestId("boolean-No")
+    const employment = page.getByTestId("option-No")
     await expect(employment).toBeVisible();
     await employment.click()
     await page.waitForTimeout(1000)

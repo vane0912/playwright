@@ -13,15 +13,13 @@ test.fixme('Aruba ED Card', async ({ page }) => {
   const getFlightAirline = await page.locator('.table__SubText-sc-1x7nv9w-16').nth(0).textContent()
   const flight_number = getFlightInfo.replace(/\D/g, "");
 
-  await appFunctions.step_1(page,"us", "aruba/apply-now")
-  const continue_sidebar = page.locator('id=btnContinueSidebar')
-
-  await appFunctions.step_2(page,continue_sidebar)
-  await page.waitForURL("**/aruba/apply-now#step=step_3c")
-  
-  await appFunctions.step_3c(page,continue_sidebar)
-  await page.waitForURL("**/aruba/apply-now#step=review")
-
+  await page.goto(deploy_url + 'aruba/apply-now')
+  await appFunctions.autofillExisting(page, "aruba/apply-now/edit-traveler/0")
+  await page.waitForURL("**/aruba/apply-now/traveler-review")
+  const continue_sidebar = page.getByRole("button").getByText("Continue")
+  await continue_sidebar.click()
+  await page.waitForURL("**/aruba/apply-now/contact-details")
+  await continue_sidebar.click() 
   await appFunctions.newPaymentCheckout(page, '6011 1111 1111 1117', '123')
   const payment_btn = page.locator('id=btnSubmitPayment')
   await expect(payment_btn).toBeVisible()
@@ -34,7 +32,7 @@ test.fixme('Aruba ED Card', async ({ page }) => {
   
   await selectors.phoneNumber(page)
   await selectors.arrival_date(page)
-  await selectors.booleanOptions(page, 'general.flight_reservation', 'boolean-Yes')
+  await selectors.booleanOptions(page, 'general.flight_reservation', 'option-Yes')
 
   await selectors.flightDropdown(page, 'general.arrival_flight_airline', 'dropdown-general.arrival_flight_airline', getFlightAirline)
   await selectors.inputText(page, "general.arrival_flight_number", '12345')
@@ -51,7 +49,7 @@ test.fixme('Aruba ED Card', async ({ page }) => {
   await expect(next_btn).toBeEnabled()
   await next_btn.click()
   await page.waitForTimeout(2000)
-  await page.getByTestId('boolean-Male').click()
+  await page.getByTestId('option-Male').click()
   await selectors.dropdownSelector(page, "applicant.0.home_country", "dropdown-applicant.0.home_country", "mexico", "MX")
   await page.waitForTimeout(2000)
 

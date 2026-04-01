@@ -102,12 +102,51 @@ async function oldPaymentCheckout(page, url, creditCard, cvvNum){
     await zip_code.fill('12345')
     */ 
 }
-async function autofillExisting(page, url) {
-    await page.getByRole("radiogroup").nth(0).click()
+async function autofillExisting(page, url, nationality, subscription) {
+    if(subscription){
+        await page.getByRole("radio").nth(2).click()
+    }else{
+        await page.getByRole("radio").nth(0).click()
+    }
     await page.getByRole("button").getByText("Confirm").click()
     await page.waitForURL(deploy_url + url)
     await page.waitForTimeout(2000)
+    await page.getByTestId("option-Male").click() 
     await page.locator('[name="applicant.0.is_passport_on_hand"]').getByTestId("option-true").click()
+    if (nationality){
+        if(nationality === "au"){
+            await page.locator('[name="applicant.0.nationality_country"]').click()
+            await page.waitForTimeout(2000)
+            await page.getByTestId("down-applicant.0.nationality_country").fill("au")
+            await page.locator('[name="applicant.0.nationality_country"]').getByRole('option', {value: "Australia flag Australia"}).click()
+            await page.waitForTimeout(2000)
+        }
+    }
+    await page.locator('[name="applicant.0.home_address"]').fill('123')
+    await page.waitForTimeout(2000)
+    await page.keyboard.press("Space")
+    await page.waitForTimeout(1000)
+    await page.keyboard.press("Enter")
+    await page.waitForTimeout(1000)
+    await page.locator('//li[@data-type="place"]').first().click()
+    await page.waitForTimeout(1000)
+
+    const passport_num = page.locator('[name="applicant.0.passport_num"]')
+    await expect(passport_num).toBeVisible()
+    await passport_num.fill('123456789')
+    const passport_day = page.locator('[name="applicant.0.passport_expiration_date.day"]')
+    await passport_day.selectOption('13')
+    const passport_month = page.locator('[name="applicant.0.passport_expiration_date.month"]')
+    await passport_month.selectOption('7')
+    const passport_year = page.locator('[name="applicant.0.passport_expiration_date.year"]')
+    await passport_year.selectOption('2030')
+    await page.waitForTimeout(2000)
+    const passport_issue_day = page.locator('[name="applicant.0.passport_issued_date.day"]')
+    await passport_issue_day.selectOption('13')
+    const passport_issue_month = page.locator('[name="applicant.0.passport_issued_date.month"]')
+    await passport_issue_month.selectOption('7')
+    const passport_issue_year = page.locator('[name="applicant.0.passport_issued_date.year"]')
+    await passport_issue_year.selectOption('2024')
     await page.waitForTimeout(2000)
     await page.locator('[name="applicant.0.are_employed"]').getByTestId("option-true").click()
     await page.waitForTimeout(2000)
@@ -119,7 +158,7 @@ async function autofillExisting(page, url) {
     const continue_sidebar = page.getByRole("button").getByText("Continue")
     await continue_sidebar.click()
 }
-async function step_1(page){
+async function step_1(page, subscription){
     const dob_day = page.locator('[name="applicant.0.dob.day"]')
     await dob_day.selectOption('13')
 
@@ -128,7 +167,9 @@ async function step_1(page){
 
     const dob_year = page.locator('[name="applicant.0.dob.year"]')
     await dob_year.selectOption('2001')
-
+    if(subscription && subscription === "individual"){
+        await dob_year.selectOption('2002')
+    }
     const name_applicant = page.locator('[name="applicant.0.first_name"]')
     await name_applicant.fill('Test')
     

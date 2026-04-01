@@ -79,7 +79,7 @@ test('Different currency Mobile', async ({ page }) => {
     await page.getByTestId("transition-page-button").click()
 
     await page.getByPlaceholder('111-222-3333').fill('11111111')
-    await page.getByTestId('boolean-WhatsApp').click()
+    await page.getByTestId('option-WhatsApp').click()
     
     const arrival_date_visible = page.locator('[name="general.arrival_date"]')
     await expect(arrival_date_visible).toBeVisible()
@@ -93,9 +93,9 @@ test('Different currency Mobile', async ({ page }) => {
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
     /*
-    await expect(page.getByTestId('boolean-Male')).toBeEnabled()
+    await expect(page.getByTestId('option-Male')).toBeEnabled()
     await page.waitForTimeout(1000)
-    await page.getByTestId('boolean-Male').click()
+    await page.getByTestId('option-Male').click()
     */
     await page.waitForTimeout(3000)
     await expect(next_btn).toBeEnabled()

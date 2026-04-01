@@ -1,22 +1,19 @@
 const { test, expect } = require('@playwright/test');
 const appFunctions = require('../functions')
 const path = require('path');
-const {general_url} = require('../urls');
+const {general_url, deploy_url} = require('../urls');
 
 test('Extra Order', async ({ page, browser }) => {
   test.slow()
-  await appFunctions.step_1(page,"mx", "turkey/apply-now")
-  const continue_sidebar = page.locator('id=btnContinueSidebar')
-
-  await appFunctions.step_2(page,continue_sidebar)
-  await page.waitForURL("**/turkey/apply-now#step=step_3c")
-  
-  await appFunctions.step_3c(page,continue_sidebar)
-  await page.waitForURL("**/turkey/apply-now#step=review")
-
+  await page.goto(deploy_url + 'turkey/apply-now')
+  await appFunctions.autofillExisting(page, "turkey/apply-now/edit-traveler/0")
+  await page.waitForURL("**/turkey/apply-now/traveler-review")
+  const continue_sidebar = page.getByRole("button").getByText("Continue")
+  await continue_sidebar.click()
+  await page.waitForURL("**/turkey/apply-now/contact-details")
+  await continue_sidebar.click() 
   await appFunctions.newPaymentCheckout(page, '6011 1111 1111 1117', '123')
   const payment_btn = page.locator('id=btnSubmitPayment')
-  await expect(payment_btn).toBeVisible()
   await expect(payment_btn).toBeEnabled()
   await payment_btn.click()  
   await page.waitForNavigation({waitUntil: 'load'})
@@ -25,7 +22,7 @@ test('Extra Order', async ({ page, browser }) => {
   let Order_num = page.url().split("/")[4];
 
   await page.getByPlaceholder('111-222-3333').fill('11111111')
-  await page.getByTestId('boolean-WhatsApp').click()
+  await page.getByTestId('option-WhatsApp').click()
   
   const arrival_date_visible = page.locator('[name="general.arrival_date"]')
   await expect(arrival_date_visible).toBeVisible()
