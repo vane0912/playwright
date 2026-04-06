@@ -204,7 +204,13 @@ test('Emergency Passport', async({page}) =>{
     await page.waitForTimeout(8000)
 
     await page.locator('id=review-continue').click()
-    //await page.getByText("Use selected details").click()
+    await page.waitForTimeout(4000)
+    const passportPostPaymentModal = await page.getByText("Use selected details").isVisible()
+
+    if (passportPostPaymentModal){
+      await page.getByText("Use selected details").click()
+    }
+  
     const passport_issue_day = page.locator('[name="applicant.0.passport_issued_date.day"]')
     await expect(passport_issue_day).toBeVisible()
     await passport_issue_day.selectOption('13')

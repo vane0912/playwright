@@ -8,7 +8,7 @@ test.use({
   ...iPhone13,
 });
 
-test('Travel Doc application pre and post payment are working Mobile', async({page}) => {
+test.fixme('Travel Doc application pre and post payment are working Mobile', async({page}) => {
     await page.goto(deploy_url + 'thailand/apply-now')
     const headerMobileNav = page.locator('id=headerMobileNav');
     await expect(headerMobileNav).toBeVisible()

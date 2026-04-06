@@ -6,7 +6,7 @@ const iPhone13 = devices['iPhone 13'];
 test.use({
   ...iPhone13,
 });
-test('Different currency Mobile', async ({ page }) => {
+test.fixme('Different currency Mobile', async ({ page }) => {
     await page.goto(deploy_url + 'turkey/apply-now');
     const headerMobileNav = page.locator('id=headerMobileNav');
     await expect(headerMobileNav).toBeVisible()

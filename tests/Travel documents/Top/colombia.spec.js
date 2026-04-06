@@ -9,6 +9,8 @@ let Order_num
 test.describe.configure({ mode: 'serial' });
 test('Colombia Check-MIG and MIN status', async ({ page }) => {
   await page.goto(deploy_url + 'colombia/apply-now')
+  await page.waitForTimeout(2000)
+  await percySnapshot(page, 'autofillModal')
   await appFunctions.autofillExisting(page, "colombia/apply-now/edit-traveler/0")
   await page.waitForURL("**/colombia/apply-now/traveler-review")
   const continue_sidebar = page.getByRole("button").getByText("Continue")

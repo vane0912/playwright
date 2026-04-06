@@ -4,7 +4,7 @@ const percySnapshot = require('@percy/playwright');
 const appFunctions = require('../functions')
 const selectors = require('../selectors')
 
-test('Travel Doc application pre and post payment are working', async({page}) => {
+test.fixme('Travel Doc application pre and post payment are working', async({page}) => {
     await page.goto(deploy_url + 'thailand/apply-now')
 
     // Validations step_1

@@ -17,6 +17,7 @@ test('Log in with ID', async ({ page }) => {
   await payment_btn.click()
   
   await page.waitForNavigation({waitUntil: 'load'})
+  await page.waitForTimeout(1000)
 
   Orders.push(page.url().split("/")[4]) 
   

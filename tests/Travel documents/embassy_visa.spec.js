@@ -24,9 +24,7 @@ test('Embassy Visa', async({page}) => {
     let Order_num = page.url().split("/")[4] 
     await page.getByPlaceholder('111-222-3333').fill('11111111')
     await page.getByTestId('option-WhatsApp').click()
-    await selectors.arrival_date(page)
     await page.waitForTimeout(2000)
-    await selectors.departure_date(page, "general.departure_date")
     await selectors.booleanOptions(page, "general.traveling_with_others", "option-No")
     await selectors.booleanOptions(page, "general.need_multiple_entry_visa", "option-No")
     await page.waitForTimeout(1000)
@@ -34,6 +32,14 @@ test('Embassy Visa', async({page}) => {
     await page.waitForTimeout(1000)
     const next_btn = page.locator('id=btnContinueUnderSection')
     await page.waitForTimeout(1000)
+    await expect(next_btn).toBeEnabled()
+    await next_btn.click()
+    await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=travel_general")
+    await selectors.arrival_date(page)
+    await selectors.departure_date(page, "general.departure_date")
+    await selectors.dropdownOptions(page, "dropdown-general.travel_reason", "Tourism")
+    
+
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
     await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_appointment_selection")

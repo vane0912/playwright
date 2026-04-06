@@ -24,7 +24,6 @@ test('Dominican Republic eTicket', async ({ page }) => {
   
   await selectors.phoneNumber(page)
   await selectors.arrival_date(page)
-  await selectors.dropdownSelector(page, "general.home_country", "dropdown-general.home_country", "mexico", "MX")
   
   Order_num = page.url().split("/")[4] 
   const next_btn = page.locator('id=btnContinueUnderSection')
@@ -45,6 +44,9 @@ test('Dominican Republic eTicket', async ({ page }) => {
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_personal")
   await selectors.booleanOptions(page, "applicant.0.gender", "option-Female")
   await selectors.booleanOptions(page, "applicant.0.marital_status", "option-Single")
+  await next_btn.click()
+  await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_residency_information_after_payment")
+
   await page.locator("id=btnSubmitApplication").click()
   await page.waitForURL(deploy_url + "order-received-page/" + Order_num)
   await page.waitForTimeout(4000)

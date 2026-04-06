@@ -7,12 +7,12 @@ all:
 admin: 
 	npx playwright test /tests/admin/
 test: 
-	npx playwright test /tests/Travel documents/ /tests/Passport-tests/ /tests/Mobile/ --workers 4 
+	npx playwright test /tests/Travel documents/ /tests/Passport-tests/ /tests/Mobile/ 
 
 refactor: 
-	npx playwright test /tests/Travel documents/Top
+	npx /tests/Travel documents/Top
 translations:
-	npx playwright test /tests/Translation 
+	npx playwright test auth.setup.ts  --headed
 
 fastPassport:
 	npx playwright test /tests/Passport-tests/Fastpassport

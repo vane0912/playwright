@@ -20,10 +20,10 @@ test('United States ESTA', async ({ page }) => {
   await expect(payment_btn).toBeEnabled()
   await payment_btn.click()
   
-  
   await page.waitForNavigation({waitUntil: 'load'})
   await page.getByTestId("transition-page-button").click()
   await selectors.phoneNumber(page)
+  await selectors.booleanOptions(page, "general.usa_travel_type", "option-No")
   Order_num = page.url().split("/")[4] 
   const next_btn = page.locator('id=btnContinueUnderSection')
   await page.waitForTimeout(1000)
@@ -74,7 +74,11 @@ test('United States ESTA', async ({ page }) => {
   await selectors.applicantPhoto(page)
   await selectors.passportPhoto(page)
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_ocr_review")
-  await page.getByText("Use selected details").click()
+  await page.waitForTimeout(4000)
+  const passportPostPaymentModal = await page.getByText("Use selected details").isVisible()
+  if (passportPostPaymentModal){
+    await page.getByText("Use selected details").click()
+  }
   await selectors.datePicker(page, "applicant.0.passport_issued_date", '1', '9', '2013')
   await page.locator("id=btnSubmitApplication").click()
   await page.waitForURL(deploy_url + "order-received-page/" + Order_num)

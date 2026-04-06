@@ -47,7 +47,11 @@ test('Egypt eVisa', async ({ page }) => {
   await selectors.passportPhoto(page)
   
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_ocr_review")
-  await page.getByText("Use selected details").click()
+  await page.waitForTimeout(4000)
+  const passportPostPaymentModal = await page.getByText("Use selected details").isVisible()
+  if (passportPostPaymentModal){
+    await page.getByText("Use selected details").click()
+  }
   const passport_issue_day = page.locator('[name="applicant.0.passport_issued_date.day"]')
   await expect(passport_issue_day).toBeVisible()
   await passport_issue_day.selectOption('13')

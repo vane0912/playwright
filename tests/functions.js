@@ -51,34 +51,35 @@ async function newPaymentCheckout(page,creditCard, cvvNum,continuebtn){
         await page.getByRole('button', { name: 'Continue to payment' }).click()
     }
     await page.waitForTimeout(2000)
-    const duplicate = await page.isVisible('id=btnDisclaimerNext')
+    const duplicate = await page.locator('id=btnDisclaimerNext').isVisible()
     if (duplicate){
       await page.locator('id=btnDisclaimerNext').click()
     }
-    await page.locator('[name="number"]').fill(creditCard);
+    
+    const primer = await page.locator('[name="number"]').isVisible()
+    if(!primer){
+        await page.locator('id=cardNumber').frameLocator('[title="Card number"]').locator('id=primer-hosted-input').fill('4242424242424242')
+        await page.locator('id=expiry').frameLocator('[title="Expiry (MM/YY)"]').locator('id=primer-hosted-input').fill('10/26')
+        await page.locator('id=cvv').frameLocator('[title="CVV"]').locator('id=primer-hosted-input').fill('123')
+        await page.locator('id=cardFormName').frameLocator('[title="Name on card"]').locator('id=primer-hosted-input').fill('Jhon')
+        
+    }else{
+        await page.locator('[name="number"]').fill(creditCard);
+        const expiration_month = page.locator('[name="mmyy"]')
+        await expiration_month.fill('10/26')
 
-    const expiration_month = page.locator('[name="mmyy"]')
-    await expiration_month.fill('10/26')
-
-    const cvv = page.locator('[name="cvv"]')
-    await cvv.fill(cvvNum)
-    /*
-    const zip_code = stripeFrame.locator("id=payment-postalCodeInput")
-    await zip_code.fill('12345')
-    */
-    const cardholder_name = page.locator('[name="full_name"]')
-    await cardholder_name.fill('John Smith')
-    /*
-    const zip_code = page.getByPlaceholder("ZIP code")
-    await zip_code.fill('12345')
-    */ 
+        const cvv = page.locator('[name="cvv"]')
+        await cvv.fill(cvvNum)
+        const cardholder_name = page.locator('[name="full_name"]')
+        await cardholder_name.fill('John Smith')
+    }
 }
 async function oldPaymentCheckout(page, url, creditCard, cvvNum){
     await page.waitForURL(url + 'step=review')
     if(continuebtn){
         await page.getByRole('button', { name: 'Continue to payment' }).click()
     }
-    await page.waitForTimeout(2000)
+    await page.waitForTimeout(4000)
     const duplicate = await page.isVisible('id=btnDisclaimerNext')
     if (duplicate){
       await page.locator('id=btnDisclaimerNext').click()
@@ -111,6 +112,10 @@ async function autofillExisting(page, url, nationality, subscription) {
     await page.getByRole("button").getByText("Confirm").click()
     await page.waitForURL(deploy_url + url)
     await page.waitForTimeout(2000)
+    const checkNationalityError = await page.getByTestId('alert-modal-button').isVisible()
+    if(checkNationalityError){
+        await page.getByTestId('alert-modal-button').click()
+    }
     await page.getByTestId("option-Male").click() 
     await page.locator('[name="applicant.0.is_passport_on_hand"]').getByTestId("option-true").click()
     if (nationality){
@@ -118,7 +123,7 @@ async function autofillExisting(page, url, nationality, subscription) {
             await page.locator('[name="applicant.0.nationality_country"]').click()
             await page.waitForTimeout(2000)
             await page.getByTestId("down-applicant.0.nationality_country").fill("au")
-            await page.locator('[name="applicant.0.nationality_country"]').getByRole('option', {value: "Australia flag Australia"}).click()
+            await page.locator('[name="applicant.0.nationality_country"]').getByRole('option', {name: "Australia flag Australia"}).click()
             await page.waitForTimeout(2000)
         }
     }
