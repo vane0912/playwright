@@ -16,6 +16,11 @@ setup('authenticate', async ({ page, context }) => {
         value: 'USD',
         url: deploy_url
       },
+      {
+        name: 'nationalityFromPassport',
+        value: 'MX',
+        url: deploy_url
+      }
     ]);
 
     await page.goto(`${deploy_url}turkey/apply-now`);
