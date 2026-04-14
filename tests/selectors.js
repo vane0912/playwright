@@ -2,12 +2,15 @@ const { expect } = require('@playwright/test');
 const path = require('path');
 
 async function arrival_date(page){
+    await page.waitForTimeout(1000)
   const arrival_date_visible = page.locator('[name="general.arrival_date"]')
   await expect(arrival_date_visible).toBeVisible()
   await arrival_date_visible.click()
   await page.locator('[data-dp-element="action-next"]').click()
   await page.locator('[data-dp-element="action-next"]').click()
-  await page.locator('.dp--future').filter({hasText: '12'}).first().click()
+  await page.waitForTimeout(1000)
+  await page.locator('.dp--future').filter({hasText: '14'}).first().click()
+  await page.waitForTimeout(1000)
 }
 
 async function departure_date(page, name){
@@ -16,7 +19,7 @@ async function departure_date(page, name){
   await departure_date_visible.click()
   await page.locator('[data-dp-element="action-next"]').click()
   await page.locator('[data-dp-element="action-next"]').click()
-  await page.locator('.dp--future').filter({hasText: '15'}).first().click()
+  await page.locator('.dp--future').filter({hasText: '17'}).first().click()
 }
 async function phoneNumber(page) {
     await page.getByPlaceholder('111-222-3333').fill('11111111')

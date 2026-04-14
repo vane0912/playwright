@@ -33,7 +33,6 @@ test('Philippines eArrival Card', async ({ page }) => {
   await next_btn.click()
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=travel_general")
   await page.waitForTimeout(2000)
-  await selectors.inputText(page, "general.departure_airport", 'Test')
   await selectors.dropdownSelector(page, 'general.arrival_flight_airline',"dropdown-general.arrival_flight_airline","Advance", "ADVANCE JET AVIATION")
   await page.waitForTimeout(2000)
   await selectors.inputText(page, "general.arrival_flight_number", '12345')

@@ -45,8 +45,6 @@ async function step_3_passport(page){
     await page.waitForTimeout(3000)
     await page.keyboard.press("Space")
     await page.waitForTimeout(1000)
-    await page.keyboard.press("Enter")
-    await page.waitForTimeout(1000)
     await page.locator('//li[@data-type="place"]').first().click()
     await page.waitForTimeout(1000)
 

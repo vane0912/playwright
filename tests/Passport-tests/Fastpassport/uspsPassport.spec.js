@@ -126,7 +126,7 @@ test('FastPassport - USPS Emergency - Preparing for shipping', async({page}) => 
   // Shipped to customer
   await search_order.click()
   await page.getByTestId("dl-manage-order-title").click()
-  await page.getByRole("button").locator("span").getByText('Change status to "Shipped to Customer"').click()
+  await page.locator('[name="change-status"]').selectOption('shipped_to_customer')
   await expect(page.getByPlaceholder('Separate with , or ;')).toBeVisible()
   await expect(page.getByTestId('submitChangeStatus')).toBeEnabled()
   await page.getByTestId('submitChangeStatus').click()
