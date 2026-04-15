@@ -62,6 +62,10 @@ async function newPaymentCheckout(page,creditCard, cvvNum,continuebtn){
         await page.locator('id=expiry').frameLocator('[title="Expiry (MM/YY)"]').locator('id=primer-hosted-input').fill('10/26')
         await page.locator('id=cvv').frameLocator('[title="CVV"]').locator('id=primer-hosted-input').fill('123')
         await page.locator('id=cardFormName').frameLocator('[title="Name on card"]').locator('id=primer-hosted-input').fill('Jhon')
+        const zip_code = await page.locator('.billing-address-form').isVisible()
+        if(zip_code){
+            await page.locator('.billing-address-form').locator("input").fill('12345')
+        }
         
     }else{
         await page.locator('[name="number"]').fill(creditCard);

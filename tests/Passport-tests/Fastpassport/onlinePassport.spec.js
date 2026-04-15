@@ -7,8 +7,15 @@ const percySnapshot = require('@percy/playwright');
 let fastpassportEmail = "automations93@fastpassport.com"
 
 test.describe.configure({ mode: 'serial' });
-test('Fastpassport - Account creation, logging and password creation', async ({page}) => {
+test('Fastpassport - Account creation, logging and password creation', async ({page, context}) => {
   test.slow()
+  await context.addCookies([
+    {
+      name: 'default_currency',
+      value: 'USD',
+      url: general_url + 'fastpassport.visachinaonline.com/passport-renewal/united-states'
+    }
+ ])
   await page.goto(general_url + 'fastpassport.visachinaonline.com/passport-renewal/united-states')
   await page.waitForTimeout(3000)
   await percySnapshot(page, 'fastPassportHomepage')

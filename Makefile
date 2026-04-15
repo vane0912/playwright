@@ -12,7 +12,7 @@ test:
 refactor: 
 	npx /tests/Travel documents/Top
 translations:
-	npx playwright test auth.setup.ts  --headed
+	npx playwright test egypt.spec.js
 
 fastPassport:
 	npx playwright test /tests/Passport-tests/Fastpassport

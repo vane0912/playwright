@@ -93,6 +93,12 @@ test('Extra Order', async ({ page, browser }) => {
     iframe.getByText('Pay now').click(),
   ]);
   await newTab.waitForLoadState()
+  await newTab.getByPlaceholder("Card number").fill("4556 7610 2998 3886")
+  await newTab.getByPlaceholder("MM/YY").fill("10/29")
+  await newTab.getByPlaceholder("CVV").fill("123")
+  await newTab.getByPlaceholder("Cardholder name").fill("John Smith")
+  await newTab.locator('id=btnSubmitPayment').click()
+  await newTab.waitForURL(deploy_url)
   await expect(newTab.getByText("Additional charge approved.")).toBeVisible()
   await page.getByRole('button', { name: 'OK' }).click()
   await page.getByTestId('applicant-details').click()

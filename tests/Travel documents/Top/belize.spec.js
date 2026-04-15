@@ -6,6 +6,7 @@ const { deploy_url } = require('../../urls');
 let Order_num
 
 test('Belize Travel Declaration', async ({ page }) => {
+  test.slow()
   await page.goto(deploy_url + 'belize/apply-now')
   await appFunctions.autofillExisting(page, "belize/apply-now/edit-traveler/0")
   await page.waitForURL("**/belize/apply-now/traveler-review")

@@ -6,6 +6,7 @@ const { deploy_url } = require('../../urls');
 let Order_num
 
 test('Curacao Immigration Card + Passenger Locator Card', async ({ page }) => {
+  test.slow()
   await page.goto(deploy_url + 'curacao/apply-now')
   await appFunctions.autofillExisting(page, "curacao/apply-now/edit-traveler/0")
   await page.waitForURL("**/curacao/apply-now/traveler-review")

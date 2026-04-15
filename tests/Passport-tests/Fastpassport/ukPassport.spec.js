@@ -8,6 +8,13 @@ let fastpassportEmail = randomEmail()
 
 test('FastPassport - United Kingdom', async({page, context}) =>{
   test.slow()
+  await context.addCookies([
+    {
+      name: 'default_currency',
+      value: 'USD',
+      url: general_url + 'fastpassport.visachinaonline.com/passport-renewal/united-states'
+    }
+ ])
   await page.goto(general_url + 'fastpassport.visachinaonline.com/passport-renewal/united-kingdom/application#step=step_1')
   await selectors.inputText(page, "general.first_name", "Test")
   await selectors.inputText(page, "general.last_name", "Test")

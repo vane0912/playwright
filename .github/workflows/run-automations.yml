@@ -2,12 +2,12 @@ name: E2E (Playwright + Percy)
 
 on:
   push:
-    branches: [ "main" ]          # run when you push to main
+    branches: [ "main" ]         
   
 permissions:
   contents: read
   pages: write
-  id-token: write             # optional manual trigger too
+  id-token: write           
 
 jobs:
   e2e:
@@ -48,3 +48,6 @@ jobs:
       - name: Deploy to GitHub Pages
         if: always()
         uses: actions/deploy-pages@v4
+
+      - name: Send results to slack
+        run: node sendReport.js

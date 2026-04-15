@@ -1,0 +1,1488 @@
+{
+  "config": {
+    "configFile": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\playwright.config.js",
+    "rootDir": "C:/Users/vanei/OneDrive/Desktop/Playwright/tests",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 7
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/vanei/OneDrive/Desktop/Playwright/test-results",
+        "repeatEach": 1,
+        "retries": 2,
+        "metadata": {
+          "actualWorkers": 7
+        },
+        "id": "setup",
+        "name": "setup",
+        "testDir": "C:/Users/vanei/OneDrive/Desktop/Playwright/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/.*\\.setup\\.ts/"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "C:/Users/vanei/OneDrive/Desktop/Playwright/test-results",
+        "repeatEach": 1,
+        "retries": 2,
+        "metadata": {
+          "actualWorkers": 7
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/vanei/OneDrive/Desktop/Playwright/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json",
+        {
+          "outputFile": "results.json"
+        }
+      ],
+      [
+        "html",
+        {
+          "open": "never"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "runAgents": "none",
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.58.2",
+    "workers": 7,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "auth.setup.ts",
+      "file": "auth.setup.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "authenticate",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 270000,
+              "annotations": [
+                {
+                  "type": "slow",
+                  "location": {
+                    "file": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\auth.setup.ts",
+                    "line": 12,
+                    "column": 10
+                  }
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "setup",
+              "projectName": "setup",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 60976,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "[\u001b[95mpercy\u001b[39m] Percy is not running, disabling snapshots\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-04-14T23:20:13.308Z",
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\auth.setup.ts",
+                        "line": 12,
+                        "column": 10
+                      }
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\test-results\\auth.setup.ts-authenticate-setup\\video.webm"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "17e3fe6f4d9d8bd79c6b-60f085b113a677673906",
+          "file": "auth.setup.ts",
+          "line": 10,
+          "column": 6
+        }
+      ]
+    },
+    {
+      "title": "Mobile\\my_orders_page.spec.js",
+      "file": "Mobile/my_orders_page.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Go to my orders page from homepage",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 23377,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-04-14T23:21:17.396Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\test-results\\Mobile-my_orders_page-Go-to-my-orders-page-from-homepage-chromium\\video.webm"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8d6bb450fec729f30bb9-35008bdd7c5efb6bad1c",
+          "file": "Mobile/my_orders_page.spec.js",
+          "line": 9,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "Passport-tests\\Fastpassport\\completePassport.spec.js",
+      "file": "Passport-tests/Fastpassport/completePassport.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "FastPassport - USPS Emergency - Complete",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 270000,
+              "annotations": [
+                {
+                  "type": "slow",
+                  "location": {
+                    "file": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Passport-tests\\Fastpassport\\completePassport.spec.js",
+                    "line": 13,
+                    "column": 8
+                  }
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 1,
+                  "status": "timedOut",
+                  "duration": 284133,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 270000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 270000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 270000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Passport-tests\\Fastpassport\\completePassport.spec.js",
+                        "column": 102,
+                        "line": 108
+                      },
+                      "message": "Error: locator.click: Test timeout of 270000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button').locator('span').getByText('Change status to \"Shipped to Customer\"')\u001b[22m\n\n\n\u001b[0m \u001b[90m 106 |\u001b[39m   \u001b[36mconst\u001b[39m search_order \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'//li[@onclick=\"searchOrderID();\"]'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 107 |\u001b[39m   \u001b[36mawait\u001b[39m search_order\u001b[33m.\u001b[39mclick()\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 108 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgetByRole(\u001b[32m\"button\"\u001b[39m)\u001b[33m.\u001b[39mlocator(\u001b[32m\"span\"\u001b[39m)\u001b[33m.\u001b[39mgetByText(\u001b[32m'Change status to \"Shipped to Customer\"'\u001b[39m)\u001b[33m.\u001b[39mclick()\n \u001b[90m     |\u001b[39m                                                                                                      \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 109 |\u001b[39m   \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByTestId(\u001b[32m'submitChangeStatus'\u001b[39m))\u001b[33m.\u001b[39mtoBeEnabled()\n \u001b[90m 110 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgetByTestId(\u001b[32m'submitChangeStatus'\u001b[39m)\u001b[33m.\u001b[39mclick()\n \u001b[90m 111 |\u001b[39m   \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByText(\u001b[32m\"All Passport Renewal applicants must have a Gov Application and Applicant Photo deliverable.\"\u001b[39m))\u001b[33m.\u001b[39mtoBeVisible()\u001b[0m\n\u001b[2m    at C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Passport-tests\\Fastpassport\\completePassport.spec.js:108:102\u001b[22m"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-04-14T23:21:17.843Z",
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Passport-tests\\Fastpassport\\completePassport.spec.js",
+                        "line": 13,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\test-results\\Passport-tests-Fastpasspor-9a933---USPS-Emergency---Complete-chromium\\video.webm"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\test-results\\Passport-tests-Fastpasspor-9a933---USPS-Emergency---Complete-chromium\\error-context.md"
+                    }
+                  ]
+                },
+                {
+                  "workerIndex": 10,
+                  "parallelIndex": 1,
+                  "status": "timedOut",
+                  "duration": 291931,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 270000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 270000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 270000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Passport-tests\\Fastpassport\\completePassport.spec.js",
+                        "column": 102,
+                        "line": 108
+                      },
+                      "message": "Error: locator.click: Test timeout of 270000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button').locator('span').getByText('Change status to \"Shipped to Customer\"')\u001b[22m\n\n\n\u001b[0m \u001b[90m 106 |\u001b[39m   \u001b[36mconst\u001b[39m search_order \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'//li[@onclick=\"searchOrderID();\"]'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 107 |\u001b[39m   \u001b[36mawait\u001b[39m search_order\u001b[33m.\u001b[39mclick()\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 108 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgetByRole(\u001b[32m\"button\"\u001b[39m)\u001b[33m.\u001b[39mlocator(\u001b[32m\"span\"\u001b[39m)\u001b[33m.\u001b[39mgetByText(\u001b[32m'Change status to \"Shipped to Customer\"'\u001b[39m)\u001b[33m.\u001b[39mclick()\n \u001b[90m     |\u001b[39m                                                                                                      \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 109 |\u001b[39m   \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByTestId(\u001b[32m'submitChangeStatus'\u001b[39m))\u001b[33m.\u001b[39mtoBeEnabled()\n \u001b[90m 110 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgetByTestId(\u001b[32m'submitChangeStatus'\u001b[39m)\u001b[33m.\u001b[39mclick()\n \u001b[90m 111 |\u001b[39m   \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByText(\u001b[32m\"All Passport Renewal applicants must have a Gov Application and Applicant Photo deliverable.\"\u001b[39m))\u001b[33m.\u001b[39mtoBeVisible()\u001b[0m\n\u001b[2m    at C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Passport-tests\\Fastpassport\\completePassport.spec.js:108:102\u001b[22m"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 1,
+                  "startTime": "2026-04-14T23:26:08.007Z",
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Passport-tests\\Fastpassport\\completePassport.spec.js",
+                        "line": 13,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\test-results\\Passport-tests-Fastpasspor-9a933---USPS-Emergency---Complete-chromium-retry1\\video.webm"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\test-results\\Passport-tests-Fastpasspor-9a933---USPS-Emergency---Complete-chromium-retry1\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\test-results\\Passport-tests-Fastpasspor-9a933---USPS-Emergency---Complete-chromium-retry1\\trace.zip"
+                    }
+                  ]
+                },
+                {
+                  "workerIndex": 16,
+                  "parallelIndex": 1,
+                  "status": "timedOut",
+                  "duration": 306219,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 270000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 270000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 270000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Passport-tests\\Fastpassport\\completePassport.spec.js",
+                        "column": 102,
+                        "line": 108
+                      },
+                      "message": "Error: locator.click: Test timeout of 270000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button').locator('span').getByText('Change status to \"Shipped to Customer\"')\u001b[22m\n\n\n\u001b[0m \u001b[90m 106 |\u001b[39m   \u001b[36mconst\u001b[39m search_order \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'//li[@onclick=\"searchOrderID();\"]'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 107 |\u001b[39m   \u001b[36mawait\u001b[39m search_order\u001b[33m.\u001b[39mclick()\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 108 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgetByRole(\u001b[32m\"button\"\u001b[39m)\u001b[33m.\u001b[39mlocator(\u001b[32m\"span\"\u001b[39m)\u001b[33m.\u001b[39mgetByText(\u001b[32m'Change status to \"Shipped to Customer\"'\u001b[39m)\u001b[33m.\u001b[39mclick()\n \u001b[90m     |\u001b[39m                                                                                                      \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 109 |\u001b[39m   \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByTestId(\u001b[32m'submitChangeStatus'\u001b[39m))\u001b[33m.\u001b[39mtoBeEnabled()\n \u001b[90m 110 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgetByTestId(\u001b[32m'submitChangeStatus'\u001b[39m)\u001b[33m.\u001b[39mclick()\n \u001b[90m 111 |\u001b[39m   \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByText(\u001b[32m\"All Passport Renewal applicants must have a Gov Application and Applicant Photo deliverable.\"\u001b[39m))\u001b[33m.\u001b[39mtoBeVisible()\u001b[0m\n\u001b[2m    at C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Passport-tests\\Fastpassport\\completePassport.spec.js:108:102\u001b[22m"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 2,
+                  "startTime": "2026-04-14T23:31:19.697Z",
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Passport-tests\\Fastpassport\\completePassport.spec.js",
+                        "line": 13,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\test-results\\Passport-tests-Fastpasspor-9a933---USPS-Emergency---Complete-chromium-retry2\\video.webm"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\test-results\\Passport-tests-Fastpasspor-9a933---USPS-Emergency---Complete-chromium-retry2\\error-context.md"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "2b19de7b8ce9bc4ece07-72d48ae87a30d06917b0",
+          "file": "Passport-tests/Fastpassport/completePassport.spec.js",
+          "line": 12,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "Passport-tests\\Fastpassport\\uspsPassport.spec.js",
+      "file": "Passport-tests/Fastpassport/uspsPassport.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "FastPassport - USPS Emergency - Preparing for shipping",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 270000,
+              "annotations": [
+                {
+                  "type": "slow",
+                  "location": {
+                    "file": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Passport-tests\\Fastpassport\\uspsPassport.spec.js",
+                    "line": 11,
+                    "column": 8
+                  }
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 2,
+                  "status": "timedOut",
+                  "duration": 283955,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 270000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 270000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 270000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Passport-tests\\Fastpassport\\uspsPassport.spec.js",
+                        "column": 102,
+                        "line": 106
+                      },
+                      "message": "Error: locator.click: Test timeout of 270000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button').locator('span').getByText('Change status to \"Shipped to Customer\"')\u001b[22m\n\n\n\u001b[0m \u001b[90m 104 |\u001b[39m   \u001b[36mconst\u001b[39m search_order \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'//li[@onclick=\"searchOrderID();\"]'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 105 |\u001b[39m   \u001b[36mawait\u001b[39m search_order\u001b[33m.\u001b[39mclick()\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 106 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgetByRole(\u001b[32m\"button\"\u001b[39m)\u001b[33m.\u001b[39mlocator(\u001b[32m\"span\"\u001b[39m)\u001b[33m.\u001b[39mgetByText(\u001b[32m'Change status to \"Shipped to Customer\"'\u001b[39m)\u001b[33m.\u001b[39mclick()\n \u001b[90m     |\u001b[39m                                                                                                      \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 107 |\u001b[39m   \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByTestId(\u001b[32m'submitChangeStatus'\u001b[39m))\u001b[33m.\u001b[39mtoBeEnabled()\n \u001b[90m 108 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgetByTestId(\u001b[32m'submitChangeStatus'\u001b[39m)\u001b[33m.\u001b[39mclick()\n \u001b[90m 109 |\u001b[39m   \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByText(\u001b[32m\"All Passport Renewal applicants must have a Gov Application and Applicant Photo deliverable.\"\u001b[39m))\u001b[33m.\u001b[39mtoBeVisible()\u001b[0m\n\u001b[2m    at C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Passport-tests\\Fastpassport\\uspsPassport.spec.js:106:102\u001b[22m"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-04-14T23:21:17.457Z",
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Passport-tests\\Fastpassport\\uspsPassport.spec.js",
+                        "line": 11,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\test-results\\Passport-tests-Fastpasspor-0ef72-cy---Preparing-for-shipping-chromium\\video.webm"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\test-results\\Passport-tests-Fastpasspor-0ef72-cy---Preparing-for-shipping-chromium\\error-context.md"
+                    }
+                  ]
+                },
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 2,
+                  "status": "timedOut",
+                  "duration": 289300,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 270000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 270000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 270000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Passport-tests\\Fastpassport\\uspsPassport.spec.js",
+                        "column": 102,
+                        "line": 106
+                      },
+                      "message": "Error: locator.click: Test timeout of 270000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button').locator('span').getByText('Change status to \"Shipped to Customer\"')\u001b[22m\n\n\n\u001b[0m \u001b[90m 104 |\u001b[39m   \u001b[36mconst\u001b[39m search_order \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'//li[@onclick=\"searchOrderID();\"]'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 105 |\u001b[39m   \u001b[36mawait\u001b[39m search_order\u001b[33m.\u001b[39mclick()\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 106 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgetByRole(\u001b[32m\"button\"\u001b[39m)\u001b[33m.\u001b[39mlocator(\u001b[32m\"span\"\u001b[39m)\u001b[33m.\u001b[39mgetByText(\u001b[32m'Change status to \"Shipped to Customer\"'\u001b[39m)\u001b[33m.\u001b[39mclick()\n \u001b[90m     |\u001b[39m                                                                                                      \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 107 |\u001b[39m   \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByTestId(\u001b[32m'submitChangeStatus'\u001b[39m))\u001b[33m.\u001b[39mtoBeEnabled()\n \u001b[90m 108 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgetByTestId(\u001b[32m'submitChangeStatus'\u001b[39m)\u001b[33m.\u001b[39mclick()\n \u001b[90m 109 |\u001b[39m   \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByText(\u001b[32m\"All Passport Renewal applicants must have a Gov Application and Applicant Photo deliverable.\"\u001b[39m))\u001b[33m.\u001b[39mtoBeVisible()\u001b[0m\n\u001b[2m    at C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Passport-tests\\Fastpassport\\uspsPassport.spec.js:106:102\u001b[22m"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 1,
+                  "startTime": "2026-04-14T23:26:07.250Z",
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Passport-tests\\Fastpassport\\uspsPassport.spec.js",
+                        "line": 11,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\test-results\\Passport-tests-Fastpasspor-0ef72-cy---Preparing-for-shipping-chromium-retry1\\video.webm"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\test-results\\Passport-tests-Fastpasspor-0ef72-cy---Preparing-for-shipping-chromium-retry1\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\test-results\\Passport-tests-Fastpasspor-0ef72-cy---Preparing-for-shipping-chromium-retry1\\trace.zip"
+                    }
+                  ]
+                },
+                {
+                  "workerIndex": 15,
+                  "parallelIndex": 2,
+                  "status": "timedOut",
+                  "duration": 306998,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 270000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 270000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 270000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Passport-tests\\Fastpassport\\uspsPassport.spec.js",
+                        "column": 102,
+                        "line": 106
+                      },
+                      "message": "Error: locator.click: Test timeout of 270000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button').locator('span').getByText('Change status to \"Shipped to Customer\"')\u001b[22m\n\n\n\u001b[0m \u001b[90m 104 |\u001b[39m   \u001b[36mconst\u001b[39m search_order \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'//li[@onclick=\"searchOrderID();\"]'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 105 |\u001b[39m   \u001b[36mawait\u001b[39m search_order\u001b[33m.\u001b[39mclick()\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 106 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgetByRole(\u001b[32m\"button\"\u001b[39m)\u001b[33m.\u001b[39mlocator(\u001b[32m\"span\"\u001b[39m)\u001b[33m.\u001b[39mgetByText(\u001b[32m'Change status to \"Shipped to Customer\"'\u001b[39m)\u001b[33m.\u001b[39mclick()\n \u001b[90m     |\u001b[39m                                                                                                      \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 107 |\u001b[39m   \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByTestId(\u001b[32m'submitChangeStatus'\u001b[39m))\u001b[33m.\u001b[39mtoBeEnabled()\n \u001b[90m 108 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgetByTestId(\u001b[32m'submitChangeStatus'\u001b[39m)\u001b[33m.\u001b[39mclick()\n \u001b[90m 109 |\u001b[39m   \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByText(\u001b[32m\"All Passport Renewal applicants must have a Gov Application and Applicant Photo deliverable.\"\u001b[39m))\u001b[33m.\u001b[39mtoBeVisible()\u001b[0m\n\u001b[2m    at C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Passport-tests\\Fastpassport\\uspsPassport.spec.js:106:102\u001b[22m"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 2,
+                  "startTime": "2026-04-14T23:31:15.543Z",
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Passport-tests\\Fastpassport\\uspsPassport.spec.js",
+                        "line": 11,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\test-results\\Passport-tests-Fastpasspor-0ef72-cy---Preparing-for-shipping-chromium-retry2\\video.webm"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\test-results\\Passport-tests-Fastpasspor-0ef72-cy---Preparing-for-shipping-chromium-retry2\\error-context.md"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "79af5d2894c447b0bb63-f254b04d87a0f225bacc",
+          "file": "Passport-tests/Fastpassport/uspsPassport.spec.js",
+          "line": 10,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "Travel documents\\different_currency.spec.js",
+      "file": "Travel documents/different_currency.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Different currency",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 270000,
+              "annotations": [
+                {
+                  "type": "slow",
+                  "location": {
+                    "file": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Travel documents\\different_currency.spec.js",
+                    "line": 8,
+                    "column": 8
+                  }
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 3,
+                  "status": "timedOut",
+                  "duration": 292911,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 270000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 270000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 270000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Travel documents\\different_currency.spec.js",
+                        "column": 14,
+                        "line": 49
+                      },
+                      "message": "Error: page.waitForNavigation: Test timeout of 270000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation until \"load\"\n============================================================\n\n\u001b[0m \u001b[90m 47 |\u001b[39m\n \u001b[90m 48 |\u001b[39m   \n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 49 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForNavigation({waitUntil\u001b[33m:\u001b[39m \u001b[32m'load'\u001b[39m})\n \u001b[90m    |\u001b[39m              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 50 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgetByTestId(\u001b[32m\"transition-page-button\"\u001b[39m)\u001b[33m.\u001b[39mclick()\n \u001b[90m 51 |\u001b[39m   \u001b[36mlet\u001b[39m \u001b[33mOrder_num\u001b[39m \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39murl()\u001b[33m.\u001b[39msplit(\u001b[32m\"/\"\u001b[39m)[\u001b[35m4\u001b[39m]\u001b[33m;\u001b[39m\n \u001b[90m 52 |\u001b[39m\u001b[0m\n\u001b[2m    at C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Travel documents\\different_currency.spec.js:49:14\u001b[22m"
+                    }
+                  ],
+                  "stdout": [
+                    {
+                      "text": "[\u001b[95mpercy\u001b[39m] Percy is not running, disabling snapshots\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-04-14T23:21:17.399Z",
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Travel documents\\different_currency.spec.js",
+                        "line": 8,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\test-results\\Travel documents-different_currency-Different-currency-chromium\\video.webm"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\test-results\\Travel documents-different_currency-Different-currency-chromium\\error-context.md"
+                    }
+                  ]
+                },
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 3,
+                  "status": "timedOut",
+                  "duration": 307606,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 270000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 270000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 270000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Travel documents\\different_currency.spec.js",
+                        "column": 14,
+                        "line": 49
+                      },
+                      "message": "Error: page.waitForNavigation: Test timeout of 270000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation until \"load\"\n============================================================\n\n\u001b[0m \u001b[90m 47 |\u001b[39m\n \u001b[90m 48 |\u001b[39m   \n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 49 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForNavigation({waitUntil\u001b[33m:\u001b[39m \u001b[32m'load'\u001b[39m})\n \u001b[90m    |\u001b[39m              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 50 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgetByTestId(\u001b[32m\"transition-page-button\"\u001b[39m)\u001b[33m.\u001b[39mclick()\n \u001b[90m 51 |\u001b[39m   \u001b[36mlet\u001b[39m \u001b[33mOrder_num\u001b[39m \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39murl()\u001b[33m.\u001b[39msplit(\u001b[32m\"/\"\u001b[39m)[\u001b[35m4\u001b[39m]\u001b[33m;\u001b[39m\n \u001b[90m 52 |\u001b[39m\u001b[0m\n\u001b[2m    at C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Travel documents\\different_currency.spec.js:49:14\u001b[22m"
+                    }
+                  ],
+                  "stdout": [
+                    {
+                      "text": "[\u001b[95mpercy\u001b[39m] Percy is not running, disabling snapshots\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 1,
+                  "startTime": "2026-04-14T23:26:18.775Z",
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Travel documents\\different_currency.spec.js",
+                        "line": 8,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\test-results\\Travel documents-different_currency-Different-currency-chromium-retry1\\video.webm"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\test-results\\Travel documents-different_currency-Different-currency-chromium-retry1\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\test-results\\Travel documents-different_currency-Different-currency-chromium-retry1\\trace.zip"
+                    }
+                  ]
+                },
+                {
+                  "workerIndex": 17,
+                  "parallelIndex": 3,
+                  "status": "timedOut",
+                  "duration": 330173,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 270000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 270000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 270000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Travel documents\\different_currency.spec.js",
+                        "column": 14,
+                        "line": 49
+                      },
+                      "message": "Error: page.waitForNavigation: Test timeout of 270000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation until \"load\"\n============================================================\n\n\u001b[0m \u001b[90m 47 |\u001b[39m\n \u001b[90m 48 |\u001b[39m   \n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 49 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForNavigation({waitUntil\u001b[33m:\u001b[39m \u001b[32m'load'\u001b[39m})\n \u001b[90m    |\u001b[39m              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 50 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgetByTestId(\u001b[32m\"transition-page-button\"\u001b[39m)\u001b[33m.\u001b[39mclick()\n \u001b[90m 51 |\u001b[39m   \u001b[36mlet\u001b[39m \u001b[33mOrder_num\u001b[39m \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39murl()\u001b[33m.\u001b[39msplit(\u001b[32m\"/\"\u001b[39m)[\u001b[35m4\u001b[39m]\u001b[33m;\u001b[39m\n \u001b[90m 52 |\u001b[39m\u001b[0m\n\u001b[2m    at C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Travel documents\\different_currency.spec.js:49:14\u001b[22m"
+                    }
+                  ],
+                  "stdout": [
+                    {
+                      "text": "[\u001b[95mpercy\u001b[39m] Percy is not running, disabling snapshots\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 2,
+                  "startTime": "2026-04-14T23:31:38.703Z",
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Travel documents\\different_currency.spec.js",
+                        "line": 8,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\test-results\\Travel documents-different_currency-Different-currency-chromium-retry2\\video.webm"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\test-results\\Travel documents-different_currency-Different-currency-chromium-retry2\\error-context.md"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "f76d2d9d8cc5a7cb6193-ebc5d4a76c04f01f40b2",
+          "file": "Travel documents/different_currency.spec.js",
+          "line": 7,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "Travel documents\\extra_order.spec.js",
+      "file": "Travel documents/extra_order.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Extra Order",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 270000,
+              "annotations": [
+                {
+                  "type": "slow",
+                  "location": {
+                    "file": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Travel documents\\extra_order.spec.js",
+                    "line": 7,
+                    "column": 8
+                  }
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 4,
+                  "status": "timedOut",
+                  "duration": 291924,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 270000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 270000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 270000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Travel documents\\extra_order.spec.js",
+                        "column": 16,
+                        "line": 101
+                      },
+                      "message": "Error: page.waitForURL: Test ended.\n=========================== logs ===========================\nwaiting for navigation to \"https://deploy-20260415--a39a5b5f.visachinaonline.com/\" until \"load\"\n============================================================\n\n\u001b[0m \u001b[90m  99 |\u001b[39m   \u001b[36mawait\u001b[39m newTab\u001b[33m.\u001b[39mgetByPlaceholder(\u001b[32m\"Cardholder name\"\u001b[39m)\u001b[33m.\u001b[39mfill(\u001b[32m\"John Smith\"\u001b[39m)\n \u001b[90m 100 |\u001b[39m   \u001b[36mawait\u001b[39m newTab\u001b[33m.\u001b[39mlocator(\u001b[32m'id=btnSubmitPayment'\u001b[39m)\u001b[33m.\u001b[39mclick()\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 101 |\u001b[39m   \u001b[36mawait\u001b[39m newTab\u001b[33m.\u001b[39mwaitForURL(deploy_url)\n \u001b[90m     |\u001b[39m                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 102 |\u001b[39m   \u001b[36mawait\u001b[39m expect(newTab\u001b[33m.\u001b[39mgetByText(\u001b[32m\"Additional charge approved.\"\u001b[39m))\u001b[33m.\u001b[39mtoBeVisible()\n \u001b[90m 103 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'button'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'OK'\u001b[39m })\u001b[33m.\u001b[39mclick()\n \u001b[90m 104 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgetByTestId(\u001b[32m'applicant-details'\u001b[39m)\u001b[33m.\u001b[39mclick()\u001b[0m\n\u001b[2m    at C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Travel documents\\extra_order.spec.js:101:16\u001b[22m"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-04-14T23:21:17.524Z",
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Travel documents\\extra_order.spec.js",
+                        "line": 7,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\test-results\\Travel documents-extra_order-Extra-Order-chromium\\video.webm"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\test-results\\Travel documents-extra_order-Extra-Order-chromium\\error-context.md"
+                    }
+                  ]
+                },
+                {
+                  "workerIndex": 12,
+                  "parallelIndex": 4,
+                  "status": "passed",
+                  "duration": 105460,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 1,
+                  "startTime": "2026-04-14T23:26:20.398Z",
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Travel documents\\extra_order.spec.js",
+                        "line": 7,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\test-results\\Travel documents-extra_order-Extra-Order-chromium-retry1\\video.webm"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\test-results\\Travel documents-extra_order-Extra-Order-chromium-retry1\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "flaky"
+            }
+          ],
+          "id": "1bb0391b09c65eb21fd8-e23819d2b696bf0da1a6",
+          "file": "Travel documents/extra_order.spec.js",
+          "line": 6,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "Travel documents\\Top\\antiguaBarbuda.spec.js",
+      "file": "Travel documents/Top/antiguaBarbuda.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Antigua & Barbuda Entry Form",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 270000,
+              "annotations": [
+                {
+                  "type": "slow",
+                  "location": {
+                    "file": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Travel documents\\Top\\antiguaBarbuda.spec.js",
+                    "line": 9,
+                    "column": 8
+                  }
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 5,
+                  "status": "timedOut",
+                  "duration": 300881,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 270000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 270000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 270000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Travel documents\\Top\\antiguaBarbuda.spec.js",
+                        "column": 14,
+                        "line": 36
+                      },
+                      "message": "Error: page.waitForURL: Test timeout of 270000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation to \"https://deploy-20260415--a39a5b5f.visachinaonline.com/order/234/continue#step=accommodation\" until \"load\"\n============================================================\n\n\u001b[0m \u001b[90m 34 |\u001b[39m   \u001b[36mawait\u001b[39m expect(next_btn)\u001b[33m.\u001b[39mtoBeEnabled()\n \u001b[90m 35 |\u001b[39m   \u001b[36mawait\u001b[39m next_btn\u001b[33m.\u001b[39mclick()\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 36 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForURL(deploy_url \u001b[33m+\u001b[39m \u001b[32m\"order/\"\u001b[39m \u001b[33m+\u001b[39m \u001b[33mOrder_num\u001b[39m \u001b[33m+\u001b[39m \u001b[32m\"/continue#step=accommodation\"\u001b[39m)\n \u001b[90m    |\u001b[39m              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 37 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForTimeout(\u001b[35m2000\u001b[39m)\n \u001b[90m 38 |\u001b[39m   \u001b[36mawait\u001b[39m selectors\u001b[33m.\u001b[39minputText(page\u001b[33m,\u001b[39m \u001b[32m\"general.destination_location_name\"\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'Test'\u001b[39m)\n \u001b[90m 39 |\u001b[39m   \u001b[36mawait\u001b[39m selectors\u001b[33m.\u001b[39maddressApi(page\u001b[33m,\u001b[39m \u001b[32m\"general.destination_address\"\u001b[39m)\u001b[0m\n\u001b[2m    at C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Travel documents\\Top\\antiguaBarbuda.spec.js:36:14\u001b[22m"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-04-14T23:21:17.715Z",
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Travel documents\\Top\\antiguaBarbuda.spec.js",
+                        "line": 9,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\test-results\\Travel documents-Top-antig-33575--Antigua-Barbuda-Entry-Form-chromium\\video.webm"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\test-results\\Travel documents-Top-antig-33575--Antigua-Barbuda-Entry-Form-chromium\\error-context.md"
+                    }
+                  ]
+                },
+                {
+                  "workerIndex": 13,
+                  "parallelIndex": 5,
+                  "status": "timedOut",
+                  "duration": 310143,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 270000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 270000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 270000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Travel documents\\Top\\antiguaBarbuda.spec.js",
+                        "column": 14,
+                        "line": 36
+                      },
+                      "message": "Error: page.waitForURL: Test timeout of 270000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation to \"https://deploy-20260415--a39a5b5f.visachinaonline.com/order/246/continue#step=accommodation\" until \"load\"\n============================================================\n\n\u001b[0m \u001b[90m 34 |\u001b[39m   \u001b[36mawait\u001b[39m expect(next_btn)\u001b[33m.\u001b[39mtoBeEnabled()\n \u001b[90m 35 |\u001b[39m   \u001b[36mawait\u001b[39m next_btn\u001b[33m.\u001b[39mclick()\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 36 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForURL(deploy_url \u001b[33m+\u001b[39m \u001b[32m\"order/\"\u001b[39m \u001b[33m+\u001b[39m \u001b[33mOrder_num\u001b[39m \u001b[33m+\u001b[39m \u001b[32m\"/continue#step=accommodation\"\u001b[39m)\n \u001b[90m    |\u001b[39m              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 37 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForTimeout(\u001b[35m2000\u001b[39m)\n \u001b[90m 38 |\u001b[39m   \u001b[36mawait\u001b[39m selectors\u001b[33m.\u001b[39minputText(page\u001b[33m,\u001b[39m \u001b[32m\"general.destination_location_name\"\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'Test'\u001b[39m)\n \u001b[90m 39 |\u001b[39m   \u001b[36mawait\u001b[39m selectors\u001b[33m.\u001b[39maddressApi(page\u001b[33m,\u001b[39m \u001b[32m\"general.destination_address\"\u001b[39m)\u001b[0m\n\u001b[2m    at C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Travel documents\\Top\\antiguaBarbuda.spec.js:36:14\u001b[22m"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 1,
+                  "startTime": "2026-04-14T23:26:26.305Z",
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Travel documents\\Top\\antiguaBarbuda.spec.js",
+                        "line": 9,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\test-results\\Travel documents-Top-antig-33575--Antigua-Barbuda-Entry-Form-chromium-retry1\\video.webm"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\test-results\\Travel documents-Top-antig-33575--Antigua-Barbuda-Entry-Form-chromium-retry1\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\test-results\\Travel documents-Top-antig-33575--Antigua-Barbuda-Entry-Form-chromium-retry1\\trace.zip"
+                    }
+                  ]
+                },
+                {
+                  "workerIndex": 18,
+                  "parallelIndex": 4,
+                  "status": "timedOut",
+                  "duration": 321009,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 270000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 270000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 270000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Travel documents\\Top\\antiguaBarbuda.spec.js",
+                        "column": 14,
+                        "line": 36
+                      },
+                      "message": "Error: page.waitForURL: Test timeout of 270000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation to \"https://deploy-20260415--a39a5b5f.visachinaonline.com/order/253/continue#step=accommodation\" until \"load\"\n============================================================\n\n\u001b[0m \u001b[90m 34 |\u001b[39m   \u001b[36mawait\u001b[39m expect(next_btn)\u001b[33m.\u001b[39mtoBeEnabled()\n \u001b[90m 35 |\u001b[39m   \u001b[36mawait\u001b[39m next_btn\u001b[33m.\u001b[39mclick()\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 36 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForURL(deploy_url \u001b[33m+\u001b[39m \u001b[32m\"order/\"\u001b[39m \u001b[33m+\u001b[39m \u001b[33mOrder_num\u001b[39m \u001b[33m+\u001b[39m \u001b[32m\"/continue#step=accommodation\"\u001b[39m)\n \u001b[90m    |\u001b[39m              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 37 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForTimeout(\u001b[35m2000\u001b[39m)\n \u001b[90m 38 |\u001b[39m   \u001b[36mawait\u001b[39m selectors\u001b[33m.\u001b[39minputText(page\u001b[33m,\u001b[39m \u001b[32m\"general.destination_location_name\"\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'Test'\u001b[39m)\n \u001b[90m 39 |\u001b[39m   \u001b[36mawait\u001b[39m selectors\u001b[33m.\u001b[39maddressApi(page\u001b[33m,\u001b[39m \u001b[32m\"general.destination_address\"\u001b[39m)\u001b[0m\n\u001b[2m    at C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Travel documents\\Top\\antiguaBarbuda.spec.js:36:14\u001b[22m"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 2,
+                  "startTime": "2026-04-14T23:31:49.518Z",
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Travel documents\\Top\\antiguaBarbuda.spec.js",
+                        "line": 9,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\test-results\\Travel documents-Top-antig-33575--Antigua-Barbuda-Entry-Form-chromium-retry2\\video.webm"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\test-results\\Travel documents-Top-antig-33575--Antigua-Barbuda-Entry-Form-chromium-retry2\\error-context.md"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "0536bf327acba2e7a3de-303f5c696bd16e60b62f",
+          "file": "Travel documents/Top/antiguaBarbuda.spec.js",
+          "line": 8,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "Travel documents\\Top\\belize.spec.js",
+      "file": "Travel documents/Top/belize.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Belize Travel Declaration",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 270000,
+              "annotations": [
+                {
+                  "type": "slow",
+                  "location": {
+                    "file": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Travel documents\\Top\\belize.spec.js",
+                    "line": 9,
+                    "column": 8
+                  }
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 6,
+                  "status": "passed",
+                  "duration": 98260,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-04-14T23:21:17.401Z",
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Travel documents\\Top\\belize.spec.js",
+                        "line": 9,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\test-results\\Travel documents-Top-belize-Belize-Travel-Declaration-chromium\\video.webm"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "002a6f10df71c781bef3-241ffb9c24fc62cc63e1",
+          "file": "Travel documents/Top/belize.spec.js",
+          "line": 8,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "Travel documents\\Top\\curacao.spec.js",
+      "file": "Travel documents/Top/curacao.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Curacao Immigration Card + Passenger Locator Card",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 270000,
+              "annotations": [
+                {
+                  "type": "slow",
+                  "location": {
+                    "file": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Travel documents\\Top\\curacao.spec.js",
+                    "line": 9,
+                    "column": 8
+                  }
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 94389,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-04-14T23:21:44.962Z",
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Travel documents\\Top\\curacao.spec.js",
+                        "line": 9,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\test-results\\Travel documents-Top-curac-31e52-Card-Passenger-Locator-Card-chromium\\video.webm"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "12abea206f3d2df07396-122e9b61845ddc54ca6e",
+          "file": "Travel documents/Top/curacao.spec.js",
+          "line": 8,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "Travel documents\\Top\\dominicanRepublic.spec.js",
+      "file": "Travel documents/Top/dominicanRepublic.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Dominican Republic eTicket",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 270000,
+              "annotations": [
+                {
+                  "type": "slow",
+                  "location": {
+                    "file": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Travel documents\\Top\\dominicanRepublic.spec.js",
+                    "line": 9,
+                    "column": 8
+                  }
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 6,
+                  "status": "passed",
+                  "duration": 76703,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-04-14T23:22:55.992Z",
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Travel documents\\Top\\dominicanRepublic.spec.js",
+                        "line": 9,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\test-results\\Travel documents-Top-domin-ca129--Dominican-Republic-eTicket-chromium\\video.webm"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b59386519a31184f6113-519a95f03128fc991efa",
+          "file": "Travel documents/Top/dominicanRepublic.spec.js",
+          "line": 8,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "Travel documents\\Top\\israel.spec.js",
+      "file": "Travel documents/Top/israel.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Israel ETA",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 270000,
+              "annotations": [
+                {
+                  "type": "slow",
+                  "location": {
+                    "file": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Travel documents\\Top\\israel.spec.js",
+                    "line": 9,
+                    "column": 8
+                  }
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 301305,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 270000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 270000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 270000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Travel documents\\Top\\israel.spec.js",
+                        "column": 14,
+                        "line": 48
+                      },
+                      "message": "Error: page.waitForURL: Test timeout of 270000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation to \"https://deploy-20260415--a39a5b5f.visachinaonline.com/order/239/continue#step=trav0_residency_information_after_payment\" until \"load\"\n  navigated to \"https://deploy-20260415--a39a5b5f.visachinaonline.com/order/239/continue#step=trav0_past_travel\"\n============================================================\n\n\u001b[0m \u001b[90m 46 |\u001b[39m   \u001b[36mawait\u001b[39m expect(next_btn)\u001b[33m.\u001b[39mtoBeEnabled()\n \u001b[90m 47 |\u001b[39m   \u001b[36mawait\u001b[39m next_btn\u001b[33m.\u001b[39mclick()\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 48 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForURL(deploy_url \u001b[33m+\u001b[39m \u001b[32m\"order/\"\u001b[39m \u001b[33m+\u001b[39m \u001b[33mOrder_num\u001b[39m \u001b[33m+\u001b[39m \u001b[32m\"/continue#step=trav0_residency_information_after_payment\"\u001b[39m)\n \u001b[90m    |\u001b[39m              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 49 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForTimeout(\u001b[35m2000\u001b[39m)\n \u001b[90m 50 |\u001b[39m   \u001b[36mawait\u001b[39m selectors\u001b[33m.\u001b[39minputText(page\u001b[33m,\u001b[39m \u001b[32m\"applicant.0.home_city\"\u001b[39m\u001b[33m,\u001b[39m \u001b[32m\"test\"\u001b[39m)\n \u001b[90m 51 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForTimeout(\u001b[35m2000\u001b[39m)\u001b[0m\n\u001b[2m    at C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Travel documents\\Top\\israel.spec.js:48:14\u001b[22m"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-04-14T23:23:19.747Z",
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Travel documents\\Top\\israel.spec.js",
+                        "line": 9,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\test-results\\Travel documents-Top-israel-Israel-ETA-chromium\\video.webm"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\test-results\\Travel documents-Top-israel-Israel-ETA-chromium\\error-context.md"
+                    }
+                  ]
+                },
+                {
+                  "workerIndex": 14,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 288310,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 270000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 270000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 270000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Travel documents\\Top\\israel.spec.js",
+                        "column": 14,
+                        "line": 48
+                      },
+                      "message": "Error: page.waitForURL: Test timeout of 270000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation to \"https://deploy-20260415--a39a5b5f.visachinaonline.com/order/249/continue#step=trav0_residency_information_after_payment\" until \"load\"\n  navigated to \"https://deploy-20260415--a39a5b5f.visachinaonline.com/order/249/continue#step=trav0_past_travel\"\n============================================================\n\n\u001b[0m \u001b[90m 46 |\u001b[39m   \u001b[36mawait\u001b[39m expect(next_btn)\u001b[33m.\u001b[39mtoBeEnabled()\n \u001b[90m 47 |\u001b[39m   \u001b[36mawait\u001b[39m next_btn\u001b[33m.\u001b[39mclick()\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 48 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForURL(deploy_url \u001b[33m+\u001b[39m \u001b[32m\"order/\"\u001b[39m \u001b[33m+\u001b[39m \u001b[33mOrder_num\u001b[39m \u001b[33m+\u001b[39m \u001b[32m\"/continue#step=trav0_residency_information_after_payment\"\u001b[39m)\n \u001b[90m    |\u001b[39m              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 49 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForTimeout(\u001b[35m2000\u001b[39m)\n \u001b[90m 50 |\u001b[39m   \u001b[36mawait\u001b[39m selectors\u001b[33m.\u001b[39minputText(page\u001b[33m,\u001b[39m \u001b[32m\"applicant.0.home_city\"\u001b[39m\u001b[33m,\u001b[39m \u001b[32m\"test\"\u001b[39m)\n \u001b[90m 51 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForTimeout(\u001b[35m2000\u001b[39m)\u001b[0m\n\u001b[2m    at C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Travel documents\\Top\\israel.spec.js:48:14\u001b[22m"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 1,
+                  "startTime": "2026-04-14T23:28:27.033Z",
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Travel documents\\Top\\israel.spec.js",
+                        "line": 9,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\test-results\\Travel documents-Top-israel-Israel-ETA-chromium-retry1\\video.webm"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\test-results\\Travel documents-Top-israel-Israel-ETA-chromium-retry1\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\test-results\\Travel documents-Top-israel-Israel-ETA-chromium-retry1\\trace.zip"
+                    }
+                  ]
+                },
+                {
+                  "workerIndex": 19,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 289738,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 270000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 270000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 270000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Travel documents\\Top\\israel.spec.js",
+                        "column": 14,
+                        "line": 48
+                      },
+                      "message": "Error: page.waitForURL: Test timeout of 270000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation to \"https://deploy-20260415--a39a5b5f.visachinaonline.com/order/254/continue#step=trav0_residency_information_after_payment\" until \"load\"\n  navigated to \"https://deploy-20260415--a39a5b5f.visachinaonline.com/order/254/continue#step=trav0_past_travel\"\n============================================================\n\n\u001b[0m \u001b[90m 46 |\u001b[39m   \u001b[36mawait\u001b[39m expect(next_btn)\u001b[33m.\u001b[39mtoBeEnabled()\n \u001b[90m 47 |\u001b[39m   \u001b[36mawait\u001b[39m next_btn\u001b[33m.\u001b[39mclick()\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 48 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForURL(deploy_url \u001b[33m+\u001b[39m \u001b[32m\"order/\"\u001b[39m \u001b[33m+\u001b[39m \u001b[33mOrder_num\u001b[39m \u001b[33m+\u001b[39m \u001b[32m\"/continue#step=trav0_residency_information_after_payment\"\u001b[39m)\n \u001b[90m    |\u001b[39m              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 49 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForTimeout(\u001b[35m2000\u001b[39m)\n \u001b[90m 50 |\u001b[39m   \u001b[36mawait\u001b[39m selectors\u001b[33m.\u001b[39minputText(page\u001b[33m,\u001b[39m \u001b[32m\"applicant.0.home_city\"\u001b[39m\u001b[33m,\u001b[39m \u001b[32m\"test\"\u001b[39m)\n \u001b[90m 51 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForTimeout(\u001b[35m2000\u001b[39m)\u001b[0m\n\u001b[2m    at C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Travel documents\\Top\\israel.spec.js:48:14\u001b[22m"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 2,
+                  "startTime": "2026-04-14T23:33:26.044Z",
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\tests\\Travel documents\\Top\\israel.spec.js",
+                        "line": 9,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\test-results\\Travel documents-Top-israel-Israel-ETA-chromium-retry2\\video.webm"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\vanei\\OneDrive\\Desktop\\Playwright\\test-results\\Travel documents-Top-israel-Israel-ETA-chromium-retry2\\error-context.md"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "8eeef24ec325fb05e245-a8b93eceaba94eb2ddb9",
+          "file": "Travel documents/Top/israel.spec.js",
+          "line": 8,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-04-14T23:20:11.282Z",
+    "duration": 1086757.8150000002,
+    "expected": 5,
+    "skipped": 0,
+    "unexpected": 5,
+    "flaky": 1
+  }
+}

@@ -8,6 +8,7 @@ let Order_num
 
 test.describe.configure({ mode: 'serial' });
 test('Colombia Check-MIG and MIN status', async ({ page }) => {
+  test.slow()
   await page.goto(deploy_url + 'colombia/apply-now')
   await page.waitForTimeout(2000)
   await percySnapshot(page, 'autofillModal')

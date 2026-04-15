@@ -7,8 +7,15 @@ const selectors = require('../../selectors')
 const randomEmail = require('random-email')
 let fastpassportEmail = randomEmail({domain: "fastpassport.com"})
 
-test('FastPassport - USPS Emergency - Preparing for shipping', async({page}) => {
+test('FastPassport - USPS Emergency - Preparing for shipping', async({page, context}) => {
   test.slow()
+  await context.addCookies([
+    {
+      name: 'default_currency',
+      value: 'USD',
+      url: general_url + 'fastpassport.visachinaonline.com/passport-renewal/united-states'
+    }
+ ])
   await page.goto(general_url + 'fastpassport.visachinaonline.com/passport-renewal/united-states')
   await page.reload()
   await page.getByRole('button').getByText('Start your renewal').click()
@@ -119,7 +126,7 @@ test('FastPassport - USPS Emergency - Preparing for shipping', async({page}) => 
   await page.waitForTimeout(8000)
   await expect(page.locator('.upload-input-wrap')).toBeVisible()
   
-  await page.locator('[name="change-status"]').selectOption('prepare_for_shipping')
+  await page.getByRole("button").locator("span").getByText('Change status to "Shipped to Customer"').click()
   await expect(page.getByTestId('submitChangeStatus')).toBeEnabled()
   await page.getByTestId('submitChangeStatus').click()
   await page.waitForURL('**/admin/orders/my_orders?redirect_to_first_order=1')
