@@ -14,11 +14,11 @@ test.fixme('Aruba ED Card', async ({ page }) => {
   const flight_number = getFlightInfo.replace(/\D/g, "");
 
   await page.goto(deploy_url + 'aruba/apply-now')
-  await appFunctions.autofillExisting(page, "aruba/apply-now/edit-traveler/0")
-  await page.waitForURL("**/aruba/apply-now/traveler-review")
+  await appFunctions.autofillExisting(page, "aruba/apply-now/edit-traveler/0?splitversion=friction--jupiter")
+  await page.waitForURL("**/aruba/apply-now/traveler-review?splitversion=friction--jupiter")
   const continue_sidebar = page.getByRole("button").getByText("Continue")
   await continue_sidebar.click()
-  await page.waitForURL("**/aruba/apply-now/contact-details")
+  await page.waitForURL("**/aruba/apply-now/contact-details?splitversion=friction--jupiter")
   await continue_sidebar.click() 
   await appFunctions.newPaymentCheckout(page, '6011 1111 1111 1117', '123')
   const payment_btn = page.locator('id=btnSubmitPayment')

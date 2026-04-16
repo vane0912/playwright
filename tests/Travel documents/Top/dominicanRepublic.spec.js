@@ -8,11 +8,11 @@ let Order_num
 test('Dominican Republic eTicket', async ({ page }) => {
   test.slow()
   await page.goto(deploy_url + 'dominican-republic/apply-now')
-  await appFunctions.autofillExisting(page, "dominican-republic/apply-now/edit-traveler/0")
-  await page.waitForURL("**/dominican-republic/apply-now/traveler-review")
+  await appFunctions.autofillExisting(page, "dominican-republic/apply-now/edit-traveler/0?splitversion=friction--jupiter")
+  await page.waitForURL("**/dominican-republic/apply-now/traveler-review?splitversion=friction--jupiter")
   const continue_sidebar = page.getByRole("button").getByText("Continue")
   await continue_sidebar.click()
-  await page.waitForURL("**/dominican-republic/apply-now/contact-details")
+  await page.waitForURL("**/dominican-republic/apply-now/contact-details?splitversion=friction--jupiter")
   await continue_sidebar.click() 
   await appFunctions.newPaymentCheckout(page, '6011 1111 1111 1117', '123')
   const payment_btn = page.locator('id=btnSubmitPayment')
@@ -45,8 +45,6 @@ test('Dominican Republic eTicket', async ({ page }) => {
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_personal")
   await selectors.booleanOptions(page, "applicant.0.gender", "option-Female")
   await selectors.booleanOptions(page, "applicant.0.marital_status", "option-Single")
-  await next_btn.click()
-  await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_residency_information_after_payment")
 
   await page.locator("id=btnSubmitApplication").click()
   await page.waitForURL(deploy_url + "order-received-page/" + Order_num)

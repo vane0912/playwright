@@ -72,8 +72,15 @@ test('Fastpassport - Account creation, logging and password creation', async ({p
   await expect(page.locator("id=loggedInUserContainer")).toBeVisible()
 })
 
-test('FastPassport - Online Passport and MIN status', async({page, browser}) =>{
+test('FastPassport - Online Passport and MIN status', async({page, context}) =>{
   test.slow()
+  await context.addCookies([
+    {
+      name: 'default_currency',
+      value: 'USD',
+      url: general_url + 'fastpassport.visachinaonline.com/passport-renewal/united-states'
+    }
+ ])
   await page.goto(general_url + 'fastpassport.visachinaonline.com/passport-renewal/united-states')
   await page.reload()
   await page.getByRole('button').getByText('Start your renewal').click()

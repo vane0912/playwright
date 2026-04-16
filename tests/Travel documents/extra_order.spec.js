@@ -6,11 +6,11 @@ const {general_url, deploy_url} = require('../urls');
 test('Extra Order', async ({ page, browser }) => {
   test.slow()
   await page.goto(deploy_url + 'turkey/apply-now')
-  await appFunctions.autofillExisting(page, "turkey/apply-now/edit-traveler/0")
-  await page.waitForURL("**/turkey/apply-now/traveler-review")
+  await appFunctions.autofillExisting(page, "turkey/apply-now/edit-traveler/0?splitversion=friction--jupiter")
+  await page.waitForURL("**/turkey/apply-now/traveler-review?splitversion=friction--jupiter")
   const continue_sidebar = page.getByRole("button").getByText("Continue")
   await continue_sidebar.click()
-  await page.waitForURL("**/turkey/apply-now/contact-details")
+  await page.waitForURL("**/turkey/apply-now/contact-details?splitversion=friction--jupiter")
   await continue_sidebar.click() 
   await appFunctions.newPaymentCheckout(page, '6011 1111 1111 1117', '123')
   const payment_btn = page.locator('id=btnSubmitPayment')
@@ -93,12 +93,6 @@ test('Extra Order', async ({ page, browser }) => {
     iframe.getByText('Pay now').click(),
   ]);
   await newTab.waitForLoadState()
-  await newTab.getByPlaceholder("Card number").fill("4556 7610 2998 3886")
-  await newTab.getByPlaceholder("MM/YY").fill("10/29")
-  await newTab.getByPlaceholder("CVV").fill("123")
-  await newTab.getByPlaceholder("Cardholder name").fill("John Smith")
-  await newTab.locator('id=btnSubmitPayment').click()
-  await newTab.waitForURL(deploy_url)
   await expect(newTab.getByText("Additional charge approved.")).toBeVisible()
   await page.getByRole('button', { name: 'OK' }).click()
   await page.getByTestId('applicant-details').click()

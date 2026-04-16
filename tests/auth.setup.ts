@@ -20,6 +20,11 @@ setup('authenticate', async ({ page, context }) => {
         name: 'nationalityFromPassport',
         value: 'MX',
         url: deploy_url
+      },
+      {
+        name: 'pavr',
+        value: '1.0.0-JUP-2.0.0',
+        url: deploy_url
       }
     ]);
 
@@ -30,29 +35,29 @@ setup('authenticate', async ({ page, context }) => {
     await percySnapshot(page, 'Step1Application')
     const continue_sidebar = page.getByRole("button").getByText("Continue")
     await continue_sidebar.click()
-    await page.waitForURL("**/turkey/apply-now/passport-details/0")
+    await page.waitForURL("**/turkey/apply-now/passport-details/0?splitversion=friction--jupiter")
     await page.waitForTimeout(2000)
     await percySnapshot(page, 'Step2Application')
     await appFunctions.step_2(page, continue_sidebar)
-    await page.waitForURL("**/turkey/apply-now/address-details/0")
+    await page.waitForURL("**/turkey/apply-now/address-details/0?splitversion=friction--jupiter")
     await page.waitForTimeout(2000)
     await percySnapshot(page, 'Step3Application')
     await appFunctions.step_3c(page, continue_sidebar)
-    await page.waitForURL("**/turkey/apply-now/additional-info/0")
+    await page.waitForURL("**/turkey/apply-now/additional-info/0?splitversion=friction--jupiter")
     await page.waitForTimeout(2000)
     await percySnapshot(page, 'Step4Application')
     await appFunctions.additionalInfo(page, continue_sidebar)
-    await page.waitForURL("**/turkey/apply-now/traveler-review")
+    await page.waitForURL("**/turkey/apply-now/traveler-review?splitversion=friction--jupiter")
     await page.waitForTimeout(2000)
     await percySnapshot(page, 'Step5Application')
     await continue_sidebar.click()
-    await page.waitForURL("**/turkey/apply-now/contact-details")
+    await page.waitForURL("**/turkey/apply-now/contact-details?splitversion=friction--jupiter")
     await page.waitForTimeout(2000)
     await percySnapshot(page, 'Step6Application')
     await expect(page.locator('[name="general.email"]')).toBeVisible()
     await page.locator('[name="general.email"]').fill(email_test)
     await continue_sidebar.click()
-    await page.waitForURL("**/turkey/apply-now/checkout")
+    await page.waitForURL("**/turkey/apply-now/checkout?splitversion=friction--jupiter")
     await page.waitForTimeout(2000)
     await percySnapshot(page, 'Step7Application')
     await appFunctions.newPaymentCheckout(page, '6011 1111 1111 1117', '123')

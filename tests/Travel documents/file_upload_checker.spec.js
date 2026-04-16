@@ -14,11 +14,11 @@ test('File upload checker', async({page}) => {
     const date1 = datepicker_date.getDate();
 
     await page.goto(deploy_url + 'india/apply-now')
-    await appFunctions.autofillExisting(page, "india/apply-now/edit-traveler/0")
-    await page.waitForURL("**/india/apply-now/traveler-review")
+    await appFunctions.autofillExisting(page, "india/apply-now/edit-traveler/0?splitversion=friction--jupiter")
+    await page.waitForURL("**/india/apply-now/traveler-review?splitversion=friction--jupiter")
     const continue_sidebar = page.getByRole("button").getByText("Continue")
     await continue_sidebar.click()
-    await page.waitForURL("**/india/apply-now/contact-details")
+    await page.waitForURL("**/india/apply-now/contact-details?splitversion=friction--jupiter")
     await continue_sidebar.click() 
     await appFunctions.newPaymentCheckout(page, '6011 1111 1111 1117', '123')
     const payment_btn = page.locator('id=btnSubmitPayment')

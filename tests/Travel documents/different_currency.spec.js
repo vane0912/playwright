@@ -7,8 +7,8 @@ const path = require('path');
 test('Different currency', async ({ page }) => {
   test.slow()
   await page.goto(deploy_url + 'turkey/apply-now');
-  await appFunctions.autofillExisting(page, "turkey/apply-now/edit-traveler/0")
-  await page.waitForURL("**/turkey/apply-now/traveler-review")
+  await appFunctions.autofillExisting(page, "turkey/apply-now/edit-traveler/0?splitversion=friction--jupiter")
+  await page.waitForURL("**/turkey/apply-now/traveler-review?splitversion=friction--jupiter")
   const currency = page.locator('id=currencyHeader');
   await expect(currency).toBeVisible()
   await currency.click()
@@ -37,13 +37,18 @@ test('Different currency', async ({ page }) => {
   
   const continue_sidebar = page.getByRole("button").getByText("Continue")
   await continue_sidebar.click()
-  await page.waitForURL("**/turkey/apply-now/contact-details")
+  await page.waitForURL("**/turkey/apply-now/contact-details?splitversion=friction--jupiter")
   await continue_sidebar.click() 
-  await appFunctions.newPaymentCheckout(page, '6011 1111 1111 1117', '123')
+  await appFunctions.newPaymentCheckout(page, '4111 1111 1111 1111', '123')
   const payment_btn = page.locator('id=btnSubmitPayment')
   await expect(payment_btn).toBeVisible()
   await expect(payment_btn).toBeEnabled()
   await payment_btn.click()
+  await page.waitForTimeout(5000)
+  const dsModal = await page.locator('primer-portal-dialog').isVisible()
+  if(dsModal){
+    await page.frameLocator(".challenge-iframe").getByText('Pass challenge').click()
+  }
 
   
   await page.waitForNavigation({waitUntil: 'load'})

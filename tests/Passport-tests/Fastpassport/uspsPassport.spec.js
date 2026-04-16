@@ -126,14 +126,14 @@ test('FastPassport - USPS Emergency - Preparing for shipping', async({page, cont
   await page.waitForTimeout(8000)
   await expect(page.locator('.upload-input-wrap')).toBeVisible()
   
-  await page.getByRole("button").locator("span").getByText('Change status to "Shipped to Customer"').click()
+  await page.locator('[name="change-status"]').selectOption('prepare_for_shipping')
   await expect(page.getByTestId('submitChangeStatus')).toBeEnabled()
   await page.getByTestId('submitChangeStatus').click()
   await page.waitForURL('**/admin/orders/my_orders?redirect_to_first_order=1')
   // Shipped to customer
   await search_order.click()
   await page.getByTestId("dl-manage-order-title").click()
-  await page.locator('[name="change-status"]').selectOption('shipped_to_customer')
+  await page.getByRole("button").locator("span").getByText('Change status to "Shipped to Customer"').click()
   await expect(page.getByPlaceholder('Separate with , or ;')).toBeVisible()
   await expect(page.getByTestId('submitChangeStatus')).toBeEnabled()
   await page.getByTestId('submitChangeStatus').click()

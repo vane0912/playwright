@@ -8,11 +8,11 @@ let Order_num
 
 test('New Zealand ETA', async ({ page }) => {
   await page.goto(deploy_url + 'new-zealand/apply-now')
-  await appFunctions.autofillExisting(page, "new-zealand/apply-now/edit-traveler/0")
-  await page.waitForURL("**/new-zealand/apply-now/traveler-review")
+  await appFunctions.autofillExisting(page, "new-zealand/apply-now/edit-traveler/0?splitversion=friction--jupiter")
+  await page.waitForURL("**/new-zealand/apply-now/traveler-review?splitversion=friction--jupiter")
   const continue_sidebar = page.getByRole("button").getByText("Continue")
   await continue_sidebar.click()
-  await page.waitForURL("**/new-zealand/apply-now/contact-details")
+  await page.waitForURL("**/new-zealand/apply-now/contact-details?splitversion=friction--jupiter")
   await continue_sidebar.click() 
   await appFunctions.newPaymentCheckout(page, '6011 1111 1111 1117', '123')
   const payment_btn = page.locator('id=btnSubmitPayment')
