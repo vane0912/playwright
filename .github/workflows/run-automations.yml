@@ -36,7 +36,7 @@ jobs:
           FLIGHT_API: ${{ secrets.FLIGHT_API }}
           
         run: |
-          npx playwright test ukEta.spec.js
+          npx percy exec -- npx playwright test /tests/Travel documents/ /tests/Passport-tests/ /tests/Mobile/ /tests/visual/
       
 
       - name: Upload Playwright report to Pages
