@@ -34,10 +34,25 @@ jobs:
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
           FLIGHT_API: ${{ secrets.FLIGHT_API }}
-          
+        shell: bash
         run: |
-          npx percy exec -- npx playwright test /tests/Travel documents/ /tests/Passport-tests/ /tests/Mobile/ /tests/visual/
-      
+          set -o pipefail
+
+          BUILD_ID=$(
+            npx percy exec -- \
+              npx playwright test \
+                "tests/visual/" \
+                --workers 4 \
+            | grep -Eo 'https://percy.io/.*/builds/[0-9]+' \
+            | awk -F/ '{print $NF}' \
+            | tail -n1
+          )
+
+          echo "BUILD_ID=$BUILD_ID" >> "$GITHUB_ENV"
+
+
+      - name: Create Percy Report
+        run: npx percy-report generate "$BUILD_ID"
 
       - name: Upload Playwright report to Pages
         if: always()

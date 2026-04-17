@@ -21,6 +21,7 @@
     "dotenv": "^16.6.1"
   },
   "dependencies": {
+    "@percy/report": "^1.0.6",
     "cld": "^2.10.1",
     "eld": "^1.0.1",
     "percy": "^5.0.0",

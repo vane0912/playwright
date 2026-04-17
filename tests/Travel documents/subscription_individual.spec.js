@@ -6,7 +6,6 @@ const {deploy_url} = require('../urls');
 
 let Order_num 
 test('Individual subscription purchase', async ({ page }) => {
-  test.slow()
   await page.goto(deploy_url + 'thailand/apply-now')
   await page.getByRole("button").getByText("Add New Traveler").click()
   await appFunctions.step_1(page, "individual")
@@ -108,6 +107,7 @@ test('Individual subscription purchase', async ({ page }) => {
   await selectors.phoneNumber(page)
   await selectors.arrival_date(page)
   await selectors.booleanOptions(page, "general.flight_reservation", "option-No")
+  await selectors.booleanOptions(page, "general.hotel_info_us", "option-No")
   Order_num = page.url().split("/")[4] 
   await page.waitForTimeout(1000)
   await expect(next_btn).toBeEnabled()
