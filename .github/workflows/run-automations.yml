@@ -74,4 +74,4 @@ jobs:
 
       - name: Send results to slack
         if: ${{ always() }}
-        run: node sendReport.js
+        run: node sendReport.js $BUILD_ID
