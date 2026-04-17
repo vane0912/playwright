@@ -55,11 +55,7 @@ jobs:
         if: always()
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
-        run: npx percy-report generate "$BUILD_ID"
-
-      - name: Move report to root
-        run: |
-          mv playwright-report/$BUILD_ID/report.html playwright-report/report.html
+        run: npx percy-report generate "$BUILD_ID" --download-path "playwright-report"
       
       - name: Show files to be published
         run: |
