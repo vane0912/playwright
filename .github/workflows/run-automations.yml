@@ -56,6 +56,11 @@ jobs:
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
         run: npx percy-report generate "$BUILD_ID"
+      
+      - name: Show files to be published
+        run: |
+          echo "Publishing these files:"
+          find playwright-report -maxdepth 3 -type f | sort
 
       - name: Upload Playwright report to Pages
         if: always()
