@@ -52,6 +52,7 @@ jobs:
 
 
       - name: Create Percy Report
+        if: always()
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
         run: npx percy-report generate "$BUILD_ID"
