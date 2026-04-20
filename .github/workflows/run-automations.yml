@@ -41,6 +41,9 @@ jobs:
           BUILD_ID=$(
             npx percy exec -- \
               npx playwright test \
+                "tests/Travel documents/" \
+                "tests/Passport-tests/" \
+                "tests/Mobile/" \
                 "tests/visual/" \
                 --workers 4 \
             | grep -Eo 'https://percy.io/.*/builds/[0-9]+' \
