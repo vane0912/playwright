@@ -36,25 +36,30 @@ jobs:
           FLIGHT_API: ${{ secrets.FLIGHT_API }}
         shell: bash
         run: |
-          set -o pipefail
+          set -e
 
-          BUILD_ID=$(
-            npx percy exec -- \
-              npx playwright test \
-                "tests/Travel documents/" \
-                "tests/Passport-tests/" \
-                "tests/Mobile/" \
-                "tests/visual/" \
-                --workers 4 \
-            | grep -Eo 'https://percy.io/.*/builds/[0-9]+' \
-            | awk -F/ '{print $NF}' \
-            | tail -n1
-          )
-
+          npx percy exec -- \
+            npx playwright test \
+              "tests/Travel documents/" \
+              "tests/Passport-tests/" \
+              "tests/Mobile/" \
+              "tests/visual/" \
+              --workers 4 \
+            2>&1 | tee percy.log
+              
+          BUILD_ID=$(grep -Eo 'https://percy.io/.*/builds/[0-9]+' percy.log | awk -F/ '{print $NF}' | tail -n1)
+              
+          echo "BUILD_ID=$BUILD_ID"
+              
+          if [ -z "$BUILD_ID" ]; then
+            echo "No Percy build ID found"
+            exit 1
+          fi
+              
           echo "BUILD_ID=$BUILD_ID" >> "$GITHUB_ENV"
-          echo "Captured BUILD_ID=$BUILD_ID"
-          
+
       - name: Wait before generating Percy report
+        if: always()
         run: sleep 50
 
       - name: Create Percy Report
