@@ -6,11 +6,11 @@ const percySnapshot = require('@percy/playwright');
 test('Payment with VISA and Cancelled order Status', async({page}) => {
   test.slow()
   await page.goto(deploy_url + 'thailand/apply-now')
-  await appFunctions.autofillExisting(page, "thailand/apply-now/edit-traveler/0?splitversion=friction--jupiter")
-  await page.waitForURL("**/thailand/apply-now/traveler-review?splitversion=friction--jupiter")
+  await appFunctions.autofillExisting(page, "thailand/apply-now/edit-traveler/0")
+  await page.waitForURL("**/thailand/apply-now/traveler-review")
   const continue_sidebar = page.getByRole("button").getByText("Continue")
   await continue_sidebar.click()
-  await page.waitForURL("**/thailand/apply-now/contact-details?splitversion=friction--jupiter")
+  await page.waitForURL("**/thailand/apply-now/contact-details")
   await continue_sidebar.click() 
   await appFunctions.newPaymentCheckout(page, '3782 8224 6310 005', '1234')
   const payment_btn = page.locator('id=btnSubmitPayment')
@@ -60,11 +60,11 @@ test('Payment with VISA and Cancelled order Status', async({page}) => {
   
 test('Payment with Master Card', async({page}) => {
   await page.goto(deploy_url + 'thailand/apply-now')
-  await appFunctions.autofillExisting(page, "thailand/apply-now/edit-traveler/0?splitversion=friction--jupiter")
-  await page.waitForURL("**/thailand/apply-now/traveler-review?splitversion=friction--jupiter")
+  await appFunctions.autofillExisting(page, "thailand/apply-now/edit-traveler/0")
+  await page.waitForURL("**/thailand/apply-now/traveler-review")
   const continue_sidebar = page.getByRole("button").getByText("Continue")
   await continue_sidebar.click()
-  await page.waitForURL("**/thailand/apply-now/contact-details?splitversion=friction--jupiter")
+  await page.waitForURL("**/thailand/apply-now/contact-details")
   await continue_sidebar.click() 
 
   await appFunctions.newPaymentCheckout(page,'5555 5555 5555 4444', '123')
@@ -77,11 +77,11 @@ test('Payment with Master Card', async({page}) => {
   
 test('Payment with Amex', async({page}) => {
   await page.goto(deploy_url + 'thailand/apply-now')
-  await appFunctions.autofillExisting(page, "thailand/apply-now/edit-traveler/0?splitversion=friction--jupiter")
-  await page.waitForURL("**/thailand/apply-now/traveler-review?splitversion=friction--jupiter")
+  await appFunctions.autofillExisting(page, "thailand/apply-now/edit-traveler/0")
+  await page.waitForURL("**/thailand/apply-now/traveler-review")
   const continue_sidebar = page.getByRole("button").getByText("Continue")
   await continue_sidebar.click()
-  await page.waitForURL("**/thailand/apply-now/contact-details?splitversion=friction--jupiter")
+  await page.waitForURL("**/thailand/apply-now/contact-details")
   await continue_sidebar.click() 
 
   await appFunctions.newPaymentCheckout(page,'3782 8224 6310 005', '1234')
@@ -94,11 +94,11 @@ test('Payment with Amex', async({page}) => {
   
 test('Payment with Discover', async({page}) => {
   await page.goto(deploy_url + 'thailand/apply-now')
-  await appFunctions.autofillExisting(page, "thailand/apply-now/edit-traveler/0?splitversion=friction--jupiter")
-  await page.waitForURL("**/thailand/apply-now/traveler-review?splitversion=friction--jupiter")
+  await appFunctions.autofillExisting(page, "thailand/apply-now/edit-traveler/0")
+  await page.waitForURL("**/thailand/apply-now/traveler-review")
   const continue_sidebar = page.getByRole("button").getByText("Continue")
   await continue_sidebar.click()
-  await page.waitForURL("**/thailand/apply-now/contact-details?splitversion=friction--jupiter")
+  await page.waitForURL("**/thailand/apply-now/contact-details")
   await continue_sidebar.click() 
     await appFunctions.newPaymentCheckout(page,'6011 1111 1111 1117', '123')
     const payment_btn = page.locator('id=btnSubmitPayment')

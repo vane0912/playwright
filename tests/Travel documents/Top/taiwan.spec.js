@@ -7,11 +7,11 @@ let Order_num
 
 test('Taiwan Arrival Card Application', async ({ page }) => {
   await page.goto(deploy_url + 'taiwan/apply-now')
-  await appFunctions.autofillExisting(page, "taiwan/apply-now/edit-traveler/0?splitversion=friction--jupiter")
-  await page.waitForURL("**/taiwan/apply-now/traveler-review?splitversion=friction--jupiter")
+  await appFunctions.autofillExisting(page, "taiwan/apply-now/edit-traveler/0")
+  await page.waitForURL("**/taiwan/apply-now/traveler-review")
   const continue_sidebar = page.getByRole("button").getByText("Continue")
   await continue_sidebar.click()
-  await page.waitForURL("**/taiwan/apply-now/contact-details?splitversion=friction--jupiter")
+  await page.waitForURL("**/taiwan/apply-now/contact-details")
   await continue_sidebar.click() 
   await appFunctions.newPaymentCheckout(page, '6011 1111 1111 1117', '123')
   const payment_btn = page.locator('id=btnSubmitPayment')
