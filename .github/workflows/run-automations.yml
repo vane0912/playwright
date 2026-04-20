@@ -52,7 +52,10 @@ jobs:
           )
 
           echo "BUILD_ID=$BUILD_ID" >> "$GITHUB_ENV"
-
+          echo "Captured BUILD_ID=$BUILD_ID"
+          
+      - name: Wait before generating Percy report
+        run: sleep 50
 
       - name: Create Percy Report
         if: always()
