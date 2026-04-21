@@ -34,54 +34,68 @@ jobs:
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
           FLIGHT_API: ${{ secrets.FLIGHT_API }}
+          TESTING_TYPE: ${{ vars.TESTING_TYPE }}
+
         shell: bash
         run: |
           set -e
 
-          npx percy exec -- \
+          if [ "$TESTING_TYPE" = "fav" ]; then
+            npx percy exec -- \
+              npx playwright test \
+                "tests/Travel documents/" \
+                "tests/Passport-tests/" \
+                "tests/Mobile/" \
+                "tests/visual/" \
+                --workers 4 \
+              2>&1 | tee percy.log
+          else
             npx playwright test \
-              "tests/Travel documents/" \
-              "tests/Passport-tests/" \
-              "tests/Mobile/" \
-              "tests/visual/" \
-              --workers 4 \
-            2>&1 | tee percy.log
+                "tests/Travel documents/" \
+                "tests/Passport-tests/" \
+                "tests/Mobile/" \
+                "tests/visual/" \
+                --workers 4 \
+          fi
 
       - name: Get latest Percy build ID
         if: always()
         shell: bash
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+          TESTING_TYPE: ${{ vars.TESTING_TYPE }}
+
         run: |
-          cat > get-percy-build.mjs <<'EOF'
-          const res = await fetch('https://percy.io/api/v1/builds', {
-            method: 'GET',
-            headers: {
-              Authorization: `Token token=${process.env.PERCY_TOKEN}`,
-              'Content-Type': 'application/json'
+          if [ "$TESTING_TYPE" = "fav" ]
+            cat > get-percy-build.mjs <<'EOF'
+            const res = await fetch('https://percy.io/api/v1/builds', {
+              method: 'GET',
+              headers: {
+                Authorization: `Token token=${process.env.PERCY_TOKEN}`,
+                'Content-Type': 'application/json'
+              }
+            });
+
+            if (!res.ok) {
+              console.error(`Percy API failed with status ${res.status}`);
+              process.exit(1);
             }
-          });
 
-          if (!res.ok) {
-            console.error(`Percy API failed with status ${res.status}`);
-            process.exit(1);
-          }
+            const payload = await res.json();
+            const latestBuild = payload?.data?.[0];
+            const buildId = latestBuild?.id ?? '';
 
-          const payload = await res.json();
-          const latestBuild = payload?.data?.[0];
-          const buildId = latestBuild?.id ?? '';
+            if (!buildId) {
+              console.error('No Percy build ID found in API response.');
+              process.exit(1);
+            }
 
-          if (!buildId) {
-            console.error('No Percy build ID found in API response.');
-            process.exit(1);
-          }
+            console.log(`BUILD_ID=${buildId}`);
+            EOF
 
-          console.log(`BUILD_ID=${buildId}`);
-          EOF
-
-          BUILD_LINE=$(node get-percy-build.mjs)
-          echo "$BUILD_LINE" >> "$GITHUB_ENV"
-          echo "$BUILD_LINE"
+            BUILD_LINE=$(node get-percy-build.mjs)
+            echo "$BUILD_LINE" >> "$GITHUB_ENV"
+            echo "$BUILD_LINE"
 
       - name: Wait before generating Percy report
         if: always()
@@ -91,7 +105,9 @@ jobs:
         if: always()
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
-        run: npx percy-report generate "$BUILD_ID" --download-path "playwright-report"
+        run: |
+          if [ "$TESTING_TYPE" = "fav" ]
+            npx percy-report generate "$BUILD_ID" --download-path "playwright-report"
       
       - name: Show files to be published
         if: always()
@@ -111,4 +127,4 @@ jobs:
 
       - name: Send results to slack
         if: ${{ always() }}
-        run: node sendReport.js $BUILD_ID
+        run: node sendReport.js $BUILD_ID $TESTING_TYPE
