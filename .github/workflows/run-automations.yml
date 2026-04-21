@@ -46,17 +46,42 @@ jobs:
               "tests/visual/" \
               --workers 4 \
             2>&1 | tee percy.log
-              
-          BUILD_ID=$(grep -Eo 'https://percy.io/.*/builds/[0-9]+' percy.log | awk -F/ '{print $NF}' | tail -n1)
-              
-          echo "BUILD_ID=$BUILD_ID"
-              
-          if [ -z "$BUILD_ID" ]; then
-            echo "No Percy build ID found"
-            exit 1
-          fi
-              
-          echo "BUILD_ID=$BUILD_ID" >> "$GITHUB_ENV"
+
+      - name: Get latest Percy build ID
+        if: always()
+        shell: bash
+        env:
+          PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+        run: |
+          cat > get-percy-build.mjs <<'EOF'
+          const res = await fetch('https://percy.io/api/v1/builds', {
+            method: 'GET',
+            headers: {
+              Authorization: `Token token=${process.env.PERCY_TOKEN}`,
+              'Content-Type': 'application/json'
+            }
+          });
+
+          if (!res.ok) {
+            console.error(`Percy API failed with status ${res.status}`);
+            process.exit(1);
+          }
+
+          const payload = await res.json();
+          const latestBuild = payload?.data?.[0];
+          const buildId = latestBuild?.id ?? '';
+
+          if (!buildId) {
+            console.error('No Percy build ID found in API response.');
+            process.exit(1);
+          }
+
+          console.log(`BUILD_ID=${buildId}`);
+          EOF
+
+          BUILD_LINE=$(node get-percy-build.mjs)
+          echo "$BUILD_LINE" >> "$GITHUB_ENV"
+          echo "$BUILD_LINE"
 
       - name: Wait before generating Percy report
         if: always()
@@ -69,6 +94,7 @@ jobs:
         run: npx percy-report generate "$BUILD_ID" --download-path "playwright-report"
       
       - name: Show files to be published
+        if: always()
         run: |
           echo "Publishing these files:"
           find playwright-report -maxdepth 3 -type f | sort
