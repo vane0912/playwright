@@ -12,6 +12,10 @@ test('Payment with VISA and Cancelled order Status', async({page}) => {
   await continue_sidebar.click()
   await page.waitForURL("**/thailand/apply-now/contact-details")
   await continue_sidebar.click() 
+  const duplicate = await page.locator('id=btnDisclaimerNext').isVisible()
+  if (duplicate){
+    await page.locator('id=btnDisclaimerNext').click()
+  }
   await appFunctions.newPaymentCheckout(page, '3782 8224 6310 005', '1234')
   const payment_btn = page.locator('id=btnSubmitPayment')
   await expect(payment_btn).toBeVisible()
@@ -66,7 +70,10 @@ test('Payment with Master Card', async({page}) => {
   await continue_sidebar.click()
   await page.waitForURL("**/thailand/apply-now/contact-details")
   await continue_sidebar.click() 
-
+  const duplicate = await page.locator('id=btnDisclaimerNext').isVisible()
+  if (duplicate){
+    await page.locator('id=btnDisclaimerNext').click()
+  }
   await appFunctions.newPaymentCheckout(page,'5555 5555 5555 4444', '123')
   const payment_btn = page.locator('id=btnSubmitPayment')
   await expect(payment_btn).toBeVisible()
@@ -83,6 +90,10 @@ test('Payment with Amex', async({page}) => {
   await continue_sidebar.click()
   await page.waitForURL("**/thailand/apply-now/contact-details")
   await continue_sidebar.click() 
+  const duplicate = await page.locator('id=btnDisclaimerNext').isVisible()
+  if (duplicate){
+    await page.locator('id=btnDisclaimerNext').click()
+  }
 
   await appFunctions.newPaymentCheckout(page,'3782 8224 6310 005', '1234')
   const payment_btn = page.locator('id=btnSubmitPayment')

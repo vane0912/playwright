@@ -5,7 +5,7 @@ const { deploy_url } = require('../../urls');
 
 let Order_num
 
-test.fixme('Dominican Republic eTicket', async ({ page }) => {
+test('Dominican Republic eTicket', async ({ page }) => {
   test.slow()
   await page.goto(deploy_url + 'dominican-republic/apply-now')
   await appFunctions.autofillExisting(page, "dominican-republic/apply-now/edit-traveler/0")
@@ -24,7 +24,6 @@ test.fixme('Dominican Republic eTicket', async ({ page }) => {
   await page.getByTestId("transition-page-button").click()
   
   await selectors.phoneNumber(page)
-  await selectors.arrival_date(page)
   
   Order_num = page.url().split("/")[4] 
   const next_btn = page.locator('id=btnContinueUnderSection')
@@ -34,17 +33,17 @@ test.fixme('Dominican Republic eTicket', async ({ page }) => {
 
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=travel_general")
   await selectors.booleanOptions(page, "general.flight_reservation", "option-No")
+  await selectors.arrival_date(page)
   await selectors.departure_date(page, "general.departure_date")
-  await selectors.dropdownSelector(page, "general.airport", "dropdown-general.airport", "azs", "AZS - Aeropuerto Internacional Presidente Juan Bosh")
-  await selectors.inputText(page, "general.departure_flight_number", "1234")
   await expect(next_btn).toBeEnabled()
   await next_btn.click()
-  await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_step_3c")
-  await next_btn.click()
-
   await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_personal")
-  await selectors.booleanOptions(page, "applicant.0.gender", "option-Female")
   await selectors.booleanOptions(page, "applicant.0.marital_status", "option-Single")
+  await next_btn.click()
+  await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_passport_after_payment")
+  await selectors.booleanOptions(page, "applicant.0.gender", "option-Female")
+  await selectors.datePicker(page, "applicant.0.passport_expiration_date", '1', '9', '2030')
+  await page.waitForTimeout(2000)
 
   await page.locator("id=btnSubmitApplication").click()
   await page.waitForURL(deploy_url + "order-received-page/" + Order_num)

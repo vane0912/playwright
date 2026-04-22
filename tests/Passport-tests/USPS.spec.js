@@ -5,7 +5,7 @@ const {deploy_url} = require('../urls');
 
 const path = require('path');
 
-test.fixme('USPS Passport', async({page}) =>{
+test.skip('USPS Passport', async({page}) =>{
     test.slow()
     await page.goto(deploy_url + 'passport-renewal/united-states/application')
     await page.waitForTimeout(2000)

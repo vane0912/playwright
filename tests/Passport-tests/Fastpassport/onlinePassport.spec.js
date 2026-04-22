@@ -204,4 +204,39 @@ test('Fix Min', async({browser}) => {
   await selectors.inputText(newTab, "applicant.0.birth_city", "Test")
   await newTab.locator("id=btnSubmitApplication").click()
   await newTab.waitForNavigation({waitUntil: 'load'})
+
+  await page.goto(general_url + 'admin.visachinaonline.com/login')
+  await page.getByPlaceholder('1234567 or you@email.com').fill('david@admin.com')
+  await page.getByRole("button", {name: 'Continue'}).click()
+  
+  await page.locator('#password_login_input').fill('testivisa5!')
+  await page.locator('#log_in_button').click()
+  await page.waitForURL('**/admin')
+  await page.waitForTimeout(3000)
+  page.on('dialog', async (dialog) => {
+      await dialog.accept(Order_num);
+  });
+  const search_order = page.locator('//li[@onclick="searchOrderID();"]');
+  await search_order.click()
+  await page.locator("section").locator('[aria-labelledby="order-annotations-title"]').click()
+  await page.getByTestId("add_annotation_button").click()
+  await page.getByTestId("annotation_type_select").selectOption("gov_confirmation_id")
+  await page.locator("section").locator('[aria-labelledby="order-annotations-title"]').locator("input").fill("1234")
+  await page.getByTestId("save_annotation_button").click()
+  await expect(page.locator("h3").getByText("Closed")).toBeVisible()
+})
+  
+test('Check complete orders', async({browser}) => {
+  test.slow()
+  const context = await browser.newContext({
+    httpCredentials: {
+      username: 'admin',
+      password: 'testivisa5!',
+    },
+  });
+  const page = await context.newPage();
+  await page.goto(deploy_url + 'mail')
+  await page.getByText("It’s on the way!").first().click()
+  await page.waitForTimeout(5000)
+  await percySnapshot(page, "completeEmailPassport")
 })

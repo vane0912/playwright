@@ -5,15 +5,41 @@ const { deploy_url } = require('../../urls');
 
 let Order_num
 
-test('United States ESTA', async ({ page }) => {
+test('United States ESTA', async ({ page, context }) => {
+  await context.addCookies([
+    {
+      name: 'default_currency',
+      value: 'USD',
+      url: deploy_url
+    },
+    {
+      name: 'nationalityFromPassport',
+      value: 'AU',
+      url: deploy_url
+    }
+  ]);
   test.slow()
   await page.goto(deploy_url + 'usa/apply-now')
-  await appFunctions.autofillExisting(page, "usa/apply-now/edit-traveler/0", "au")
-  await page.waitForURL("**/usa/apply-now/traveler-review")
+  await page.getByRole("button").getByText("Add New Traveler").click()
+  await appFunctions.step_1(page)
   const continue_sidebar = page.getByRole("button").getByText("Continue")
   await continue_sidebar.click()
+  await page.waitForURL("**/usa/apply-now/passport-details/0")
+  await appFunctions.step_2(page, continue_sidebar)
+  await page.waitForURL("**/usa/apply-now/address-details/0")
+  await appFunctions.step_3c(page, continue_sidebar)
+  await page.waitForURL("**/usa/apply-now/additional-info/0")
+  await appFunctions.additionalInfo(page, continue_sidebar)
+  await page.waitForURL("**/usa/apply-now/traveler-review")
+  await continue_sidebar.click()
   await page.waitForURL("**/usa/apply-now/contact-details")
-  await continue_sidebar.click() 
+  await continue_sidebar.click()
+  await page.waitForURL("**/usa/apply-now/checkout")
+  await page.waitForTimeout(2000)
+  const duplicate = await page.isVisible('id=btnDisclaimerNext')
+  if (duplicate){
+    await page.locator('id=btnDisclaimerNext').click()
+  }
   await appFunctions.newPaymentCheckout(page, '6011 1111 1111 1117', '123')
   const payment_btn = page.locator('id=btnSubmitPayment')
   await expect(payment_btn).toBeVisible()

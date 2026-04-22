@@ -5,7 +5,7 @@ const { deploy_url } = require('../../urls');
 
 let Order_num
 
-test.fixme('Antigua & Barbuda Entry Form', async ({ page }) => {
+test.skip('Antigua & Barbuda Entry Form', async ({ page }) => {
   test.slow()
   await page.goto(deploy_url + 'antigua-barbuda/apply-now')
   await appFunctions.autofillExisting(page, "antigua-barbuda/apply-now/edit-traveler/0")

@@ -7,7 +7,7 @@ const selectors = require('../../selectors')
 const randomEmail = require('random-email')
 let fastpassportEmail = randomEmail({domain: "fastpassport.com"})
 
-test.fixme('FastPassport - USPS Emergency - Preparing for shipping', async({page, context}) => {
+test.skip('FastPassport - USPS Emergency - Preparing for shipping', async({page, context}) => {
   test.slow()
   await context.addCookies([
     {

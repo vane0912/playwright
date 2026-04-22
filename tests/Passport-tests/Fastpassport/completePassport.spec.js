@@ -9,7 +9,7 @@ const percySnapshot = require('@percy/playwright');
 let fastpassportEmail = randomEmail({domain: "fastpassport.com"})
 
 test.describe.configure({ mode: 'serial' });
-test.fixme('FastPassport - USPS Emergency - Complete', async({page, context}) => {
+test.skip('FastPassport - USPS Emergency - Complete', async({page, context}) => {
   test.slow()
   await context.addCookies([
     {
@@ -151,7 +151,7 @@ test('Check complete orders', async({browser}) => {
   });
   const page = await context.newPage();
   await page.goto(deploy_url + 'mail')
-  await page.getByText("Your passport kit is on it’s way!").first().click()
+  await page.getByText("	It’s on the way!").first().click()
   await page.waitForTimeout(5000)
   await percySnapshot(page, "completeEmailPassport")
 })
