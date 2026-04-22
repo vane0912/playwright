@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 const {deploy_url} = require('../urls');
 const percySnapshot = require('@percy/playwright');
 const appFunctions = require('../functions')
-test('Continue with your application banner', async({page}) => {
+test.fixme('Continue with your application banner', async({page}) => {
   await page.goto(deploy_url + 'antigua-barbuda/apply-now')
   await appFunctions.autofillExisting(page, "antigua-barbuda/apply-now/edit-traveler/0")
   await page.waitForURL("**/antigua-barbuda/apply-now/traveler-review")

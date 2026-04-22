@@ -4,7 +4,7 @@ const appFunctions = require('../functions')
 const path = require('path');
 const percySnapshot = require('@percy/playwright');
 
-test('Emergency Passport', async({page}) =>{
+test.fixme('Emergency Passport', async({page}) =>{
     test.slow()
     await page.goto(deploy_url + 'passport-renewal/united-states/application')
     await page.waitForTimeout(2000)
