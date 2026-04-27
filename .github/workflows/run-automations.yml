@@ -67,7 +67,7 @@ jobs:
 
         run: |
           if [ "$TESTING_TYPE" = "fav" ]; then
-            cat > get-percy-build.mjs <<'EOF'
+          cat > get-percy-build.mjs <<'EOF'
             const res = await fetch('https://percy.io/api/v1/builds', {
               method: 'GET',
               headers: {
@@ -91,7 +91,7 @@ jobs:
             }
 
             console.log(`BUILD_ID=${buildId}`);
-            EOF
+          EOF
 
             BUILD_LINE=$(node get-percy-build.mjs)
             echo "$BUILD_LINE" >> "$GITHUB_ENV"
