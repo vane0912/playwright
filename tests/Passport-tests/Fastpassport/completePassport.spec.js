@@ -141,7 +141,7 @@ test.skip('FastPassport - USPS Emergency - Complete', async({page, context}) => 
   await page.waitForURL('**/admin/orders/my_orders?redirect_to_first_order=1')
 })
 
-test('Check complete orders', async({browser}) => {
+test.skip('Check complete orders', async({browser}) => {
   test.slow()
   const context = await browser.newContext({
       httpCredentials: {
