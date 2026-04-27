@@ -6,6 +6,7 @@ const selectors = require('../../selectors')
 const percySnapshot = require('@percy/playwright');
 let fastpassportEmail = "automations93@fastpassport.com"
 
+let Order_num
 test.describe.configure({ mode: 'serial' });
 test('Fastpassport - Account creation, logging and password creation', async ({page, context}) => {
   test.slow()
