@@ -1,8 +1,8 @@
-const deploy_url = "https://deploy-20260428--22a9c273.visachinaonline.com/"
-const general_url = "https://deploy-20260428--22a9c273."  
-const email_test = "automations@ivisa.com"
-const requester = "Vanessa"
+const deploy_url = "https://avni-php-86b9hn34p--9755d960.visachinaonline.com/visachinaonline.com/"
+const general_url = "https://avni-php-86b9hn34p--9755d960.visachinaonline.com/"  
+const email_test = "test@mail.com"
+const requester = "Analia"
 let Orders = [] 
-module.exports = {deploy_url,  email_test, Orders, general_url,requester}
+module.exports = {deploy_url,  email_test, Orders, general_url}
 
     
